@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context="mobi.garden.bottomnavigationtest.Activity.CartActivity">
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/tidak_kosong">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/gradient"
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KERANJANG BELANJA"
+                            android:textColor="#fff"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.Toolbar>
+
+
+                <LinearLayout
+                    android:id="@+id/apotek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/toolbar_cart"
+                    android:orientation="vertical"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="10pt"
+                        tools:text="informasi pembelian"
+                        android:textSize="11dp"
+                        android:background="@color/green_yellow"
+                        android:paddingTop="2dp"
+                        android:paddingLeft="15dp"
+                        android:id="@+id/info"/>
+
+                    <TextView
+                        android:id="@+id/outlet_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:text="APOTEK"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:layout_marginLeft="15dp"/>
+
+                </LinearLayout>
+
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/apotek">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:layout_marginTop="7dp"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rvCartList2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="10dp">
+
+                            </android.support.v7.widget.RecyclerView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:gravity="center">
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:text="TAMBAH BARANG"
+                                android:textSize="12dp"
+                                android:paddingLeft="25dp"
+                                android:paddingRight="25dp"
+                                android:background="@drawable/border_trans_green"
+                                android:textColor="#b0ca8b"
+                                android:id="@+id/btnTambahBarang" />
+                        </LinearLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#ffffff"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:layout_marginTop="7dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="METODE PENGIRIMAN"
+                                android:textStyle="bold"
+                                android:textColor="#a4a4a4"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginLeft="15dp" />
+
+                            <View android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="#f7f7f7"
+                                android:layout_marginTop="30dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="15pt">
+
+                                <RadioGroup
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:id="@+id/radio_group">
+                                    <RadioButton
+                                        android:id="@+id/radio_delivery"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"/>
+                                    <LinearLayout
+                                        android:layout_weight="1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:background="@drawable/delivery"
+                                            />
+                                    </LinearLayout>
+
+                                    <RadioButton
+                                        android:id="@+id/radio_apotek"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"/>
+
+                                    <LinearLayout
+                                        android:layout_weight="1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical">
+                                        <TextView
+                                            android:layout_width="60dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="Ambil Di Apotek"
+                                            android:textColor="@android:color/black"/>
+                                    </LinearLayout>
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:layout_marginTop="7dp"
+                            android:paddingBottom="10dp"
+                            android:orientation="vertical"
+                            android:background="@android:color/white">
+
+                            <TextView
+                                android:id="@+id/textView23"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:textStyle="bold"
+                                android:textColor="#a4a4a4"
+                                android:text="ALAMAT PENGIRIMAN"
+                                android:layout_marginLeft="15dp"/>
+
+                            <View android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_marginTop="7dp"
+                                android:background="#f7f7f7"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="3dp"
+                                android:weightSum="10">
+
+                                <ImageView
+                                    android:id="@+id/ivMap"
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_weight="1"
+                                    app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvOutletAddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="9"
+                                    tools:text="Alamat Apotek"
+                                    android:layout_marginLeft="4dp"
+                                    android:textColor="@android:color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="3dp"
+                                android:weightSum="10">
+
+                                <ImageView
+                                    android:id="@+id/ivAddAlternativeAddress"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/white"
+                                    app:srcCompat="@drawable/ic_location_on_black2_24dp" />
+                                <EditText
+                                    android:id="@+id/etAddCustomerAddress"
+                                    android:layout_weight="8"
+                                    android:layout_width="140pt"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Tambah Alamat"
+                                    android:inputType="textMultiLine|textUri"
+                                    android:textSize="12sp"
+                                    android:visibility="visible" />
+
+                                <ImageView
+                                    android:id="@+id/ivEditName"
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="5dp"
+                                    app:srcCompat="@drawable/ic_edit" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:background="@android:color/white"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginLeft="15dp"
+                                android:textStyle="bold"
+                                android:textColor="#a4a4a4"
+                                android:text="DETAIL PEMBAYARAN"/>
+
+                            <View android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_marginTop="7dp"
+                                android:background="#f7f7f7"/>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="100">
+
+                                <ImageView
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@drawable/ic_shopping_cart_black_24dp"/>
+
+                                <TextView
+                                    android:layout_weight="60"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="Jumlah"/>
+
+                                <TextView
+                                    android:layout_weight="39"
+                                    android:layout_width="45dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="total"
+                                    android:layout_marginRight="11dp"
+                                    android:textAlignment="textEnd"
+                                    android:id="@+id/jumlah"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="100">
+
+                                <ImageView
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@drawable/ic_shopping_cart_black_24dp"/>
+
+                                <TextView
+                                    android:layout_weight="60"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="Biaya Pengiriman"/>
+
+                                <TextView
+                                    android:layout_weight="39"
+                                    android:layout_width="45dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="total"
+                                    android:layout_marginRight="11dp"
+                                    android:textAlignment="textEnd"
+                                    android:id="@+id/biayaPengiriman"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="100">
+
+                                <ImageView
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@drawable/ic_shopping_cart_black_24dp"/>
+
+                                <TextView
+                                    android:layout_weight="60"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="Punya kode voucher ?"/>
+
+                                <TextView
+                                    android:layout_weight="39"
+                                    android:layout_width="45dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="total"
+                                    android:layout_marginRight="11dp"
+                                    android:textAlignment="textEnd"
+                                    android:id="@+id/voucher"/>
+
+                            </LinearLayout>
+
+                            <View android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="#f7f7f7"
+                                android:layout_marginTop="5dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="100">
+
+                                <ImageView
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@drawable/ic_shopping_cart_black_24dp"/>
+
+                                <TextView
+                                    android:layout_weight="60"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="TOTAL PEMBAYARAN"/>
+
+                                <TextView
+                                    android:layout_weight="39"
+                                    android:layout_width="45dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="total"
+                                    android:layout_marginRight="11dp"
+                                    android:textAlignment="textEnd"
+                                    android:id="@+id/totalPembayaran"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="20pt"
+                            android:text="Lanjut Pembelian"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/gradient"
+                            android:textColor="@android:color/white"
+                            android:layout_gravity="center"
+                            android:id="@+id/btnLanjutPembelian"/>
+                    </LinearLayout>
+
+                </android.support.v4.widget.NestedScrollView>
+
+            </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:id="@+id/kosong"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/empty">
+                </ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:id="@+id/belum_login"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Anda belum login lho ^.^">
+                </TextView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/login_cart"
+                    android:background="@color/ijo"
+                    android:textColor="@color/white"
+                    android:text="Login disini"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <include
+        layout="@layout/element_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        />
+
+</LinearLayout>
+

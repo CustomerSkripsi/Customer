@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="mobi.garden.bottomnavigationtest.Activity.HomeActivity">
+
+
+    //Search bar
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/gradient"
+        >
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/user_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+
+    //SwipeRefresh
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        //ScrollView
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            //HomeContent
+            <LinearLayout
+                android:background="@color/background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/produk"
+                >
+
+                //Slider
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/slider"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="170dp"-->
+                    <!--&gt;-->
+
+                    <!--<FrameLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<mobi.garden.bottomnavigationtest.Slider.SliderView-->
+                            <!--android:id="@+id/sliderView"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--/>-->
+
+
+                    <!--</FrameLayout>-->
+
+                    <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/bg_indicator" />-->
+
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/pagesContainer"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_marginBottom="8dp"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:orientation="horizontal" />-->
+
+                <!--</RelativeLayout>-->
+
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+
+                    <android.support.v4.view.ViewPager
+
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:id = "@+id/view_pager">
+
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                        android:id="@+id/SliderDots"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                //ProdukPromo
+                <LinearLayout
+                    android:id="@+id/ll_promo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <TextView
+                            android:textSize="16dp"
+                            android:text="PRODUK PROMO"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            />
+
+                        <Button
+                            android:background="#ffffff"
+                            android:text="selengkapnya >"
+                            android:textSize="11dp"
+                            android:textColor="#7c7c7c"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_cv_obat_promo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp">
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+                //ProdukRekomendasi
+                <LinearLayout
+                    android:id="@+id/ll_rekomendasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <TextView
+                            android:textSize="16dp"
+                            android:text="PRODUK REKOMENDASI"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            />
+
+                        <Button
+                            android:background="#ffffff"
+                            android:text="selengkapnya >"
+                            android:textSize="11dp"
+                            android:textColor="#7c7c7c"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_cv_obat_rekomendasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp">
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+                //ProdukTerlaris
+                <LinearLayout
+                    android:id="@+id/ll_terlaris"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <TextView
+                            android:textSize="16dp"
+                            android:text="PRODUK TERLARIS"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            />
+
+                        <Button
+                            android:background="#ffffff"
+                            android:text="selengkapnya >"
+                            android:textSize="11dp"
+                            android:textColor="#7c7c7c"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_cv_obat_terlaris"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp">
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    //NavbarBottom
+    <include
+        android:id="@+id/navigation"
+        layout="@layout/element_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

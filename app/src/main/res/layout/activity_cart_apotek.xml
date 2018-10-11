@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CartApotekActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_as"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/gradient"
+            app:titleTextColor="@android:color/white">
+
+        </android.support.v7.widget.Toolbar>
+
+
+        //ScrollView
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar_as">
+
+            //Content
+
+            <LinearLayout
+                android:id="@+id/addproductcart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                android:orientation="vertical"
+
+                >
+
+                //Slider
+
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/slider"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="170dp">-->
+
+                    <!--<FrameLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<mobi.garden.bottomnavigationtest.Slider.SliderView-->
+                            <!--android:id="@+id/sliderView2"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent" />-->
+                        <!---->
+
+                    <!--</FrameLayout>-->
+
+                    <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/bg_indicator" />-->
+
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/pagesContainer2"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_marginBottom="8dp"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:orientation="horizontal" />-->
+
+                <!--</RelativeLayout>-->
+
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+
+                    <android.support.v4.view.ViewPager
+
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:id = "@+id/sliderView2">
+
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                        android:id="@+id/SliderDots2"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/searchID"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:maxLines="1"
+                        android:inputType="textAutoComplete"
+                        android:textSize="15dp"
+                        android:hint="Cari disini"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="18dp"
+                        android:drawableLeft="@drawable/ic_search_black_24dp"
+                        android:background="@drawable/bordertrans3" />
+
+
+                </android.support.v7.widget.Toolbar>
+
+
+                //Produk Terkait
+
+                <LinearLayout
+                    android:id="@+id/ll_terkait"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <TextView
+                            android:textSize="16dp"
+                            android:text="PRODUK TERKAIT"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            />
+
+                        <Button
+                            android:background="#ffffff"
+                            android:text="selengkapnya >"
+                            android:textSize="11dp"
+                            android:textColor="#7c7c7c"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_cv_obat_terkait"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="@android:color/white"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="85dp"
+                app:layout_behavior="@string/bottom_sheet_behavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/substract" />
+
+                    <ImageButton
+                        android:layout_width="20dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_menupsd" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutEstimated"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+
+                        <include
+                            layout="@layout/cart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.1"></include>
+
+
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="15"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvEstimatedPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="Estimated Price"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tvTotalPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="ini harga" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/buyBtn"
+                            android:layout_width="3dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_next" />
+
+                    </LinearLayout>
+
+                    <ScrollView
+                        android:id="@+id/svCartList"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rvCartList"
+                                android:layout_width="match_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="18dp"
+                                tools:listitem="@layout/cart_list_row">
+
+                            </android.support.v7.widget.RecyclerView>
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

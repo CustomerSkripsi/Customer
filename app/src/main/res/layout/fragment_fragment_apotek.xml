@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Fragment.fragment_apotek">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listitem_apotek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/cv_search">
+    </android.support.v7.widget.RecyclerView>
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:id="@+id/itest"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:text="fragment apotek"-->
+    <!--android:paddingTop="?attr/actionBarSize"/>-->
+
+</FrameLayout>

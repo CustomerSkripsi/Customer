@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apakah anda akan melanjutkan ?"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:background="@drawable/gradient"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/container1"
+        android:layout_marginTop="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/dialog_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:text="Keranjang belanja sebelumnya akan dihapus karena pemindahan apotek"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_batal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container1"
+        android:text="BATAL"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/gradient"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        />
+
+    <Button
+        android:id="@+id/button_lanjut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/container1"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/gradient"
+        android:text="LANJUT"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"/>
+
+
+</RelativeLayout>

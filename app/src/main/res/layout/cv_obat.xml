@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_obat"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+    android:layout_width="110dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp">
+
+
+    <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_cv_obat">
+
+        <ImageView
+            android:id="@+id/iv_picture_obat"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="#000000"/>
+
+        <TextView
+            android:id="@+id/tv_nama_obat"
+            tools:text="nama"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:layout_marginTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" />
+            <Button
+                android:id="@+id/btn_detail_obat"
+                android:textSize="8dp"
+                android:text="detail"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/borderhijau4"
+                android:textColor="#ffff"
+                android:layout_width="fill_parent"
+                android:layout_height="27dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
