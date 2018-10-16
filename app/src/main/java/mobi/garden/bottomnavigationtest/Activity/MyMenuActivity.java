@@ -47,7 +47,7 @@ public class MyMenuActivity extends BaseActivity implements View.OnClickListener
         Toolbar toolbar = findViewById(R.id.toolbar_info);
 
         setSupportActionBar(toolbar);
-        setTitle("Menu Saya");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         if(userLocalStore.getUserLoggedIn()){
             //set visibility container gone
@@ -57,16 +57,6 @@ public class MyMenuActivity extends BaseActivity implements View.OnClickListener
             containerProfil.setVisibility(containerProfil.GONE);
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_chevron_left_black_24dp));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +64,14 @@ public class MyMenuActivity extends BaseActivity implements View.OnClickListener
                 dialogProgress.hideDialog();
                 startActivity(new Intent(MyMenuActivity.this, Login.class));
                 finish();
+            }
+        });
+
+        myProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MyMenuActivity.this, ProfileCustomerActivity.class );
+                startActivity(i);
             }
         });
 

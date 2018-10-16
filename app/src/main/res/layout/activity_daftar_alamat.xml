@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/tbDaftarAlamat"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    app:titleTextColor="@android:color/white"
+    android:background="@drawable/gradient"
+    android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DAFTAR ALAMAT"
+            android:textColor="#fff"
+            android:textSize="17dp"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvAlamatList"
+        tools:listitem="@layout/daftaralamat_list"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

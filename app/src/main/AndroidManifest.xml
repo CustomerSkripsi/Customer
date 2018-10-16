@@ -45,6 +45,9 @@
         <activity android:name=".LoginRegister.Register" />
         <activity android:name=".Activity.InformasiObatAs" />
         <activity android:name=".Activity.CartApotekActivity" />
+        <activity android:name=".Activity.ProfileCustomerActivity" />
+        <activity android:name=".Activity.EmailProfile" />
+        <activity android:name=".Activity.AlamatProfile" />
     </application>
 
 </manifest>

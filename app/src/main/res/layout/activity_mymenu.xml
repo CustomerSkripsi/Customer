@@ -26,8 +26,17 @@
                 android:background="@drawable/gradient"
                 android:id="@+id/toolbar_info"
                 title="Menu Saya"
+                android:layout_gravity="center"
                 titleTextColor="@android:color/white"
                 >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MY MENU"
+                    android:textColor="#fff"
+                    android:textSize="17dp"
+                    android:gravity="center"
+                    android:textStyle="bold" />
             </android.support.v7.widget.Toolbar>
 
 
