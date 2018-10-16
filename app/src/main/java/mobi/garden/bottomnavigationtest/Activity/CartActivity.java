@@ -102,13 +102,8 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         df.setMaximumFractionDigits(0);
 
         Toolbar toolbar = findViewById(R.id.toolbar_cart);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_chevron_left_black_24dp));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         Intent intent = getIntent();
         userlocal  = new UserLocalStore(this);
