@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Camera"
+            android:drawableStart="@drawable/ic_camera"
+            android:drawableLeft="@drawable/ic_camera"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/tvGallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Gallery"
+            android:drawableStart="@drawable/ic_gallery"
+            android:drawableLeft="@drawable/ic_gallery"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:paddingRight="20dp"
+        android:text="Batal"
+        android:textAlignment="textEnd"
+        android:gravity="end"
+        android:paddingBottom="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</LinearLayout>

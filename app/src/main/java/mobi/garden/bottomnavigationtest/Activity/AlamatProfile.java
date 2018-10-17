@@ -1,10 +1,12 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import mobi.garden.bottomnavigationtest.R;
@@ -32,5 +34,15 @@ public class AlamatProfile extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.addtoolbar, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.add){
+            Intent i = new Intent(AlamatProfile.this, AddAlamatActivity.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
