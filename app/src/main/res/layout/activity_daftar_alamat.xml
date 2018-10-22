@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Activity.AlamatProfile"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
     android:id="@+id/tbDaftarAlamat"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     app:titleTextColor="@android:color/white"
     android:background="@drawable/gradient"
     android:layout_gravity="center">

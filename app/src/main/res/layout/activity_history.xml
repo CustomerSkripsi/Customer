@@ -16,21 +16,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradient">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HISTORY"
-            android:textColor="#fff"
-            android:textSize="17dp"
-            android:gravity="center"
-            android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tablayoutHistory"
-        app:tabTextColor="#808080"
+        app:tabTextColor="	#A9A9A9"
         app:tabSelectedTextColor="@color/black"
         app:tabIndicatorColor="@color/black">
 
