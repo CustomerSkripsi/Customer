@@ -50,6 +50,7 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
                 i.putExtra("Tanggal", currentItem.getTanggal());
                 i.putExtra("OutletName", currentItem.getOutletName());
                 i.putExtra("StatusOrder", currentItem.getStatusOrder());
+               // i.putExtra("StatusOrderID", currentItem.getStatusOrderId());
 
                 v.getContext().startActivity(i);
             }

@@ -74,6 +74,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     public abstract int getContentViewId();
     public abstract int getNavigationMenuItemId();
 
-
-
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +42,7 @@ public class HistoryBerhasil extends Fragment {
 
     private static UserLocalStore userLocal;
     static User currUser;
+
 
 
     public static RequestQueue mQueue;
@@ -95,6 +97,7 @@ public class HistoryBerhasil extends Fragment {
                         L.setTanggal(result.getString("OrderDate"));
                         L.setAlamat(result.getString("OutletName"));
                         L.setStatusOrder(result.getString("StatusOrderName"));
+                        L.setStatusOrderID(result.getString("StatusOrderID"));
                         lacakItem.add(L);
 
                         recyclerView.setAdapter(lacakPesananAdapter);
