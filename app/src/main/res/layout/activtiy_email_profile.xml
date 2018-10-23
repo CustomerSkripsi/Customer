@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--//tools:context=".Activity.EmailProfileActivity">-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbUpdateEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="@drawable/gradient"
+        android:layout_gravity="center">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Email Terdaftar "/>
+
+        <TextView
+            android:id="@+id/tvEmailAnda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_marginBottom="40dp"
+            android:text="ERVINSUKA69@69.69"/>
+
+        <EditText
+            android:id="@+id/EmailProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Masukkan Email baru"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="20dp"/>
+        <EditText
+            android:id="@+id/PasswordProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="40dp">
+            <EditText
+                android:id="@+id/etEmailOTP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_weight="1"
+                android:hint="Kode OTP"
+                android:inputType="textEmailAddress"/>
+        <Button
+            android:id="@+id/EmailRequestOTPbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="Request OTP"
+            android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:src="@drawable/ic_email"-->
+            <!--android:layout_marginBottom="10dp"/>-->
+
+        <Button
+            android:id="@+id/EmailbtnProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="UBAH EMAIL"
+            android:textColor="@color/white"/>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -205,7 +205,7 @@ public class ProfileCustomerActivity extends AppCompatActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
-        Log.d("objCustomerrrrrrrrrr",objCustomer.toString());
+        Log.d("objCustomerrrrrrr",objCustomer.toString());
         Toast.makeText(this, objCustomer.toString(), Toast.LENGTH_SHORT).show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, objCustomer, new Response.Listener<JSONObject>() {
             @Override
