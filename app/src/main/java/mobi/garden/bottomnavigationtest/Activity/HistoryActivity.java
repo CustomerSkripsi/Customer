@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.support.v7.widget.Toolbar;
@@ -46,13 +47,14 @@ public class HistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         Toolbar toolbar = findViewById(R.id.tbHistory);
+        toolbar.setTitle("HISTORY");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         viewPager = findViewById(R.id.pagerHistory);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         viewPagerAdapter.addFrag(new HistoryBerhasil(),"Berhasil");
-        viewPagerAdapter.addFrag(new HistoryPending(), "Pending");
+        viewPagerAdapter.addFrag(new HistoryPending(), "Proses");
         viewPagerAdapter.addFrag(new HistoryGagal(), "Gagal");
         viewPager.setAdapter(viewPagerAdapter);
 
