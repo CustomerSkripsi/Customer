@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,6 +44,7 @@ public class HistoryBerhasil extends Fragment {
     static User currUser;
 
 
+
     public static RequestQueue mQueue;
     static String link;
 
@@ -63,18 +65,22 @@ public class HistoryBerhasil extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         userLocal = new UserLocalStore(getContext());
         currUser = userLocal.getLoggedInUser();
 
         lacakItem = new ArrayList<>();
 
-        link = "http://pharmanet.apodoc.id/select_lacak_customer.php?UserID="+currUser.getUserID();
+        link = "http://pharmanet.apodoc.id/select_lacak_berhasil_customer.php?CustomerID="+currUser.getUserID();
         mQueue = Volley.newRequestQueue(getContext());
         JSON();
 
         lacakPesananAdapter = new LacakPesananAdapter(lacakItem);
         return view;
-            }
+    }
 
 
     public static void JSON()
@@ -93,11 +99,13 @@ public class HistoryBerhasil extends Fragment {
                         Lacak L = new Lacak();
                         L.setOrderID(result.getString("OrderID"));
                         L.setTanggal(result.getString("OrderDate"));
-                        L.setAlamat(result.getString("OutletName"));
+                        L.setOutletName(result.getString("OutletName"));
                         L.setStatusOrder(result.getString("StatusOrderName"));
+                        L.setStatusOrderID(result.getString("StatusOrderID"));
                         lacakItem.add(L);
-
                         recyclerView.setAdapter(lacakPesananAdapter);
+
+
                     }
 //                    swipeRefreshLayout.setRefreshing(false);
                 } catch (JSONException e) {

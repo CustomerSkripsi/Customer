@@ -2,8 +2,17 @@ package mobi.garden.bottomnavigationtest.Model;
 
 public class Lacak {
 
-    private String orderID, tanggal, statusOrder, alamat, phone, outletName;
+    private String orderID, tanggal, statusOrder, alamat, phone, outletName, statusOrderID;
     private int  totalHarga;
+
+
+    public String getStatusOrderID() {
+        return statusOrderID;
+    }
+
+    public void setStatusOrderID(String statusOrderID) {
+        this.statusOrderID = statusOrderID;
+    }
 
     public String getOutletName() {
         return outletName;
