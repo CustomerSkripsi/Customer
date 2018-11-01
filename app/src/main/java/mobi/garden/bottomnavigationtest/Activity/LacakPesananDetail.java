@@ -23,6 +23,7 @@ public class LacakPesananDetail extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lacak_pesanan_detail);
+        
 
         lacakPesananDetail_OrderID = findViewById(R.id.lacakPesananDetail_OrderID);
         lacakPesananDetail_Date = findViewById(R.id.lacakPesananDetail_Date);
