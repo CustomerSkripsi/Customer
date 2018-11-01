@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Fragment;
 
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import mobi.garden.bottomnavigationtest.Activity.LacakPesananDetail;
 import mobi.garden.bottomnavigationtest.Adapter.LacakPesananAdapter;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
@@ -42,7 +45,6 @@ public class HistoryBerhasil extends Fragment {
 
     private static UserLocalStore userLocal;
     static User currUser;
-
 
 
     public static RequestQueue mQueue;
@@ -71,6 +73,8 @@ public class HistoryBerhasil extends Fragment {
 
         userLocal = new UserLocalStore(getContext());
         currUser = userLocal.getLoggedInUser();
+
+
 
         lacakItem = new ArrayList<>();
 
