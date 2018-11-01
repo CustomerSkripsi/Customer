@@ -70,9 +70,11 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
                 i.putExtra("StatusOrder", currentItem.getStatusOrder());
                 // i.putExtra("StatusOrderID", currentItem.getStatusOrderId());
 
+
                 v.getContext().startActivity(i);
             }
         });
+
     }
 
     @Override

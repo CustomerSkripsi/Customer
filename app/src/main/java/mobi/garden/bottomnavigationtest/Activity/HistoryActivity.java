@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class HistoryActivity extends BaseActivity {
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     List<Fragment> fragmentList = new ArrayList<>();
+
 
     @Override
     public  int getContentViewId() {
@@ -57,6 +60,8 @@ public class HistoryActivity extends BaseActivity {
         viewPagerAdapter.addFrag(new HistoryPending(), "Proses");
         viewPagerAdapter.addFrag(new HistoryGagal(), "Gagal");
         viewPager.setAdapter(viewPagerAdapter);
+
+
 
         tabLayout = findViewById(R.id.tablayoutHistory);
         tabLayout.setupWithViewPager(viewPager);

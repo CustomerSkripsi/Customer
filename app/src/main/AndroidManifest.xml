@@ -49,6 +49,7 @@
         <activity android:name=".Activity.EmailProfile" />
         <activity android:name=".Activity.AlamatProfile" />
         <activity android:name=".Activity.AddAlamatActivity"/>
+        <activity android:name=".Activity.LacakPesananDetail"/>
     </application>
 
 </manifest>
