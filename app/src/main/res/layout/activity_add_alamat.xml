@@ -35,17 +35,6 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_namaAlamat"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        app:errorEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Simpan Alamat Sebagai"/>
-    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_namaPenerima"
@@ -53,7 +42,8 @@
         android:layout_height="55dp"
         app:errorEnabled="true">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
+            android:id="@+id/etNamaPenerima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Penerima"
@@ -66,7 +56,8 @@
         android:layout_height="55dp"
         app:errorEnabled="true">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
+            android:id="@+id/etAlamatPenerima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Alamat Lengkap"/>
@@ -78,7 +69,8 @@
         android:layout_height="55dp"
         app:errorEnabled="true">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
+            android:id="@+id/etKotaPenerima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Kota/Kab"
@@ -86,12 +78,27 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_provinsiPenerima"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:errorEnabled="true">
+
+           <EditText
+               android:id="@+id/etProvinsiPenerima"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Provinsi"
+               android:inputType="text"/>
+            </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/til_kodeposPerimna"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:errorEnabled="true">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
+            android:id="@+id/etKodePosPenerima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Kode Pos"
@@ -104,7 +111,8 @@
         android:layout_height="55dp"
         app:errorEnabled="true">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
+            android:id="@+id/etTeleponPenerima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="No. telepon Penerima"

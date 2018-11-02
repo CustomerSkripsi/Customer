@@ -1,9 +1,7 @@
 package mobi.garden.bottomnavigationtest.LoginRegister;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 public class UserLocalStore {public static final String SP_Name = "userDetails";
     SharedPreferences userLocalDatabase;
@@ -35,7 +33,6 @@ public class UserLocalStore {public static final String SP_Name = "userDetails";
     public User getLoggedInUser(){
         String id = userLocalDatabase.getString("userID", "");
         String userName = userLocalDatabase.getString("userName", "");
-
 
         User storedUser = new User(userName,id);
         return storedUser;
