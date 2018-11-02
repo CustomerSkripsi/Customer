@@ -25,13 +25,26 @@
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:orientation="vertical">
+
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rvAlamatList"
         tools:listitem="@layout/daftaralamat_list"
         >
     </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

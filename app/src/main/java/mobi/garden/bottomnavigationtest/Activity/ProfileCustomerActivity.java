@@ -68,7 +68,7 @@ public class ProfileCustomerActivity extends AppCompatActivity {
     String memberID, customerID, customerFullName, customerDOB, customerEmail, customerPhone, customerPhoto, customerGender;
 
     private static UserLocalStore userLocalStore;
-    static User currUser;
+    public static User currUser;
 
     Context context;
 

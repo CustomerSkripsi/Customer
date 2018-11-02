@@ -93,8 +93,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                                 userLocalStore.setUserLoggedIn(true);
                                 userLocalStore.storeUserData(new User(
-                                        response.getString("CustomerUsername"),
-                                        response.getString("CustomerID")
+                                        response.getString("CustomerUsername")
+                                        , response.getString("CustomerID")
                                 ));
 
                                 dialogProgress.hideDialog();
@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 String userName = etUserName.getText().toString();
                 String password = etPassword.getText().toString();
 
-                User user = new User(userName,password);
+                User user = new User(userName, password);
                 login(user);
                 //authenticate(user);
 
