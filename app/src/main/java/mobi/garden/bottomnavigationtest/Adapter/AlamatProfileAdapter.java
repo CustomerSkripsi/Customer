@@ -145,7 +145,7 @@ public class AlamatProfileAdapter extends RecyclerView.Adapter<AlamatProfileAdap
 
                     Log.d("response",response.toString());
                     if (response.getString("status").equals("OK")) {
-                        Toast.makeText(context, "berhasil", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "berhasiiiiil", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(context, "gagal", Toast.LENGTH_LONG).show();
                     }
