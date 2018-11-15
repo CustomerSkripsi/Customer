@@ -50,6 +50,7 @@
         <activity android:name=".Activity.AlamatProfile" />
         <activity android:name=".Activity.AddAlamatActivity"/>
         <activity android:name=".Activity.LacakPesananDetail"/>
+        <activity android:name=".Activity.UbahAlamatActivity"/>
     </application>
 
 </manifest>

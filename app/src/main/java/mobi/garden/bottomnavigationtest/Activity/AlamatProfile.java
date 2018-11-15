@@ -40,18 +40,18 @@ import mobi.garden.bottomnavigationtest.R;
 public class AlamatProfile extends AppCompatActivity {
 
     private static RequestQueue queue;
-    public String customerID;
+    public static String customerID;
     private static UserLocalStore userLocalStore;
     static User currUser;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    static SwipeRefreshLayout swipeRefreshLayout;
 
-    RecyclerView rvAlamat;
+    static RecyclerView rvAlamat;
     TextView TvUbah, TvHapus;
 
     public static List<User> userList = new ArrayList<>();
-    AlamatProfileAdapter alamatProfileAdapter;
-    Context context;
+   static AlamatProfileAdapter alamatProfileAdapter;
+    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class AlamatProfile extends AppCompatActivity {
         userLocalStore = new UserLocalStore(getApplicationContext());
         currUser = userLocalStore.getLoggedInUser();
         customerID = String.valueOf(currUser.getUserID());
-        context = getApplicationContext();
+        context = AlamatProfile.this;
         queue = Volley.newRequestQueue(AlamatProfile.this);
 
         TvUbah = findViewById(R.id.tvUbahAlamat);
@@ -122,7 +122,7 @@ public class AlamatProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initAlamat(){
+    public void initAlamat(){
         rvAlamat = findViewById(R.id.rvAlamatList);
         rvAlamat.setHasFixedSize(true);
         rvAlamat.setVisibility(View.VISIBLE);
@@ -132,7 +132,7 @@ public class AlamatProfile extends AppCompatActivity {
         getAlamat();
     }
 
-    public void getAlamat(){
+    public static void getAlamat(){
 //        queue = Volley.newRequestQueue(view.getContext());
         final JsonObjectRequest rec= new JsonObjectRequest(Request.Method.GET,"http://pharmanet.apodoc.id/select_alamat_customer.php?CustomerID="+currUser.getUserID(), null, new Response.Listener<JSONObject>() {
             @Override
@@ -147,7 +147,7 @@ public class AlamatProfile extends AppCompatActivity {
                             rvAlamat.setVisibility(View.VISIBLE);
                             JSONObject obj = users.getJSONObject(i);
                             userList.add(new User(
-                                    obj.getString("CustomerID"),
+                                    obj.getString("CustomerLocationID"),
                                     obj.getString("RecipientName"),
                                     obj.getString("RecipientNumber"),
                                     obj.getString("CustomerLocationAddress"),
@@ -162,8 +162,9 @@ public class AlamatProfile extends AppCompatActivity {
                             e1.printStackTrace();
                         }
                     }
-                    alamatProfileAdapter = new AlamatProfileAdapter(userList,context);
+                    alamatProfileAdapter = new AlamatProfileAdapter(userList,context,customerID);
                     rvAlamat.setAdapter(alamatProfileAdapter);
+                    alamatProfileAdapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                 } catch (JSONException e) {
                     e.printStackTrace();

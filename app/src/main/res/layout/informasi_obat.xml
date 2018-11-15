@@ -7,24 +7,24 @@
     tools:context="mobi.garden.bottomnavigationtest.Activity.InfromasiObat"
     android:background="@color/white">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/gradient"
+        android:id="@+id/toolbar_info"
+        app:title="Informasi Produk"
+        app:titleTextColor="@android:color/white"
+
+        >
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
+        android:layout_below="@id/toolbar_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/border"
         android:layout_alignParentBottom="true">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/gradient"
-            android:id="@+id/toolbar_info"
-            app:title="Informasi Produk"
-            app:titleTextColor="@android:color/white"
-
-            >
-
-        </android.support.v7.widget.Toolbar>
 
 
         <android.support.v4.widget.NestedScrollView

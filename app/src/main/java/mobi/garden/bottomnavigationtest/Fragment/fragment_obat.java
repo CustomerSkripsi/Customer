@@ -77,21 +77,24 @@ public class fragment_obat extends Fragment {
                                 for (int i = 0; i < Obats.length(); i++) {
                                     try {
                                         JSONObject obat = Obats.getJSONObject(i);
-                                        modelObats.add(new Model_Obat(obat.getString("ProductID")
-                                                ,obat.getString("ProductName"),
+                                        modelObats.add(new Model_Obat(obat.getString("ProductID"),
+                                                obat.getString("ProductName"),
                                                 obat.getString("ProductImage"),
-                                                obat.getString("ProductDescription"),
-                                                obat.getString("ProductIndicationUsage"),
-                                                obat.getString("ProductIngredients"),
-                                                obat.getString("ProductDosage"),
-                                                obat.getString("ProductHowToUse"),
-                                                obat.getString("ProductPackage"),
-                                                obat.getString("ProductClassification"),
-                                                obat.getString("ProductRecipe"),
-                                                obat.getString("ProductContraindication"),
-                                                obat.getString("ProductStorage"),
-                                                obat.getString("PrincipalName"),
-                                                obat.getString("CategoryID")
+                                                obat.getInt("ProductPrice"),
+                                                obat.getInt("ProductPriceAfterDiscount"),
+                                                obat.getInt("ProductDiscount")
+                                                //obat.getString("ProductDescription"),
+                                                //obat.getString("ProductIndicationUsage"),
+                                                //obat.getString("ProductIngredients"),
+                                                //obat.getString("ProductDosage"),
+                                                //obat.getString("ProductHowToUse"),
+                                                //obat.getString("ProductPackage"),
+                                                //obat.getString("ProductClassification"),
+                                                //obat.getString("ProductRecipe"),
+                                                //obat.getString("ProductContraindication"),
+                                                //obat.getString("ProductStorage"),
+                                                //obat.getString("PrincipalName"),
+                                                //obat.getString("CategoryID")
                                                 ));
                                     } catch (JSONException e) {
                                         e.printStackTrace();

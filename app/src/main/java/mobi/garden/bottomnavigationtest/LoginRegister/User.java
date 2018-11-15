@@ -3,10 +3,10 @@ package mobi.garden.bottomnavigationtest.LoginRegister;
 public class User {
     String fullName,DOB,gender,contact,email,userName,password,address,codeReferral,userID;
     public String  recipientName, recipientNumber, customerAddress, customerCity, customerPostalCode, customerProvince;
-    public String customerID;
+    public String customerLocationID;
 
-    public User(String customerID, String recipientName, String recipientNumber, String customerAddress, String customerCity, String customerPostalCode, String customerProvince){
-        this.customerID = customerID;
+    public User(String customerLocationID,String recipientName, String recipientNumber, String customerAddress, String customerCity, String customerPostalCode, String customerProvince){
+        this.customerLocationID = customerLocationID;
         this.recipientName = recipientName;
         this.recipientNumber = recipientNumber;
         this.customerAddress = customerAddress;
@@ -93,5 +93,13 @@ public class User {
 
     public void setCustomerProvince(String customerProvince) {
         this.customerProvince = customerProvince;
+    }
+
+    public String getCustomerLocationID() {
+        return customerLocationID;
+    }
+
+    public void setCustomerLocationID(String customerLocationID) {
+        this.customerLocationID = customerLocationID;
     }
 }
