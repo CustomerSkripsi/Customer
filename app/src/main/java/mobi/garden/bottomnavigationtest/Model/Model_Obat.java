@@ -4,6 +4,8 @@ public class Model_Obat {
     public String ProductID,ProductName,productPhoto, productDescription, indikasi, kandungan, dosis, carapakai, kemasan,
     golongan, resepYN, kontraindikasi,  carasimpan, principal,categoryID;
 
+    public int productPrice, productDiscount, productPriceAfterdc;
+
     public Model_Obat(String ProductID, String ProductName, String productPhoto, String productDescription,
                       String indikasi, String kandungan, String dosis, String carapakai, String kemasan,
                       String golongan, String resepYN, String kontraindikasi, String carasimpan, String principal,String categoryID) {
@@ -22,6 +24,15 @@ public class Model_Obat {
         this.carasimpan = carasimpan;
         this.principal = principal;
         this.categoryID=categoryID;
+    }
+
+    public Model_Obat(String ProductID, String ProductName, String productPhoto, int productPrice, int productPriceAfterDc, int productDiscount) {
+        this.ProductID = ProductID;
+        this.ProductName = ProductName;
+        this.productPhoto = productPhoto;
+        this.productPrice = productPrice;
+        this.productPriceAfterdc = productPriceAfterDc;
+        this.productDiscount = productDiscount;
     }
 
 
@@ -170,4 +181,27 @@ public class Model_Obat {
         this.categoryID = categoryID;
     }
 
+    public int getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public int getProductDiscount() {
+        return productDiscount;
+    }
+
+    public void setProductDiscount(int productDiscount) {
+        this.productDiscount = productDiscount;
+    }
+
+    public int getProductPriceAfterdc() {
+        return productPriceAfterdc;
+    }
+
+    public void setProductPriceAfterdc(int productPriceAfterdc) {
+        this.productPriceAfterdc = productPriceAfterdc;
+    }
 }
