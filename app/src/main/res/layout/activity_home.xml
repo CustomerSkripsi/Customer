@@ -119,51 +119,118 @@
                 </FrameLayout>
 
                 //ProdukPromo
+
+                <TextView
+                    android:id="@+id/tvProduk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="PRODUK"
+                    android:textColor="@color/ijo" />
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/llProduk"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"></LinearLayout>-->
+
                 <LinearLayout
                     android:id="@+id/ll_promo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:weightSum="4"
                     android:background="@drawable/border"
-                    >
+                    android:paddingTop="5dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
+                    <ImageView
+                        android:id="@+id/ivPromo"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="140px"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_promo" />
 
-                        <TextView
-                            android:textSize="16dp"
-                            android:text="PRODUK PROMO"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:gravity="center"
-                            />
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_terlaris" />
 
-                        <Button
-                            android:background="#ffffff"
-                            android:text="selengkapnya >"
-                            android:textSize="11dp"
-                            android:textColor="#7c7c7c"
-                            android:layout_alignParentEnd="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
 
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_cv_obat_promo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp">
-                    </android.support.v7.widget.RecyclerView>
 
                 </LinearLayout>
 
                 //ProdukRekomendasi
+
+                <TextView
+                    android:id="@+id/tvFitur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FITUR"
+                    android:layout_gravity="center"
+                    android:textColor="@color/ijo"/>
+
+                <LinearLayout
+                    android:id="@+id/llFitur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivMember"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_home_black_24dp" />
+
+                    <ImageView
+                        android:id="@+id/ivHistory"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_people" />
+
+                    <ImageView
+                        android:id="@+id/ivKategori"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_home_black_24dp" />
+
+                </LinearLayout>
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="PRODUK PROMO"-->
+                        <!--android:textSize="16dp"-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentEnd="true"-->
+                        <!--android:background="#ffffff"-->
+                        <!--android:text="selengkapnya >"-->
+                        <!--android:textColor="#7c7c7c"-->
+                        <!--android:textSize="11dp" />-->
+
+                <!--</RelativeLayout>-->
+
                 <LinearLayout
                     android:id="@+id/ll_rekomendasi"
                     android:layout_width="match_parent"
@@ -173,30 +240,36 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/border">
 
-                    <RelativeLayout
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_cv_obat_promo"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
-                        <TextView
-                            android:textSize="16dp"
-                            android:text="PRODUK REKOMENDASI"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:gravity="center"
-                            />
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="40dp">-->
 
-                        <Button
-                            android:background="#ffffff"
-                            android:text="selengkapnya >"
-                            android:textSize="11dp"
-                            android:textColor="#7c7c7c"
-                            android:layout_alignParentEnd="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <!--<TextView-->
+                            <!--android:textSize="16dp"-->
+                            <!--android:text="PRODUK REKOMENDASI"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_marginLeft="10dp"-->
+                            <!--android:gravity="center"-->
+                            <!--/>-->
 
-                    </RelativeLayout>
+                        <!--<Button-->
+                            <!--android:background="#ffffff"-->
+                            <!--android:text="selengkapnya >"-->
+                            <!--android:textSize="11dp"-->
+                            <!--android:textColor="#7c7c7c"-->
+                            <!--android:layout_alignParentEnd="true"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+
+                    <!--</RelativeLayout>-->
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_cv_obat_rekomendasi"
@@ -217,30 +290,30 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/border">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="40dp">-->
 
-                        <TextView
-                            android:textSize="16dp"
-                            android:text="PRODUK TERLARIS"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:gravity="center"
-                            />
+                        <!--<TextView-->
+                            <!--android:textSize="16dp"-->
+                            <!--android:text="PRODUK TERLARIS"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_marginLeft="10dp"-->
+                            <!--android:gravity="center"-->
+                            <!--/>-->
 
-                        <Button
-                            android:background="#ffffff"
-                            android:text="selengkapnya >"
-                            android:textSize="11dp"
-                            android:textColor="#7c7c7c"
-                            android:layout_alignParentEnd="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <!--<Button-->
+                            <!--android:background="#ffffff"-->
+                            <!--android:text="selengkapnya >"-->
+                            <!--android:textSize="11dp"-->
+                            <!--android:textColor="#7c7c7c"-->
+                            <!--android:layout_alignParentEnd="true"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
 
-                    </RelativeLayout>
+                    <!--</RelativeLayout>-->
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_cv_obat_terlaris"

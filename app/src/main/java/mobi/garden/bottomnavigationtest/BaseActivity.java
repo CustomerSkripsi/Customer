@@ -52,9 +52,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
                 startActivity(new Intent(this, HomeActivity.class));
             } else if (itemId == R.id.navigation_dashboard) {
                     startActivity(new Intent(this, KategoriActivity.class));
-            } else if (itemId == R.id.navigation_notifications) {
-                    startActivity(new Intent(this, HistoryActivity.class));
-            } else if(itemId == R.id.navigation_notifications1){
+            } //else if (itemId == R.id.navigation_notifications) {
+                   // startActivity(new Intent(this, HistoryActivity.class));
+            //}
+            else if(itemId == R.id.navigation_notifications1){
                 startActivity(new Intent(this, CartActivity.class));
             } else if(itemId == R.id.navigation_notifications2){
                 startActivity(new Intent(this, MyMenuActivity.class));

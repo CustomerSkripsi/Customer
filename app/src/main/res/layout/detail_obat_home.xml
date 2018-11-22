@@ -99,23 +99,25 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="10dp">
+
             <RelativeLayout
-                android:layout_weight="1"
                 android:layout_width="170dp"
                 android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="6dp"
-                android:layout_marginLeft="15dp">
+                android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btn_informasi_product"
                     android:layout_width="1500dp"
                     android:layout_height="30dp"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:textAllCaps="false"
-                    android:textSize="15dp"
-                    android:text="Informasi Produk"
                     android:background="@drawable/borderhijau3"
-                    android:textColor="#ffff" />
+                    android:gravity="center"
+                    android:text="Informasi Produk"
+                    android:textAllCaps="false"
+                    android:textColor="#ffff"
+                    android:textSize="15dp" />
             </RelativeLayout>
 
             <RelativeLayout
