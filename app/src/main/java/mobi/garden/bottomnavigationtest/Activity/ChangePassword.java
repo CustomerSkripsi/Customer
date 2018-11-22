@@ -36,7 +36,7 @@ public class ChangePassword {
     String tempID, tempUsername ,tempPassword, customerID;
     TextInputLayout til_PassBaru, til_PassLama, til_PassBaruKonfirm;
     TextInputEditText etPassBaru, etPassLama, etKonfirmPassBaru;
-    TextView  TvOKE, TvBatal;
+    TextView  TvOKE, TvBatal; 
 
     private static final String SALT_LOGIN = "Pharmanet";
 
