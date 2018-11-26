@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -19,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +37,13 @@ import mobi.garden.bottomnavigationtest.R;
 public class DetailKategori extends AppCompatActivity {
     Context context;
     String url, kategoriname;
+    String namaproduk,tempimage,harga1, hargacoret1;
     TextView tvNamaObat;
     List<ModelKategori> KategorisList = new ArrayList<>();
     DetailKategoriAdapter dkAdapter;
     RecyclerView rvprodukdetail;
+    ImageView imgProduct,imgProduct2,imgProduct3;
+    TextView tvNamaProdukPromo,tvNamaProdukPromo2,tvNamaProdukPromo3,tvHargaCoret,tvHargaCoret2,tvHargaCoret3,tvHarga,tvHarga2,tvHarga3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,7 @@ public class DetailKategori extends AppCompatActivity {
 
         Intent intent = getIntent();
         kategoriname = intent.getStringExtra("CategoryName");
-        showkategoris();
+
 
         android.support.v7.widget.Toolbar dToolbar = findViewById(R.id.toolbar4);
         dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
@@ -71,7 +77,23 @@ public class DetailKategori extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        if(kategoriname.contains(" ")){
+            kategoriname = kategoriname.replace(" ","%20");
+        }
+        show3promo();
+        showkategoris();
+        //FIND VIEW
+        imgProduct = findViewById(R.id.imgProduct);
+        imgProduct2 = findViewById(R.id.imgProduct2);
+        imgProduct3 = findViewById(R.id.imgProduct3);
+        tvNamaProdukPromo = findViewById(R.id.tvNamaProdukPromo);
+        tvNamaProdukPromo2 = findViewById(R.id.tvNamaProdukPromo2);
+        tvHargaCoret = findViewById(R.id.tvHargaCoret);
+        tvHargaCoret2 = findViewById(R.id.tvHargaCoret2);
+        tvHargaCoret3 = findViewById(R.id.tvHargaCoret3);
+        tvHarga = findViewById(R.id.tvHarga);
+        tvHarga2 = findViewById(R.id.tvHarga2);
+        tvHarga3 = findViewById(R.id.tvHarga3);
 
 
     }
@@ -95,7 +117,7 @@ public class DetailKategori extends AppCompatActivity {
                         ModelKategori m = new ModelKategori();
                         m.setCategoryName(object.getString("ProductName"));
                         KategorisList.add(m);
-                        Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("rwar", object.toString());
                         dkAdapter = new DetailKategoriAdapter(KategorisList,context);
                         rvprodukdetail.setAdapter(dkAdapter);
@@ -113,6 +135,73 @@ public class DetailKategori extends AppCompatActivity {
         });
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(req);
+    }
+
+    public void show3promo(){
+        String url2 = "http://pharmanet.apodoc.id/customer/Category3promo.php?CategoryName="+kategoriname;
+        JsonObjectRequest quest = new JsonObjectRequest(url2, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for(int i=0;i<result.length();i++){
+                    try {
+                        JSONObject object = result.getJSONObject(i);
+                        tempimage = object.getString("ProductImage");
+                        namaproduk = object.getString("ProductName");
+                        hargacoret1 = object.getString("ProductPrice");
+                        harga1 = object.getString("ProductPriceAfterDiscount");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if(imgProduct.equals("null")){
+                        Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct);
+                    }else {
+                        Picasso.with(context).load(tempimage).into(imgProduct, new Callback() {
+                            @Override
+                            public void onSuccess() { }
+
+                            @Override
+                            public void onError() {
+                                Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct);
+                            }
+                        });
+                    }
+                    if(imgProduct2.equals("null")){
+                        Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct2);
+                    }else {
+                        Picasso.with(context).load(tempimage).into(imgProduct2, new Callback() {
+                            @Override
+                            public void onSuccess() { }
+
+                            @Override
+                            public void onError() {
+                                Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct2);
+                            }
+                        });
+                    }
+                    tvNamaProdukPromo.setText(namaproduk);
+                    tvNamaProdukPromo2.setText(namaproduk);
+                    tvHargaCoret.setText("Rp. "+hargacoret1);
+                    tvHargaCoret2.setText("Rp. "+hargacoret1);
+                    tvHargaCoret3.setText("Rp. "+hargacoret1);
+                    tvHarga.setText("Rp. "+harga1);
+                    tvHarga2.setText("Rp. "+harga1);
+                    tvHarga3.setText("Rp. "+harga1);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Error Response", Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue queue=Volley.newRequestQueue(context);
+        queue.add(quest);
     }
 
 }
