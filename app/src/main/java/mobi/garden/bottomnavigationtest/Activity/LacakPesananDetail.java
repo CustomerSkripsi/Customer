@@ -15,8 +15,8 @@ public class LacakPesananDetail extends AppCompatActivity{
     static String ID;
     String Date,OutletName,StatusOrder;
 
-    TextView lacakPesananDetail_OrderID,lacakPesananDetail_Date,lacakPesananDetail_apoName,lacakPesananDetail_NamaPenerima,lacakPesananDetail_Phone;
-    TextView lacakPesananDetail_AlamatPenerima,lacakPesananDetail_StatusDelivery,lacakPesananDetail_Status,lacakPesananDetail_TglTerima,lacakPesananDetail_Alasan;
+    TextView lacakPesananDetail_OrderID,lacakPesananDetail_Date,lacakPesananDetail_apoName,lacakPesananDetail_NamaObat,lacakPesananDetail_Harga;
+    TextView lacakPesananDetail_Jumlah,lacakPesananDetail_Berat; //lacakPesananDetail_Status;
     TextView sub_total_detail;
 
     @Override
@@ -28,12 +28,10 @@ public class LacakPesananDetail extends AppCompatActivity{
         lacakPesananDetail_OrderID = findViewById(R.id.lacakPesananDetail_OrderID);
         lacakPesananDetail_Date = findViewById(R.id.lacakPesananDetail_Date);
         lacakPesananDetail_apoName = findViewById(R.id.lacakPesananDetail_apoName);
-        lacakPesananDetail_NamaPenerima = findViewById(R.id.lacakPesananDetail_NamaPenerima);
-        lacakPesananDetail_Phone = findViewById(R.id.lacakPesananDetail_Phone);
-        lacakPesananDetail_AlamatPenerima = findViewById(R.id.lacakPesananDetail_AlamatPenerima);
-        lacakPesananDetail_StatusDelivery = findViewById(R.id.lacakPesananDetail_StatusDelivery);
-        lacakPesananDetail_Status = findViewById(R.id.lacakPesananDetail_Status);
-        lacakPesananDetail_TglTerima = findViewById(R.id.lacakPesananDetail_TglTerima);
+        lacakPesananDetail_NamaObat = findViewById(R.id.lacakPesananDetail_Nama_Item);
+        lacakPesananDetail_Harga = findViewById(R.id.lacakPesananDetail_Price);
+        lacakPesananDetail_Jumlah = findViewById(R.id.lacakPesananDetail_Jumlah);
+        lacakPesananDetail_Berat = findViewById(R.id.lacakPesananDetail_Berat);
         sub_total_detail = findViewById(R.id.sub_total_detail);
 
 
@@ -47,7 +45,7 @@ public class LacakPesananDetail extends AppCompatActivity{
         lacakPesananDetail_OrderID.setText(ID);
         lacakPesananDetail_Date.setText(Date);
         lacakPesananDetail_apoName.setText(OutletName);
-        lacakPesananDetail_Status.setText(StatusOrder);
+        //lacakPesananDetail_Status.setText(StatusOrder);
 
     }
 }
