@@ -1,12 +1,14 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,17 +41,23 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
     public void onBindViewHolder(PromoViewHolder holder, int position) {
         final ModelPromo mp = modelPromo.get(position);
         //Toast.makeText(context, "Test", Toast.LENGTH_SHORT).show();
-        holder.tvNamaProdukPromo.setText(mp.PromoNameProduct);
-        holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.PriceProduct));
+
+        holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
+        holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
+        holder.tvharga.setText("Rp. "+String.valueOf(mp.getProductPriceAfterDC()));
+
+        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
+            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+        }
         //holder.tvharga.setText("Rp. "+String.valueOf(mp.PriceProduct));
 //        if(mp.ProductNameUrl.contains("/")){
 //            mp.ProductNameUrl = mp.ProductNameUrl.replace("\\/","");
 //        }
         //Toast.makeText(context, ""+mp.ProductNameUrl, Toast.LENGTH_SHORT).show();
-        if(mp.ProductNameUrl.equalsIgnoreCase("null")){
+        if(mp.getProductNameUrl().equalsIgnoreCase("null")){
             Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
         }else {
-            Picasso.with(context).load(mp.ProductNameUrl).into(holder.imgProduct, new Callback() {
+            Picasso.with(context).load(mp.getProductNameUrl()).into(holder.imgProduct, new Callback() {
                 @Override
                 public void onSuccess() {}
                 @Override
@@ -69,12 +77,14 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
     public static class PromoViewHolder extends RecyclerView.ViewHolder{
         TextView tvNamaProdukPromo,tvHargaCoret, tvharga;
         ImageView imgProduct;
+        LinearLayout llproduk;
         public PromoViewHolder(View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
             tvNamaProdukPromo = itemView.findViewById(R.id.tvNamaProdukPromo);
             tvHargaCoret = itemView.findViewById(R.id.tvHargaCoret);
             tvharga = itemView.findViewById(R.id.tvHarga);
+            llproduk = itemView.findViewById(R.id.llproduk);
         }
     }
 }
