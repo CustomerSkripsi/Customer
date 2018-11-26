@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -49,7 +50,6 @@ import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 
 
 public class HomeActivity extends BaseActivity {
-
     //Slider Image
     private SliderPagerAdapter mAdapter;
     private SliderIndicator mIndicator;
@@ -76,6 +76,9 @@ public class HomeActivity extends BaseActivity {
     private int dotscount;
     private ImageView[] dots;
 
+    ImageView ivHistory, ivkategory ,ivPromo;
+    //String iv
+
 //    private String[] imageUrls = new String[]{
 //            "http://analisadaily.com/assets/image/news/big/2015/10/buah-buahan-terbaik-kaya-alkali-182507-1.jpg",
 //            "https://asset.kompas.com/crop/0x0:900x600/750x500/data/photo/2017/12/11/14051175721.jpg",
@@ -95,6 +98,29 @@ public class HomeActivity extends BaseActivity {
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
+
+        ivHistory = findViewById(R.id.ivHistory);
+        ivkategory = findViewById(R.id.ivKategori);
+        ivPromo = findViewById(R.id.ivPromo);
+        ivHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this , HistoryActivity.class));
+            }
+        });
+        ivkategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this , KategoriActivity.class));
+            }
+        });
+        ivPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, PromoActivity.class));
+            }
+        });
+
 
         cardListBrand.setHasFixedSize(true);
         cardListBrand.setVisibility(View.VISIBLE);
