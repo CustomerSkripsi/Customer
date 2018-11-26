@@ -1,9 +1,11 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -64,6 +66,15 @@ public class InfromasiObat extends BaseActivity {
         tv_carasimpan_obat.setText(detail_obat.get(session_obat.CARASIMPAN));
         tv_principal_obat.setText(detail_obat.get(session_obat.PRINCIPAL));
 
+        android.support.v7.widget.Toolbar dToolbar = findViewById(R.id.toolbar_info);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(InfromasiObat.this, DetailObatHome.class);
+                startActivity(i);
+            }
+        });
 
     }
 
