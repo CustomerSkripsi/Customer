@@ -17,7 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -54,11 +53,11 @@
         <activity android:name=".Activity.AddAlamatActivity" />
         <activity android:name=".Activity.LacakPesananDetail" />
         <activity android:name=".Activity.UbahAlamatActivity" />
-
         <activity android:name=".Activity.LupaPass" />
         <activity android:name=".Activity.MemberActivity" />
         <activity android:name=".Activity.RegisterMember" />
-        <activity android:name=".Activity.EditLupaPasswordActivity"></activity>
+        <activity android:name=".Activity.EditLupaPasswordActivity" />
+        <activity android:name=".Activity.gantiPassword"></activity>
     </application>
 
 </manifest>

@@ -73,8 +73,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Verifikasi"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:background="@drawable/orangebutton"/>
 
             <Button
                 android:id="@+id/btnLupaPassKirimUlang"
@@ -85,8 +86,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Kirim Ulang"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:background="@drawable/orangebutton"/>
         </LinearLayout>
 
         <LinearLayout
@@ -159,7 +161,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Masuk"
-                android:textColor="#000000"
+                android:textColor="#FFF"
+                android:background="@drawable/orangebutton"
                 android:textSize="20sp"
                 android:visibility="gone" />
 
@@ -172,8 +175,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Kirim Kode"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:background="@drawable/orangebutton"/>
             <!--android:visibility="gone" -->
 
         </LinearLayout>

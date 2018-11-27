@@ -158,6 +158,12 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Kelamin"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#000"/>
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -188,6 +194,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="No.Telepon / HP"
+                        android:inputType="phone"
+                        android:maxLength="15"
+                        android:textColor="#000"
+                        android:textColorHint="#000"  />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -197,32 +222,11 @@
                         android:layout_marginTop="10dp"
                         android:backgroundTint="#000"
                         android:ems="10"
-                        android:hint="E-mail (xxx@gmail.com)"
+                        android:hint="E-mail"
                         android:inputType="textEmailAddress"
                         android:maxLength="50"
                         android:textColor="#000"
                         android:textColorHint="#000" />
-                </android.support.design.widget.TextInputLayout>
-
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginTop="10dp"
-                        android:backgroundTint="#000"
-                        android:ems="10"
-                        android:hint="No.Handphone (08xxx...)"
-                        android:inputType="phone"
-                        android:maxLength="15"
-                        android:textColor="#000"
-                        android:textColorHint="#000"  />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -300,149 +304,6 @@
                     android:textSize="20sp"
                     android:visibility="gone" />
 
-                <!--<EditText-->
-                <!--android:id="@+id/etNama"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Nama"-->
-                <!--android:inputType="textPersonName"-->
-                <!--android:maxLength="50"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etAlamat"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Alamat"-->
-                <!--android:inputType="textMultiLine"-->
-                <!--android:maxLength="180"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etKota"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Kota"-->
-                <!--android:inputType="textPostalAddress"-->
-                <!--android:maxLength="20"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etTanggalLahir"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Tanggal Lahir"-->
-                <!--android:inputType="text"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etEmail"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="E-mail (xxx@gmail.com)"-->
-                <!--android:inputType="textEmailAddress"-->
-                <!--android:maxLength="50"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etPhone"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="No.Handphone (08xxx...)"-->
-                <!--android:inputType="phone"-->
-                <!--android:maxLength="15"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etUsername"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Username"-->
-                <!--android:inputType="text"-->
-                <!--android:maxLength="15"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etPassword"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Password"-->
-                <!--android:inputType="textPassword"-->
-                <!--android:maxLength="15"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/etRegisterKonfirmasiPassword"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:backgroundTint="#000"-->
-                <!--android:ems="10"-->
-                <!--android:hint="Konfirmasi Password"-->
-                <!--android:inputType="textPassword"-->
-                <!--android:maxLength="15"-->
-                <!--android:textColor="#000"-->
-                <!--android:textColorHint="#000" />-->
-
                 <Button
                     android:id="@+id/btnKirimVerifikasi"
                     android:layout_width="match_parent"
@@ -451,8 +312,9 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/orangebutton"
                     android:text="Kirim Kode"
-                    android:textColor="#000000"
+                    android:textColor="#FFF"
                     android:textSize="20sp" />
 
 

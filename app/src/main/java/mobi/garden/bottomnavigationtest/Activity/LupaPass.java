@@ -103,8 +103,6 @@ public class LupaPass extends AppCompatActivity {
         mAuthLupaPass = FirebaseAuth.getInstance();
         setUpVerificationCallback();
 
-
-
         //validasi nomor hape
         queue = Volley.newRequestQueue(this);
 

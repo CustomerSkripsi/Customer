@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MemberActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -47,10 +54,10 @@
         android:layout_gravity="center"
         android:enabled="false"
         android:gravity="center"
-        android:hint="Nama User"
         android:background="@drawable/gradient"
         android:textSize="16dp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:layout_editor_absoluteX="0dp"
         tools:ignore="MissingConstraints"></TextView>
@@ -76,120 +83,143 @@
 
 </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linform"
-        android:orientation="vertical"
+        android:layout_height="320dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linPict">
-        <TextView
-            android:id="@+id/ivLogout"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:visibility="visible"
-            android:hint="Log out"
-            android:clickable="true"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            />
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
+            android:id="@+id/linform"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etMemberID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#000"
-                android:ems="10"
-                android:hint="Member ID"
-                android:focusable="false"
-                android:inputType="textPersonName"
-                android:maxLength="50"
-                android:textColor="#000"
-                android:textColorHint="#000" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etTanggalLahir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#000"
-                android:ems="10"
-                android:hint="Tanggal Lahir"
-                android:focusable="false"
-                android:inputType="textPersonName"
-                android:maxLength="50"
-                android:textColor="#000"
-                android:textColorHint="#000" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etNoTelp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#000"
-                android:ems="10"
-                android:hint="Nomor Telpon"
-                android:focusable="false"
-                android:inputType="textPersonName"
-                android:maxLength="50"
-                android:textColor="#000"
-                android:textColorHint="#000" />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#000"
-                android:ems="10"
-                android:hint="Email"
-                android:focusable="false"
-                android:inputType="textPersonName"
-                android:maxLength="50"
-                android:textColor="#000"
-                android:textColorHint="#000" />
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvubahPass"
-            android:text="Ubah Password"
-            />
-    </LinearLayout>
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linPict">
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etMemberID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Member ID"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:textColor="#000"
+                    android:textColorHint="#000" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etTanggalLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Tanggal Lahir"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:textColor="#000"
+                    android:textColorHint="#000" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etNoTelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Nomor Telpon"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:textColor="#000"
+                    android:textColorHint="#000" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Email"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:textColor="#000"
+                    android:textColorHint="#000" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/whitetransparent"
+                android:drawableLeft="@drawable/ic_settings_black_24dp"
+                android:drawablePadding="6dp"
+                android:gravity="left|center"
+                android:height="60dp"
+                android:padding="6dp"
+                android:text="Ubah Password"
+                android:textColor="#000"
+                android:id="@+id/btnEditPass"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/whitetransparent"
+                android:drawableLeft="@drawable/ic_exit_to_app_black_24dp"
+                android:drawablePadding="6dp"
+                android:gravity="left|center"
+                android:height="60dp"
+                android:padding="6dp"
+                android:text="log out"
+                android:textColor="#000"
+                android:id="@+id/btnLogout"
+                />
+
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

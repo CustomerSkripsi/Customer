@@ -449,10 +449,6 @@ public class RegisterMember extends AppCompatActivity{
 
 //        listKota();
 
-
-
-
-
         rbPria.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -49,11 +49,11 @@ public class MemberActivity extends AppCompatActivity {
         SessionManagement session;
         AlertDialog dialog;
         AlertDialog.Builder builder;
-        ImageView ivBarcode,ivLogout, ivFilter1, ivFilter2, ivFilter3;
+        ImageView ivBarcode,ivLogout, ivFilter1, ivFilter2, ivFilter3,ivChevronLeftProfile;
         Context context;
         TextView tvNama,tvLogout;
         String today, awalbarcode = "";
-        Button btnRefresh;
+        Button btnRefresh, btnLogout, btnEditPass;
         ConstraintLayout mainMember;
         LinearLayout koneksiLayout;
 
@@ -78,10 +78,10 @@ public class MemberActivity extends AppCompatActivity {
 //                    startActivity(intent);
 //                    break;
 //
-//                case R.id.GantiPassword:
-//                    Intent intent1 = new Intent(MemberActivity.this, GantiPassword.class);
-//                    startActivity(intent1);
-//                    break;
+                case R.id.GantiPassword:
+                    Intent intent1 = new Intent(MemberActivity.this, gantiPassword.class);
+                    startActivity(intent1);
+                    break;
                 case R.id.logout:
                     builder.setMessage("Apakah Anda ingin Logout member ?");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -119,7 +119,8 @@ public class MemberActivity extends AppCompatActivity {
             setContentView(R.layout.activity_member);
             queue = Volley.newRequestQueue(this);
             builder = new AlertDialog.Builder(this);
-
+            btnLogout = findViewById(R.id.btnLogout);
+            btnEditPass = findViewById(R.id.btnEditPass);
             etEmail = findViewById(R.id.etEmail);
             etMemberID = findViewById(R.id.etMemberID);
             etNoTelp = findViewById(R.id.etNoTelp);
@@ -129,9 +130,17 @@ public class MemberActivity extends AppCompatActivity {
 
             final HashMap<String, String> member = session.getMemberDetails();
 
-            Toolbar tolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(tolbar);
-            setTitle("");
+            Toolbar mToolbar =findViewById(R.id.toolbar);
+            mToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MemberActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
+            });
+
 
             String url1 = "http://sayasehat.apodoc.id/selectMember.php?member="+member.get(SessionManagement.KEY_KODEMEMBER);
             JsonObjectRequest req = new JsonObjectRequest(url1, null,
@@ -242,9 +251,9 @@ public class MemberActivity extends AppCompatActivity {
 //            koneksiLayout = findViewById(R.id.koneksiLayout);
 //            mainMember = findViewById(R.id.mainMember);
             ivBarcode = findViewById(R.id.ivBarcode);
-            tvLogout = findViewById(R.id.ivLogout);
+
 //            ivLogout = findViewById(R.id.ivLogout);
-//            tvNama = findViewById(R.id.tvNama);
+            tvNama = findViewById(R.id.tvNama);
 
 //            ivFilter1 = findViewById(R.id.ivFilter1);
 //            ivFilter2 = findViewById(R.id.ivFilter2);
@@ -317,7 +326,7 @@ public class MemberActivity extends AppCompatActivity {
 //                }
 //            });
 
-            tvLogout.setOnClickListener(new View.OnClickListener() {
+            btnLogout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     builder.setMessage("Apakah Anda ingin Logout member ?");
@@ -344,16 +353,43 @@ public class MemberActivity extends AppCompatActivity {
                 }
             });
 
+            btnEditPass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    builder.setMessage("Apakah Anda ingin merubah password ?");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent1 = new Intent(MemberActivity.this, gantiPassword.class);
+                            startActivity(intent1);
+
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+
+                    dialog = builder.show();
+
+                }
+            });
+
+
 //            tvNama.setVisibility(View.VISIBLE);
             ivBarcode.setVisibility(View.VISIBLE);
-            tvLogout.setVisibility(View.VISIBLE);
+            btnLogout.setVisibility(View.VISIBLE);
+//            tvLogout.setVisibility(View.VISIBLE);
 //            ivFilter1.setVisibility(View.VISIBLE);
 //            ivFilter2.setVisibility(View.VISIBLE);
 //            ivFilter3.setVisibility(View.VISIBLE);
 
 // DRAW BARCODE
             drawBarcode(member.get(SessionManagement.KEY_KODEMEMBER));
-//            tvNama.setText(member.get(SessionManagement.KEY_NAMA.trim()));
+            tvNama.setText(member.get(SessionManagement.KEY_NAMA.trim()));
         }
 
         //DRAW BARCODE

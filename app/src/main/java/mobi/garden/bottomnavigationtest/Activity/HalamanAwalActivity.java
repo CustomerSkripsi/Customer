@@ -90,7 +90,6 @@ public class HalamanAwalActivity extends AppCompatActivity {
         tvDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "masuk halaman daftar", Toast.LENGTH_SHORT).show();
                 Intent iii = new Intent(HalamanAwalActivity.this,RegisterMember.class);
                 startActivity(iii);
             }

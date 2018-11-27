@@ -130,7 +130,6 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
 //                        } catch (InterruptedException e) {
 //                            e.printStackTrace();
 //                        }
-
                             try {
 
                                 JSONObject objDetail = new JSONObject();

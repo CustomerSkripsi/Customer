@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.HalamanAwalActivity">
+    tools:context=".Activity.HalamanAwalActivity"
+    tools:layout_editor_absoluteY="25dp"
+    android:background="@color/blued">
 
     <LinearLayout
         android:id="@+id/linLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@color/blued"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -19,8 +24,8 @@
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/pharmanet"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:background="@drawable/logo_century" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,82 +40,152 @@
         app:layout_constraintTop_toBottomOf="@+id/linLogo"
         tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/etUserName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/etUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/whitetransparent"
+                android:hint="Username"
+                android:padding="10dp"
+                android:textColor="#000" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/whitetransparent"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="#000" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/orangebutton"
+                android:text="LOG IN"
+                android:textColor="#FFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLupaPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:onClick="lupaPass"
+                android:text="Lupa Password?"
+                android:textAlignment="center"
+                android:textColor="#FFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/image_button_2"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:hint="Username" />
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/whitetransparent"
+            android:gravity="left|center">
 
-        <EditText
-            android:id="@+id/etPassword"
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/logo_google_small" />
+
+            <TextView
+                android:id="@+id/image_button_2_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:gravity="center"
+                android:text="Google"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnGoogle"
+            style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
-            android:hint="Password"
-            android:inputType="textPassword"/>
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_weight="1"
-            android:text="LOG IN"
-            android:textColor="#FFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:background="@drawable/whitetransparent"
+            android:gravity="left|center">
 
-        <TextView
-            android:id="@+id/tvLupaPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:onClick="lupaPass"
-            android:text="Lupa Password?"
-            android:textAlignment="center" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/logo_facebook_small" />
 
-        <ImageButton
-            android:id="@+id/google"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
+            <TextView
+                android:id="@+id/btnFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:gravity="center"
+                android:text="Facebook"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
-            />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp" />
+
     </LinearLayout>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tvdaftar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linLogin">
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/whitetransparent"
+        android:gravity="center|bottom"
+        android:onClick="lupa_Pass"
+        android:padding="5dp"
+        android:text="Belum memiliki akun? DAFTAR"
+        android:textAlignment="center"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="OnClick"
+        tools:layout_editor_absoluteX="0dp" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--android:gravity="bottom"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/linLogin">-->
 
-        <TextView
 
-            android:id="@+id/tvdaftar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:onClick="lupa_Pass"
-            android:text="Belum memiliki akun? DAFTAR"
-            android:textAlignment="center"
-            tools:ignore="OnClick" />
-    </RelativeLayout>
+    <!--</LinearLayout>-->
 </android.support.constraint.ConstraintLayout>
