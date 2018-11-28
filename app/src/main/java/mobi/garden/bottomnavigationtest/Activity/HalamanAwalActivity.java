@@ -71,8 +71,9 @@ public class HalamanAwalActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
 
         if(session.isLoggedIn()){
-            Intent i = new Intent(HalamanAwalActivity.this,MemberActivity.class);
+            Intent i = new Intent(HalamanAwalActivity.this,HomeActivity.class);
             startActivity(i);
+            finish();
         }
 
         builder = new AlertDialog.Builder(this);
@@ -195,6 +196,7 @@ public class HalamanAwalActivity extends AppCompatActivity {
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     session.LoginSession(Relasi_nama, Relasi_CardNumber, "","");
                                                     Intent intent = new Intent(HalamanAwalActivity.this, HomeActivity.class);
+                                                    finish();
                                                     startActivity(intent);
                                                 }
                                             });
@@ -260,7 +262,6 @@ public class HalamanAwalActivity extends AppCompatActivity {
 
             }
         });
-
         dialog = builder.show();
     }
 

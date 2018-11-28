@@ -912,7 +912,7 @@ public class RegisterMember extends AppCompatActivity{
                                                                 @Override
                                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                                     session.LoginSession(namaLogin, Relasi_CardNumber, "","");
-                                                                    Intent intent = new Intent(RegisterMember.this, MemberActivity.class);
+                                                                    Intent intent = new Intent(RegisterMember.this, HomeActivity.class);
                                                                     startActivity(intent);
                                                                 }
                                                             });

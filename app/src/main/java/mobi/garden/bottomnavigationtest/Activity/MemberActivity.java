@@ -404,29 +404,29 @@ public class MemberActivity extends AppCompatActivity {
 
         }
 
-        @Override
-        public void onBackPressed() {
-            builder.setMessage("Apakah Anda ingin keluar dari aplikasi ?");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    startActivity(intent);
-                    return;
-                }
-            });
-
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            });
-
-            dialog = builder.show();
-
-        }
+//        @Override
+//        public void onBackPressed() {
+//            builder.setMessage("Apakah Anda ingin keluar dari aplikasi ?");
+//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    Intent intent = new Intent(Intent.ACTION_MAIN);
+//                    intent.addCategory(Intent.CATEGORY_HOME);
+//                    startActivity(intent);
+//                    return;
+//                }
+//            });
+//
+//            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                }
+//            });
+//
+//            dialog = builder.show();
+//
+//        }
 
         @Override
         protected void onStart() {

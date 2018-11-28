@@ -43,6 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.ApotekActivity" />
         <activity android:name=".Activity.PickUpActivity" />
+        <activity android:name=".Activity.PromoActivity" />
         <activity android:name=".LoginRegister.Login" />
         <activity android:name=".LoginRegister.Register" />
         <activity android:name=".Activity.InformasiObatAs" />
