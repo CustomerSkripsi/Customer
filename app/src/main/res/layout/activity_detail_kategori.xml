@@ -53,20 +53,21 @@
                             android:id="@+id/tvProdukPromo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:text="PRODUK PROMO"
                             android:textSize="16dp"
-                            android:textStyle="bold"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"/>
+                            android:textStyle="bold" />
 
                         <Button
+                            android:id="@+id/btnPromoSeleng"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
+                            android:layout_marginRight="10dp"
                             android:background="#ffffff"
                             android:text="Selengkapnya >"
                             android:textColor="#7c7c7c"
-                            android:layout_marginRight="10dp"
                             android:textSize="11dp" />
                     </RelativeLayout>
 

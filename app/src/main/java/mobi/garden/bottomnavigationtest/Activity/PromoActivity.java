@@ -54,7 +54,7 @@ public class PromoActivity extends AppCompatActivity {
     public static  List<ModelPromo> PromoList = new ArrayList<>();
     public static PromoAdapter promoAdapter;
     TextView etSearchPromo;
-
+    public static String geturl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,12 @@ public class PromoActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
+        Intent i = getIntent();
+        geturl = i.getStringExtra("allpromo");
+       // geturl = getIntent().getStringExtra("allpromo");
+        Log.d("URL", geturl);
         rvPromo.setLayoutManager(llm);
+
 //        rvPromo.setHasFixedSize(true);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
 //        rvPromo.setLayoutManager(gridLayoutManager);
@@ -107,9 +112,11 @@ public class PromoActivity extends AppCompatActivity {
             }
            // String content= etSearchPromo.getText().toString();
         });
-        //PromoList.clear();
+
       //  showallpromo();
         searchProcess(etSearchPromo.getText().toString());
+        searchpromocategory();
+
         Toolbar dToolbar = findViewById(R.id.toolbar2);
         dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
         dToolbar.setTitle("PROMO");
@@ -124,6 +131,22 @@ public class PromoActivity extends AppCompatActivity {
 
 
     }
+
+    public void searchProcess(String text){
+        searching = new Searching(context,text,rvPromo);
+        searching.search();
+    }
+
+    public void searchpromocategory(){
+        searching = new Searching(context, rvPromo);
+        searching.promocategory();
+    }
+
+
+
+
+
+
 //
 //    private void initiateTopAdapter(){
 //        rvPromo.setHasFixedSize(true);
@@ -185,10 +208,13 @@ public class PromoActivity extends AppCompatActivity {
 //        },2000);
 //    }
 
-    public void searchProcess(String text){
-        searching = new Searching(context,text,rvPromo);
-        searching.search();
-    }
+
+
+
+
+
+
+
 
 //    public void showallpromo(){
 //        url="http://pharmanet.apodoc.id/customer/ProductPromoAll.php";

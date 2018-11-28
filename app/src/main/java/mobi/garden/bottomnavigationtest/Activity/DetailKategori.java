@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,13 +37,14 @@ import mobi.garden.bottomnavigationtest.R;
 
 public class DetailKategori extends AppCompatActivity {
     Context context;
-    String url, kategoriname;
+    String url, kategoriname, CategoryName;
     String namaproduk,tempimage,harga1, hargacoret1;
     TextView tvNamaObat;
     List<ModelKategori> KategorisList = new ArrayList<>();
     DetailKategoriAdapter dkAdapter;
     RecyclerView rvprodukdetail;
     ImageView imgProduct,imgProduct2,imgProduct3;
+    Button btnSelengkapPromo;
     TextView tvNamaProdukPromo,tvNamaProdukPromo2,tvNamaProdukPromo3,tvHargaCoret,tvHargaCoret2,tvHargaCoret3,tvHarga,tvHarga2,tvHarga3;
 
     @Override
@@ -66,6 +68,15 @@ public class DetailKategori extends AppCompatActivity {
         Intent intent = getIntent();
         kategoriname = intent.getStringExtra("CategoryName");
 
+        btnSelengkapPromo = findViewById(R.id.btnPromoSeleng);
+        btnSelengkapPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),PromoActivity.class);
+                i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/PromoCategory.php?CategoryName="+kategoriname);
+                startActivity(i);
+            }
+        });
 
         android.support.v7.widget.Toolbar dToolbar = findViewById(R.id.toolbar4);
         dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
@@ -77,11 +88,16 @@ public class DetailKategori extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
         if(kategoriname.contains(" ")){
             kategoriname = kategoriname.replace(" ","%20");
         }
         show3promo();
         showkategoris();
+
+
+
         //FIND VIEW
         imgProduct = findViewById(R.id.imgProduct);
         imgProduct2 = findViewById(R.id.imgProduct2);
