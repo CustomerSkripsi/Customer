@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,12 +35,19 @@ public class Searching {
     String promoname, producturl;
     int priceproduk,priceprodukafterdc;
 
+
     public Searching(Context context,String input,  RecyclerView recyclerView) {
         this.input = input;
         this.context = context;
         this.recyclerView = recyclerView;
     }
 
+    public Searching(Context context, RecyclerView recyclerView) {
+        this.context = context;
+        this.recyclerView = recyclerView;
+    }
+
+    //PROMO HOME
     public void search(){
         PromoList.clear();
         queue = Volley.newRequestQueue(context);
@@ -48,11 +56,12 @@ public class Searching {
 //        recyclerView.setLayoutManager(llm);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
         recyclerView.setLayoutManager(gridLayoutManager);
-        showallpromo();
+
+        showallpromo(PromoActivity.geturl+input);
     }
 
-    public void showallpromo(){
-        url="http://pharmanet.apodoc.id/customer/ProductPromoAll.php?input="+input;
+    public void showallpromo(String text){
+        url=text;
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -98,4 +107,51 @@ public class Searching {
 
         queue.add(req);
     }
+
+    //PROMO KATEGORI
+    public void promocategory(){
+        PromoList.clear();
+        queue = Volley.newRequestQueue(context);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        showpromocategory(PromoActivity.geturl);
+    }
+
+    public void showpromocategory(String text){
+        url = text;
+        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for(int i=0; i< result.length();i++){
+                    try {
+                        JSONObject object = result.getJSONObject(i);
+                        promoname = object.getString("ProductName");
+                        producturl = object.getString("ProductImage");
+                        priceproduk = object.getInt("ProductPrice");
+                        priceprodukafterdc = object.getInt("ProductPriceAfterDiscount");
+                        PromoList.add(new ModelPromo(promoname,producturl,priceproduk,priceprodukafterdc));
+                        Log.d("rwar", object.toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                promoAdapter = new PromoAdapter(PromoList,context);
+                recyclerView.setAdapter(promoAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Sedang Gangguan", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(req);
+    }
+
 }

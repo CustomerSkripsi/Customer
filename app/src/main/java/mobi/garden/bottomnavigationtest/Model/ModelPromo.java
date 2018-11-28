@@ -11,6 +11,11 @@ public class ModelPromo {
         this.ProductPriceAfterDC = productPriceAfterDC;
     }
 
+    public ModelPromo(String promoNameProduct, String productNameUrl) {
+        this.PromoNameProduct = promoNameProduct;
+        this.ProductNameUrl = productNameUrl;
+    }
+
     public int getProductPriceAfterDC() {
         return ProductPriceAfterDC;
     }

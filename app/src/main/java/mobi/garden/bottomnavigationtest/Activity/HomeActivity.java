@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -12,10 +13,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,11 +44,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Searching;
 import mobi.garden.bottomnavigationtest.Slider.SliderIndicator;
 import mobi.garden.bottomnavigationtest.Slider.SliderPagerAdapter;
 import mobi.garden.bottomnavigationtest.Slider.SliderView;
@@ -55,9 +63,16 @@ public class HomeActivity extends BaseActivity {
     private SliderIndicator mIndicator;
     private SliderView sliderView;
     private LinearLayout mLinearLayout;
+    private int context_pilihan;
+    RecyclerView rvSearchGlobal;
+
+    List<String> listRekomen = new ArrayList<>();
+    List<String> listRekomenApotek = new ArrayList<>();
+    List<String> listRekomenProduct = new ArrayList<>();
 
     //obat adapter
     RequestQueue queue;
+    Context context;
     obat_adapter pa;
     RecyclerView cardListBrand;
     RecyclerView cardListBrand2;
@@ -70,22 +85,17 @@ public class HomeActivity extends BaseActivity {
 
     TextView editText;
     ViewPagerAdapter adapter;
+    String input;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     List<String>imageUrls = new ArrayList<>();
     private int dotscount;
     private ImageView[] dots;
+    GlobalSearchAdapter globalSearchAdapter;
+
 
     ImageView ivHistory, ivkategory ,ivPromo;
-    //String iv
-
-//    private String[] imageUrls = new String[]{
-//            "http://analisadaily.com/assets/image/news/big/2015/10/buah-buahan-terbaik-kaya-alkali-182507-1.jpg",
-//            "https://asset.kompas.com/crop/0x0:900x600/750x500/data/photo/2017/12/11/14051175721.jpg",
-//            "https://www.rimma.co/wp-content/uploads/-000//1/Banana3.jpg",
-//            "https://cdn.idntimes.com/content-images/post/20180226/che-lg-grande-2f06368abd39d78579ba163793d36535-ee6d92b3cb0b8679d93c8cce22a95ca0_600x400.jpg",
-//            "https://www.cantikbijak.com/wp-content/uploads/2017/07/000038-00_buah-yang-baik-untuk-ibu-hamil_macam-macam-buah_800x450_cc0-min.jpg"
-//    };
+    EditText etSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +109,7 @@ public class HomeActivity extends BaseActivity {
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
+        InitiateSearchAdapter();
         ivHistory = findViewById(R.id.ivHistory);
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
@@ -117,10 +128,59 @@ public class HomeActivity extends BaseActivity {
         ivPromo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, PromoActivity.class));
+//              startActivity(new Intent(HomeActivity.this, PromoActivity.class));
+                Intent i = new Intent(getApplicationContext(),PromoActivity.class);
+                i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/ProductPromoAll.php?input=");
+                startActivity(i);
             }
         });
 
+        etSearch = findViewById(R.id.tvSearch);
+        etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId== EditorInfo.IME_ACTION_SEARCH||actionId == EditorInfo.IME_ACTION_DONE){
+                    String input = etSearch.getText().toString();
+                    if(input.contains(" ")){input = input.replace(" ","%20"); }
+                    if(input.contains("+")){input = input.replace("+","%2B"); }
+                    if(input.contains("/")){input = input.replace("/","\\/"); }
+                    if(input.contains(",")){input = input.replace(",","%2C"); }
+                    Log.d("inputnya",input+"");
+                    if(context_pilihan==1){
+                        Intent i = new Intent(HomeActivity.this,SearchProduk.class);
+                        i.putExtra(SearchProduk.SEARCH_RESULT, input);
+                        startActivity(i);
+                    }else if(context_pilihan==2){
+                        //Intent i = new Intent(HomeActivity.this,);
+                    }
+                }
+                return false;
+            }
+        });
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
+                    rvSearchGlobal.setVisibility(View.GONE);
+                    //Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
+                }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
+                    //set ulang rekomendasinya
+                    Log.d("jumlah",etSearch.getText().toString());
+                search(etSearch.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         cardListBrand.setHasFixedSize(true);
         cardListBrand.setVisibility(View.VISIBLE);
@@ -148,9 +208,7 @@ public class HomeActivity extends BaseActivity {
         Intent i=getIntent();
 
         setStatusBarGradiant(this);
-
         swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
-
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -166,46 +224,107 @@ public class HomeActivity extends BaseActivity {
                 }, 3500);
             }
         });
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, Search_Activity.class));
-            }
-        });
+//        editText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(HomeActivity.this, Search_Activity.class));
+//            }
+//        });
         show_view(cardListBrand,pr,"http://pharmanet.apodoc.id/select_product_promo.php");
         show_view(cardListBrand2,pr2,"http://pharmanet.apodoc.id/select_product_rekomendasi.php");
         show_view(cardListBrand3,pr3,"http://pharmanet.apodoc.id/select_product_terlaris.php");
 
 
-
-
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         showImageSlider(viewPager);
-
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
-
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+    }
 
+    private void search(String s) {
+        listRekomen = new ArrayList();
+        int i = 0;
+        for(int j = 0;j<listRekomenApotek.size();j++){
+            if(listRekomenApotek.get(j).toLowerCase().contains(s.toLowerCase())){
+                listRekomen.add(listRekomenApotek.get(j));
+                Log.d("category",listRekomenApotek.get(j));
+                i++;
+                globalSearchAdapter.setContext_pilihan(1);
+                context_pilihan = 1;
+                if(i==10){
+                    break;
+                }
+            }
+        }
+        Log.d("jumlah_i",i+"");
+        if(i==0){
+            for(int j = 0;j<listRekomenProduct.size();j++){
+                if(listRekomenProduct.get(j).toLowerCase().contains(s.toLowerCase())){
+                    listRekomen.add(listRekomenProduct.get(j));
+                    Log.d("product",listRekomenProduct.get(j));
+                    i++;
+                    context_pilihan = 2;
+                    globalSearchAdapter.setContext_pilihan(2);
+                    if(i==10){
+                        break;
+                    }
+                }
+            }
+        }
+        //update recyclerview
+        globalSearchAdapter.setProductList(listRekomen);
+        rvSearchGlobal.setAdapter(globalSearchAdapter);
+        globalSearchAdapter.notifyDataSetChanged();
+        rvSearchGlobal.setVisibility(View.VISIBLE);
+    }
+
+    private void InitiateSearchAdapter() {
+        globalSearchAdapter = new GlobalSearchAdapter(this);
+        rvSearchGlobal = findViewById(R.id.rvSearchglobal);
+        rvSearchGlobal.setVisibility(View.GONE);
+        rvSearchGlobal.setLayoutManager(new LinearLayoutManager(context));
+        setRekomen();
+    }
+
+    private void setRekomen(){
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/Searchglobal.php", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray resultApotek = response.getJSONArray("resultApotek");
+                    JSONArray resultProduct = response.getJSONArray("resultProduct");
+                    listRekomenProduct.clear();
+                    listRekomenApotek.clear();
+
+                    for (int i = 0; i<resultApotek.length(); i++)
+                    {
+                        JSONObject result = resultApotek.getJSONObject(i);
+                        listRekomenApotek.add(result.getString("SearchResult"));
+                    }
+                    for (int i = 0; i<resultProduct.length(); i++)
+                    {
+                        JSONObject result = resultProduct.getJSONObject(i);
+                        listRekomenProduct.add(result.getString("SearchResult"));
+                    }
+                    Log.d("ListCategory",listRekomenApotek.size()+"");
+                    Log.d("ListProduct",listRekomenProduct.size()+"");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(req);
     }
 
 
-    //Slider
-//    private void setupSlider() {
-//        sliderView.setDurationScroll(800);
-//        List<Fragment> fragments = new ArrayList<>();
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/illuminare%20Brightening%20Solution.jpg"));
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/Hyco%20Care.jpg"));
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/Omepros%20april%20revisi-min.jpg"));
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/Nourish%20April%202018%20revisi%202.jpg"));
-//
-//        mAdapter = new SliderPagerAdapter(getSupportFragmentManager(), fragments);
-//        sliderView.setAdapter(mAdapter);
-//        mIndicator = new SliderIndicator(this, mLinearLayout, sliderView, R.drawable.indicator_circle);
-//        mIndicator.setPageCount(fragments.size());
-//        mIndicator.show();
-//    }
 
     private void showImageSlider(final View view) {
 

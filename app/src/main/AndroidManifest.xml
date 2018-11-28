@@ -52,7 +52,8 @@
         <activity android:name=".Activity.LacakPesananDetail" />
         <activity android:name=".Activity.UbahAlamatActivity" />
         <activity android:name=".Activity.DetailKategori" />
-        <activity android:name=".Activity.PromoActivity"></activity>
+        <activity android:name=".Activity.PromoActivity" />
+        <activity android:name=".Activity.SearchProduk"></activity>
     </application>
 
 </manifest>
