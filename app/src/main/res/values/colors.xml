@@ -16,10 +16,13 @@
     <color name="green1">#a0db8e</color>
     <color name="gray1">#E2E5DE</color>
     <color name="green_yellow">#B1FB17</color>
+    <color name="orange">#FF8040</color>
+    <!--<color name="orange">#FFA500</color>-->
 
     //gradient
     <color name="ijo">#5bb531</color>
     <color name="biru">#0093d9</color>
+    <color name="whitetransparent">#ddffffff</color>
 
     //search
     <color name="searchBackground">#80ff80</color>
