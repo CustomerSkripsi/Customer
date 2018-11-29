@@ -12,11 +12,7 @@
         <activity
             android:name=".Activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.Search_Activity"
@@ -53,7 +49,14 @@
         <activity android:name=".Activity.UbahAlamatActivity"/>
         <activity android:name=".Activity.DetailKategori" />
         <activity android:name=".Activity.PromoActivity"></activity>
-        <activity android:name=".Activity.SearchResultApotek"></activity>
+
+        <activity android:name=".Activity.SearchResultApotek">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

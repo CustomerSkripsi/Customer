@@ -15,7 +15,12 @@ public class obat implements Parcelable {
 
     public String categoryID;
 
-    public int outletProductPrice, outletProductStockQty;
+    public int outletProductPrice;
+    public int outletProductStockQty;
+
+
+
+    public int outletProductPriceafterDsc;
     public int cartProductPrice;
     public int cartProductQty;
 
@@ -73,6 +78,12 @@ public class obat implements Parcelable {
         this.cartProductQty = cartProductStockQty;
     }
 
+    public obat(String productID, String productName, String productPhoto, int outletProductPrice) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productPhoto = productPhoto;
+        this.outletProductPrice = outletProductPrice;
+    }
 
     public int getOutletProductPrice() {
         return outletProductPrice;
@@ -139,6 +150,14 @@ public class obat implements Parcelable {
     public String getProductDescription() {
 
         return productDescription;
+    }
+
+    public int getOutletProductPriceafterDsc() {
+        return outletProductPriceafterDsc;
+    }
+
+    public void setOutletProductPriceafterDsc(int outletProductPriceafterDsc) {
+        this.outletProductPriceafterDsc = outletProductPriceafterDsc;
     }
 
     public void setProductDescription(String productDescription) {
