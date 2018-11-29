@@ -39,13 +39,13 @@ public class SearchProdukAdapter extends RecyclerView.Adapter<SearchProdukAdapte
     public void onBindViewHolder(@NonNull SearchProdukAdapter.SearchProdukViewHolder holder, int position) {
         final ModelPromo m = mp.get(position);
         holder.tvNama.setText(m.getPromoNameProduct());
-        holder.llproduk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent i = new Intent(context, )
-                //i.putExtra("ProductName",m.getPromoNameProduct());
-            }
-        });
+//        holder.llproduk.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Intent i = new Intent(context, )
+//                //i.putExtra("ProductName",m.getPromoNameProduct());
+//            }
+//        });
 
     }
 

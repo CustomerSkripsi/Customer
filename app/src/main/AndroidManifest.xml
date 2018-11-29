@@ -53,7 +53,8 @@
         <activity android:name=".Activity.UbahAlamatActivity" />
         <activity android:name=".Activity.DetailKategori" />
         <activity android:name=".Activity.PromoActivity" />
-        <activity android:name=".Activity.SearchProduk"></activity>
+        <activity android:name=".Activity.SearchProduk" />
+        <activity android:name=".Activity.SearchApotek"></activity>
     </application>
 
 </manifest>
