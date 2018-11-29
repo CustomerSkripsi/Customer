@@ -21,6 +21,15 @@ public class apotek {
     public  int stok;
     public int delivery_fee;
 
+    public apotek(String nama_apotek) {
+        this.nama_apotek = nama_apotek;
+    }
+
+    public apotek(String nama_apotek, String jam_operasi) {
+        this.nama_apotek = nama_apotek;
+        this.jam_operasi = jam_operasi;
+    }
+
     public apotek(String id_apotek, String nama_apotek, String jam_operasi, String keterangan, int harga, int stok) {
         this.id_apotek = id_apotek;
         this.nama_apotek = nama_apotek;
