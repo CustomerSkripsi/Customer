@@ -48,6 +48,12 @@ public class SessionManagement {
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
+    // Constructor Cart
+    public SessionManagement(String username, String member) {
+        editor.putString(KEY_KODEMEMBER, member);
+        editor.putString(USERNAME, username);
+        editor.commit();
+    }
 
 
     public void createLoginSession(String email,String password){
@@ -88,8 +94,19 @@ public class SessionManagement {
         editor.putString(KEY_NOHP, nomor_hp);
         editor.commit();
     }
+    //cart
+    public SessionManagement getLoggedInIdSession() {
+        String member = pref.getString("member", "");
+        String username = pref.getString("nama", "");
 
+        SessionManagement storedUser = new SessionManagement(username, member);
+        return storedUser;
+    }
+    public String getUserID() {
+        return KEY_KODEMEMBER;
+    }
 
+    //
     public void checkLogin() {
         // Check login status
         if (!this.isLoggedIn()) {
@@ -167,4 +184,5 @@ public class SessionManagement {
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
     }
+
 }

@@ -45,6 +45,7 @@ import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class CartActivity extends BaseActivity implements View.OnClickListener {
 
@@ -65,13 +66,15 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     public static final String insertTransaction = "http://pharmanet.apodoc.id/addHeaderTransaction.php";
 
     //static final String CUSTOMER_ID = "CustomerID";
-    public static String CustomerID;
+    public static String CustomerID,memberID;
     TextView dialog_Nama, dialog_No_Telepon, dialog_Alamat;
     Button btnLanjutPembelian,button_lanjut, button_Batal, btn_login_cart;
     Button button_lanjut1, button_Batal1;
     Dialog myDialog,myDialog1;
     String urlUser = "Http://Pharmanet.Apodoc.id/select_customer_confirm.php?id=";
     UserLocalStore userlocal;
+
+    SessionManagement session;
 
 
     @Override
@@ -110,7 +113,14 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         User currUser = userlocal.getLoggedInUser();
         CustomerID = currUser.getUserID();
 
-        Toast.makeText(this, CustomerID+"", Toast.LENGTH_SHORT).show();
+//        session = new SessionManagement(getApplicationContext());
+//        SessionManagement currentUser = session.getLoggedInIdSession();
+//        memberID = currentUser.getUserID();
+
+
+
+
+        Toast.makeText(this, memberID+"", Toast.LENGTH_SHORT).show();
 
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
         btnLanjutPembelian.setOnClickListener(this);
@@ -146,7 +156,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         btn_login_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CartActivity.this, Login.class));
+                startActivity(new Intent(CartActivity.this,MemberActivity.class));
             }
         });
     }
@@ -424,6 +434,23 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if(session.isLoggedIn()){
+//            not_empty.setVisibility(not_empty.VISIBLE);
+//            show_cart(urlbawah, Integer.parseInt(memberID));
+//
+//        }
+//        else {
+//            not_empty.setVisibility(not_empty.GONE);
+//            empty.setVisibility(empty.GONE);
+//            not_login.setVisibility(not_login.VISIBLE);
+//
+//        }
+//    }
 
     @Override
     protected void onResume() {
