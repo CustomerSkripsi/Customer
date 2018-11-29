@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nama Apotek: "
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/lacakPesananDetail_apoName"
@@ -131,18 +131,13 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/lacakPesananDetail_Qty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jumlah : "
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
-                <TextView
-                    android:id="@+id/lacakPesananDetail_Jumlah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textAllCaps="true"
-                    android:textSize="10dp"/>
+
 
             </LinearLayout>
 
@@ -151,18 +146,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Berat "
-                    android:textSize="10dp"/>
-
-                <TextView
                     android:id="@+id/lacakPesananDetail_Berat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textAllCaps="true"
-                    android:textSize="10dp"/>
+                    android:text="Berat "
+                    android:textSize="10dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -196,9 +184,9 @@
         android:padding="15dp">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvLacakDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rvLacakDetail"
             tools:listitem="@layout/lacak_pesanan_list">
 
         </android.support.v7.widget.RecyclerView>

@@ -85,7 +85,6 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         jumlah = findViewById(R.id.jumlah);
         jumlahPembayaran = findViewById(R.id.totalPembayaran);
         biaya_pengiriman = findViewById(R.id.biayaPengiriman);
-        r_delivery = findViewById(R.id.radio_delivery);
         r_apotek = findViewById(R.id.radio_apotek);
         r_group = findViewById(R.id.radio_group);
         empty =(LinearLayout) findViewById(R.id.kosong);
@@ -129,9 +128,6 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
-                    case R.id.radio_delivery:
-                        Toast.makeText(context, "delivery", Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.radio_apotek:
                         Toast.makeText(context, "apotek", Toast.LENGTH_SHORT).show();
                         break;
