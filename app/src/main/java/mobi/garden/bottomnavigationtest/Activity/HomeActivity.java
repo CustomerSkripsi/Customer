@@ -33,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 
 import org.json.JSONArray;
@@ -60,12 +61,10 @@ import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 public class HomeActivity extends BaseActivity {
     //Slider Image
     private SliderPagerAdapter mAdapter;
-    private SliderIndicator mIndicator;
-    private SliderView sliderView;
-    private LinearLayout mLinearLayout;
+    private SliderIndicator mIndicator;private SliderView sliderView;private LinearLayout mLinearLayout;
+
     private int context_pilihan;
     RecyclerView rvSearchGlobal;
-
     List<String> listRekomen = new ArrayList<>();
     List<String> listRekomenApotek = new ArrayList<>();
     List<String> listRekomenProduct = new ArrayList<>();
@@ -89,10 +88,10 @@ public class HomeActivity extends BaseActivity {
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     List<String>imageUrls = new ArrayList<>();
-    private int dotscount;
     private ImageView[] dots;
+    private static NotificationBadge mBadge;
     GlobalSearchAdapter globalSearchAdapter;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     ImageView ivHistory, ivkategory ,ivPromo;
     EditText etSearch;
@@ -103,7 +102,7 @@ public class HomeActivity extends BaseActivity {
 //        sliderView = (SliderView) findViewById(R.id.sliderView);
 //        mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 //        setupSlider();
-
+        rvSearchGlobal = findViewById(R.id.rvSearchglobal);
         editText = (TextView) findViewById(R.id.editText);
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
@@ -132,6 +131,18 @@ public class HomeActivity extends BaseActivity {
                 Intent i = new Intent(getApplicationContext(),PromoActivity.class);
                 i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/ProductPromoAll.php?input=");
                 startActivity(i);
+            }
+        });
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                etSearch.setText("");
+                mBadge.setVisibility(View.VISIBLE);
+                rvSearchGlobal.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -169,19 +180,20 @@ public class HomeActivity extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
                     rvSearchGlobal.setVisibility(View.GONE);
-                    //Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
                 }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
                     //set ulang rekomendasinya
                     Log.d("jumlah",etSearch.getText().toString());
-                search(etSearch.getText().toString());
+                    search(etSearch.getText().toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
+                    rvSearchGlobal.setVisibility(View.GONE);
+                }
             }
         });
-
         cardListBrand.setHasFixedSize(true);
         cardListBrand.setVisibility(View.VISIBLE);
         cardListBrand2.setHasFixedSize(true);
@@ -214,7 +226,6 @@ public class HomeActivity extends BaseActivity {
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
-
                         // Berhenti berputar/refreshing
                         swiperefresh.setRefreshing(false);
 
@@ -224,12 +235,7 @@ public class HomeActivity extends BaseActivity {
                 }, 3500);
             }
         });
-//        editText.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomeActivity.this, Search_Activity.class));
-//            }
-//        });
+
         show_view(cardListBrand,pr,"http://pharmanet.apodoc.id/select_product_promo.php");
         show_view(cardListBrand2,pr2,"http://pharmanet.apodoc.id/select_product_rekomendasi.php");
         show_view(cardListBrand3,pr3,"http://pharmanet.apodoc.id/select_product_terlaris.php");
