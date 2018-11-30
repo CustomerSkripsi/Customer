@@ -66,6 +66,8 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         holder.tv_nama_apotek.setText(pr.getNama_apotek());
         holder.tv_harga_obat_apotek.setText(df.format(pr.getHarga())+"");
         holder.tv_stok_obat_apotek.setText(String.valueOf(pr.getStok()));
+        holder.tv_latitude.setText(pr.latitude+" km");
+        holder.tv_latitude.setText(pr.longitude+" km");
         holder.RatObat.setRating(3);
         holder.RatObat.setEnabled(false);
 
@@ -80,7 +82,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     public static class apotekViewHolder extends RecyclerView.ViewHolder {
         RatingBar RatObat;
 
-        TextView tv_nama_apotek,tv_harga_obat_apotek,tv_stok_obat_apotek,tv_keterangan_apotek;
+        TextView tv_nama_apotek,tv_harga_obat_apotek,tv_stok_obat_apotek,tv_latitude, tv_longitude;
         LinearLayout containerApotek;
 
         public apotekViewHolder(View v) {
@@ -90,6 +92,8 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
             tv_nama_apotek= (TextView) v.findViewById(R.id.tv_nama_apotek);
             tv_harga_obat_apotek=(TextView) v.findViewById(R.id.tv_harga_obat_apotek);
             tv_stok_obat_apotek=(TextView) v.findViewById(R.id.tv_stok_obat_apotek);
+            tv_latitude= v.findViewById(R.id.tv_jarak);
+            tv_longitude= v.findViewById(R.id.tv_jarak);
 
         }
     }

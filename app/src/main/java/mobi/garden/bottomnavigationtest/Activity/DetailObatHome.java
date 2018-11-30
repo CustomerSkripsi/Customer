@@ -1,5 +1,6 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,7 +47,7 @@ public class DetailObatHome extends AppCompatActivity {
     List<apotek> pr = new ArrayList<>();
 
     String obatName;
-    String gambarObat;
+    String gambarObat,ProductName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +61,25 @@ public class DetailObatHome extends AppCompatActivity {
         iv_picture_obat2= (ImageView) findViewById(R.id.iv_picture_obat2);
         tv_nama_obat2=(TextView) findViewById(R.id.tv_nama_obat2);
 
-        obatName = getIntent().getStringExtra("productname");
-        gambarObat = getIntent().getStringExtra("productImage");
+//        obatName = getIntent().getStringExtra("ProductName");
+        gambarObat = getIntent().getStringExtra("ProductImage");
 
-        Log.d("gambar", gambarObat);
+
 
         Picasso.with(DetailObatHome.this).load(gambarObat).into(iv_picture_obat2);
-        tv_nama_obat2.setText(obatName);
+
 
         RvApotek = findViewById(R.id.rv_detail_obat);
         RvApotek.setHasFixedSize(true);
+
+        Intent intent = getIntent();
+        ProductName = intent.getStringExtra("ProductName");
+//        if(ProductName.contains(" ")){
+//            ProductName = ProductName.replace(" ","%20");
+//        }
+        Log.d("ssss", "asdasd: "+ProductName);
+
+        tv_nama_obat2.setText(ProductName);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -98,7 +108,7 @@ public class DetailObatHome extends AppCompatActivity {
 //            }
 //        });
 
-        show_view(RvApotek, pr,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php");
+        show_view(RvApotek, pr,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName);
 
 
     }
@@ -119,7 +129,9 @@ public class DetailObatHome extends AppCompatActivity {
                             list.add(new apotek(obj.getString("OutletID")
                                     ,obj.getString("OutletName")
                                     ,obj.getInt("OutletProductPrice")
-                                    ,obj.getInt("OutletProductStockQty")));
+                                    ,obj.getInt("OutletProductStockQty")
+                                    ,obj.getDouble("OutletLatitude")
+                                    ,obj.getDouble("OutletLongitude")));
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                             Toast.makeText(DetailObatHome.this, e1.getMessage(), Toast.LENGTH_SHORT).show();

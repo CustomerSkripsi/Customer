@@ -15,13 +15,35 @@ public class apotek {
     public String jarak;
     public int harga;
     public int stok;
+    public double latitude;
+    public double longitude;
 
-    public apotek(String id_apotek, String nama_apotek, int harga, int stok) {
+    public apotek(String id_apotek, String nama_apotek, int harga, int stok, double latitude,double longitude) {
         this.id_apotek = id_apotek;
         this.nama_apotek = nama_apotek;
         this.harga = harga;
         this.stok = stok;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+
 
     public String getId_apotek() {
         return id_apotek;
