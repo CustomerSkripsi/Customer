@@ -1,9 +1,11 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,7 +23,6 @@ import org.json.JSONObject;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.ObatFavoriteAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.ObatPromoAdapter;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -30,7 +31,7 @@ public class SearchResultApotek extends AppCompatActivity {
     TextView tvApotekName,tvApotekAddress,tvApotekhoneNumber,tvApotekOperationalHour;
     RatingBar rbApotek;
     RecyclerView rvObatPromo, rvObatFavorite;
-    ObatPromoAdapter promoAdapter;
+    String produkk;
     ObatFavoriteAdapter favoriteAdapter;
 
 
@@ -59,10 +60,20 @@ public class SearchResultApotek extends AppCompatActivity {
         rbApotek.setRating(3);
         rbApotek.setEnabled(true);
 
+        Intent intent = getIntent();
+        produkk =  intent.getStringExtra("ProdukName");
+        Log.d("test", "jass: "+produkk);
+        if(produkk.contains(" ")){
+            produkk = produkk.replace(" ","%20");
+        }
+
+
+
 //        showView();
     }
 
     public void showView(final RecyclerView cardlist, final List<obat> list, String url) {
+        url ="http://pharmanet.apodoc.id/customer/select_apotek_result.php?"+produkk;
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
