@@ -61,7 +61,8 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".Activity.SearchProduk" />
-        <activity android:name=".Activity.SearchApotek"></activity>
+        <activity android:name=".Activity.SearchApotek" />
+        <activity android:name=".Activity.FavoritActivity"></activity>
     </application>
 
 </manifest>

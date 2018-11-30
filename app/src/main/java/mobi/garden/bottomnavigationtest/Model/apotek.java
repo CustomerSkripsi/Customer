@@ -25,6 +25,13 @@ public class apotek {
         this.nama_apotek = nama_apotek;
     }
 
+    public apotek(String id_apotek, String nama_apotek, String outletOprOpen, String outletOprClose) {
+        this.id_apotek = id_apotek;
+        this.nama_apotek = nama_apotek;
+        this.outletOprOpen = outletOprOpen;
+        this.outletOprClose = outletOprClose;
+    }
+
     public apotek(String nama_apotek, String jam_operasi) {
         this.nama_apotek = nama_apotek;
         this.jam_operasi = jam_operasi;

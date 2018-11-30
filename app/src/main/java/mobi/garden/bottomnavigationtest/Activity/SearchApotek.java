@@ -42,7 +42,7 @@ public class SearchApotek extends AppCompatActivity {
 
     Context context;
     RecyclerView rvhasilSearchApotek;
-    String apotek,apoteknama, url ,jamoperasi;
+    String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose;
 
 
     SearchApotekAdapter searchapotekAdapter;
@@ -94,13 +94,15 @@ public class SearchApotek extends AppCompatActivity {
                     apoteklist.clear();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                } //(String id_apotek, String nama_apotek, String outletOprOpen, String outletOprClose)
                 for(int i =0; i<result.length();i++){
                     try {
                         JSONObject object = result.getJSONObject(i);
+                        id_apotek = object.getString("OutletID");
                         apoteknama = object.getString("OutletName");
-                        //jamoperasi = object.getString("ProductImage");
-                        apoteklist.add(new apotek(apoteknama));
+                        outletOprOpen = object.getString("OutletOprOpen");
+                        outletOprClose = object.getString("OutletOprClose");
+                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,outletOprClose));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("ssqwes", object.toString());
                     } catch (JSONException e) {

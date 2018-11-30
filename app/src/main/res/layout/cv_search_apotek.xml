@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/tvnamaapotek"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:paddingLeft="20dp"
@@ -21,21 +21,21 @@
 
         <TextView
             android:id="@+id/tvJarak"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Jarak" />
 
         <TextView
             android:id="@+id/tvRating"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Rating" />
 
         <TextView
             android:id="@+id/tvJamOperasional"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="Jam" />
