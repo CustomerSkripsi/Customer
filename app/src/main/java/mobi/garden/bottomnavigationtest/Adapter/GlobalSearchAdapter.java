@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.SearchApotek;
 import mobi.garden.bottomnavigationtest.Activity.SearchProduk;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -49,12 +50,12 @@ public class GlobalSearchAdapter extends RecyclerView.Adapter<GlobalSearchAdapte
             public void onClick(View view) {
                 if(context_pilihan!=0){
                     if(context_pilihan == 1){ // INTEN KE APOTEK
-                        //Intent i = new Intent(context, SearchProduk.class);
-                        //context.startActivity(i);
+                        Intent i = new Intent(context,SearchApotek.class);
+                        i.putExtra("ApotekName", ProductName);
+                        context.startActivity(i);
                     }else{
                         Intent i = new Intent(context,SearchProduk.class);
                         i.putExtra("ProdukName", ProductName);
-
                         context.startActivity(i);
 //                        intent.putExtra("PreregisOwnerID",u.getUserid());//UserID
 //                        intent.putExtra("OutletID",u.getOutletid());

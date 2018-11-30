@@ -183,7 +183,7 @@
                             app:srcCompat="@drawable/iconpromo" />
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/ivFavorit"
                             android:layout_width="60dp"
                             android:layout_height="65dp"
                             android:layout_weight="1"
@@ -240,6 +240,13 @@
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/iconkategori" />
+
+                        <ImageView
+                            android:id="@+id/ivLainlain"
+                            android:layout_width="10dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/iconlainlain"/>
                     </LinearLayout>
 
                 </LinearLayout>

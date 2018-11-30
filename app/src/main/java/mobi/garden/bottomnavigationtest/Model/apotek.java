@@ -17,10 +17,36 @@ public class apotek {
     public int stok;
     public double latitude;
     public double longitude;
+    public apotek(String nama_apotek) {
+        this.nama_apotek = nama_apotek;
+    }
+
+    public apotek(String id_apotek, String nama_apotek, String outletOprOpen, String outletOprClose) {
+        this.id_apotek = id_apotek;
+        this.nama_apotek = nama_apotek;
+        this.outletOprOpen = outletOprOpen;
+        this.outletOprClose = outletOprClose;
+    }
+
+    public apotek(String nama_apotek, String jam_operasi) {
+        this.nama_apotek = nama_apotek;
+        this.jam_operasi = jam_operasi;
+    }
+
+    public apotek(String id_apotek, String nama_apotek, String jam_operasi, String keterangan, int harga, int stok) {
+        this.id_apotek = id_apotek;
+        this.nama_apotek = nama_apotek;
+        this.jam_operasi = jam_operasi;
+        this.keterangan = keterangan;
+        this.harga = harga;
+        this.stok = stok;
+    }
 
     public apotek(String id_apotek, String nama_apotek, int harga, int stok, double latitude,double longitude) {
         this.id_apotek = id_apotek;
         this.nama_apotek = nama_apotek;
+        this.keterangan = keterangan;
+        this.delivery_fee = delivery_fee;
         this.harga = harga;
         this.stok = stok;
         this.latitude = latitude;
@@ -109,4 +135,7 @@ public class apotek {
         this.stok = stok;
     }
 
+    public void setMetodePengiriman(String metodePengiriman) {
+        this.metodePengiriman = metodePengiriman;
+    }
 }

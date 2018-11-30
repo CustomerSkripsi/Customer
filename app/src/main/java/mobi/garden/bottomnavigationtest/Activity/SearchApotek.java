@@ -30,45 +30,48 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import mobi.garden.bottomnavigationtest.Adapter.SearchProdukAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.SearchApotekAdapter;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
+import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 
-public class SearchProduk extends AppCompatActivity {
-    private RequestQueue queue;
-    RecyclerView rvhasilSearchProduk;
-    public static final String SEARCH_RESULT= "search_result";
-    String produkNama, url,produkid,promoName,productUrl;
-    List<ModelPromo> prodk = new ArrayList<>();
+public class SearchApotek extends AppCompatActivity {
+    List<apotek> apoteklist = new ArrayList<>();
     List<String>imageUrls = new ArrayList<>();
 
-    SearchProdukAdapter searchprodukAdapter;
     Context context;
+    RecyclerView rvhasilSearchApotek;
+    String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose;
+
+
+    SearchApotekAdapter searchapotekAdapter;
     ViewPagerAdapter adapter;
     ViewPager viewPager;
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_produk);
-        context = SearchProduk.this;
+        setContentView(R.layout.activity_search_apotek);
+        context = SearchApotek.this;
 
-        rvhasilSearchProduk = findViewById(R.id.rvHasilSearchProduk);
+        rvhasilSearchApotek = findViewById(R.id.rvHasilSearchApotek);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        rvhasilSearchProduk.setLayoutManager(llm);
+        rvhasilSearchApotek.setLayoutManager(llm);
+
 
         Intent intent = getIntent();
-        produkNama =  intent.getStringExtra("ProdukName");
-        Log.d("test", "jasidjas: "+produkNama);
-        if(produkNama.contains(" ")){
-            produkNama = produkNama.replace(" ","%20");
+        apotek =  intent.getStringExtra("ApotekName");
+        Log.d("test", "jass: "+apotek);
+        if(apotek.contains(" ")){
+            apotek = apotek.replace(" ","%20");
         }
-        showhasilproduk();
+        showhasilapotek();
 
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -79,37 +82,40 @@ public class SearchProduk extends AppCompatActivity {
 
     }
 
-    public void showhasilproduk(){
-        url="http://pharmanet.apodoc.id/customer/showSearchProduk.php?ProdukNama="+produkNama;
+
+    public void showhasilapotek(){
+        url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek;
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray result = null;
                 try {
                     result = response.getJSONArray("result");
-                    prodk.clear();
+                    apoteklist.clear();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                } //(String id_apotek, String nama_apotek, String outletOprOpen, String outletOprClose)
                 for(int i =0; i<result.length();i++){
                     try {
                         JSONObject object = result.getJSONObject(i);
-                        promoName = object.getString("ProductName");
-                        productUrl = object.getString("ProductImage");
-                        prodk.add(new ModelPromo(promoName,productUrl));
+                        id_apotek = object.getString("OutletID");
+                        apoteknama = object.getString("OutletName");
+                        outletOprOpen = object.getString("OutletOprOpen");
+                        outletOprClose = object.getString("OutletOprClose");
+                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,outletOprClose));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
-                        Log.d("ssqwe", object.toString());
+                        Log.d("ssqwes", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                searchprodukAdapter = new SearchProdukAdapter(prodk,context);
-                rvhasilSearchProduk.setAdapter(searchprodukAdapter);
+                searchapotekAdapter = new SearchApotekAdapter(apoteklist,context);
+                rvhasilSearchApotek.setAdapter(searchapotekAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SearchProduk.this, "Gangguan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Gangguan", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -136,7 +142,7 @@ public class SearchProduk extends AppCompatActivity {
                                 JSONObject banner = banners.getJSONObject(i);
                                 imageUrls.add(banner.getString("SliderImage"));
 
-                                adapter = new ViewPagerAdapter(SearchProduk.this, imageUrls);
+                                adapter = new ViewPagerAdapter(SearchApotek.this, imageUrls);
                                 viewPager.setAdapter(adapter);
                             }
 
@@ -191,7 +197,7 @@ public class SearchProduk extends AppCompatActivity {
     public class MyTimerTask extends TimerTask {
         @Override
         public void run() {
-            SearchProduk.this.runOnUiThread(new Runnable() {
+            SearchApotek.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if(viewPager.getCurrentItem()==0){
