@@ -55,7 +55,7 @@ public class PromoActivity extends AppCompatActivity {
     public static PromoAdapter promoAdapter;
     TextView etSearchPromo;
     public static String geturl;
-
+    //iconlainlain
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,6 @@ public class PromoActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         geturl = i.getStringExtra("allpromo");
-       // geturl = getIntent().getStringExtra("allpromo");
         Log.d("URL", geturl);
         rvPromo.setLayoutManager(llm);
 
@@ -83,16 +82,16 @@ public class PromoActivity extends AppCompatActivity {
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
 //        rvPromo.setLayoutManager(gridLayoutManager);
         etSearchPromo = findViewById(R.id.search);
-        etSearchPromo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    searchProcess(etSearchPromo.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
+//        etSearchPromo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+//                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    searchProcess(etSearchPromo.getText().toString());
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
         etSearchPromo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -115,7 +114,7 @@ public class PromoActivity extends AppCompatActivity {
 
       //  showallpromo();
         searchProcess(etSearchPromo.getText().toString());
-        searchpromocategory();
+        //searchpromocategory();
 
         Toolbar dToolbar = findViewById(R.id.toolbar2);
         dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
@@ -125,6 +124,7 @@ public class PromoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(PromoActivity.this, HomeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 

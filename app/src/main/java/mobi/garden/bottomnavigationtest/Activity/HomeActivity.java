@@ -93,7 +93,7 @@ public class HomeActivity extends BaseActivity {
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit;
     EditText etSearch;
 
     @Override
@@ -112,6 +112,7 @@ public class HomeActivity extends BaseActivity {
         ivHistory = findViewById(R.id.ivHistory);
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
+        ivFavorit = findViewById(R.id.ivFavorit);
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +131,15 @@ public class HomeActivity extends BaseActivity {
 //              startActivity(new Intent(HomeActivity.this, PromoActivity.class));
                 Intent i = new Intent(getApplicationContext(),PromoActivity.class);
                 i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/ProductPromoAll.php?input=");
+                startActivity(i);
+            }
+        });
+
+        ivFavorit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),FavoritActivity.class);
+                i.putExtra("allfavorit","http://pharmanet.apodoc.id/customer/ProductFavoritAll.php?ProductName=");
                 startActivity(i);
             }
         });

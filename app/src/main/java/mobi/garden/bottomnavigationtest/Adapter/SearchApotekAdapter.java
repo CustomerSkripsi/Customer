@@ -35,6 +35,7 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
     public void onBindViewHolder(@NonNull SearchApotekAdapter.SearchApotekViewHolder holder, int position) {
         final apotek ap = apoteks.get(position);
         holder.tvnamaapotek.setText(ap.getNama_apotek());
+        holder.tvJamOperasional.setText(ap.getOutletOprOpen()+"-"+ap.getOutletOprClose());
 //        holder.llapotek.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -50,11 +51,12 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
     }
 
     public class SearchApotekViewHolder extends RecyclerView.ViewHolder{
-        TextView tvnamaapotek;
+        TextView tvnamaapotek, tvJamOperasional;
         LinearLayout llapotek;
         public SearchApotekViewHolder(View itemView){
             super(itemView);
             tvnamaapotek = itemView.findViewById(R.id.tvnamaapotek);
+            tvJamOperasional = itemView.findViewById(R.id.tvJamOperasional);
             llapotek = itemView.findViewById(R.id.llApotek);
         }
     }
