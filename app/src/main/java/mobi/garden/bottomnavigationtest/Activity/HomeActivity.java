@@ -76,7 +76,7 @@ public class HomeActivity extends BaseActivity {
     private int dotscount;
     private ImageView[] dots;
 
-    ImageView ivHistory, ivkategory ,ivPromo,ivMember;
+    ImageView ivHistory, ivkategory ,ivPromo,ivMember, ivLainlain;
     //String iv
 
 //    private String[] imageUrls = new String[]{
@@ -103,6 +103,7 @@ public class HomeActivity extends BaseActivity {
         ivHistory = findViewById(R.id.ivHistory);
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
+        ivLainlain = findViewById(R.id.ivLainlain);
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +126,12 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,MemberActivity.class));
+            }
+        });
+        ivLainlain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,CartApotekActivity.class));
             }
         });
 

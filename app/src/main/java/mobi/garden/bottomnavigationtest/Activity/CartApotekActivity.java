@@ -118,10 +118,10 @@ public class CartApotekActivity extends AppCompatActivity {
         CustomerID = currUser.getUserID();
 
         Intent i = getIntent();
-        Category_ID = Integer.parseInt(i.getStringExtra(CATEGORY_ID));
-        Outlet_ID = i.getStringExtra(OUTLET_ID);
-        Product_ID = i.getStringExtra(PRODUCT_ID);
-        Outlet_Name = i.getStringExtra(OUTLET_NAME);
+//        Category_ID = Integer.parseInt(i.getStringExtra(CATEGORY_ID));
+//        Outlet_ID = i.getStringExtra(OUTLET_ID);
+//        Product_ID = i.getStringExtra(PRODUCT_ID);
+//        Outlet_Name = i.getStringExtra(OUTLET_NAME);
 
         setStatusBarGradiant(this);
 

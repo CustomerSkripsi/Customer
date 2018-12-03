@@ -219,6 +219,13 @@
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/iconkategori" />
+
+                        <ImageView
+                            android:id="@+id/ivLainlain"
+                            android:layout_width="10dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/iconlainlain" />
                     </LinearLayout>
 
                 </LinearLayout>
