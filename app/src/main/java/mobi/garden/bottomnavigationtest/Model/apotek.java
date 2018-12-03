@@ -17,18 +17,29 @@ public class apotek {
     public String outletOprOpen;
     public String outletOprClose;
     public  String outletOprDay;
+    public int ratingbar;
     public int harga;
     public  int stok;
     public int delivery_fee;
 
+    public int getRatingbar() {
+        return ratingbar;
+    }
+
+    public void setRatingbar(int ratingbar) {
+        this.ratingbar = ratingbar;
+    }
+
     public apotek(String nama_apotek) {
+
         this.nama_apotek = nama_apotek;
     }
 
-    public apotek(String id_apotek, String nama_apotek, String outletOprOpen, String outletOprClose) {
+    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose) {
         this.id_apotek = id_apotek;
-        this.nama_apotek = nama_apotek;
+        this.nama_apotek = nama_apotek; //
         this.outletOprOpen = outletOprOpen;
+        this.ratingbar = ratingbar;
         this.outletOprClose = outletOprClose;
     }
 

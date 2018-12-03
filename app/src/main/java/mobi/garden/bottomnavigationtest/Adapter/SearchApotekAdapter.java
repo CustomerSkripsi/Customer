@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -36,6 +37,8 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
         final apotek ap = apoteks.get(position);
         holder.tvnamaapotek.setText(ap.getNama_apotek());
         holder.tvJamOperasional.setText(ap.getOutletOprOpen()+"-"+ap.getOutletOprClose());
+        holder.rbApotek.setRating((float)ap.getRatingbar());
+        //holder.rbApotek.setRating((float)3.7888);
 //        holder.llapotek.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -53,11 +56,13 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
     public class SearchApotekViewHolder extends RecyclerView.ViewHolder{
         TextView tvnamaapotek, tvJamOperasional;
         LinearLayout llapotek;
+        RatingBar rbApotek;
         public SearchApotekViewHolder(View itemView){
             super(itemView);
             tvnamaapotek = itemView.findViewById(R.id.tvnamaapotek);
             tvJamOperasional = itemView.findViewById(R.id.tvJamOperasional);
             llapotek = itemView.findViewById(R.id.llApotek);
+            rbApotek = itemView.findViewById(R.id.rbApotek);
         }
     }
 }

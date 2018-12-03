@@ -13,11 +13,12 @@
 
         <TextView
             android:id="@+id/tvnamaapotek"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:paddingLeft="20dp"
-            android:text="Produk" />
+            android:paddingLeft="10dp"
+            android:text="Produk"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvJarak"
@@ -26,19 +27,20 @@
             android:layout_weight="1"
             android:text="Jarak" />
 
-        <TextView
-            android:id="@+id/tvRating"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Rating" />
+        <RatingBar
+            android:id="@+id/rbApotek"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="2" />
 
         <TextView
             android:id="@+id/tvJamOperasional"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="Jam" />
+            android:layout_weight="1"
+            android:text="Jam"
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

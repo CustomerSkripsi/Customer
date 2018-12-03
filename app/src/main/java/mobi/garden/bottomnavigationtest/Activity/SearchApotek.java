@@ -2,10 +2,10 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,12 +26,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.SearchApotekAdapter;
-import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
@@ -42,7 +42,8 @@ public class SearchApotek extends AppCompatActivity {
 
     Context context;
     RecyclerView rvhasilSearchApotek;
-    String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose;
+    String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose, tempApotekDay;
+    int ratingbar;
 
 
     SearchApotekAdapter searchapotekAdapter;
@@ -65,6 +66,7 @@ public class SearchApotek extends AppCompatActivity {
         rvhasilSearchApotek.setLayoutManager(llm);
 
 
+
         Intent intent = getIntent();
         apotek =  intent.getStringExtra("ApotekName");
         Log.d("test", "jass: "+apotek);
@@ -72,6 +74,7 @@ public class SearchApotek extends AppCompatActivity {
             apotek = apotek.replace(" ","%20");
         }
         showhasilapotek();
+
 
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -84,7 +87,9 @@ public class SearchApotek extends AppCompatActivity {
 
 
     public void showhasilapotek(){
-        url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek;
+        getDay();
+        url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek+"&day="+tempApotekDay;
+        //url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek;
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -100,9 +105,10 @@ public class SearchApotek extends AppCompatActivity {
                         JSONObject object = result.getJSONObject(i);
                         id_apotek = object.getString("OutletID");
                         apoteknama = object.getString("OutletName");
+                        ratingbar = object.getInt("TotalRating");
                         outletOprOpen = object.getString("OutletOprOpen");
                         outletOprClose = object.getString("OutletOprClose");
-                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,outletOprClose));
+                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,ratingbar,outletOprClose));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("ssqwes", object.toString());
                     } catch (JSONException e) {
@@ -215,6 +221,42 @@ public class SearchApotek extends AppCompatActivity {
                 }
             });
 
+        }
+    }
+
+    private void getDay(){
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (day) {
+            case Calendar.SUNDAY:
+                // Current day is Sunday
+                tempApotekDay = "Minggu";
+                break;
+            case Calendar.MONDAY:
+                // Current day is Monday
+                tempApotekDay = "Senin";
+                break;
+            case Calendar.TUESDAY:
+                // Current day is Tuesday
+                tempApotekDay = "Selasa";
+                break;
+            case Calendar.WEDNESDAY:
+                // Current day is Wednesday
+                tempApotekDay = "Rabu";
+                break;
+            case Calendar.THURSDAY:
+                // Current day is Thursday
+                tempApotekDay = "Kamis";
+                break;
+            case Calendar.FRIDAY:
+                // Current day is Friday
+                tempApotekDay = "Jumat";
+                break;
+            case Calendar.SATURDAY:
+                // Current day is Saturday
+                tempApotekDay = "Sabtu";
+                break;
         }
     }
 
