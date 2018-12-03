@@ -229,38 +229,6 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
-                }  else if (!(etPhone.getText().toString().equals(Relasi_Username))){
-
-
-                    builder3.setMessage("Username sudah digunakan");
-                    builder3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    dialog =builder.show();
-
-
-
-                } else if (etAlamat.getText().toString().equals("")) {
-                    builder.setMessage("Harap isi Alamat Anda");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            etAlamat.requestFocus();
-                        }
-                    });
-                    dialog = builder.show();
-                } else if (etKota.getText().toString().equals("")) {
-                    builder.setMessage("Harap isi Kota Anda");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            etKota.requestFocus();
-                        }
-                    });
-                    dialog = builder.show();
                 } else if (etTanggalLahir.getText().toString().equals("")) {
                     builder.setMessage("Harap isi Tanggal Lahir Anda");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -270,21 +238,11 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
-                } else if (etEmail.getText().toString().equals("")) {
-                    builder.setMessage("Harap isi Email Anda");
+                } else if (!rbPria.isChecked() && !rbWanita.isChecked()) {
+                    builder.setMessage("Harap pilih jenis kelamin Anda");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            etEmail.requestFocus();
-                        }
-                    });
-                    dialog = builder.show();
-                } else if (verifikasiEmail) {
-                    builder.setMessage("Email Anda sudah terdaftar");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            etEmail.requestFocus();
                         }
                     });
                     dialog = builder.show();
@@ -315,6 +273,57 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
+                } else if (etEmail.getText().toString().equals("")) {
+                    builder.setMessage("Harap isi Email Anda");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            etEmail.requestFocus();
+                        }
+                    });
+                    dialog = builder.show();
+                } else if (verifikasiEmail) {
+                    builder.setMessage("Email Anda sudah terdaftar");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            etEmail.requestFocus();
+                        }
+                    });
+                    dialog = builder.show();
+
+//                }  else if (!(etPhone.getText().toString().equals(Relasi_Username))){
+//
+//
+//                    builder3.setMessage("Username sudah digunakan");
+//                    builder3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                        }
+//                    });
+//                    dialog =builder.show();
+
+//                } else if (etAlamat.getText().toString().equals("")) {
+//                    builder.setMessage("Harap isi Alamat Anda");
+//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            etAlamat.requestFocus();
+//                        }
+//                    });
+//                    dialog = builder.show();
+
+//                } else if (etKota.getText().toString().equals("")) {
+//                    builder.setMessage("Harap isi Kota Anda");
+//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            etKota.requestFocus();
+//                        }
+//                    });
+//                    dialog = builder.show();
+
                 } else if (etUsername.getText().toString().equals("")) {
                     builder.setMessage("Harap isi Username Anda");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -353,7 +362,7 @@ public class RegisterMember extends AppCompatActivity{
                     });
                     dialog = builder.show();
                 }else if (etRegisterKonfirmasiPass.getText().toString().equals("")) {
-                    builder3.setMessage("Harap isi Password Anda");
+                    builder3.setMessage("Harap isi Konfirmasi Password Anda");
                     builder3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -379,14 +388,7 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
-                } else if (!rbPria.isChecked() && !rbWanita.isChecked()) {
-                    builder.setMessage("Harap pilih jenis kelamin Anda");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-                    dialog = builder.show();
+
                 } else {
                     builder.setMessage("Apakah anda yakin sudah benar? Tekan OK untuk mengirim kode");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
