@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -39,11 +40,21 @@ public class SearchProdukAdapter extends RecyclerView.Adapter<SearchProdukAdapte
     public void onBindViewHolder(@NonNull SearchProdukAdapter.SearchProdukViewHolder holder, int position) {
         final ModelPromo m = mp.get(position);
         holder.tvNama.setText(m.getPromoNameProduct());
+        holder.tvNama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,DetailObatHome.class);
+                i.putExtra("ProductName",m.getPromoNameProduct());
+                i.putExtra("ProductImage",m.getProductNameUrl());
+                context.startActivity(i);
+            }
+        });
+
 //        holder.llproduk.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                //Intent i = new Intent(context, )
-//                //i.putExtra("ProductName",m.getPromoNameProduct());
+//                Intent i = new Intent(context, DetailObatHome.class);
+//                i.putExtra("ProductName",m.getPromoNameProduct());
 //            }
 //        });
 

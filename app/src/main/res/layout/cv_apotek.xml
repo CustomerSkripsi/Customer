@@ -21,7 +21,7 @@
             <LinearLayout
                 android:layout_weight="7"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="65dp"
                 android:orientation="horizontal"
                 android:id="@+id/containerApotek">
 
@@ -40,9 +40,22 @@
                         android:textAllCaps="true"
                         android:textSize="12dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                        />
+                    <TextView
+                        android:paddingTop="7dp"
+                        android:paddingLeft="15dp"
+                        android:id="@+id/tv_jarak"
+                        tools:text="jarak"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
                     <RatingBar
                         android:paddingBottom="3dp"
                         android:layout_marginLeft="13dp"
@@ -52,6 +65,26 @@
                         android:layout_height="wrap_content"
                         android:numStars="5"
                         />
+                    <TextView
+                        android:id="@+id/tv_jam_open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:paddingBottom="4dp"
+                        tools:text="JamOpen"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="1dp"
+                        android:paddingRight="1dp"
+                        android:text="-"/>
+                    <TextView
+                        android:id="@+id/tv_jam_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        tools:text="JamClose"/>
+            </LinearLayout>
                 </LinearLayout>
 
 
@@ -75,27 +108,9 @@
                     android:textSize="13dp"
                     android:gravity="center_horizontal"
                     android:layout_marginRight="7dp"
-                    android:text="stock"
+                    android:text="stock" />
 
-                    />
-                <TextView
-                    android:layout_weight="2"
-                    android:id="@+id/tv_keterangan_apotek"
-                    android:text="keterangan"
-                    android:paddingTop="7dp"
-                    android:textSize="13dp"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    />
             </LinearLayout>
-            <Button
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="7dp"
-                android:id="@+id/btn_beli"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/shoppingcart"/>
-
         </LinearLayout>
 
         <View

@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
-import mobi.garden.bottomnavigationtest.Model.session_obat;
-import mobi.garden.bottomnavigationtest.R;
-import mobi.garden.bottomnavigationtest.Model.Model_Obat;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
+import mobi.garden.bottomnavigationtest.Model.Model_Obat;
+import mobi.garden.bottomnavigationtest.Model.session_obat;
+import mobi.garden.bottomnavigationtest.R;
 
 public class AdapterSearch_Obat extends RecyclerView.Adapter<AdapterSearch_Obat.SearchApotekViewHolder> {
 
@@ -65,6 +65,7 @@ public class AdapterSearch_Obat extends RecyclerView.Adapter<AdapterSearch_Obat.
                         ,modelSearch.carasimpan,modelSearch.principal,modelSearch.categoryID);
                 Intent intent = new Intent(context, DetailObatHome.class);
                 intent.putExtra("productname", modelSearch.ProductName+"");
+                intent.putExtra("productImage",modelSearch.productPhoto);
                 Toast.makeText(context, "You've Just Press : " + modelSearch.ProductName , Toast.LENGTH_SHORT).show();
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
