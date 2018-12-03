@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,15 +70,12 @@ public class DetailObatHome extends AppCompatActivity {
 
         RvApotek = findViewById(R.id.rv_detail_obat);
         RvApotek.setHasFixedSize(true);
-
+        tv_nama_obat2.setText(ProductName);
         Intent intent = getIntent();
         ProductName = intent.getStringExtra("ProductName");
-//        if(ProductName.contains(" ")){
-//            ProductName = ProductName.replace(" ","%20");
-//        }
-        Log.d("ssss", "asdasd: "+ProductName);
-
-        tv_nama_obat2.setText(ProductName);
+        if(ProductName.contains(" ")){
+            ProductName = ProductName.replace(" ","%20");
+        }
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -123,9 +119,8 @@ public class DetailObatHome extends AppCompatActivity {
                     apoteks = response.getJSONArray("result");
                     for (int i = 0; i < apoteks.length(); i++) {
                         try {
-                            cardlist.setVisibility(View.VISIBLE);
+                            //cardlist.setVisibility(View.VISIBLE);
                             JSONObject obj = apoteks.getJSONObject(i);
-
                             list.add(new apotek(obj.getString("OutletID")
                                     ,obj.getString("OutletName")
                                     ,obj.getInt("OutletProductPrice")
@@ -135,6 +130,7 @@ public class DetailObatHome extends AppCompatActivity {
                                     ,obj.getInt("TotalRating")
                                     ,obj.getString("OutletOprOpen")
                                     ,obj.getString("OutletOprClose")));
+                            Log.d("rwarss", list.toString());
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                             Toast.makeText(DetailObatHome.this, e1.getMessage(), Toast.LENGTH_SHORT).show();
@@ -152,7 +148,7 @@ public class DetailObatHome extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(DetailObatHome.this, "error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailObatHome.this, "error", Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(rec);
