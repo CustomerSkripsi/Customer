@@ -131,7 +131,10 @@ public class DetailObatHome extends AppCompatActivity {
                                     ,obj.getInt("OutletProductPrice")
                                     ,obj.getInt("OutletProductStockQty")
                                     ,obj.getDouble("OutletLatitude")
-                                    ,obj.getDouble("OutletLongitude")));
+                                    ,obj.getDouble("OutletLongitude")
+                                    ,obj.getInt("TotalRating")
+                                    ,obj.getString("OutletOprOpen")
+                                    ,obj.getString("OutletOprClose")));
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                             Toast.makeText(DetailObatHome.this, e1.getMessage(), Toast.LENGTH_SHORT).show();
@@ -139,7 +142,7 @@ public class DetailObatHome extends AppCompatActivity {
 
                     }
 
-                    pa = new apotek_adapter(DetailObatHome.this,list);
+                    pa = new apotek_adapter(DetailObatHome.this,list,DetailObatHome.this);
                     cardlist.setAdapter(pa);
 
                 } catch (JSONException e) {

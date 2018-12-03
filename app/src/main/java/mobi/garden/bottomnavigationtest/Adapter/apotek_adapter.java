@@ -1,5 +1,6 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,11 +34,19 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     UserLocalStore userLocalStore;
     DecimalFormat df;
 
+    Activity activity;
 
     public apotek_adapter(Context c, List<apotek> apoteklist) {
         this.apoteklist = apoteklist;
         this.context = c;
         session = new session_obat(c);
+    }
+
+    public apotek_adapter(Context c, List<apotek> apoteklist, Activity activity) {
+        this.apoteklist = apoteklist;
+        this.context = c;
+        session = new session_obat(c);
+        this.activity = activity;
     }
 
     @Override
@@ -51,7 +60,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     @Override
     public void onBindViewHolder(apotek_adapter.apotekViewHolder holder, int position) {
         final apotek pr = apoteklist.get(position);
-        userLocalStore  = new UserLocalStore(context);
+        userLocalStore = new UserLocalStore(context);
         User currUser = userLocalStore.getLoggedInUser();
         CustomerID = currUser.getUserID();
 
@@ -63,13 +72,41 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
 
+//        LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+//        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
+//        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//        double longitude = location.getLongitude();
+//        double latitude = location.getLatitude();
+//
+//        Location loc1 = new Location("");
+//        loc1.setLatitude(latitude);
+//        loc1.setLongitude(longitude);
+//
+//        Location loc2 = new Location("");
+//        loc2.setLatitude(pr.latitude);
+//        loc2.setLongitude(pr.longitude);
+//
+//        double distanceInMeters = loc1.distanceTo(loc2)/1000;
+//
+//        Log.d("Jarak", distanceInMeters+"");
+
         holder.tv_nama_apotek.setText(pr.getNama_apotek());
         holder.tv_harga_obat_apotek.setText(df.format(pr.getHarga())+"");
         holder.tv_stok_obat_apotek.setText(String.valueOf(pr.getStok()));
-        holder.tv_latitude.setText(pr.latitude+" km");
-        holder.tv_latitude.setText(pr.longitude+" km");
-        holder.RatObat.setRating(3);
+        holder.tv_jarak.setText(100+"");
+        holder.RatObat.setRating(pr.getRating());
         holder.RatObat.setEnabled(false);
+        holder.tv_jam_open.setText(pr.getOutletOprOpen());
+        holder.tv_jam_close.setText(pr.getOutletOprClose());
 
 
     }
@@ -82,7 +119,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     public static class apotekViewHolder extends RecyclerView.ViewHolder {
         RatingBar RatObat;
 
-        TextView tv_nama_apotek,tv_harga_obat_apotek,tv_stok_obat_apotek,tv_latitude, tv_longitude;
+        TextView tv_nama_apotek,tv_harga_obat_apotek,tv_stok_obat_apotek,tv_jarak, tv_jam_open, tv_jam_close;
         LinearLayout containerApotek;
 
         public apotekViewHolder(View v) {
@@ -92,8 +129,9 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
             tv_nama_apotek= (TextView) v.findViewById(R.id.tv_nama_apotek);
             tv_harga_obat_apotek=(TextView) v.findViewById(R.id.tv_harga_obat_apotek);
             tv_stok_obat_apotek=(TextView) v.findViewById(R.id.tv_stok_obat_apotek);
-            tv_latitude= v.findViewById(R.id.tv_jarak);
-            tv_longitude= v.findViewById(R.id.tv_jarak);
+            tv_jarak= v.findViewById(R.id.tv_jarak);
+            tv_jam_open = v.findViewById(R.id.tv_jam_open);
+            tv_jam_close = v.findViewById(R.id.tv_jam_close);
 
         }
     }

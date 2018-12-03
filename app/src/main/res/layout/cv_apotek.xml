@@ -52,7 +52,10 @@
                         android:textSize="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
                     <RatingBar
                         android:paddingBottom="3dp"
                         android:layout_marginLeft="13dp"
@@ -62,6 +65,26 @@
                         android:layout_height="wrap_content"
                         android:numStars="5"
                         />
+                    <TextView
+                        android:id="@+id/tv_jam_open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:paddingBottom="4dp"
+                        tools:text="JamOpen"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="1dp"
+                        android:paddingRight="1dp"
+                        android:text="-"/>
+                    <TextView
+                        android:id="@+id/tv_jam_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        tools:text="JamClose"/>
+            </LinearLayout>
                 </LinearLayout>
 
 
