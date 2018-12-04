@@ -63,7 +63,7 @@ public class MemberActivity extends AppCompatActivity {
         SessionManagement session;
         AlertDialog dialog;
         AlertDialog.Builder builder;
-        ImageView ivBarcode,ivLogout, ivFilter1, ivFilter2, ivFilter3,ivChevronLeftProfile;
+        ImageView ivBarcode,ivLogout, ivFilter1, ivFilter2, ivFilter3,ivChevronLeftProfile,ivEdit;
         Context context;
         TextView tvNama,tvLogout;
         String today, awalbarcode = "";
@@ -148,6 +148,7 @@ public class MemberActivity extends AppCompatActivity {
             builder = new AlertDialog.Builder(this);
             btnLogout = findViewById(R.id.btnLogout);
             btnEditPass = findViewById(R.id.btnEditPass);
+            ivEdit = findViewById(R.id.ivEdit);
             etEmail = findViewById(R.id.etEmail);
             etMemberID = findViewById(R.id.etMemberID);
             etNoTelp = findViewById(R.id.etNoTelp);
@@ -358,7 +359,13 @@ public class MemberActivity extends AppCompatActivity {
 //
 //                }
 //            });
-
+            ivEdit.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent11 = new Intent(MemberActivity.this, EditEMember.class);
+                    startActivity(intent11);
+                }
+            }));
             btnLogout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -566,30 +573,13 @@ public class MemberActivity extends AppCompatActivity {
 
 
         }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(MemberActivity.this,HalamanAwalActivity.class);
+        startActivity(i);
+    }
 
-//        @Override
-//        public void onBackPressed() {
-//            builder.setMessage("Apakah Anda ingin keluar dari aplikasi ?");
-//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    Intent intent = new Intent(Intent.ACTION_MAIN);
-//                    intent.addCategory(Intent.CATEGORY_HOME);
-//                    startActivity(intent);
-//                    return;
-//                }
-//            });
-//
-//            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                }
-//            });
-//
-//            dialog = builder.show();
-//
-//        }
 
         @Override
         protected void onStart() {

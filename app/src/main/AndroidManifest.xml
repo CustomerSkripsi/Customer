@@ -58,7 +58,8 @@
         <activity android:name=".Activity.MemberActivity" />
         <activity android:name=".Activity.RegisterMember" />
         <activity android:name=".Activity.EditLupaPasswordActivity" />
-        <activity android:name=".Activity.gantiPassword"></activity>
+        <activity android:name=".Activity.gantiPassword" />
+        <activity android:name=".Activity.EditEMember"></activity>
     </application>
 
 </manifest>

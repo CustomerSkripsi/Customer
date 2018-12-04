@@ -145,9 +145,9 @@ public class RegisterMember extends AppCompatActivity{
 
         etNama = findViewById(R.id.etNama);
         etTanggalLahir = (EditText) findViewById(R.id.etTanggalLahir);
-//        etAlamat = findViewById(R.id.etAlamat);
+        etAlamat = findViewById(R.id.etAlamat);
         etEmail = findViewById(R.id.etEmail);
-//        etKota = findViewById(R.id.etKota);
+        etKota = findViewById(R.id.etKota);
         rbPria = findViewById(R.id.rbPria);
         rbWanita = findViewById(R.id.rbWanita);
         etPhone = findViewById(R.id.etPhone);
@@ -165,12 +165,12 @@ public class RegisterMember extends AppCompatActivity{
 
 
 // Recycler Search Kota
-//        recyclerView = findViewById(R.id.rvSearch);
-//        recyclerView.setHasFixedSize(true);
+        recyclerView = findViewById(R.id.rvSearch);
+        recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(llm);
+        recyclerView.setLayoutManager(llm);
 
         etTanggalLahir.setInputType(InputType.TYPE_NULL);
         bar_register = findViewById(R.id.bar_register);
@@ -229,6 +229,24 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
+                } else if (etAlamat.getText().toString().equals("")) {
+                    builder.setMessage("Harap isi Alamat Anda");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            etAlamat.requestFocus();
+                        }
+                    });
+                    dialog = builder.show();
+                } else if (etKota.getText().toString().equals("")) {
+                    builder.setMessage("Harap isi Kota Anda");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            etKota.requestFocus();
+                        }
+                    });
+                    dialog = builder.show();
                 } else if (etTanggalLahir.getText().toString().equals("")) {
                     builder.setMessage("Harap isi Tanggal Lahir Anda");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -238,11 +256,21 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
-                } else if (!rbPria.isChecked() && !rbWanita.isChecked()) {
-                    builder.setMessage("Harap pilih jenis kelamin Anda");
+                } else if (etEmail.getText().toString().equals("")) {
+                    builder.setMessage("Harap isi Email Anda");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            etEmail.requestFocus();
+                        }
+                    });
+                    dialog = builder.show();
+                } else if (verifikasiEmail) {
+                    builder.setMessage("Email Anda sudah terdaftar");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            etEmail.requestFocus();
                         }
                     });
                     dialog = builder.show();
@@ -273,57 +301,6 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
-                } else if (etEmail.getText().toString().equals("")) {
-                    builder.setMessage("Harap isi Email Anda");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            etEmail.requestFocus();
-                        }
-                    });
-                    dialog = builder.show();
-                } else if (verifikasiEmail) {
-                    builder.setMessage("Email Anda sudah terdaftar");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            etEmail.requestFocus();
-                        }
-                    });
-                    dialog = builder.show();
-
-//                }  else if (!(etPhone.getText().toString().equals(Relasi_Username))){
-//
-//
-//                    builder3.setMessage("Username sudah digunakan");
-//                    builder3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                        }
-//                    });
-//                    dialog =builder.show();
-
-//                } else if (etAlamat.getText().toString().equals("")) {
-//                    builder.setMessage("Harap isi Alamat Anda");
-//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            etAlamat.requestFocus();
-//                        }
-//                    });
-//                    dialog = builder.show();
-
-//                } else if (etKota.getText().toString().equals("")) {
-//                    builder.setMessage("Harap isi Kota Anda");
-//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            etKota.requestFocus();
-//                        }
-//                    });
-//                    dialog = builder.show();
-
                 } else if (etUsername.getText().toString().equals("")) {
                     builder.setMessage("Harap isi Username Anda");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -362,7 +339,7 @@ public class RegisterMember extends AppCompatActivity{
                     });
                     dialog = builder.show();
                 }else if (etRegisterKonfirmasiPass.getText().toString().equals("")) {
-                    builder3.setMessage("Harap isi Konfirmasi Password Anda");
+                    builder3.setMessage("Harap isi Password Anda");
                     builder3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -388,7 +365,14 @@ public class RegisterMember extends AppCompatActivity{
                         }
                     });
                     dialog = builder.show();
-
+                } else if (!rbPria.isChecked() && !rbWanita.isChecked()) {
+                    builder.setMessage("Harap pilih jenis kelamin Anda");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    dialog = builder.show();
                 } else {
                     builder.setMessage("Apakah anda yakin sudah benar? Tekan OK untuk mengirim kode");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -408,48 +392,47 @@ public class RegisterMember extends AppCompatActivity{
         });
 
 
+        etKota.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    return true;
+                }
+                return false;
+            }
+        });
 
-//        etKota.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
+        etKota.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-//        etKota.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                int size = etKota.getText().length();
-//                searchList.clear();
-//                for (int i=0; i< cityItemList.size(); i++){
-//                    if(size<=cityItemList.get(i).getNamaKota().length()){
-//                        if(cityItemList.get(i).getNamaKota().toLowerCase().trim()
-//                                .contains(etKota.getText().toString().toLowerCase().trim())){
-//                            searchList.add(cityItemList.get(i));
-//                        }
-//                    }
-//                }
-//                searchAdapter = new SearchAdapter(searchList, getBaseContext());
-//                recyclerView.setAdapter(searchAdapter);
-//
-//            }
-//        });
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int size = etKota.getText().length();
+                searchList.clear();
+                for (int i=0; i< cityItemList.size(); i++){
+                    if(size<=cityItemList.get(i).getNamaKota().length()){
+                        if(cityItemList.get(i).getNamaKota().toLowerCase().trim()
+                                .contains(etKota.getText().toString().toLowerCase().trim())){
+                            searchList.add(cityItemList.get(i));
+                        }
+                    }
+                }
+                searchAdapter = new SearchAdapter(searchList, getBaseContext());
+                recyclerView.setAdapter(searchAdapter);
+
+            }
+        });
 
 
-//        listKota();
+        listKota();
 
         rbPria.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -525,52 +508,52 @@ public class RegisterMember extends AppCompatActivity{
 
 
 
-//        etKota.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean b) {
-//                if(!etKota.isFocused()){
-//                    recyclerView.setVisibility(View.GONE);
-//
-//                    String url1 = "http://sayasehat.apodoc.id/selectCity.php?city="+etKota.getText().toString();
-//                    JsonObjectRequest req = new JsonObjectRequest(url1, null,
-//                            new Response.Listener<JSONObject>() {
-//                                @Override
-//                                public void onResponse(JSONObject response) {
-//                                    JSONArray users = null;
-//                                    try {
-//                                        users = response.getJSONArray("result");
-//
-//                                        if(String.valueOf(users).equals("[]")){
-//                                            m_city = "1";
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                    for (int i = 0; i < users.length(); i++) {
-//                                        try {
-//                                            JSONObject obj = users.getJSONObject(i);
-//                                            m_city = obj.getString("Cty_ID");
-//                                        } catch (JSONException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                    }
-//
-//                                }
-//
-//                            }, new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//
-//                        }
-//                    });
-//
-//                    queue.add(req);
-//                }
-//                else{
-//                    recyclerView.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+        etKota.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!etKota.isFocused()){
+                    recyclerView.setVisibility(View.GONE);
+
+                    String url1 = "http://sayasehat.apodoc.id/selectCity.php?city="+etKota.getText().toString();
+                    JsonObjectRequest req = new JsonObjectRequest(url1, null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    JSONArray users = null;
+                                    try {
+                                        users = response.getJSONArray("result");
+
+                                        if(String.valueOf(users).equals("[]")){
+                                            m_city = "1";
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    for (int i = 0; i < users.length(); i++) {
+                                        try {
+                                            JSONObject obj = users.getJSONObject(i);
+                                            m_city = obj.getString("Cty_ID");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                }
+
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+
+                    queue.add(req);
+                }
+                else{
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         btnRegis = findViewById(R.id.btnRegis);
         btnRegis.setOnClickListener(new View.OnClickListener() {
@@ -741,7 +724,6 @@ public class RegisterMember extends AppCompatActivity{
         addListenerOnButton();
     }
 
-
     //ERROR MESSAGE
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(RegisterMember.this);
@@ -858,8 +840,6 @@ public class RegisterMember extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterMember.this, "Berhasil verifikasi nomor", Toast.LENGTH_SHORT).show();
-
-//
                             JSONObject objRegister = new JSONObject();
 //                            try {
 //                                Thread.sleep(2000);
@@ -1131,41 +1111,41 @@ public class RegisterMember extends AppCompatActivity{
 
 
     //Tampilin
-//    private void listKota(){
-//        JsonObjectRequest stringGet = new JsonObjectRequest(LISTKOTA_URL, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        JSONArray users = null;
-//                        try {
-//                            users = response.getJSONArray("result");
-//                            JSONObject obj;
-//
-//                            for (int i = 0; i < users.length(); i++) {
-//                                obj = users.getJSONObject(i);
-//                                strkota = obj.getString("Cty_Name").trim();
-//                                cityItemList.add(new CityItem(strkota));
-//                                searchAdapter = new SearchAdapter(cityItemList,context);
-//                                recyclerView.setAdapter(searchAdapter);
-//
-//                            }
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//
-//                    }
-//
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        });
-//        queue.add(stringGet);
-//    }
+    private void listKota(){
+        JsonObjectRequest stringGet = new JsonObjectRequest(LISTKOTA_URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        JSONArray users = null;
+                        try {
+                            users = response.getJSONArray("result");
+                            JSONObject obj;
+
+                            for (int i = 0; i < users.length(); i++) {
+                                obj = users.getJSONObject(i);
+                                strkota = obj.getString("Cty_Name").trim();
+                                cityItemList.add(new CityItem(strkota));
+                                searchAdapter = new SearchAdapter(cityItemList,context);
+                                recyclerView.setAdapter(searchAdapter);
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(stringGet);
+    }
 
     public void setCurrentDateOnView() {
 

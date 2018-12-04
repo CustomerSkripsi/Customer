@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -77,6 +79,8 @@ public class HomeActivity extends BaseActivity {
     private ImageView[] dots;
 
     ImageView ivHistory, ivkategory ,ivPromo,ivMember;
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
     //String iv
 
 //    private String[] imageUrls = new String[]{
@@ -93,7 +97,7 @@ public class HomeActivity extends BaseActivity {
 //        sliderView = (SliderView) findViewById(R.id.sliderView);
 //        mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 //        setupSlider();
-
+        builder = new AlertDialog.Builder(this);
         editText = (TextView) findViewById(R.id.editText);
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
@@ -158,21 +162,16 @@ public class HomeActivity extends BaseActivity {
 
         swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
 
-        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override public void run() {
+        swiperefresh.setOnRefreshListener(() -> new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
 
-                        // Berhenti berputar/refreshing
-                        swiperefresh.setRefreshing(false);
+                // Berhenti berputar/refreshing
+                swiperefresh.setRefreshing(false);
 
-                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
-                         pa.notifyDataSetChanged();
-                    }
-                }, 3500);
+                // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+                 pa.notifyDataSetChanged();
             }
-        });
+        }, 3500));
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,7 +256,7 @@ public class HomeActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("ERROR VOLLEY SLIDER"+error, error.getMessage());
+//                        Log.d("ERROR VOLLEY SLIDER"+error, error.getMessage());
                     }
                 }
         );
@@ -326,6 +325,29 @@ public class HomeActivity extends BaseActivity {
             });
 
         }
+    }
+    @Override
+    public void onBackPressed() {
+        builder.setMessage("Apakah Anda ingin keluar dari aplikasi ?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+                return;
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        dialog = builder.show();
+
     }
 
     public void show_view(final RecyclerView cardlist, final List<obat> list, String url){

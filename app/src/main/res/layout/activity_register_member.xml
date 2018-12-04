@@ -82,45 +82,45 @@
                 </android.support.design.widget.TextInputLayout>
 
 
-                <!--<android.support.design.widget.TextInputLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content">-->
-                    <!--<android.support.design.widget.TextInputEditText-->
-                        <!--android:id="@+id/etAlamat"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="25dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:backgroundTint="#000"-->
-                        <!--android:ems="10"-->
-                        <!--android:hint="Alamat"-->
-                        <!--android:inputType="textMultiLine"-->
-                        <!--android:maxLength="180"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textColorHint="#000"/>-->
-                <!--</android.support.design.widget.TextInputLayout>-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etAlamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Alamat"
+                        android:inputType="textMultiLine"
+                        android:maxLength="180"
+                        android:textColor="#000"
+                        android:textColorHint="#000"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <!--<android.support.design.widget.TextInputLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content">-->
-                    <!--<android.support.design.widget.TextInputEditText-->
-                        <!--android:id="@+id/etKota"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="25dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:backgroundTint="#000"-->
-                        <!--android:ems="10"-->
-                        <!--android:hint="Kota"-->
-                        <!--android:inputType="textPostalAddress"-->
-                        <!--android:maxLength="20"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textColorHint="#000" />-->
-                <!--</android.support.design.widget.TextInputLayout>-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etKota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Kota"
+                        android:inputType="textPostalAddress"
+                        android:maxLength="20"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
 
 
                 <android.support.v7.widget.RecyclerView
@@ -194,25 +194,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="25dp"
-                        android:backgroundTint="#000"
-                        android:ems="10"
-                        android:hint="No.Telepon / HP"
-                        android:inputType="phone"
-                        android:maxLength="15"
-                        android:textColor="#000"
-                        android:textColorHint="#000"  />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -227,6 +208,25 @@
                         android:maxLength="50"
                         android:textColor="#000"
                         android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="No. Handphone"
+                        android:inputType="phone"
+                        android:maxLength="15"
+                        android:textColor="#000"
+                        android:textColorHint="#000"  />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
