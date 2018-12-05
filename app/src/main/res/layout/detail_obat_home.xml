@@ -75,73 +75,73 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--android:background="@drawable/border"-->
-        <!--android:layout_marginBottom="5dp">-->
-        <!--<TextView-->
-            <!--android:text="Deskripsi"-->
-            <!--android:textColor="#cacaca"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:paddingLeft="9dp"/>-->
-        <!--<TextView-->
-            <!--android:id="@+id/tv_deskripsi_obat"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:paddingLeft="9dp"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/border"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:text="Deskripsi"
+            android:textColor="#cacaca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:paddingLeft="9dp"/>
+        <TextView
+            android:id="@+id/tv_deskripsi_obat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:paddingLeft="9dp"/>
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginBottom="10dp">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="6dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btn_informasi_produk"
+                    android:layout_width="1500dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/borderhijau3"
+                    android:gravity="center"
+                    android:text="Informasi Produk"
+                    android:textAllCaps="false"
+                    android:textColor="#ffff"
+                    android:textSize="15dp" />
+            </RelativeLayout>
 
             <!--<RelativeLayout-->
+                <!--android:layout_weight="1"-->
                 <!--android:layout_width="170dp"-->
                 <!--android:layout_height="40dp"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginRight="6dp"-->
-                <!--android:layout_weight="1">-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="15dp">-->
 
                 <!--<Button-->
-                    <!--android:id="@+id/btn_informasi_produk"-->
                     <!--android:layout_width="1500dp"-->
                     <!--android:layout_height="30dp"-->
                     <!--android:layout_centerInParent="true"-->
-                    <!--android:background="@drawable/borderhijau3"-->
                     <!--android:gravity="center"-->
-                    <!--android:text="Informasi Produk"-->
+                    <!--android:text="Informasi Penyakit"-->
+                    <!--android:textSize="15dp"-->
                     <!--android:textAllCaps="false"-->
-                    <!--android:textColor="#ffff"-->
-                    <!--android:textSize="15dp" />-->
+                    <!--android:background="@drawable/borderhijau3"-->
+                    <!--android:textColor="#ffff"/>-->
             <!--</RelativeLayout>-->
+        </LinearLayout>
 
-            <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_width="170dp"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_height="40dp"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_marginLeft="6dp"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_marginRight="15dp">&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<Button&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="1500dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="30dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_centerInParent="true"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:text="Informasi Penyakit"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textSize="15dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textAllCaps="false"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:background="@drawable/borderhijau3"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textColor="#ffff"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
-        <!--</LinearLayout>-->
-
-    <!--</LinearLayout>-->
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

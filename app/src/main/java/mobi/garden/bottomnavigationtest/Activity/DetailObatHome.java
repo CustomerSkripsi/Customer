@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,30 +32,25 @@ import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 
 public class DetailObatHome extends AppCompatActivity {
-
     RequestQueue queue;
     apotek_adapter pa;
 
-//    Button btnBack;
-//    Button btnNext;
-//    Button btnInfoProduk;
-    ImageView pictObat;
-    TextView namaObat;
+    String gambarObat,ProductName,obatName;
+    Button btnInfoProduk;//  Button btnBack,btnNext;
     RecyclerView RvApotek;
-    ImageView iv_picture_obat2;
-    TextView tv_nama_obat2;
+    ImageView iv_picture_obat2,pictObat;
+    TextView tv_nama_obat2,namaObat;
+
     HashMap<String,String> detail_obat;
     List<apotek> pr = new ArrayList<>();
 
-    String obatName;
-    String gambarObat,ProductName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_obat_home);
 
-//        btnInfoProduk=(Button) findViewById(R.id.btn_informasi_produk);
+        btnInfoProduk = findViewById(R.id.btn_informasi_produk);
 //        btnBack=(Button)findViewById(R.id.btn_back_product);
 //        btnNext=(Button)findViewById(R.id.btn_next_product);
 
@@ -97,12 +94,16 @@ public class DetailObatHome extends AppCompatActivity {
 //            }
 //        });
 //
-//        btnInfoProduk.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        btnInfoProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailObatHome.this , InfromasiObat.class));
+                Intent i = new Intent(getApplicationContext(),InfromasiObat.class);
+                i.putExtra("produk",ProductName);
+
+                startActivity(i);
+            }
+        });
 
         show_view(RvApotek, pr,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName);
 

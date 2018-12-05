@@ -1,9 +1,7 @@
 package mobi.garden.bottomnavigationtest;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +91,6 @@ public class Searching {
                         PromoList.add(new ModelPromo(promoname,producturl,priceproduk,priceprodukafterdc));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("rwar", object.toString());
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

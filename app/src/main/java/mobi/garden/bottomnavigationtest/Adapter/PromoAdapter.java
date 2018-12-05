@@ -4,27 +4,26 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Model.ModelKategori;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
 public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHolder> {
     List<ModelPromo> modelPromo;
     Context context;
-
+    String tempurl;
     public PromoAdapter(List<ModelPromo> modelPromo, Context context) {
         this.modelPromo = modelPromo;
         this.context = context;
@@ -51,18 +50,26 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
         if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
         }
-        if(mp.getProductNameUrl().equalsIgnoreCase("null")){
-            Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
-        }else {
-            Picasso.with(context).load(mp.getProductNameUrl()).into(holder.imgProduct, new Callback() {
+//        if(mp.getProductNameUrl().equalsIgnoreCase("null")){
+//            Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+//        }else {
+        tempurl = mp.getProductNameUrl();
+        Log.d("onBindViewHolder: ",tempurl);
+        if(tempurl.contains(" ")){
+            tempurl = tempurl.replace(" ","%20");
+        }
+            Picasso.with(context).load(tempurl).into(holder.imgProduct, new Callback() {
                 @Override
-                public void onSuccess() {}
+                public void onSuccess() {
+                    Picasso.with(context).load(tempurl).into(holder.imgProduct);
+                }
                 @Override
                 public void onError() {
-                    Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+                    holder.imgProduct.setImageResource(R.drawable.nopicture);
+                    //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
                 }
             });
-        }
+//        }
        // Picasso.with(context).load("http://pharmaapp.pharmanet.co.id/public/data/images/product/zoom/0100175.jpg").into(holder.imgProduct);
     }
 
