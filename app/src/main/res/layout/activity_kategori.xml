@@ -32,7 +32,7 @@
             android:textColor="@color/searchText"
             android:textColorHint="@color/searchHint"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/ivCart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></EditText>
 
@@ -66,7 +66,7 @@
         <!--</android.support.v7.widget.RecyclerView>-->
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/imageView"
@@ -90,7 +90,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:badgeBackground="@drawable/badge_bg_with_shadow"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/ivCart"
             app:layout_constraintTop_toTopOf="parent"
             app:maxTextLength="3"></com.nex3z.notificationbadge.NotificationBadge>
 

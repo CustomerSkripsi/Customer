@@ -11,6 +11,21 @@ public class ModelPromo {
         this.ProductPriceAfterDC = productPriceAfterDC;
     }
 
+    public String getProductID() {
+        return ProductID;
+    }
+
+    public void setProductID(String productID) {
+        ProductID = productID;
+    }
+
+    public ModelPromo(String productID, String promoNameProduct, String productNameUrl, int productPriceAfterDC) {
+        ProductID = productID;
+        PromoNameProduct = promoNameProduct;
+        ProductNameUrl = productNameUrl;
+        ProductPriceAfterDC = productPriceAfterDC;
+    }
+
     public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct) {
         PromoNameProduct = promoNameProduct;
         ProductNameUrl = productNameUrl;

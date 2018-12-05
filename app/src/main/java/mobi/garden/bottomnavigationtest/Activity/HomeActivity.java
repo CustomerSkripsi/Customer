@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,7 +34,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.nex3z.notificationbadge.NotificationBadge;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,12 +44,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
-import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.R;
-import mobi.garden.bottomnavigationtest.Searching;
 import mobi.garden.bottomnavigationtest.Slider.SliderIndicator;
 import mobi.garden.bottomnavigationtest.Slider.SliderPagerAdapter;
 import mobi.garden.bottomnavigationtest.Slider.SliderView;
@@ -93,7 +90,7 @@ public class HomeActivity extends BaseActivity {
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart;
     EditText etSearch;
 
     @Override
@@ -141,6 +138,13 @@ public class HomeActivity extends BaseActivity {
                 Intent i = new Intent(getApplicationContext(),FavoritActivity.class);
                 i.putExtra("allfavorit","http://pharmanet.apodoc.id/customer/ProductFavoritAll.php?ProductName=");
                 startActivity(i);
+            }
+        });
+        ivCart = findViewById(R.id.ivCart);
+        ivCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this , CartActivity.class));
             }
         });
 
