@@ -1,18 +1,20 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,7 +37,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.nex3z.notificationbadge.NotificationBadge;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,12 +47,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
-import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.R;
-import mobi.garden.bottomnavigationtest.Searching;
 import mobi.garden.bottomnavigationtest.Slider.SliderIndicator;
 import mobi.garden.bottomnavigationtest.Slider.SliderPagerAdapter;
 import mobi.garden.bottomnavigationtest.Slider.SliderView;
@@ -107,6 +107,13 @@ public class HomeActivity extends BaseActivity {
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
+
+
+        if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
 
         InitiateSearchAdapter();
         ivHistory = findViewById(R.id.ivHistory);

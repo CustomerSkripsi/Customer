@@ -1,7 +1,11 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -35,7 +43,7 @@ public class DetailObatHome extends AppCompatActivity {
     RequestQueue queue;
     apotek_adapter pa;
 
-//    Button btnBack;
+    //    Button btnBack;
 //    Button btnNext;
 //    Button btnInfoProduk;
     ImageView pictObat;
@@ -43,28 +51,104 @@ public class DetailObatHome extends AppCompatActivity {
     RecyclerView RvApotek;
     ImageView iv_picture_obat2;
     TextView tv_nama_obat2;
-    HashMap<String,String> detail_obat;
+    HashMap<String, String> detail_obat;
     List<apotek> pr = new ArrayList<>();
 
     String obatName;
-    String gambarObat,ProductName;
+    String gambarObat, ProductName;
+
+    double longitude;
+    double latitude;
+
+    GoogleApiClient mGoogleApiClient;
+
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_obat_home);
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(DetailObatHome.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DetailObatHome.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DetailObatHome.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+                                longitude = location.getLongitude();
+                                latitude = location.getLatitude();
+
+                                Log.d("test123", longitude + "");
+
+
+                            } else {
+                                Toast.makeText(DetailObatHome.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
 //        btnInfoProduk=(Button) findViewById(R.id.btn_informasi_produk);
 //        btnBack=(Button)findViewById(R.id.btn_back_product);
 //        btnNext=(Button)findViewById(R.id.btn_next_product);
 
-        iv_picture_obat2= (ImageView) findViewById(R.id.iv_picture_obat2);
-        tv_nama_obat2=(TextView) findViewById(R.id.tv_nama_obat2);
+        iv_picture_obat2 = (ImageView) findViewById(R.id.iv_picture_obat2);
+        tv_nama_obat2 = (TextView) findViewById(R.id.tv_nama_obat2);
 
 //        obatName = getIntent().getStringExtra("ProductName");
         gambarObat = getIntent().getStringExtra("ProductImage");
 
 
+//            LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//////            Log.d("wasd" ,location.toString());
+////            longitude = location.getLongitude();
+////            latitude = location.getLatitude();
+//            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+//              final LocationListener locationListener = new LocationListener() {
+//                public void onLocationChanged(Location location) {
+//                    longitude = location.getLongitude();
+//                    latitude = location.getLatitude();
+//
+//                    Log.d("sssss", "onLocationChanged: ");
+//                    Log.d("test1", longitude+"");
+//                    Log.d("test2", latitude+"");
+//                }
+//
+//                @Override
+//                public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//                }
+//
+//                @Override
+//                public void onProviderEnabled(String provider) {
+//
+//                }
+//
+//                @Override
+//                public void onProviderDisabled(String provider) {
+//
+//                }
+//            };
+//
+//            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
 
         Picasso.with(DetailObatHome.this).load(gambarObat).into(iv_picture_obat2);
 
@@ -72,14 +156,15 @@ public class DetailObatHome extends AppCompatActivity {
         RvApotek = findViewById(R.id.rv_detail_obat);
         RvApotek.setHasFixedSize(true);
 
+
         Intent intent = getIntent();
         ProductName = intent.getStringExtra("ProductName");
-//        if(ProductName.contains(" ")){
-//            ProductName = ProductName.replace(" ","%20");
-//        }
+        tv_nama_obat2.setText(ProductName);
+        if(ProductName.contains(" ")){
+            ProductName = ProductName.replace(" ","%20");
+        }
         Log.d("ssss", "asdasd: "+ProductName);
 
-        tv_nama_obat2.setText(ProductName);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -142,7 +227,7 @@ public class DetailObatHome extends AppCompatActivity {
 
                     }
 
-                    pa = new apotek_adapter(DetailObatHome.this,list,DetailObatHome.this);
+                    pa = new apotek_adapter(DetailObatHome.this,list,longitude,latitude);
                     cardlist.setAdapter(pa);
 
                 } catch (JSONException e) {
