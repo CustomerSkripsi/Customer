@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 
 import java.util.HashMap;
@@ -50,8 +51,8 @@ public class SessionManagement {
     }
     // Constructor Cart
     public SessionManagement(String username, String member) {
-        editor.putString(KEY_KODEMEMBER, member);
         editor.putString(USERNAME, username);
+        editor.putString(KEY_KODEMEMBER, member);
         editor.commit();
     }
 
@@ -94,14 +95,7 @@ public class SessionManagement {
         editor.putString(KEY_NOHP, nomor_hp);
         editor.commit();
     }
-    //cart
-    public SessionManagement getLoggedInIdSession() {
-        String member = pref.getString("member", "");
-        String username = pref.getString("nama", "");
 
-        SessionManagement storedUser = new SessionManagement(username, member);
-        return storedUser;
-    }
     public String getUserID() {
         return KEY_KODEMEMBER;
     }
@@ -181,8 +175,37 @@ public class SessionManagement {
         editor.commit();
     }
 
+    public void setUserLoggedIn(Boolean isLoggedIn){
+        editor.putBoolean("loggedIn", isLoggedIn);
+        editor.commit();
+    }
+
+    //cart
+    public SessionManagement getLoggedInIdSession() {
+        String member = pref.getString("member", "");
+        String username = pref.getString("nama", "");
+        Log.d("asd",member);
+        SessionManagement storedUser = new SessionManagement(member,username);
+        return storedUser;
+    }
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    public boolean getUserLoggedIn(){
+        if(pref.getBoolean("IsLoggedIn",false)){
+            return true;
+        }
+        else {
+//            Intent i = new Intent(context, Login.class);
+//            //reset activities
+//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//            //masuk login
+//            context.startActivity(i);
+            return false;
+        }
     }
 
 }

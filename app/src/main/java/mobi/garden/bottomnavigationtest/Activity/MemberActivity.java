@@ -197,10 +197,11 @@ public class MemberActivity extends AppCompatActivity {
                                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                                                    session.logoutUser();
                                                 }
                                             });
                                             dialog = builder.show();
+
 
                                         }else{
 
@@ -374,10 +375,13 @@ public class MemberActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             session.logoutUser();
-                            Intent intent = new Intent(Intent.ACTION_MAIN);
-                            intent.addCategory(Intent.CATEGORY_HOME);
+                            Intent intent = new Intent(MemberActivity.this, HalamanAwalActivity.class);
                             startActivity(intent);
                             return;
+//                            Intent intent = new Intent(Intent.ACTION_MAIN);
+//                            intent.addCategory(Intent.CATEGORY_HOME);
+//                            startActivity(intent);
+//                            return;
                         }
                     });
 

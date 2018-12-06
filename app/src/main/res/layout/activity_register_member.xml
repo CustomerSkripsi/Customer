@@ -373,7 +373,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Verifikasi"
-                android:textColor="#000000"
+                android:background="@drawable/orangebutton"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <Button
@@ -385,7 +386,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Kirim Ulang"
-                android:textColor="#000000"
+                android:background="@drawable/orangebutton"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
         </LinearLayout>
 

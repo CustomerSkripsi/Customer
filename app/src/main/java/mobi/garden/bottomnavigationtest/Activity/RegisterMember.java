@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -102,7 +103,7 @@ public class RegisterMember extends AppCompatActivity{
     String m_city, namaLogin, strkota = "";
     Boolean verifikasiHp, verifikasiEmail, verifikasiUser = false;
 
-    public static final String REGISTER_URL = "http://sayasehat.apodoc.id/registerMember.php";
+    public static final String REGISTER_URL = "http://sayasehat.apodoc.id/registerMemberB2C.php";
     public static final String LISTKOTA_URL = "http://sayasehat.apodoc.id/listKota.php";
     //Kode bebas
     private static final String SALT_LOGIN = "Century";
@@ -869,7 +870,7 @@ public class RegisterMember extends AppCompatActivity{
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
-
+                            Log.d("test123", objRegister.toString());
                             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, REGISTER_URL, objRegister,
                                     new Response.Listener<JSONObject>() {
                                         @Override
@@ -919,7 +920,6 @@ public class RegisterMember extends AppCompatActivity{
                                     });
                             RequestQueue requestQueue = Volley.newRequestQueue(RegisterMember.this);
                             requestQueue.add(stringRequest);
-
 
 //                            Intent i = new Intent(RegisterActivity.this,MemberActivity.class);
 //                            startActivity(i);
@@ -1198,7 +1198,7 @@ public class RegisterMember extends AppCompatActivity{
             day = selectedDay;
 
             // set selected date into textview
-            etTanggalLahir.setText(new StringBuilder().append(day).append("-").append(month + 1).append("-").append(year).append(" "), TextView.BufferType.EDITABLE);
+            etTanggalLahir.setText(new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).append(" "), TextView.BufferType.EDITABLE);
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
             // set selected date into datepicker also

@@ -36,6 +36,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.cart_adapter2;
@@ -66,7 +67,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     public static final String insertTransaction = "http://pharmanet.apodoc.id/addHeaderTransaction.php";
 
     //static final String CUSTOMER_ID = "CustomerID";
-    public static String CustomerID,memberID;
+    public static String CustomerID,memberID, userName;
     TextView dialog_Nama, dialog_No_Telepon, dialog_Alamat;
     Button btnLanjutPembelian,button_lanjut, button_Batal, btn_login_cart;
     Button button_lanjut1, button_Batal1;
@@ -74,8 +75,9 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     String urlUser = "Http://Pharmanet.Apodoc.id/select_customer_confirm.php?id=";
     UserLocalStore userlocal;
 
-    SessionManagement session;
 
+    SessionManagement session;
+    HashMap<String, String> login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +111,14 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         Intent intent = getIntent();
-        userlocal  = new UserLocalStore(this);
-        User currUser = userlocal.getLoggedInUser();
-        CustomerID = currUser.getUserID();
+//        userlocal  = new UserLocalStore(this);
+//        User currUser = userlocal.getLoggedInUser();
+//        CustomerID = currUser.getUserID();
 
-//        session = new SessionManagement(getApplicationContext());
-//        SessionManagement currentUser = session.getLoggedInIdSession();
-//        memberID = currentUser.getUserID();
+        session = new SessionManagement(getApplicationContext());
+        login = session.getMemberDetails();
+        userName= login.get(SessionManagement.USERNAME);
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
 
 
 
@@ -315,7 +318,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         info.setText("ANDA MEMILIKI "+cartlist.size()+" BARANG DI KERANJANG BELANJA");
     }
 
-    public static void show_cart(String urlbawah, int CustomerID) {
+    public static void show_cart(String urlbawah, String CustomerID) {
 
         JSONObject objAdd = new JSONObject();
         try {
@@ -376,7 +379,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                     info.setText("ANDA MEMILIKI "+cartlist.size()+" BARANG DI KERANJANG BELANJA");
 
                     //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
-                    adapter = new cart_adapter2(context,cartlist,CustomerID);
+                    adapter = new cart_adapter2(context,cartlist,Integer.parseInt(CustomerID));
                     recyclerViewCartList.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -435,30 +438,13 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         requestQueue.add(stringRequest);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        if(session.isLoggedIn()){
-//            not_empty.setVisibility(not_empty.VISIBLE);
-//            show_cart(urlbawah, Integer.parseInt(memberID));
-//
-//        }
-//        else {
-//            not_empty.setVisibility(not_empty.GONE);
-//            empty.setVisibility(empty.GONE);
-//            not_login.setVisibility(not_login.VISIBLE);
-//
-//        }
-//    }
-
     @Override
     protected void onResume() {
         super.onResume();
 
-        if(userlocal.getUserLoggedIn()){
+        if(session.getUserLoggedIn()){
             not_empty.setVisibility(not_empty.VISIBLE);
-            show_cart(urlbawah, Integer.parseInt(CustomerID));
+            show_cart(urlbawah, memberID);
 
         }
         else {
@@ -468,4 +454,21 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 
         }
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if(userlocal.getUserLoggedIn()){
+//            not_empty.setVisibility(not_empty.VISIBLE);
+//            show_cart(urlbawah, CustomerID);
+//
+//        }
+//        else {
+//            not_empty.setVisibility(not_empty.GONE);
+//            empty.setVisibility(empty.GONE);
+//            not_login.setVisibility(not_login.VISIBLE);
+//
+//        }
+//    }
 }
