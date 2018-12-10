@@ -90,6 +90,7 @@ public class HomeActivity extends BaseActivity {
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     List<String>imageUrls = new ArrayList<>();
+    private int dotscount;
     private ImageView[] dots;
     private static NotificationBadge mBadge;
     GlobalSearchAdapter globalSearchAdapter;
@@ -112,17 +113,18 @@ public class HomeActivity extends BaseActivity {
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
-        if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            return;
-        }
+
+        ivMember = findViewById(R.id.ivMember);
 
         InitiateSearchAdapter();
+
         ivHistory = findViewById(R.id.ivHistory);
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
         ivFavorit = findViewById(R.id.ivFavorit);
         ivMember = findViewById(R.id.ivMember);
+        ivMember = findViewById(R.id.ivMember);
+        ivLainlain = findViewById(R.id.ivLainlain);
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +202,12 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,MemberActivity.class));
+            }
+        });
+        ivLainlain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,CartApotekActivity.class));
             }
         });
 

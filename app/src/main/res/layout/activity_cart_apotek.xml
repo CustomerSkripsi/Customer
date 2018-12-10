@@ -18,6 +18,20 @@
             android:background="@drawable/gradient"
             app:titleTextColor="@android:color/white">
 
+            <TextView
+                android:id="@+id/tv_apotekname"
+                android:textSize="16dp"
+                android:text="NAMA APOTEK"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                />
+
+
+
         </android.support.v7.widget.Toolbar>
 
 
@@ -158,8 +172,15 @@
 
                     </RelativeLayout>
 
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_cv_obat_terkait"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvProdukAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
@@ -174,7 +195,9 @@
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
             <android.support.v4.widget.NestedScrollView
                 android:id="@+id/bottom_sheet"

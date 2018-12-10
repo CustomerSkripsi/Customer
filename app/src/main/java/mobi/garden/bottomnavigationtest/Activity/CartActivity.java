@@ -50,7 +50,7 @@ import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class CartActivity extends BaseActivity implements View.OnClickListener {
 
-    static TextView info, outlet_name,jumlah, jumlahPembayaran, alamat, biaya_pengiriman;
+    static TextView info, outlet_name, jumlah, jumlahPembayaran, alamat, biaya_pengiriman;
     static LinearLayout empty, not_empty, not_login;
     private static int total = 0;
     private static int totalPembayaran = 0;
@@ -69,7 +69,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     //static final String CUSTOMER_ID = "CustomerID";
     public static String CustomerID,memberID, userName;
     TextView dialog_Nama, dialog_No_Telepon, dialog_Alamat;
-    Button btnLanjutPembelian,button_lanjut, button_Batal, btn_login_cart;
+    Button btnLanjutPembelian, button_lanjut, button_Batal, btn_login_cart;
     Button button_lanjut1, button_Batal1;
     Dialog myDialog,myDialog1;
     String urlUser = "Http://Pharmanet.Apodoc.id/select_customer_confirm.php?id=";
@@ -82,20 +82,20 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
 
-        context=getApplicationContext();
+        context = getApplicationContext();
         info = (TextView) findViewById(R.id.info);
         outlet_name = (TextView) findViewById(R.id.outlet_name);
         alamat = findViewById(R.id.tvOutletAddress);
         jumlah = findViewById(R.id.jumlah);
         jumlahPembayaran = findViewById(R.id.totalPembayaran);
         biaya_pengiriman = findViewById(R.id.biayaPengiriman);
-        r_delivery = findViewById(R.id.radio_delivery);
         r_apotek = findViewById(R.id.radio_apotek);
         r_group = findViewById(R.id.radio_group);
-        empty =(LinearLayout) findViewById(R.id.kosong);
-        not_empty =(LinearLayout) findViewById(R.id.tidak_kosong);
-        not_login =(LinearLayout) findViewById(R.id.belum_login);
+        empty = (LinearLayout) findViewById(R.id.kosong);
+        not_empty = (LinearLayout) findViewById(R.id.tidak_kosong);
+        not_login = (LinearLayout) findViewById(R.id.belum_login);
         btn_login_cart = (Button) findViewById(R.id.login_cart);
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -121,9 +121,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
 
 
-
-
-        Toast.makeText(this, memberID+"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, memberID + "", Toast.LENGTH_SHORT).show();
 
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
         btnLanjutPembelian.setOnClickListener(this);
@@ -141,10 +139,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
             @Override
 
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.radio_delivery:
-                        Toast.makeText(context, "delivery", Toast.LENGTH_SHORT).show();
-                        break;
+                switch (checkedId) {
                     case R.id.radio_apotek:
                         Toast.makeText(context, "apotek", Toast.LENGTH_SHORT).show();
                         break;
@@ -159,7 +154,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         btn_login_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CartActivity.this,MemberActivity.class));
+                startActivity(new Intent(CartActivity.this, MemberActivity.class));
             }
         });
     }
@@ -181,8 +176,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                 if(userlocal.getUserLoggedIn()){
                     myAlertDialog();
                     Toast.makeText(this, "anda sudah login", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
 
                     Toast.makeText(this, "anda belum login", Toast.LENGTH_SHORT).show();
                     //startActivity(new Intent(CartActivity.this, MyMenuActivity.class));
@@ -192,7 +186,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    public void myAlertDialog(){
+    public void myAlertDialog() {
 
         myDialog = new Dialog(CartActivity.this);
         myDialog.setContentView(R.layout.dialog_layout);
@@ -202,7 +196,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         dialog_Nama = (TextView) myDialog.findViewById(R.id.dialog_nama);
         dialog_No_Telepon = (TextView) myDialog.findViewById(R.id.dialog_no_telepon);
         dialog_Alamat = (TextView) myDialog.findViewById(R.id.dialog_alamat);
-        Toast.makeText(this, CustomerID+"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, CustomerID + "", Toast.LENGTH_SHORT).show();
         show_view(Integer.parseInt(CustomerID));
         button_Batal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +209,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 //intent hal lain
-                insertTransaction(insertTransaction,Integer.parseInt(CustomerID));
+                insertTransaction(insertTransaction, Integer.parseInt(CustomerID));
                 startActivity(new Intent(CartActivity.this, PickUpActivity.class));
                 myDialog.cancel();
             }
@@ -223,7 +217,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         myDialog.show();
     }
 
-    public void myAlertDialog1(){
+    public void myAlertDialog1() {
 
         myDialog1 = new Dialog(CartActivity.this);
         myDialog1.setContentView(R.layout.dialog_layout3);
@@ -248,8 +242,8 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         myDialog1.show();
     }
 
-    public void show_view(int CustomerID){
-        final JsonObjectRequest rec= new JsonObjectRequest(urlUser+CustomerID, null, new Response.Listener<JSONObject>() {
+    public void show_view(int CustomerID) {
+        final JsonObjectRequest rec = new JsonObjectRequest(urlUser + CustomerID, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -276,7 +270,6 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
@@ -288,34 +281,34 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    public static void refresh_cart(List<cart>cartList){
+    public static void refresh_cart(List<cart> cartList) {
         total = 0;
-        totalPembayaran=0;
+        totalPembayaran = 0;
 
         for (int i = 0; i < cartlist.size(); i++) {
 
-            total += cartlist.get(i).cartProductQty*cartlist.get(i).cartProductPrice;
+            total += cartlist.get(i).cartProductQty * cartlist.get(i).cartProductPrice;
             totalPembayaran = total + cartlist.get(0).outletDeliveryFee;
         }
-        jumlah.setText(df.format(total)+"");
-        jumlahPembayaran.setText(df.format(totalPembayaran)+"");
-        info.setText("ANDA MEMILIKI "+cartlist.size()+" BARANG DI KERANJANG BELANJA");
+        jumlah.setText(df.format(total) + "");
+        jumlahPembayaran.setText(df.format(totalPembayaran) + "");
+        info.setText("ANDA MEMILIKI " + cartlist.size() + " BARANG DI KERANJANG BELANJA");
 
-        adapter = new cart_adapter2(context,cartlist,1);
+        adapter = new cart_adapter2(context, cartlist, 1);
         recyclerViewCartList.setAdapter(adapter);
     }
 
-    public static void refresh_total_cart(List<cart> cartList){
-        total=0;
-        totalPembayaran=0;
+    public static void refresh_total_cart(List<cart> cartList) {
+        total = 0;
+        totalPembayaran = 0;
 
         for (int i = 0; i < cartList.size(); i++) {
             total += cartlist.get(i).cartProductQty*cartlist.get(i).cartProductPrice;
             totalPembayaran = total + cartlist.get(0).outletDeliveryFee;
         }
-        jumlah.setText(df.format(total)+"");
-        jumlahPembayaran.setText(df.format(totalPembayaran)+"");
-        info.setText("ANDA MEMILIKI "+cartlist.size()+" BARANG DI KERANJANG BELANJA");
+        jumlah.setText(df.format(total) + "");
+        jumlahPembayaran.setText(df.format(totalPembayaran) + "");
+        info.setText("ANDA MEMILIKI " + cartlist.size() + " BARANG DI KERANJANG BELANJA");
     }
 
     public static void show_cart(String urlbawah, String CustomerID) {
@@ -338,7 +331,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                 try {
                     products = response.getJSONArray("result");
                     cartlist.clear();
-                    total=0;
+                    total = 0;
                     for (int i = 0; i < products.length(); i++) {
                         try {
                             recyclerViewCartList.setVisibility(View.VISIBLE);
@@ -354,12 +347,12 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                                     obj.getInt("CartProductPrice")
                             ));
 
-                            total += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
+                            total += obj.getInt("CartProductQty") * obj.getInt("CartProductPrice");
                             totalPembayaran = total + obj.getInt("OutletDeliveryFee");
 
                             outlet_name.setText(products.getJSONObject(0).getString("OutletName"));
                             alamat.setText(products.getJSONObject(0).getString("OutletAddress"));
-                            biaya_pengiriman.setText(df.format(products.getJSONObject(0).getInt("OutletDeliveryFee"))+"");
+                            biaya_pengiriman.setText(df.format(products.getJSONObject(0).getInt("OutletDeliveryFee")) + "");
 
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -369,17 +362,17 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                     if(cartlist.size()==0){
                         //set visibility container gone
                         not_empty.setVisibility(not_empty.GONE);
-                    }
-                    else {
+                    } else {
                         empty.setVisibility(empty.GONE);
                     }
 
-                    jumlah.setText(df.format(total)+"");
-                    jumlahPembayaran.setText(df.format(totalPembayaran)+"");
-                    info.setText("ANDA MEMILIKI "+cartlist.size()+" BARANG DI KERANJANG BELANJA");
+                    jumlah.setText(df.format(total) + "");
+                    jumlahPembayaran.setText(df.format(totalPembayaran) + "");
+                    info.setText("ANDA MEMILIKI " + cartlist.size() + " BARANG DI KERANJANG BELANJA");
 
                     //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
-                    adapter = new cart_adapter2(context,cartlist,Integer.parseInt(CustomerID));
+                    //adapter = new cart_adapter2(context,cartlist,Integer.parseInt(CustomerID));
+                    adapter = new cart_adapter2(context, cartlist, CustomerID);
                     recyclerViewCartList.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -409,13 +402,13 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-        JsonObjectRequest stringRequest= new JsonObjectRequest(Request.Method.POST, insertTransaction, objAdd, new Response.Listener<JSONObject>() {
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, insertTransaction, objAdd, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     //  etxt1.setText(response.getString("status"));
 
-                    Log.d("response",response.toString());
+                    Log.d("response", response.toString());
                     if (response.getString("status").equals("success")) {
                         Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_LONG).show();
                     } else {
@@ -430,7 +423,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(CartActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("error_respon_transaksi",error.getMessage());
+                        Log.d("error_respon_transaksi", error.getMessage());
                     }
                 }
         );
@@ -459,16 +452,33 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 //    protected void onResume() {
 //        super.onResume();
 //
-//        if(userlocal.getUserLoggedIn()){
+//        if (session.isLoggedIn()) {
 //            not_empty.setVisibility(not_empty.VISIBLE);
-//            show_cart(urlbawah, CustomerID);
+//            show_cart(urlbawah, Integer.parseInt(memberID));
 //
-//        }
-//        else {
+//        } else {
 //            not_empty.setVisibility(not_empty.GONE);
 //            empty.setVisibility(empty.GONE);
 //            not_login.setVisibility(not_login.VISIBLE);
 //
 //        }
 //    }
+//}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(userlocal.getUserLoggedIn()){
+            not_empty.setVisibility(not_empty.VISIBLE);
+            show_cart(urlbawah, Integer.parseInt(CustomerID));
+
+        }
+        else {
+            not_empty.setVisibility(not_empty.GONE);
+            empty.setVisibility(empty.GONE);
+            not_login.setVisibility(not_login.VISIBLE);
+
+        }
+    }
 }

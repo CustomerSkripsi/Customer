@@ -1,7 +1,7 @@
 package mobi.garden.bottomnavigationtest.LoginRegister;
 
 public class User {
-    String fullName,DOB,gender,contact,email,userName,password,address,codeReferral,userID;
+    public String fullName,DOB,gender,contact,email,userName,password,address,codeReferral,userID, outletID;
     public String  recipientName, recipientNumber, customerAddress, customerCity, customerPostalCode, customerProvince;
     public String customerLocationID;
 
@@ -45,6 +45,7 @@ public class User {
     public User(String userName, String id){
         this.userName=userName;
         this.userID=id;
+        this.outletID= outletID;
     }
 
     public String getRecipientName() {

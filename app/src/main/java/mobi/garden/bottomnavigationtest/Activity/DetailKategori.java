@@ -185,7 +185,7 @@ public class DetailKategori extends AppCompatActivity {
 
     public void show3promo(){
         String url2 = "http://pharmanet.apodoc.id/customer/Category3promo.php?CategoryName="+kategoriname;
-        JsonObjectRequest quest = new JsonObjectRequest(url2, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest quest = new JsonObjectRequest (url2, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray result = null;

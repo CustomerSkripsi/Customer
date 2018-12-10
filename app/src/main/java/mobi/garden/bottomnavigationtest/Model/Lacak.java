@@ -2,7 +2,7 @@ package mobi.garden.bottomnavigationtest.Model;
 
 public class Lacak {
 
-    private String orderID, tanggal, statusOrder, alamat, phone, outletName, statusOrderID;
+    private String orderID, tanggal, statusOrder, alamat, phone, outletName, statusOrderID, lacakdetail, orderProductQty;
     private int  totalHarga;
 
 
@@ -62,6 +62,10 @@ public class Lacak {
         this.phone = phone;
     }
 
+    public String getLacakDetail() {
+        return lacakdetail;
+    }
+
     public int getTotalHarga() {
         return totalHarga;
     }
@@ -69,4 +73,5 @@ public class Lacak {
     public void setTotalHarga(int totalHarga) {
         this.totalHarga = totalHarga;
     }
+
 }

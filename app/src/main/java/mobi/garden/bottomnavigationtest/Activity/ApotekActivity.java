@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -44,7 +45,7 @@ public class ApotekActivity extends AppCompatActivity {
     ImageView iv_picture_apotek;
     Button hideButton;
     LinearLayout containerHide;
-
+    Context context;
     //obat adapter
     RequestQueue queue;
     obat_adapter_as pa;
@@ -170,7 +171,7 @@ public class ApotekActivity extends AppCompatActivity {
 
                     }
 
-                    pa = new obat_adapter_as(ApotekActivity.this,list);
+                    pa = new obat_adapter_as(list,context);
                     cardlist.setAdapter(pa);
 
                 } catch (JSONException e) {
