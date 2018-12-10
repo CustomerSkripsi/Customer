@@ -12,48 +12,85 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
-            android:weightSum="7"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="7">
 
             <LinearLayout
-                android:layout_weight="7"
+                android:id="@+id/containerApotek"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:id="@+id/containerApotek">
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="85dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="3">
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:paddingTop="7dp"
-                        android:paddingLeft="15dp"
                         android:id="@+id/tv_nama_apotek"
-                        tools:text="nama apotik"
-                        android:textStyle="bold"
-                        android:textAllCaps="true"
-                        android:textSize="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="7dp"
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        tools:text="nama apotik" />
 
-                        />
-                    <RatingBar
-                        android:paddingBottom="3dp"
-                        android:layout_marginLeft="13dp"
-                        android:id="@+id/ratingBar"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_jarak"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:numStars="5"
-                        />
-                </LinearLayout>
+                        android:paddingLeft="15dp"
+                        android:paddingTop="7dp"
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        tools:text="jarak" />
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RatingBar
+                            android:id="@+id/ratingBar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13dp"
+                            android:numStars="5"
+                            android:paddingBottom="3dp" />
+
+                        <TextView
+                            android:id="@+id/tv_jam_open"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:paddingBottom="4dp"
+                            tools:text="JamOpen" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="1dp"
+                            android:paddingRight="1dp"
+                            android:text="-" />
+
+                        <TextView
+                            android:id="@+id/tv_jam_close"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            tools:text="JamClose" />
+                    </LinearLayout>
+                </LinearLayout>
 
 
                 <TextView
@@ -61,41 +98,23 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="7dp"
-                    android:textSize="13dp"
                     android:gravity="center_horizontal"
-                    android:text="harga" />
+                    android:paddingTop="7dp"
+                    android:text="harga"
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/tv_stok_obat_apotek"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:paddingTop="7dp"
-                    android:textSize="13dp"
-                    android:gravity="center_horizontal"
                     android:layout_marginRight="7dp"
-                    android:text="stock"
-
-                    />
-                <TextView
-                    android:layout_weight="2"
-                    android:id="@+id/tv_keterangan_apotek"
-                    android:text="keterangan"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
                     android:paddingTop="7dp"
-                    android:textSize="13dp"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    />
-            </LinearLayout>
-            <Button
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="7dp"
-                android:id="@+id/btn_beli"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/shoppingcart"/>
+                    android:text="stock"
+                    android:textSize="13dp" />
 
+            </LinearLayout>
         </LinearLayout>
 
         <View

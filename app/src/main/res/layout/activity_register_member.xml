@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mobi.garden.bottomnavigationtest.Activity.RegisterMember"
+    android:onClick="hideKeyboard">
+
+    <ProgressBar
+        android:id="@+id/bar_register"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:translationZ="5dp"
+        android:visibility="gone"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:onClick="hideKeyboard">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+             />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:onClick="hideKeyboard">
+
+            <LinearLayout
+                android:id="@+id/FormRegLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:onClick="hideKeyboard">
+
+                <TextView
+                    android:id="@+id/etForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#000"
+                    android:gravity="center"
+                    android:maxLength="50"
+                    android:text="Registrasi Member"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textColorHint="#000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Nama"
+                        android:inputType="textPersonName"
+                        android:maxLength="50"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etAlamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Alamat"
+                        android:inputType="textMultiLine"
+                        android:maxLength="180"
+                        android:textColor="#000"
+                        android:textColorHint="#000"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etKota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Kota"
+                        android:inputType="textPostalAddress"
+                        android:maxLength="20"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="0dp"
+                    android:visibility="gone" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etTanggalLahir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Tanggal Lahir"
+                        android:inputType="text"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Kelamin"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#000"/>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbPria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"
+                        android:buttonTint="#000"
+                        android:text="Pria"
+                        android:textColor="#000" />
+
+                    <RadioButton
+                        android:id="@+id/rbWanita"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:buttonTint="#000"
+                        android:text="Wanita"
+                        android:textColor="#000" />
+                </RadioGroup>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="E-mail"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="No. Handphone"
+                        android:inputType="phone"
+                        android:maxLength="15"
+                        android:textColor="#000"
+                        android:textColorHint="#000"  />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Username"
+                        android:inputType="text"
+                        android:maxLength="15"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:maxLength="15"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etRegisterKonfirmasiPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#000"
+                        android:ems="10"
+                        android:hint="Konfirmasi Password"
+                        android:inputType="textPassword"
+                        android:maxLength="15"
+                        android:textColor="#000"
+                        android:textColorHint="#000" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/btnRegis"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Buat"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnKirimVerifikasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/orangebutton"
+                    android:text="Kirim Kode"
+                    android:textColor="#FFF"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/ValidasiForm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="hideKeyboard"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/etValidasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="150dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#000"
+                android:gravity="center"
+                android:maxLength="50"
+                android:text="Verifikasi Nomor"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etKodeVeri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#000"
+                android:ems="10"
+                android:hint="Kode Verifikasi"
+                android:inputType="text"
+                android:maxLength="15"
+                android:textColor="#000"
+                android:textColorHint="#000" />
+
+            <Button
+                android:id="@+id/btnValid"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Verifikasi"
+                android:background="@drawable/orangebutton"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnKirimUlang"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Kirim Ulang"
+                android:background="@drawable/orangebutton"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

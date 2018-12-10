@@ -16,10 +16,52 @@ public class apotek {
     public String metodePengiriman;
     public String outletOprOpen;
     public String outletOprClose;
-    public  String outletOprDay;
+    public String outletOprDay;
+    public int ratingbar;
+    public int rating;
+    public String jarak;
     public int harga;
     public  int stok;
+    public double latitude;
+    public double longitude;
     public int delivery_fee;
+
+    public int getRatingbar() {
+        return ratingbar;
+    }
+
+    public void setRatingbar(int ratingbar) {
+        this.ratingbar = ratingbar;
+    }
+
+    public apotek(String nama_apotek) {
+
+        this.nama_apotek = nama_apotek;
+    }
+
+    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose,double latitude,double longitude ) {
+        this.id_apotek = id_apotek;
+        this.nama_apotek = nama_apotek;
+        this.outletOprOpen = outletOprOpen;
+        this.ratingbar = ratingbar;
+        this.outletOprClose = outletOprClose;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+//    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose) {
+//        this.id_apotek = id_apotek;
+//        this.nama_apotek = nama_apotek; //
+//        this.outletOprOpen = outletOprOpen;
+//        this.ratingbar = ratingbar;
+//        this.outletOprClose = outletOprClose;
+//    }
+
+
+    public apotek(String nama_apotek, String jam_operasi) {
+        this.nama_apotek = nama_apotek;
+        this.jam_operasi = jam_operasi;
+    }
 
     public apotek(String id_apotek, String nama_apotek, String jam_operasi, String keterangan, int harga, int stok) {
         this.id_apotek = id_apotek;
@@ -28,25 +70,40 @@ public class apotek {
         this.keterangan = keterangan;
         this.harga = harga;
         this.stok = stok;
+
     }
 
-    public apotek(String id_apotek, String nama_apotek, String keterangan, int delivery_fee, int harga, int stok) {
+    public apotek(String id_apotek, String nama_apotek, int harga, int stok, double latitude,double longitude , int rating, String outletOprOpen, String outletOprClose) {
         this.id_apotek = id_apotek;
         this.nama_apotek = nama_apotek;
-        this.keterangan = keterangan;
-        this.delivery_fee = delivery_fee;
+//        this.keterangan = keterangan;
+//        this.delivery_fee = delivery_fee;
         this.harga = harga;
         this.stok = stok;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.rating = rating;
+        this.outletOprOpen = outletOprOpen;
+        this.outletOprClose = outletOprClose;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
 
-    public int getDelivery_fee() {
-        return delivery_fee;
-    }
-
-    public void setDelivery_fee(int delivery_fee) {
-        this.delivery_fee = delivery_fee;
-    }
 
     public String getId_apotek() {
         return id_apotek;
@@ -72,46 +129,6 @@ public class apotek {
         this.jam_operasi = jam_operasi;
     }
 
-    public String getKeterangan() {
-        return keterangan;
-    }
-
-    public void setKeterangan(String keterangan) {
-        this.keterangan = keterangan;
-    }
-
-    public int getHarga() {
-        return harga;
-    }
-
-    public void setHarga(int harga) {
-        this.harga = harga;
-    }
-
-    public int getStok() {
-        return stok;
-    }
-
-    public void setStok(int stok) {
-        this.stok = stok;
-    }
-
-    public String getOutletSIA() {
-        return outletSIA;
-    }
-
-    public void setOutletSIA(String outletSIA) {
-        this.outletSIA = outletSIA;
-    }
-
-    public String getOutletSIPA() {
-        return outletSIPA;
-    }
-
-    public void setOutletSIPA(String outletSIPA) {
-        this.outletSIPA = outletSIPA;
-    }
-
     public String getOutletOprOpen() {
         return outletOprOpen;
     }
@@ -135,29 +152,32 @@ public class apotek {
     public void setOutletOprDay(String outletOprDay) {
         this.outletOprDay = outletOprDay;
     }
-    public String getAddress() {
-        return address;
+
+    public int getHarga() {
+        return harga;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHarga(int harga) {
+        this.harga = harga;
     }
 
-    String noTelepon;
-
-    public String getNoTelepon() {
-        return noTelepon;
+    public int getStok() {
+        return stok;
     }
 
-    public void setNoTelepon(String noTelepon) {
-        this.noTelepon = noTelepon;
+    public void setStok(int stok) {
+        this.stok = stok;
     }
 
-    public String getMetodePengiriman() {
-        return metodePengiriman;
+    public int getRating() {
+        return rating;
     }
 
-    public void setMetodePengiriman(String metodePengiriman) {
-        this.metodePengiriman = metodePengiriman;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
+
+//    public void setMetodePengiriman(String metodePengiriman) {
+//        this.metodePengiriman = metodePengiriman;
+//    }
 }

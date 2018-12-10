@@ -8,29 +8,37 @@
     android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/gradient"
         android:id="@+id/toolbar_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar"
         app:title="Informasi Produk"
-        app:titleTextColor="@android:color/white"
-
-        >
+        app:titleTextColor="@android:color/white">
     </android.support.v7.widget.Toolbar>
+    <!---->
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar5"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:background="@drawable/toolbar"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="?attr/actionBarTheme" >-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
 
     <LinearLayout
-        android:layout_below="@id/toolbar_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_below="@id/toolbar_info"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/border"
-        android:layout_alignParentBottom="true">
+        android:orientation="vertical">
 
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -56,10 +64,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/iv_picture_obat3"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
                         android:text="Nama Obat"
                         android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="5dp"/>
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -67,18 +75,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:paddingBottom="50dp"
-                    >
+                    android:orientation="vertical"
+                    android:paddingBottom="50dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="15dp"
+                        android:orientation="horizontal"
 
                         >
 
@@ -98,9 +105,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -118,9 +124,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -138,9 +143,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -158,9 +162,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -178,9 +181,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -198,9 +200,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -218,9 +219,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -238,9 +238,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"
@@ -258,9 +257,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="15dp"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="100dp"

@@ -1,10 +1,58 @@
 package mobi.garden.bottomnavigationtest.Model;
 
 public class Model_Obat {
-    public String ProductID,ProductName,productPhoto, productDescription, indikasi, kandungan, dosis, carapakai, kemasan,
-    golongan, resepYN, kontraindikasi,  carasimpan, principal,categoryID;
+    public String ProductID;
+    public String ProductName;
+    public String productPhoto;
+    public String productDescription;
+    public String indikasi;
+    public String kandungan;
+    public String dosis;
+    public String carapakai;
+    public String kemasan;
+    public String golongan;
+    public String resepYN;
+
+    public String getCarapemakaian() {
+        return carapemakaian;
+    }
+
+    public void setCarapemakaian(String carapemakaian) {
+        this.carapemakaian = carapemakaian;
+    }
+
+    public String getPenyimpanan() {
+        return penyimpanan;
+    }
+
+    public void setPenyimpanan(String penyimpanan) {
+        this.penyimpanan = penyimpanan;
+    }
+
+    public String kontraindikasi;
+    public String carasimpan;
+    public String principal;
+    public String categoryID;
+    public String carapemakaian;
+    public String penyimpanan;
+
 
     public int productPrice, productDiscount, productPriceAfterdc;
+    public Model_Obat(String productID, String productPhoto, String indikasi,String kandungan, String dosis, String carapemakaian, String kemasan, String golongan, String resepYN,
+                      String kontraindikasi, String penyimpanan, String principal) {
+        ProductID = productID;
+        this.productPhoto = productPhoto;
+        this.indikasi = indikasi;
+        this.kandungan = kandungan;
+        this.dosis = dosis;
+        this.carapemakaian = carapemakaian;
+        this.kemasan = kemasan;
+        this.golongan = golongan;
+        this.resepYN = resepYN;
+        this.kontraindikasi = kontraindikasi;
+        this.penyimpanan = penyimpanan;
+        this.principal = principal;
+    }
 
     public Model_Obat(String ProductID, String ProductName, String productPhoto, String productDescription,
                       String indikasi, String kandungan, String dosis, String carapakai, String kemasan,
@@ -37,37 +85,30 @@ public class Model_Obat {
 
 
     public String getProductID() {
-
         return ProductID;
     }
 
     public void setProductID(String ProductID) {
-
         this.ProductID = ProductID;
     }
 
     public String getProductName() {
-
         return ProductName;
     }
 
     public void setProductName(String ProductName) {
-
         this.ProductName = ProductName;
     }
 
     public String getProductPhoto() {
-
         return productPhoto;
     }
 
     public void setProductPhoto(String productPhoto) {
-
         this.productPhoto = productPhoto;
     }
 
     public String getProductDescription() {
-
         return productDescription;
     }
 
@@ -123,52 +164,42 @@ public class Model_Obat {
     }
 
     public String getGolongan() {
-
         return golongan;
     }
 
     public void setGolongan(String golongan) {
-
         this.golongan = golongan;
     }
 
     public String getResepYN() {
-
         return resepYN;
     }
 
     public void setResepYN(String resepYN) {
-
         this.resepYN = resepYN;
     }
 
     public String getKontraindikasi() {
-
         return kontraindikasi;
     }
 
     public void setKontraindikasi(String kontraindikasi) {
-
         this.kontraindikasi = kontraindikasi;
     }
 
     public String getCarasimpan() {
-
         return carasimpan;
     }
 
     public void setCarasimpan(String carasimpan) {
-
         this.carasimpan = carasimpan;
     }
 
     public String getPrincipal() {
-
         return principal;
     }
 
     public void setPrincipal(String principal) {
-
         this.principal = principal;
     }
 

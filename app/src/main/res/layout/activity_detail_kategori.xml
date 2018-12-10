@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.DetailKategori">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v4.view.ViewPager
+
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp">
+
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                        android:id="@+id/SliderDots"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_promo"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="#ffffff">
+
+                        <TextView
+                            android:id="@+id/tvProdukPromo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="PRODUK PROMO"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnPromoSeleng"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="10dp"
+                            android:background="#ffffff"
+                            android:text="Selengkapnya >"
+                            android:textColor="#7c7c7c"
+                            android:textSize="11dp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv3promo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="#ffffff">
+
+                        <TextView
+                            android:id="@+id/tvFavorit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="PRODUK FAVORIT"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnFavoritSeleng"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="10dp"
+                            android:background="#ffffff"
+                            android:text="Selengkapnya >"
+                            android:textColor="#7c7c7c"
+                            android:textSize="11dp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv3favorite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llprodukdetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvprodukdetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+</RelativeLayout>
