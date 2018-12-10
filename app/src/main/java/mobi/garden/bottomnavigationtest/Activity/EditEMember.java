@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -98,7 +99,7 @@ public class EditEMember extends AppCompatActivity {
     String m_city, namaLogin, strkota = "";
     Boolean verifikasiHp;
 
-    public static final String EDIT_URL = "http://sayasehat.apodoc.id/Edit.php";
+    public static final String EDIT_URL = "http://sayasehat.apodoc.id/editB2C.php";
     public static final String LISTKOTA_URL = "http://sayasehat.apodoc.id/listKota.php";
     //Kode bebas
     private static final String SALT_LOGIN = "Century";
@@ -598,7 +599,7 @@ public class EditEMember extends AppCompatActivity {
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
-
+                            Log.d("testedit", objRegister.toString());
                             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, EDIT_URL, objRegister,
                                     new Response.Listener<JSONObject>() {
                                         @Override
@@ -614,11 +615,11 @@ public class EditEMember extends AppCompatActivity {
                                                         JSONObject obj = users.getJSONObject(i);
 
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
-
+                                                        Toast.makeText(EditEMember.this, "qwe", Toast.LENGTH_SHORT).show();
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
                                                         }else {
-
+                                                            Toast.makeText(context, "123123", Toast.LENGTH_SHORT).show();
                                                             builder2.setMessage("Data sudah tersimpan");
                                                             builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                 @Override

@@ -43,7 +43,7 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
 
     //session
     SessionManagement session;
-    public static final String EDITLUPAPASSWORD_URL = "http://sayasehat.apodoc.id/editPassLupaPass.php";
+    public static final String EDITLUPAPASSWORD_URL = "http://sayasehat.apodoc.id/editPassLupaPassB2C.php";
 
     String Relasi_CardNumber;
     String nama,member,noHP,username,password;
