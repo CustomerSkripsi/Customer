@@ -21,6 +21,16 @@ public class apotek {
     public  int stok;
     public int delivery_fee;
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int rating;
+
     public apotek(String nama_apotek) {
         this.nama_apotek = nama_apotek;
     }
@@ -46,8 +56,19 @@ public class apotek {
         this.stok = stok;
     }
 
+    public apotek(String id_apotek, String address, String outletOprOpen, String outletOprClose, int rating, String noTelepon) {
+        this.id_apotek = id_apotek;
+       // this.nama_apotek = nama_apotek;
+        this.address = address;
+        this.outletOprOpen = outletOprOpen;
+        this.outletOprClose = outletOprClose;
+        this.rating = rating;
+        this.noTelepon = noTelepon;
+    }
+
     public apotek(String id_apotek, String nama_apotek, String keterangan, int delivery_fee, int harga, int stok) {
         this.id_apotek = id_apotek;
+
         this.nama_apotek = nama_apotek;
         this.keterangan = keterangan;
         this.delivery_fee = delivery_fee;
@@ -55,6 +76,8 @@ public class apotek {
         this.stok = stok;
     }
 
+    public apotek() {
+    }
 
     public int getDelivery_fee() {
         return delivery_fee;

@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -36,13 +38,14 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
         final apotek ap = apoteks.get(position);
         holder.tvnamaapotek.setText(ap.getNama_apotek());
         holder.tvJamOperasional.setText(ap.getOutletOprOpen()+"-"+ap.getOutletOprClose());
-//        holder.llapotek.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Intent i = new Intent(context, )
-//                //i.putExtra("ProductName",);
-//            }
-//        });
+        holder.llapotek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,SearchResultApotek.class);
+                i.putExtra("ApotekName", ap.getNama_apotek());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
