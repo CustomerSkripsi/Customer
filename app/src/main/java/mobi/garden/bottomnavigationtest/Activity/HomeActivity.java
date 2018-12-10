@@ -3,6 +3,7 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -95,7 +97,8 @@ public class HomeActivity extends BaseActivity {
 
     ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart;
     EditText etSearch;
-
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,11 +106,13 @@ public class HomeActivity extends BaseActivity {
 //        mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 //        setupSlider();
         rvSearchGlobal = findViewById(R.id.rvSearchglobal);
+        builder = new AlertDialog.Builder(this);
         editText = (TextView) findViewById(R.id.editText);
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
+        ivMember = findViewById(R.id.ivMember);
 
         if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -193,6 +198,12 @@ public class HomeActivity extends BaseActivity {
                 return false;
             }
         });
+        ivMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,MemberActivity.class));
+            }
+        });
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -253,13 +264,16 @@ public class HomeActivity extends BaseActivity {
                         // Berhenti berputar/refreshing
                         swiperefresh.setRefreshing(false);
 
-                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
-                         pa.notifyDataSetChanged();
-                    }
-                }, 3500);
+                // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+                 pa.notifyDataSetChanged();
+            }
+        }, 3500));
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, Search_Activity.class));
             }
         });
-
         show_view(cardListBrand,pr,"http://pharmanet.apodoc.id/select_product_promo.php");
         show_view(cardListBrand2,pr2,"http://pharmanet.apodoc.id/select_product_rekomendasi.php");
         show_view(cardListBrand3,pr3,"http://pharmanet.apodoc.id/select_product_terlaris.php");
@@ -468,6 +482,29 @@ public class HomeActivity extends BaseActivity {
             });
 
         }
+    }
+    @Override
+    public void onBackPressed() {
+        builder.setMessage("Apakah Anda ingin keluar dari aplikasi ?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+                return;
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        dialog = builder.show();
+
     }
 
     public void show_view(final RecyclerView cardlist, final List<obat> list, String url){
