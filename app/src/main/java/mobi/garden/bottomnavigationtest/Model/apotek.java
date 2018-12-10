@@ -26,6 +26,16 @@ public class apotek {
     public double longitude;
     public int delivery_fee;
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int rating;
+
     public int getRatingbar() {
         return ratingbar;
     }
@@ -49,15 +59,6 @@ public class apotek {
         this.longitude = longitude;
     }
 
-//    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose) {
-//        this.id_apotek = id_apotek;
-//        this.nama_apotek = nama_apotek; //
-//        this.outletOprOpen = outletOprOpen;
-//        this.ratingbar = ratingbar;
-//        this.outletOprClose = outletOprClose;
-//    }
-
-
     public apotek(String nama_apotek, String jam_operasi) {
         this.nama_apotek = nama_apotek;
         this.jam_operasi = jam_operasi;
@@ -74,21 +75,29 @@ public class apotek {
     }
 
     public apotek(String id_apotek, String nama_apotek, int harga, int stok, double latitude,double longitude , int rating, String outletOprOpen, String outletOprClose) {
+    public apotek(String id_apotek, String address, String outletOprOpen, String outletOprClose, int rating, String noTelepon) {
+        this.id_apotek = id_apotek;
+       // this.nama_apotek = nama_apotek;
+        this.address = address;
+        this.outletOprOpen = outletOprOpen;
+        this.outletOprClose = outletOprClose;
+        this.rating = rating;
+        this.noTelepon = noTelepon;
+    }
+
+    public apotek(String id_apotek, String nama_apotek, String keterangan, int delivery_fee, int harga, int stok) {
         this.id_apotek = id_apotek;
         this.nama_apotek = nama_apotek;
 //        this.keterangan = keterangan;
 //        this.delivery_fee = delivery_fee;
         this.harga = harga;
         this.stok = stok;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.rating = rating;
-        this.outletOprOpen = outletOprOpen;
-        this.outletOprClose = outletOprClose;
     }
 
     public double getLatitude() {
         return latitude;
+    }
+    public apotek() {
     }
 
     public void setLatitude(double latitude) {

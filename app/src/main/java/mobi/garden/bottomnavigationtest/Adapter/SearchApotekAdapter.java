@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -78,6 +80,14 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
             holder.tvJarak.setText("0 KM");
         }
 
+        holder.llapotek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,SearchResultApotek.class);
+                i.putExtra("ApotekName", ap.getNama_apotek());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
