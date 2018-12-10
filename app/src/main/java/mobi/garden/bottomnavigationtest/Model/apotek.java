@@ -39,13 +39,24 @@ public class apotek {
         this.nama_apotek = nama_apotek;
     }
 
-    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose) {
+    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose,double latitude,double longitude ) {
         this.id_apotek = id_apotek;
-        this.nama_apotek = nama_apotek; //
+        this.nama_apotek = nama_apotek;
         this.outletOprOpen = outletOprOpen;
         this.ratingbar = ratingbar;
         this.outletOprClose = outletOprClose;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
+
+//    public apotek(String id_apotek, String nama_apotek ,String outletOprOpen,int ratingbar, String outletOprClose) {
+//        this.id_apotek = id_apotek;
+//        this.nama_apotek = nama_apotek; //
+//        this.outletOprOpen = outletOprOpen;
+//        this.ratingbar = ratingbar;
+//        this.outletOprClose = outletOprClose;
+//    }
+
 
     public apotek(String nama_apotek, String jam_operasi) {
         this.nama_apotek = nama_apotek;

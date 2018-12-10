@@ -1,8 +1,12 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,12 +60,50 @@ public class SearchApotek extends AppCompatActivity {
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
 
+    double longitude,latitude;
+    GoogleApiClient mGoogleApiClient;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_apotek);
         context = SearchApotek.this;
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SearchApotek.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+                                longitude = location.getLongitude();
+                                latitude = location.getLatitude();
+                                Log.d("test123", longitude + "");
+                            } else {
+                                Toast.makeText(SearchApotek.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
 
         rvhasilSearchApotek = findViewById(R.id.rvHasilSearchApotek);
 
@@ -108,14 +154,16 @@ public class SearchApotek extends AppCompatActivity {
                         ratingbar = object.getInt("TotalRating");
                         outletOprOpen = object.getString("OutletOprOpen");
                         outletOprClose = object.getString("OutletOprClose");
-                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,ratingbar,outletOprClose));
+                        longitude = object.getDouble("OutletLatitude");
+                        latitude = object.getDouble("OutletLongitude");
+                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,ratingbar,outletOprClose,longitude,latitude));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("ssqwes", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                searchapotekAdapter = new SearchApotekAdapter(apoteklist,context);
+                searchapotekAdapter = new SearchApotekAdapter(apoteklist,context,longitude,latitude);
                 rvhasilSearchApotek.setAdapter(searchapotekAdapter);
             }
         }, new Response.ErrorListener() {

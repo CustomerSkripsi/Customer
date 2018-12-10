@@ -58,7 +58,6 @@
         <activity android:name=".Activity.SearchProduk" />
         <activity android:name=".Activity.SearchApotek" />
         <activity android:name=".Activity.FavoritActivity" />
-        <activity android:name=".Activity.GPSTrackerActivity"></activity>
     </application>
 
 </manifest>

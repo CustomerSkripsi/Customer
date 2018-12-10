@@ -58,9 +58,14 @@ public class InfromasiObat extends BaseActivity {
         detail_obat = session_obat.getUserDetails();
 
         context = InfromasiObat.this;
-
+        tv_nama_obat3=(TextView) findViewById(R.id.tv_nama_obat3);
         Intent intent = getIntent();
         Product = intent.getStringExtra("produk");
+        if(Product.contains("%20")){
+            Product = Product.replace("%20"," ");
+        }
+        tv_nama_obat3.setText(Product);
+        Log.d("asddd: ",Product);
         if(Product.contains(" ")){
             Product = Product.replace(" ","%20");
         }
@@ -68,7 +73,7 @@ public class InfromasiObat extends BaseActivity {
 
 
         iv_picture_obat3=(ImageView) findViewById(R.id.iv_picture_obat3);
-        tv_nama_obat3=(TextView) findViewById(R.id.tv_nama_obat3);
+
         tv_indikasi_obat= (TextView) findViewById(R.id.tv_indikasi_obat);
         tv_kandungan_obat= (TextView) findViewById(R.id.tv_kandungan_obat);
         tv_dosis_obat= (TextView) findViewById(R.id.tv_dosis_obat);
