@@ -48,4 +48,6 @@ dependencies {
     implementation 'com.nex3z:notification-badge:0.1.0'
     implementation files('src/libs/core-2.1.jar')
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    implementation "com.google.android.gms:play-services-location:16.0.0"
 }

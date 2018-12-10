@@ -2,7 +2,9 @@ package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +38,15 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
 
     Activity activity;
 
-    public apotek_adapter(Context c, List<apotek> apoteklist) {
+    double userLong;
+    double userlat;
+
+    public apotek_adapter(Context c, List<apotek> apoteklist,double longitude,double latitude) {
         this.apoteklist = apoteklist;
         this.context = c;
         session = new session_obat(c);
+        userLong = longitude;
+        userlat = latitude;
     }
 
     public apotek_adapter(Context c, List<apotek> apoteklist, Activity activity) {
@@ -72,37 +79,31 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
 
-//        LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-//        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//        double longitude = location.getLongitude();
-//        double latitude = location.getLatitude();
 //
-//        Location loc1 = new Location("");
-//        loc1.setLatitude(latitude);
-//        loc1.setLongitude(longitude);
-//
-//        Location loc2 = new Location("");
-//        loc2.setLatitude(pr.latitude);
-//        loc2.setLongitude(pr.longitude);
-//
-//        double distanceInMeters = loc1.distanceTo(loc2)/1000;
-//
-//        Log.d("Jarak", distanceInMeters+"");
+        Location loc1 = new Location("");
+        loc1.setLatitude(userlat);
+        loc1.setLongitude(userLong);
+
+        Location loc2 = new Location("");
+        loc2.setLatitude(pr.latitude);
+        loc2.setLongitude(pr.longitude);
+
+        double distanceInMeters = loc1.distanceTo(loc2)/1000;
+
+        Log.d("Jarak", distanceInMeters+"");
 
         holder.tv_nama_apotek.setText(pr.getNama_apotek());
         holder.tv_harga_obat_apotek.setText(df.format(pr.getHarga())+"");
         holder.tv_stok_obat_apotek.setText(String.valueOf(pr.getStok()));
-        holder.tv_jarak.setText(100+"");
+        if(userLong != 0 && userlat !=0)
+        {
+            holder.tv_jarak.setText(String.format("%.1f",distanceInMeters)+" KM");
+        }
+        else
+        {
+            holder.tv_jarak.setText("0 KM");
+        }
+
         holder.RatObat.setRating(pr.getRating());
         holder.RatObat.setEnabled(false);
         holder.tv_jam_open.setText(pr.getOutletOprOpen());

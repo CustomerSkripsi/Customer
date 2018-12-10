@@ -1,12 +1,15 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -104,6 +107,13 @@ public class HomeActivity extends BaseActivity {
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
+
+
+        if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
 
         InitiateSearchAdapter();
         ivHistory = findViewById(R.id.ivHistory);
