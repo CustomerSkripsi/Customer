@@ -94,7 +94,7 @@ public class HomeActivity extends BaseActivity {
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivMember,ivLainlain;
     EditText etSearch;
 
     @Override
@@ -114,6 +114,8 @@ public class HomeActivity extends BaseActivity {
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
         ivFavorit = findViewById(R.id.ivFavorit);
+        ivMember = findViewById(R.id.ivMember);
+        ivLainlain = findViewById(R.id.ivLainlain);
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

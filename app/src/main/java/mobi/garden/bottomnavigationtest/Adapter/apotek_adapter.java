@@ -2,7 +2,9 @@ package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
+import mobi.garden.bottomnavigationtest.Activity.SearchApotek;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.apotek;
@@ -99,6 +103,10 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
 //
 //        Log.d("Jarak", distanceInMeters+"");
 
+//        android.support.v7.widget.Toolbar dToolbar = findViewById(R.id.toolbar4);
+//        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+//        dToolbar.setTitle(kategoriname);
+
         holder.tv_nama_apotek.setText(pr.getNama_apotek());
         holder.tv_harga_obat_apotek.setText(df.format(pr.getHarga())+"");
         holder.tv_stok_obat_apotek.setText(String.valueOf(pr.getStok()));
@@ -107,6 +115,15 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         holder.RatObat.setEnabled(false);
         holder.tv_jam_open.setText(pr.getOutletOprOpen());
         holder.tv_jam_close.setText(pr.getOutletOprClose());
+        holder.containerApotek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,CartApotekActivity.class);
+                i.putExtra("ApotekName", pr.getNama_apotek());
+                Log.d( "ssssssss",pr.getNama_apotek());
+                context.startActivity(i);
+            }
+        });
 
 
     }
@@ -132,6 +149,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
             tv_jarak= v.findViewById(R.id.tv_jarak);
             tv_jam_open = v.findViewById(R.id.tv_jam_open);
             tv_jam_close = v.findViewById(R.id.tv_jam_close);
+            //containerApotek = v.findViewById(R.id.containerApotek);
 
         }
     }

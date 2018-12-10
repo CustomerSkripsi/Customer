@@ -80,6 +80,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
 
         context = getApplicationContext();
         info = (TextView) findViewById(R.id.info);
@@ -107,14 +108,14 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-//        Intent intent = getIntent();
-//               userlocal  = new UserLocalStore(this);
-//               User currUser = userlocal.getLoggedInUser();
-//               CustomerID = currUser.getUserID();
+        Intent intent = getIntent();
+               userlocal  = new UserLocalStore(this);
+               User currUser = userlocal.getLoggedInUser();
+               CustomerID = currUser.getUserID();
 
-        session = new SessionManagement(getApplicationContext());
-        SessionManagement currentUser = session.getLoggedInIdSession();
-        memberID = currentUser.getUserID();
+//        session = new SessionManagement(getApplicationContext());
+//        SessionManagement currentUser = session.getLoggedInIdSession();
+//        memberID = currentUser.getUserID();
 
 
         Toast.makeText(this, memberID + "", Toast.LENGTH_SHORT).show();
@@ -425,34 +426,16 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (session.isLoggedIn()) {
-            not_empty.setVisibility(not_empty.VISIBLE);
-            show_cart(urlbawah, Integer.parseInt(memberID));
-
-        } else {
-            not_empty.setVisibility(not_empty.GONE);
-            empty.setVisibility(empty.GONE);
-            not_login.setVisibility(not_login.VISIBLE);
-
-        }
-    }
-}
 //
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
 //
-//        if(userlocal.getUserLoggedIn()){
+//        if (session.isLoggedIn()) {
 //            not_empty.setVisibility(not_empty.VISIBLE);
-//            show_cart(urlbawah, Integer.parseInt(CustomerID));
+//            show_cart(urlbawah, Integer.parseInt(memberID));
 //
-//        }
-//        else {
+//        } else {
 //            not_empty.setVisibility(not_empty.GONE);
 //            empty.setVisibility(empty.GONE);
 //            not_login.setVisibility(not_login.VISIBLE);
@@ -460,3 +443,21 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 //        }
 //    }
 //}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(userlocal.getUserLoggedIn()){
+            not_empty.setVisibility(not_empty.VISIBLE);
+            show_cart(urlbawah, Integer.parseInt(CustomerID));
+
+        }
+        else {
+            not_empty.setVisibility(not_empty.GONE);
+            empty.setVisibility(empty.GONE);
+            not_login.setVisibility(not_login.VISIBLE);
+
+        }
+    }
+}

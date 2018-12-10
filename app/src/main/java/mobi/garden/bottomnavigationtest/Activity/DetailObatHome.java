@@ -76,6 +76,7 @@ public class DetailObatHome extends AppCompatActivity {
         if(ProductName.contains(" ")){
             ProductName = ProductName.replace(" ","%20");
         }
+        Log.d("tttttttttttttt",ProductName);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);

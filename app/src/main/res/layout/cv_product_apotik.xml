@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_product_apotik"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+    android:layout_width="110dp"
+    android:layout_height="180dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_cv_product_apotik">
+
+        <ImageView
+            android:id="@+id/iv_foto_obat"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="#000000"/>
+        <TextView
+            android:id="@+id/tv_nama_obat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="nama obat"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tv_qty_obat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="qty"
+            android:textSize="12dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/tv_harga_obat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="harga"
+            android:textSize="12dp"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_addObat"
+                android:textSize="10dp"
+                android:text="ADD"
+                android:background="@color/ijo"
+                android:textColor="#ffff"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
