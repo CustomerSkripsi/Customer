@@ -9,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -31,19 +33,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.DetailKategoriAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.FavoritAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
 import mobi.garden.bottomnavigationtest.Model.ModelKategori;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
 public class DetailKategori extends AppCompatActivity {
     Context context;
-    String url, kategoriname;
-    String namaproduk,tempimage,harga1, hargacoret1;
-    TextView tvNamaObat;
+    String url, kategoriname, CategoryName,namaproduk,tempimage;
+    int harga1, hargacoret1;
+    PromoAdapter promoAdapter;
+    FavoritAdapter favoritAdapter;
+
     List<ModelKategori> KategorisList = new ArrayList<>();
+    List<ModelPromo> PromoList = new ArrayList<>();
+    List<ModelPromo> FavoritList = new ArrayList<>();
+
     DetailKategoriAdapter dkAdapter;
-    RecyclerView rvprodukdetail;
+    RecyclerView rvprodukdetail, rv3promo, rv3favorit;
     ImageView imgProduct,imgProduct2,imgProduct3;
-    TextView tvNamaProdukPromo,tvNamaProdukPromo2,tvNamaProdukPromo3,tvHargaCoret,tvHargaCoret2,tvHargaCoret3,tvHarga,tvHarga2,tvHarga3;
+    Button btnSelengkapPromo, btnFavoritSeleng;
+    LinearLayout ll_favorite, ll_promo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +62,22 @@ public class DetailKategori extends AppCompatActivity {
         setContentView(R.layout.activity_detail_kategori);
         context = DetailKategori.this;
         rvprodukdetail = findViewById(R.id.rvprodukdetail);
+        rv3promo = findViewById(R.id.rv3promo);
+        rv3favorit = findViewById(R.id.rv3favorite);
+        ll_promo = findViewById(R.id.ll_promo);
+        ll_favorite = findViewById(R.id.ll_favorite);
+
+
 
 //        rvprodukdetail.setHasFixedSize(true);
 //        rvprodukdetail.setVisibility(View.VISIBLE);
-//        LinearLayoutManager llm = new LinearLayoutManager(this);
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-//        rvprodukdetail.setLayoutManager(llm);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv3promo.setLayoutManager(llm);
+
+        LinearLayoutManager llms = new LinearLayoutManager(this);
+        llms.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv3favorit.setLayoutManager(llms);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
         rvprodukdetail.setLayoutManager(gridLayoutManager);
@@ -65,6 +86,26 @@ public class DetailKategori extends AppCompatActivity {
 
         Intent intent = getIntent();
         kategoriname = intent.getStringExtra("CategoryName");
+
+        btnSelengkapPromo = findViewById(R.id.btnPromoSeleng);
+        btnSelengkapPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),PromoActivity.class);
+                i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/PromoCategory.php?CategoryName="+kategoriname+"&ProductName=");
+                startActivity(i);
+            }
+        });
+
+        btnFavoritSeleng = findViewById(R.id.btnFavoritSeleng);
+        btnFavoritSeleng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),FavoritActivity.class);
+                i.putExtra("allfavorit","http://pharmanet.apodoc.id/customer/FavoritCategory.php?CategoryName="+kategoriname+"&ProductName=");
+                startActivity(i);
+            }
+        });
 
 
         android.support.v7.widget.Toolbar dToolbar = findViewById(R.id.toolbar4);
@@ -77,23 +118,20 @@ public class DetailKategori extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
         if(kategoriname.contains(" ")){
             kategoriname = kategoriname.replace(" ","%20");
         }
+
+
+
         show3promo();
+        show3favorit();
         showkategoris();
-        //FIND VIEW
-        imgProduct = findViewById(R.id.imgProduct);
-        imgProduct2 = findViewById(R.id.imgProduct2);
-        imgProduct3 = findViewById(R.id.imgProduct3);
-        tvNamaProdukPromo = findViewById(R.id.tvNamaProdukPromo);
-        tvNamaProdukPromo2 = findViewById(R.id.tvNamaProdukPromo2);
-        tvHargaCoret = findViewById(R.id.tvHargaCoret);
-        tvHargaCoret2 = findViewById(R.id.tvHargaCoret2);
-        tvHargaCoret3 = findViewById(R.id.tvHargaCoret3);
-        tvHarga = findViewById(R.id.tvHarga);
-        tvHarga2 = findViewById(R.id.tvHarga2);
-        tvHarga3 = findViewById(R.id.tvHarga3);
+
+
+
 
 
     }
@@ -145,54 +183,28 @@ public class DetailKategori extends AppCompatActivity {
                 JSONArray result = null;
                 try {
                     result = response.getJSONArray("result");
+                    PromoList.clear();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 for(int i=0;i<result.length();i++){
                     try {
                         JSONObject object = result.getJSONObject(i);
-                        tempimage = object.getString("ProductImage");
                         namaproduk = object.getString("ProductName");
-                        hargacoret1 = object.getString("ProductPrice");
-                        harga1 = object.getString("ProductPriceAfterDiscount");
+                        tempimage = object.getString("ProductImage");
+                        hargacoret1 = object.getInt("ProductPrice");
+                        harga1 = object.getInt("ProductPriceAfterDiscount");
+                        PromoList.add(new ModelPromo(namaproduk,tempimage,hargacoret1,harga1));
+                        Log.d("rwar", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if(imgProduct.equals("null")){
-                        Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct);
-                    }else {
-                        Picasso.with(context).load(tempimage).into(imgProduct, new Callback() {
-                            @Override
-                            public void onSuccess() { }
-
-                            @Override
-                            public void onError() {
-                                Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct);
-                            }
-                        });
-                    }
-                    if(imgProduct2.equals("null")){
-                        Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct2);
-                    }else {
-                        Picasso.with(context).load(tempimage).into(imgProduct2, new Callback() {
-                            @Override
-                            public void onSuccess() { }
-
-                            @Override
-                            public void onError() {
-                                Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(imgProduct2);
-                            }
-                        });
-                    }
-                    tvNamaProdukPromo.setText(namaproduk);
-                    tvNamaProdukPromo2.setText(namaproduk);
-                    tvHargaCoret.setText("Rp. "+hargacoret1);
-                    tvHargaCoret2.setText("Rp. "+hargacoret1);
-                    tvHargaCoret3.setText("Rp. "+hargacoret1);
-                    tvHarga.setText("Rp. "+harga1);
-                    tvHarga2.setText("Rp. "+harga1);
-                    tvHarga3.setText("Rp. "+harga1);
                 }
+                if(PromoList.size()==0) {
+                    ll_promo.setVisibility(View.GONE);
+                }
+                promoAdapter = new PromoAdapter(PromoList,context);
+                rv3promo.setAdapter(promoAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -203,5 +215,48 @@ public class DetailKategori extends AppCompatActivity {
         RequestQueue queue=Volley.newRequestQueue(context);
         queue.add(quest);
     }
+
+
+    public void show3favorit(){
+        String url = "http://pharmanet.apodoc.id/customer/Category3favorit.php?CategoryName="+kategoriname;
+        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                    FavoritList.clear();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for(int i=0;i<result.length();i++){
+                    try {
+                        JSONObject object = result.getJSONObject(i);
+                        namaproduk = object.getString("ProductName");
+                        tempimage = object.getString("ProductImage");
+                        hargacoret1 = object.getInt("ProductPrice");
+                        FavoritList.add(new ModelPromo(namaproduk,tempimage,hargacoret1));
+                        Log.d("rwarss", object.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(FavoritList.size()==0) {
+                    ll_favorite.setVisibility(View.GONE);
+                }
+                favoritAdapter = new FavoritAdapter(FavoritList,context);
+                rv3favorit.setAdapter(favoritAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Error Response", Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue queue=Volley.newRequestQueue(context);
+        queue.add(req);
+    }
+
 
 }

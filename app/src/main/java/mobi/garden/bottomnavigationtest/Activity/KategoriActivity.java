@@ -2,17 +2,18 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -38,6 +39,8 @@ public class KategoriActivity extends BaseActivity {
     String url, kategoriname, tempNamekategoriname;
     List<ModelKategori> KategorisList = new ArrayList<>();
     KategoriAdapter kAdapter;
+    TextView tvSearch;
+    String content;
 
     @Override
     public  int getContentViewId() {
@@ -52,47 +55,77 @@ public class KategoriActivity extends BaseActivity {
         setContentView(R.layout.activity_kategori);
         context = KategoriActivity.this;
         rvKategori = findViewById(R.id.rvkategori);
+        tvSearch = findViewById(R.id.tvSearch);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvKategori.setLayoutManager(llm);
-        kategoris();
+
        // setStatusBarGradiant(this);
-        android.support.v7.widget.Toolbar dToolbar = findViewById(R.id.toolbar3);
-        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
-        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        //kategoris(content);
+        tvSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(KategoriActivity.this, HomeActivity.class);
-                startActivity(i);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                 content = tvSearch.getText().toString();
+                kategoris(content);
+            }
+
+        });
+        String u = "";
+        kategoris(u);
+        tvSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    return false;
+                }
+                View view   = getCurrentFocus();
+                if(view!=null){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+                return false;
             }
         });
 
+
+
     }
 
-    public void kategoris(){
-        url = "http://pharmanet.apodoc.id/customer/kategori.php";
+
+    public void kategoris(String input){
+        url = "http://pharmanet.apodoc.id/customer/kategori.php?input="+input;
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray result = null;
                 try {
                     result = response.getJSONArray("result");
+                    KategorisList.clear();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 for(int i=0; i<result.length();i++){
                     try {
                         JSONObject obj = result.getJSONObject(i);
-                        ModelKategori m = new ModelKategori();
-                        m.setCategoryName(obj.getString("Kategori"));
+                        //ModelKategori m = new ModelKategori();
+                       // m.setCategoryName(obj.getString("Kategori"));
                         kategoriname = obj.getString("Kategori");
                         //Toast.makeText(context, "panjangnya"+result.length(), Toast.LENGTH_SHORT).show();
-                        KategorisList.add(m);
-                        kAdapter = new KategoriAdapter(KategorisList,KategoriActivity.this);
-                        rvKategori.setAdapter(kAdapter);
+                        KategorisList.add(new ModelKategori(kategoriname));
+                        Log.d("rwar", obj.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    kAdapter = new KategoriAdapter(KategorisList,KategoriActivity.this);
+                    rvKategori.setAdapter(kAdapter);
                 }
             }
         }, new Response.ErrorListener() {

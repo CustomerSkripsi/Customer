@@ -10,26 +10,47 @@
 
 
     //Search bar
-    <RelativeLayout
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/gradient"
-        >
+        android:background="@drawable/gradient">
+
+        <!--<include-->
+        <!--android:id="@+id/include"-->
+        <!--layout="@layout/user_search"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_centerVertical="true" />-->
+
 
         <include
             android:id="@+id/include"
-            layout="@layout/user_search"
+            layout="@layout/top_navbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSearchglobal"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true" />
+            android:layout_marginTop="56dp"
+            android:translationZ="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:listitem="@layout/dropdown" />
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
     //SwipeRefresh
@@ -59,38 +80,38 @@
 
                 //Slider
                 <!--<RelativeLayout-->
-                    <!--android:id="@+id/slider"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="170dp"-->
-                    <!--&gt;-->
+                <!--android:id="@+id/slider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="170dp"-->
+                <!--&gt;-->
 
-                    <!--<FrameLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content">-->
+                <!--<FrameLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
 
-                        <!--<mobi.garden.bottomnavigationtest.Slider.SliderView-->
-                            <!--android:id="@+id/sliderView"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--/>-->
+                <!--<mobi.garden.bottomnavigationtest.Slider.SliderView-->
+                <!--android:id="@+id/sliderView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--/>-->
 
 
-                    <!--</FrameLayout>-->
+                <!--</FrameLayout>-->
 
-                    <!--<View-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@drawable/bg_indicator" />-->
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_indicator" />-->
 
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/pagesContainer"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentBottom="true"-->
-                        <!--android:layout_gravity="bottom"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:gravity="center_horizontal"-->
-                        <!--android:orientation="horizontal" />-->
+                <!--<LinearLayout-->
+                <!--android:id="@+id/pagesContainer"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:orientation="horizontal" />-->
 
                 <!--</RelativeLayout>-->
 
@@ -121,10 +142,10 @@
                 //ProdukPromo
 
                 <!--<LinearLayout-->
-                    <!--android:id="@+id/llProduk"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal"></LinearLayout>-->
+                <!--android:id="@+id/llProduk"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"></LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/ll_promo"
@@ -162,7 +183,7 @@
                             app:srcCompat="@drawable/iconpromo" />
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/ivFavorit"
                             android:layout_width="60dp"
                             android:layout_height="65dp"
                             android:layout_weight="1"
@@ -225,32 +246,32 @@
                             android:layout_width="10dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/iconlainlain" />
+                            app:srcCompat="@drawable/iconlainlain"/>
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="40dp">-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp">-->
 
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="PRODUK PROMO"-->
-                        <!--android:textSize="16dp"-->
-                        <!--android:textStyle="bold" />-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="PRODUK PROMO"-->
+                <!--android:textSize="16dp"-->
+                <!--android:textStyle="bold" />-->
 
-                    <!--<Button-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentEnd="true"-->
-                        <!--android:background="#ffffff"-->
-                        <!--android:text="selengkapnya >"-->
-                        <!--android:textColor="#7c7c7c"-->
-                        <!--android:textSize="11dp" />-->
+                <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:background="#ffffff"-->
+                <!--android:text="selengkapnya >"-->
+                <!--android:textColor="#7c7c7c"-->
+                <!--android:textSize="11dp" />-->
 
                 <!--</RelativeLayout>-->
 
@@ -270,27 +291,27 @@
                         android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
                     <!--<RelativeLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="40dp">-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp">-->
 
-                        <!--<TextView-->
-                            <!--android:textSize="16dp"-->
-                            <!--android:text="PRODUK REKOMENDASI"-->
-                            <!--android:textStyle="bold"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_marginLeft="10dp"-->
-                            <!--android:gravity="center"-->
-                            <!--/>-->
+                    <!--<TextView-->
+                    <!--android:textSize="16dp"-->
+                    <!--android:text="PRODUK REKOMENDASI"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:gravity="center"-->
+                    <!--/>-->
 
-                        <!--<Button-->
-                            <!--android:background="#ffffff"-->
-                            <!--android:text="selengkapnya >"-->
-                            <!--android:textSize="11dp"-->
-                            <!--android:textColor="#7c7c7c"-->
-                            <!--android:layout_alignParentEnd="true"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content" />-->
+                    <!--<Button-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:text="selengkapnya >"-->
+                    <!--android:textSize="11dp"-->
+                    <!--android:textColor="#7c7c7c"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
                     <!--</RelativeLayout>-->
 
@@ -314,27 +335,27 @@
                     android:background="@drawable/border">
 
                     <!--<RelativeLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="40dp">-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp">-->
 
-                        <!--<TextView-->
-                            <!--android:textSize="16dp"-->
-                            <!--android:text="PRODUK TERLARIS"-->
-                            <!--android:textStyle="bold"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_marginLeft="10dp"-->
-                            <!--android:gravity="center"-->
-                            <!--/>-->
+                    <!--<TextView-->
+                    <!--android:textSize="16dp"-->
+                    <!--android:text="PRODUK TERLARIS"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:gravity="center"-->
+                    <!--/>-->
 
-                        <!--<Button-->
-                            <!--android:background="#ffffff"-->
-                            <!--android:text="selengkapnya >"-->
-                            <!--android:textSize="11dp"-->
-                            <!--android:textColor="#7c7c7c"-->
-                            <!--android:layout_alignParentEnd="true"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content" />-->
+                    <!--<Button-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:text="selengkapnya >"-->
+                    <!--android:textSize="11dp"-->
+                    <!--android:textColor="#7c7c7c"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
                     <!--</RelativeLayout>-->
 

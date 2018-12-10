@@ -3,6 +3,8 @@
     package="mobi.garden.bottomnavigationtest">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -59,6 +61,11 @@
         <activity android:name=".Activity.RegisterMember" />
         <activity android:name=".Activity.EditLupaPasswordActivity" />
         <activity android:name=".Activity.gantiPassword"></activity>
+        <activity android:name=".Activity.DetailKategori" />
+        <activity android:name=".Activity.PromoActivity" />
+        <activity android:name=".Activity.SearchProduk" />
+        <activity android:name=".Activity.SearchApotek" />
+        <activity android:name=".Activity.FavoritActivity"></activity>
     </application>
 
 </manifest>

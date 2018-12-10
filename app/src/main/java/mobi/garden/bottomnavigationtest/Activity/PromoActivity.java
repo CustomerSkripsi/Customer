@@ -2,41 +2,24 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Adapter.DetailKategoriAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
-import mobi.garden.bottomnavigationtest.Model.ModelKategori;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Searching;
@@ -54,8 +37,8 @@ public class PromoActivity extends AppCompatActivity {
     public static  List<ModelPromo> PromoList = new ArrayList<>();
     public static PromoAdapter promoAdapter;
     TextView etSearchPromo;
-
-
+    public static String geturl;
+    //iconlainlain
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +50,11 @@ public class PromoActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
+        Intent i = getIntent();
+        geturl = i.getStringExtra("allpromo");
+        Log.d("URL", geturl);
         rvPromo.setLayoutManager(llm);
+
 //        rvPromo.setHasFixedSize(true);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
 //        rvPromo.setLayoutManager(gridLayoutManager);
@@ -78,16 +65,16 @@ public class PromoActivity extends AppCompatActivity {
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
 //        rvPromo.setLayoutManager(gridLayoutManager);
         etSearchPromo = findViewById(R.id.search);
-        etSearchPromo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    searchProcess(etSearchPromo.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
+//        etSearchPromo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+//                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    searchProcess(etSearchPromo.getText().toString());
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
         etSearchPromo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -107,9 +94,11 @@ public class PromoActivity extends AppCompatActivity {
             }
            // String content= etSearchPromo.getText().toString();
         });
-        //PromoList.clear();
+
       //  showallpromo();
         searchProcess(etSearchPromo.getText().toString());
+        //searchpromocategory();
+
         Toolbar dToolbar = findViewById(R.id.toolbar2);
         dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
         dToolbar.setTitle("PROMO");
@@ -118,12 +107,32 @@ public class PromoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(PromoActivity.this, HomeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
 
 
     }
+
+    public void searchProcess(String text){
+        searching = new Searching(context,text,rvPromo);
+        searching.search();
+    }
+
+
+
+
+    public void searchpromocategory(){
+        searching = new Searching(context, rvPromo);
+        searching.promocategory();
+    }
+
+
+
+
+
+
 //
 //    private void initiateTopAdapter(){
 //        rvPromo.setHasFixedSize(true);
@@ -185,10 +194,13 @@ public class PromoActivity extends AppCompatActivity {
 //        },2000);
 //    }
 
-    public void searchProcess(String text){
-        searching = new Searching(context,text,rvPromo);
-        searching.search();
-    }
+
+
+
+
+
+
+
 
 //    public void showallpromo(){
 //        url="http://pharmanet.apodoc.id/customer/ProductPromoAll.php";

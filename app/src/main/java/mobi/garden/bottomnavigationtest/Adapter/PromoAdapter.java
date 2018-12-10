@@ -45,15 +45,12 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
         holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
         holder.tvharga.setText("Rp. "+String.valueOf(mp.getProductPriceAfterDC()));
-
+//        if(mp.getProductPriceAfterDC()==0){
+//            holder.tvharga.setText();
+//        }
         if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
         }
-        //holder.tvharga.setText("Rp. "+String.valueOf(mp.PriceProduct));
-//        if(mp.ProductNameUrl.contains("/")){
-//            mp.ProductNameUrl = mp.ProductNameUrl.replace("\\/","");
-//        }
-        //Toast.makeText(context, ""+mp.ProductNameUrl, Toast.LENGTH_SHORT).show();
         if(mp.getProductNameUrl().equalsIgnoreCase("null")){
             Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
         }else {
