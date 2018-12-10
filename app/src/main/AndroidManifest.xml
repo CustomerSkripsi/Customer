@@ -24,7 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.Search_Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Activity.KategoriActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -53,11 +53,18 @@
         <activity android:name=".Activity.ProfileCustomerActivity" />
         <activity android:name=".Activity.EmailProfile" />
         <activity android:name=".Activity.AlamatProfile" />
-        <activity android:name=".Activity.AddAlamatActivity" />
-        <activity android:name=".Activity.LacakPesananDetail" />
-        <activity android:name=".Activity.UbahAlamatActivity" />
+        <activity android:name=".Activity.AddAlamatActivity"/>
+        <activity android:name=".Activity.LacakPesananDetail"/>
+        <activity android:name=".Activity.UbahAlamatActivity"/>
         <activity android:name=".Activity.DetailKategori" />
-        <activity android:name=".Activity.PromoActivity" />
+        <activity android:name=".Activity.PromoActivity"></activity>
+        <activity android:name=".Activity.SearchResultApotek">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity android:name=".Activity.SearchProduk" />
         <activity android:name=".Activity.SearchApotek" />
         <activity android:name=".Activity.FavoritActivity" />

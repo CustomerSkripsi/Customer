@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cvObatFavorite"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_cv_obat_favorite">
+
+        <ImageView
+            android:id="@+id/iv_picture_obat_favorite"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="#000000"/>
+
+        <TextView
+            android:id="@+id/tv_name_obat_favorite"
+            tools:text="Nama Obat"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_price_obat_favorite"
+            tools:text="harga obat"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</LinearLayout>

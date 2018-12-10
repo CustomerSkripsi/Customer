@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.SearchApotek;
-import mobi.garden.bottomnavigationtest.Activity.SearchProduk;
+import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.R;
 
 public class GlobalSearchAdapter extends RecyclerView.Adapter<GlobalSearchAdapter.GlobalSearchViewHolder> {
@@ -54,7 +53,7 @@ public class GlobalSearchAdapter extends RecyclerView.Adapter<GlobalSearchAdapte
                         i.putExtra("ApotekName", ProductName);
                         context.startActivity(i);
                     }else{
-                        Intent i = new Intent(context,SearchProduk.class);
+                        Intent i = new Intent(context,SearchResultApotek.class);
                         i.putExtra("ProdukName", ProductName);
                         context.startActivity(i);
 //                        intent.putExtra("PreregisOwnerID",u.getUserid());//UserID
