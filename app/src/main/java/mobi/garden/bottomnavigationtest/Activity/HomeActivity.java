@@ -95,7 +95,7 @@ public class HomeActivity extends BaseActivity {
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember;
     EditText etSearch;
     AlertDialog.Builder builder;
     AlertDialog dialog;
@@ -112,19 +112,17 @@ public class HomeActivity extends BaseActivity {
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
-        ivMember = findViewById(R.id.ivMember);
-
         if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
-
 
         InitiateSearchAdapter();
         ivHistory = findViewById(R.id.ivHistory);
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
         ivFavorit = findViewById(R.id.ivFavorit);
+        ivMember = findViewById(R.id.ivMember);
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -256,27 +254,47 @@ public class HomeActivity extends BaseActivity {
 
         setStatusBarGradiant(this);
         swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
-                    @Override public void run() {
+                    @Override
+                    public void run() {
                         // Berhenti berputar/refreshing
                         swiperefresh.setRefreshing(false);
-
-                // fungsi-fungsi lain yang dijalankan saat refresh berhenti
-                 pa.notifyDataSetChanged();
-            }
-        }, 3500));
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, Search_Activity.class));
+                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+                        pa.notifyDataSetChanged();
+                    }
+                },3500);
             }
         });
-        show_view(cardListBrand,pr,"http://pharmanet.apodoc.id/select_product_promo.php");
-        show_view(cardListBrand2,pr2,"http://pharmanet.apodoc.id/select_product_rekomendasi.php");
-        show_view(cardListBrand3,pr3,"http://pharmanet.apodoc.id/select_product_terlaris.php");
+
+
+//        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // Berhenti berputar/refreshing
+//                        swiperefresh.setRefreshing(false);
+//                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+//                        pa.notifyDataSetChanged();
+//                    }
+//                }, 3500));
+//                editText.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        startActivity(new Intent(HomeActivity.this, Search_Activity.class));
+//                    }
+//                });
+//            }
+//
+
+        show_view(cardListBrand, pr, "http://pharmanet.apodoc.id/select_product_promo.php");
+        show_view(cardListBrand2, pr2, "http://pharmanet.apodoc.id/select_product_rekomendasi.php");
+        show_view(cardListBrand3, pr3, "http://pharmanet.apodoc.id/select_product_terlaris.php");
 
 
         //slider
@@ -285,7 +303,9 @@ public class HomeActivity extends BaseActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
     }
+
 
     private void search(String s) {
         listRekomen = new ArrayList();
@@ -325,7 +345,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void InitiateSearchAdapter() {
-        globalSearchAdapter = new GlobalSearchAdapter(this);
+        globalSearchAdapter = new GlobalSearchAdapter(HomeActivity.this);
         rvSearchGlobal = findViewById(R.id.rvSearchglobal);
         rvSearchGlobal.setVisibility(View.GONE);
         rvSearchGlobal.setLayoutManager(new LinearLayoutManager(context));
@@ -364,14 +384,13 @@ public class HomeActivity extends BaseActivity {
 
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(HomeActivity.this);
         requestQueue.add(req);
     }
 
 
 
     private void showImageSlider(final View view) {
-
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.GET,
                 "http://pharmanet.apodoc.id/select_banner_owner.php",
@@ -425,7 +444,7 @@ public class HomeActivity extends BaseActivity {
         dots = new ImageView[dotscount];
 
         for(int z = 0; z < dotscount; z++){
-            dots[z] = new ImageView(this);
+            dots[z] = new ImageView(HomeActivity.this);
             dots[z].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -480,7 +499,6 @@ public class HomeActivity extends BaseActivity {
                     }
                 }
             });
-
         }
     }
     @Override
@@ -561,15 +579,14 @@ public class HomeActivity extends BaseActivity {
     }
 
     public  int getContentViewId () {
-
         return R.layout.activity_home;
-        }
+     }
 
     public  int getNavigationMenuItemId () {
             return R.id.navigation_home;
         }
 
-    public static void setStatusBarGradiant(Activity activity) {
+    public  void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
             Drawable background = activity.getResources().getDrawable(R.drawable.gradient);
@@ -580,4 +597,5 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
-    }
+
+}

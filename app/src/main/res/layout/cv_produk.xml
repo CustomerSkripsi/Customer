@@ -16,8 +16,6 @@
         android:layout_height="175dp"
         android:layout_weight="1"
         android:paddingBottom="5dp"
-        android:orientation="vertical"
-        android:paddingBottom="5dp"
         android:orientation="vertical">
 
 >

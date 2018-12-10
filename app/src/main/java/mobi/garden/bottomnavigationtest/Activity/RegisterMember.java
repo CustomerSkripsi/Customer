@@ -103,7 +103,7 @@ public class RegisterMember extends AppCompatActivity{
     String m_city, namaLogin, strkota = "";
     Boolean verifikasiHp, verifikasiEmail, verifikasiUser = false;
 
-    public static final String REGISTER_URL = "http://sayasehat.apodoc.id/registerMemberB2C.php";
+    public static final String REGISTER_URL = "http://sayasehat.apodoc.id/registerMember.php";
     public static final String LISTKOTA_URL = "http://sayasehat.apodoc.id/listKota.php";
     //Kode bebas
     private static final String SALT_LOGIN = "Century";
@@ -874,9 +874,9 @@ public class RegisterMember extends AppCompatActivity{
                             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, REGISTER_URL, objRegister,
                                     new Response.Listener<JSONObject>() {
                                         @Override
-
                                         public void onResponse(JSONObject response) {
                                             JSONArray users;
+                                            Log.d("hmm", "onResponse: ");
                                             try {
                                                 if (response.getString("status").equals("OK")) {
 
@@ -885,11 +885,11 @@ public class RegisterMember extends AppCompatActivity{
                                                         JSONObject obj = users.getJSONObject(i);
 
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
+                                                        Log.d("asdff", "onResponse: "+Relasi_CardNumber);
 
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
                                                         }else {
-
                                                             builder2.setMessage("Selamat Datang " + namaLogin.toUpperCase());
                                                             builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                 @Override
@@ -903,19 +903,16 @@ public class RegisterMember extends AppCompatActivity{
                                                             builder2.show();
                                                         }
                                                     }
-
-
                                                 }
                                             } catch (JSONException e1) {
                                                 e1.printStackTrace();
                                             }
-
                                         }
-                                    },
-                                    new Response.ErrorListener() {
+                                    }, new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            // Toast.makeText(Register.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                                            Toast.makeText(RegisterMember.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                                             Log.d("err2", "onErrorResponse: "+error.getMessage());
                                         }
                                     });
                             RequestQueue requestQueue = Volley.newRequestQueue(RegisterMember.this);
