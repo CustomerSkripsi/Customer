@@ -616,6 +616,7 @@ public class EditEMember extends AppCompatActivity {
 
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
                                                         Toast.makeText(EditEMember.this, "qwe", Toast.LENGTH_SHORT).show();
+
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
                                                         }else {
@@ -643,7 +644,7 @@ public class EditEMember extends AppCompatActivity {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            // Toast.makeText(Register.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                                             Toast.makeText(EditEMember.this,"aaa",Toast.LENGTH_LONG ).show();
                                         }
                                     });
                             RequestQueue requestQueue = Volley.newRequestQueue(EditEMember.this);

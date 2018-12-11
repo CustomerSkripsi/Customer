@@ -247,7 +247,7 @@ public class gantiPassword extends AppCompatActivity {
                                 objDetail.put("password",etKonfirmasiPassBaruGantiPass.getText().toString().trim());
                                 objDetail.put("member", member.get(SessionManagement.KEY_KODEMEMBER));
                                 objRegister.put("data", objDetail);
-                                Log.d("qwer", "qqqqqqqqqq");
+                                Log.d("qwer", "asdqwe");
 
                             }catch (JSONException e){
                                 e.printStackTrace();
@@ -260,10 +260,10 @@ public class gantiPassword extends AppCompatActivity {
                                         public void onResponse(JSONObject response) {
                                             JSONArray users;
                                             try {
-                                                Log.d("qwer1", "qqqqqqqqqq");
+                                                Log.d("qwer1", "q");
                                                 if (response.getString("status").equals("OK")) {
                                                     users = response.getJSONArray("result");
-                                                    Log.d("qwer", "qqqqqqqqqq");
+                                                    Log.d("qwer", "ccc");
                                                     for(int i = 0;i < users.length();i++)
                                                     {
                                                         JSONObject obj = users.getJSONObject(i);
