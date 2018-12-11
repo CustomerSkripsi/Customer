@@ -10,26 +10,47 @@
 
 
     //Search bar
-    <RelativeLayout
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/gradient"
-        >
+        android:background="@drawable/gradient">
+
+        <!--<include-->
+        <!--android:id="@+id/include"-->
+        <!--layout="@layout/user_search"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_centerVertical="true" />-->
+
 
         <include
             android:id="@+id/include"
-            layout="@layout/user_search"
+            layout="@layout/top_navbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSearchglobal"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true" />
+            android:layout_marginTop="56dp"
+            android:translationZ="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:listitem="@layout/dropdown" />
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
     //SwipeRefresh
@@ -162,7 +183,7 @@
                             app:srcCompat="@drawable/iconpromo" />
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/ivFavorit"
                             android:layout_width="60dp"
                             android:layout_height="65dp"
                             android:layout_weight="1"
@@ -219,6 +240,13 @@
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/iconkategori" />
+
+                        <ImageView
+                            android:id="@+id/ivLainlain"
+                            android:layout_width="10dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/iconlainlain"/>
                     </LinearLayout>
 
                 </LinearLayout>

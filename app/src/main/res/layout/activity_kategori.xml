@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:background="@color/white"
@@ -9,13 +10,100 @@
     tools:context="mobi.garden.bottomnavigationtest.Activity.HistoryActivity"
     >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar3"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:layout_height="50dp"
+        android:background="@drawable/gradient"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/tvSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_four_corner_background"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Search Kategori"
+            android:imeOptions="actionSearch"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:textColor="@color/searchText"
+            android:textColorHint="@color/searchHint"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivCart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_notifications_black_24dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rvSearchGlobal"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="7dp"-->
+        <!--android:layout_marginStart="7dp"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/tvtest"-->
+        <!--app:layout_constraintStart_toStartOf="@id/tvtest"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tvtest"-->
+        <!--tools:listitem="@layout/dropdown"-->
+        <!--android:translationZ="10dp">-->
+
+        <!--</android.support.v7.widget.RecyclerView>-->
+
+        <ImageView
+            android:id="@+id/ivCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/imageView"
+            android:layout_toLeftOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/tvtest"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_cart_home"
+            tools:ignore="VectorDrawableCompat" />
+
+        <com.nex3z.notificationbadge.NotificationBadge
+            android:id="@+id/badge"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:badgeBackground="@drawable/badge_bg_with_shadow"
+            app:layout_constraintStart_toStartOf="@+id/ivCart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:maxTextLength="3"></com.nex3z.notificationbadge.NotificationBadge>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/toolbar"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="?attr/actionBarTheme" />-->
 
     <!--<RelativeLayout-->
         <!--android:id="@+id/relativeLayout"-->

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "mobi.garden.bottomnavigationtest"
         minSdkVersion 21
@@ -17,6 +17,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            applicationIdSuffix ".debug"
         }
     }
 
@@ -33,8 +36,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //firebase
-    implementation 'com.google.firebase:firebase-core:16.0.5'
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
 
     implementation 'me.dm7.barcodescanner:zbar:1.9.8'
     implementation 'com.facebook.android:facebook-android-sdk:4.0.0'
@@ -60,5 +63,7 @@ dependencies {
     implementation 'com.nex3z:notification-badge:0.1.0'
     implementation files('src/libs/core-2.1.jar')
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    implementation "com.google.android.gms:play-services-location:16.0.0"
 }
 apply plugin: 'com.google.gms.google-services'

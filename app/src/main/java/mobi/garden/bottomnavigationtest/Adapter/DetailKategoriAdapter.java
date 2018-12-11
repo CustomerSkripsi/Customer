@@ -6,20 +6,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Model.ModelKategori;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
 public class DetailKategoriAdapter extends RecyclerView.Adapter<DetailKategoriAdapter.DetailKategoriViewHolder> {
     List<ModelKategori> modelKategoris;
+    List<ModelPromo> detailKategoriList = new ArrayList<>();
     Context context;
 
-    public DetailKategoriAdapter(List<ModelKategori> modelKategoris, Context context) {
-        this.modelKategoris = modelKategoris;
+    public DetailKategoriAdapter(List<ModelPromo> detailKategoriList, Context context) {
+        this.detailKategoriList = detailKategoriList;
         this.context = context;
     }
 
@@ -32,21 +40,40 @@ public class DetailKategoriAdapter extends RecyclerView.Adapter<DetailKategoriAd
 
     @Override
     public void onBindViewHolder(DetailKategoriViewHolder holder, int position) {
-        final ModelKategori m = modelKategoris.get(position);
-        //Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
-        holder.tvNamaProdukPromo.setText(m.CategoryName);
+        final ModelPromo m = detailKategoriList.get(position);
+        Picasso.with(context).load(m.getProductNameUrl()).into(holder.imgProduct, new Callback() {
+            @Override
+            public void onSuccess() { }
+            @Override
+            public void onError() {
+                holder.imgProduct.setImageResource(R.drawable.nopicture);
+            }
+        });
+        holder.tvNamaProdukPromo.setText(m.getPromoNameProduct());
+        holder.tvHargaCoret.setText("Rp. "+String.valueOf(m.getProductPriceAfterDC()));
+        holder.llproduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "kepencet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return modelKategoris.size();
+        return detailKategoriList.size();
     }
 
     public static class DetailKategoriViewHolder extends RecyclerView.ViewHolder{
-        TextView tvNamaProdukPromo;
+        TextView tvNamaProdukPromo,tvHargaCoret,tvHarga;
+        ImageView imgProduct;
+        LinearLayout llproduk;
         public DetailKategoriViewHolder(View itemView) {
             super(itemView);
             tvNamaProdukPromo = itemView.findViewById(R.id.tvNamaProdukPromo);
+            tvHargaCoret = itemView.findViewById(R.id.tvHargaCoret);
+            llproduk = itemView.findViewById(R.id.llproduk);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
         }
     }
 }

@@ -1,23 +1,31 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,7 +37,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,10 +48,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
-import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Slider.SliderIndicator;
 import mobi.garden.bottomnavigationtest.Slider.SliderPagerAdapter;
@@ -54,12 +63,17 @@ import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 public class HomeActivity extends BaseActivity {
     //Slider Image
     private SliderPagerAdapter mAdapter;
-    private SliderIndicator mIndicator;
-    private SliderView sliderView;
-    private LinearLayout mLinearLayout;
+    private SliderIndicator mIndicator;private SliderView sliderView;private LinearLayout mLinearLayout;
+
+    private int context_pilihan;
+    RecyclerView rvSearchGlobal;
+    List<String> listRekomen = new ArrayList<>();
+    List<String> listRekomenApotek = new ArrayList<>();
+    List<String> listRekomenProduct = new ArrayList<>();
 
     //obat adapter
     RequestQueue queue;
+    Context context;
     obat_adapter pa;
     RecyclerView cardListBrand;
     RecyclerView cardListBrand2;
@@ -72,41 +86,43 @@ public class HomeActivity extends BaseActivity {
 
     TextView editText;
     ViewPagerAdapter adapter;
+    String input;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     List<String>imageUrls = new ArrayList<>();
-    private int dotscount;
     private ImageView[] dots;
+    private static NotificationBadge mBadge;
+    GlobalSearchAdapter globalSearchAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo,ivMember;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember;
+    EditText etSearch;
     AlertDialog.Builder builder;
     AlertDialog dialog;
-    //String iv
-
-//    private String[] imageUrls = new String[]{
-//            "http://analisadaily.com/assets/image/news/big/2015/10/buah-buahan-terbaik-kaya-alkali-182507-1.jpg",
-//            "https://asset.kompas.com/crop/0x0:900x600/750x500/data/photo/2017/12/11/14051175721.jpg",
-//            "https://www.rimma.co/wp-content/uploads/-000//1/Banana3.jpg",
-//            "https://cdn.idntimes.com/content-images/post/20180226/che-lg-grande-2f06368abd39d78579ba163793d36535-ee6d92b3cb0b8679d93c8cce22a95ca0_600x400.jpg",
-//            "https://www.cantikbijak.com/wp-content/uploads/2017/07/000038-00_buah-yang-baik-untuk-ibu-hamil_macam-macam-buah_800x450_cc0-min.jpg"
-//    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        sliderView = (SliderView) findViewById(R.id.sliderView);
 //        mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 //        setupSlider();
+        rvSearchGlobal = findViewById(R.id.rvSearchglobal);
         builder = new AlertDialog.Builder(this);
         editText = (TextView) findViewById(R.id.editText);
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
-        ivMember = findViewById(R.id.ivMember);
+        if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
+        InitiateSearchAdapter();
         ivHistory = findViewById(R.id.ivHistory);
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
+        ivFavorit = findViewById(R.id.ivFavorit);
+        ivMember = findViewById(R.id.ivMember);
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +138,62 @@ public class HomeActivity extends BaseActivity {
         ivPromo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, PromoActivity.class));
+//              startActivity(new Intent(HomeActivity.this, PromoActivity.class));
+                Intent i = new Intent(getApplicationContext(),PromoActivity.class);
+                i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/ProductPromoAll.php?input=");
+                startActivity(i);
+            }
+        });
+
+        ivFavorit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),FavoritActivity.class);
+                i.putExtra("allfavorit","http://pharmanet.apodoc.id/customer/ProductFavoritAll.php?ProductName=");
+                startActivity(i);
+            }
+        });
+        ivCart = findViewById(R.id.ivCart);
+        ivCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this , CartActivity.class));
+            }
+        });
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                etSearch.setText("");
+                mBadge.setVisibility(View.VISIBLE);
+                rvSearchGlobal.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        etSearch = findViewById(R.id.tvSearch);
+        etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId== EditorInfo.IME_ACTION_SEARCH||actionId == EditorInfo.IME_ACTION_DONE){
+                    String input = etSearch.getText().toString();
+                    if(input.contains(" ")){input = input.replace(" ","%20"); }
+                    if(input.contains("+")){input = input.replace("+","%2B"); }
+                    if(input.contains("/")){input = input.replace("/","\\/"); }
+                    if(input.contains(",")){input = input.replace(",","%2C"); }
+                    Log.d("inputnya",input+"");
+                    if(context_pilihan==1){
+                        Intent i = new Intent(HomeActivity.this,SearchProduk.class);
+                        i.putExtra(SearchProduk.SEARCH_RESULT, input);
+                        startActivity(i);
+                    }else if(context_pilihan==2){
+                        //Intent i = new Intent(HomeActivity.this,);
+                    }
+                }
+                return false;
             }
         });
         ivMember.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +203,30 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
+                    rvSearchGlobal.setVisibility(View.GONE);
+//                    Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
+                }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
+                    //set ulang rekomendasinya
+                    Log.d("jumlah",etSearch.getText().toString());
+                    search(etSearch.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
+                    rvSearchGlobal.setVisibility(View.GONE);
+                }
+            }
+        });
         cardListBrand.setHasFixedSize(true);
         cardListBrand.setVisibility(View.VISIBLE);
         cardListBrand2.setHasFixedSize(true);
@@ -159,62 +253,144 @@ public class HomeActivity extends BaseActivity {
         Intent i=getIntent();
 
         setStatusBarGradiant(this);
-
         swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
 
-        swiperefresh.setOnRefreshListener(() -> new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-
-                // Berhenti berputar/refreshing
-                swiperefresh.setRefreshing(false);
-
-                // fungsi-fungsi lain yang dijalankan saat refresh berhenti
-                 pa.notifyDataSetChanged();
-            }
-        }, 3500));
-        editText.setOnClickListener(new View.OnClickListener() {
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, Search_Activity.class));
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Berhenti berputar/refreshing
+                        swiperefresh.setRefreshing(false);
+                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+                        pa.notifyDataSetChanged();
+                    }
+                },3500);
             }
         });
-        show_view(cardListBrand,pr,"http://pharmanet.apodoc.id/select_product_promo.php");
-        show_view(cardListBrand2,pr2,"http://pharmanet.apodoc.id/select_product_rekomendasi.php");
-        show_view(cardListBrand3,pr3,"http://pharmanet.apodoc.id/select_product_terlaris.php");
 
 
+//        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // Berhenti berputar/refreshing
+//                        swiperefresh.setRefreshing(false);
+//                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+//                        pa.notifyDataSetChanged();
+//                    }
+//                }, 3500));
+//                editText.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        startActivity(new Intent(HomeActivity.this, Search_Activity.class));
+//                    }
+//                });
+//            }
+//
+
+        show_view(cardListBrand, pr, "http://pharmanet.apodoc.id/select_product_promo.php");
+        show_view(cardListBrand2, pr2, "http://pharmanet.apodoc.id/select_product_rekomendasi.php");
+        show_view(cardListBrand3, pr3, "http://pharmanet.apodoc.id/select_product_terlaris.php");
 
 
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         showImageSlider(viewPager);
-
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
-
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
     }
 
 
-    //Slider
-//    private void setupSlider() {
-//        sliderView.setDurationScroll(800);
-//        List<Fragment> fragments = new ArrayList<>();
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/illuminare%20Brightening%20Solution.jpg"));
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/Hyco%20Care.jpg"));
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/Omepros%20april%20revisi-min.jpg"));
-//        fragments.add(FragmentSlider.newInstance("http://app.apotikcentury.id/public/data/images/slide/Nourish%20April%202018%20revisi%202.jpg"));
-//
-//        mAdapter = new SliderPagerAdapter(getSupportFragmentManager(), fragments);
-//        sliderView.setAdapter(mAdapter);
-//        mIndicator = new SliderIndicator(this, mLinearLayout, sliderView, R.drawable.indicator_circle);
-//        mIndicator.setPageCount(fragments.size());
-//        mIndicator.show();
-//    }
+    private void search(String s) {
+        listRekomen = new ArrayList();
+        int i = 0;
+        for(int j = 0;j<listRekomenApotek.size();j++){
+            if(listRekomenApotek.get(j).toLowerCase().contains(s.toLowerCase())){
+                listRekomen.add(listRekomenApotek.get(j));
+                Log.d("category",listRekomenApotek.get(j));
+                i++;
+                globalSearchAdapter.setContext_pilihan(1);
+                context_pilihan = 1;
+                if(i==10){
+                    break;
+                }
+            }
+        }
+        Log.d("jumlah_i",i+"");
+        if(i==0){
+            for(int j = 0;j<listRekomenProduct.size();j++){
+                if(listRekomenProduct.get(j).toLowerCase().contains(s.toLowerCase())){
+                    listRekomen.add(listRekomenProduct.get(j));
+                    Log.d("product",listRekomenProduct.get(j));
+                    i++;
+                    context_pilihan = 2;
+                    globalSearchAdapter.setContext_pilihan(2);
+                    if(i==10){
+                        break;
+                    }
+                }
+            }
+        }
+        //update recyclerview
+        globalSearchAdapter.setProductList(listRekomen);
+        rvSearchGlobal.setAdapter(globalSearchAdapter);
+        globalSearchAdapter.notifyDataSetChanged();
+        rvSearchGlobal.setVisibility(View.VISIBLE);
+    }
+
+    private void InitiateSearchAdapter() {
+        globalSearchAdapter = new GlobalSearchAdapter(HomeActivity.this);
+        rvSearchGlobal = findViewById(R.id.rvSearchglobal);
+        rvSearchGlobal.setVisibility(View.GONE);
+        rvSearchGlobal.setLayoutManager(new LinearLayoutManager(context));
+        setRekomen();
+    }
+
+    private void setRekomen(){
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/Searchglobal.php", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray resultApotek = response.getJSONArray("resultApotek");
+                    JSONArray resultProduct = response.getJSONArray("resultProduct");
+                    listRekomenProduct.clear();
+                    listRekomenApotek.clear();
+
+                    for (int i = 0; i<resultApotek.length(); i++)
+                    {
+                        JSONObject result = resultApotek.getJSONObject(i);
+                        listRekomenApotek.add(result.getString("SearchResult"));
+                    }
+                    for (int i = 0; i<resultProduct.length(); i++)
+                    {
+                        JSONObject result = resultProduct.getJSONObject(i);
+                        listRekomenProduct.add(result.getString("SearchResult"));
+                    }
+                    Log.d("ListCategory",listRekomenApotek.size()+"");
+                    Log.d("ListProduct",listRekomenProduct.size()+"");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(HomeActivity.this);
+        requestQueue.add(req);
+    }
+
+
 
     private void showImageSlider(final View view) {
-
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.GET,
                 "http://pharmanet.apodoc.id/select_banner_owner.php",
@@ -256,7 +432,7 @@ public class HomeActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Log.d("ERROR VOLLEY SLIDER"+error, error.getMessage());
+                        Log.d("ERROR VOLLEY SLIDER"+error, error.getMessage());
                     }
                 }
         );
@@ -268,7 +444,7 @@ public class HomeActivity extends BaseActivity {
         dots = new ImageView[dotscount];
 
         for(int z = 0; z < dotscount; z++){
-            dots[z] = new ImageView(this);
+            dots[z] = new ImageView(HomeActivity.this);
             dots[z].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -323,7 +499,6 @@ public class HomeActivity extends BaseActivity {
                     }
                 }
             });
-
         }
     }
     @Override
@@ -404,15 +579,14 @@ public class HomeActivity extends BaseActivity {
     }
 
     public  int getContentViewId () {
-
         return R.layout.activity_home;
-        }
+     }
 
     public  int getNavigationMenuItemId () {
             return R.id.navigation_home;
         }
 
-    public static void setStatusBarGradiant(Activity activity) {
+    public  void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
             Drawable background = activity.getResources().getDrawable(R.drawable.gradient);
@@ -423,4 +597,5 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
-    }
+
+}
