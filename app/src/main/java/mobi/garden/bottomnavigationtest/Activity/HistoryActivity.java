@@ -65,7 +65,7 @@ public class HistoryActivity extends BaseActivity {
 
         tabLayout = findViewById(R.id.tablayoutHistory);
         tabLayout.setupWithViewPager(viewPager);
-        setIcon();
+        //setIcon();
 
         setStatusBarGradiant(this);
 
@@ -128,9 +128,9 @@ public class HistoryActivity extends BaseActivity {
         }
     }
 
-    private void setIcon(){
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_check_circle_black_24dp);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_access_time_yellow_24dp);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_error_black_24dp);
-    }
+//    private void setIcon(){
+//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_check_circle_black_24dp);
+//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_access_time_yellow_24dp);
+//        tabLayout.getTabAt(2).setIcon(R.drawable.ic_error_black_24dp);
+//    }
 }

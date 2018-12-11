@@ -74,13 +74,6 @@ public class DetailObatHome extends AppCompatActivity {
         }
         else {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
             mFusedLocationClient.getLastLocation()
@@ -104,9 +97,18 @@ public class DetailObatHome extends AppCompatActivity {
         }
 
         btnInfoProduk = findViewById(R.id.btn_informasi_produk);
+        btnInfoProduk.setVisibility(View.GONE);
+        btnInfoProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailObatHome.this , InfromasiObat.class));
+                Intent i = new Intent(getApplicationContext(),InfromasiObat.class);
+                i.putExtra("produk",ProductName);
+                startActivity(i);
+            }
+        });
 //        btnBack=(Button)findViewById(R.id.btn_back_product);
 //        btnNext=(Button)findViewById(R.id.btn_next_product);
-
         iv_picture_obat2 = (ImageView) findViewById(R.id.iv_picture_obat2);
         tv_nama_obat2 = (TextView) findViewById(R.id.tv_nama_obat2);
 
@@ -115,7 +117,6 @@ public class DetailObatHome extends AppCompatActivity {
 
 
         Picasso.with(DetailObatHome.this).load(gambarObat).into(iv_picture_obat2);
-
 
         RvApotek = findViewById(R.id.rv_detail_obat);
         RvApotek.setHasFixedSize(true);
@@ -135,16 +136,7 @@ public class DetailObatHome extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
 
 
-        btnInfoProduk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DetailObatHome.this , InfromasiObat.class));
-                Intent i = new Intent(getApplicationContext(),InfromasiObat.class);
-                i.putExtra("produk",ProductName);
 
-                startActivity(i);
-            }
-        });
 
         show_view(RvApotek, pr,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName);
 
@@ -164,6 +156,7 @@ public class DetailObatHome extends AppCompatActivity {
                             JSONObject obj = apoteks.getJSONObject(i);
                             list.add(new apotek(obj.getString("OutletID")
                                     ,obj.getString("OutletName")
+                                    ,obj.getString("ProductName")
                                     ,obj.getInt("OutletProductPrice")
                                     ,obj.getInt("OutletProductStockQty")
                                     ,obj.getDouble("OutletLatitude")
@@ -171,10 +164,10 @@ public class DetailObatHome extends AppCompatActivity {
                                     ,obj.getInt("TotalRating")
                                     ,obj.getString("OutletOprOpen")
                                     ,obj.getString("OutletOprClose")));
-                            Log.d("rwarss", list.toString());
+                            Log.d("rwar", obj.toString());
                         } catch (JSONException e1) {
                             e1.printStackTrace();
-                            Toast.makeText(DetailObatHome.this, e1.getMessage(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(DetailObatHome.this, e1.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                     pa = new apotek_adapter(DetailObatHome.this,list,longitude,latitude);

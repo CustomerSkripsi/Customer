@@ -103,7 +103,7 @@ public class RegisterMember extends AppCompatActivity{
     String m_city, namaLogin, strkota = "";
     Boolean verifikasiHp, verifikasiEmail, verifikasiUser = false;
 
-    public static final String REGISTER_URL = "http://sayasehat.apodoc.id/registerMember.php";
+    public static final String REGISTER_URL = "http://sayasehat.apodoc.id/registerMemberB2C.php";
     public static final String LISTKOTA_URL = "http://sayasehat.apodoc.id/listKota.php";
     //Kode bebas
     private static final String SALT_LOGIN = "Century";

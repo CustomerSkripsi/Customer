@@ -2,6 +2,7 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ public class KategoriActivity extends BaseActivity {
     KategoriAdapter kAdapter;
     TextView tvSearch;
     String content;
+    ImageView ivCart;
 
     @Override
     public  int getContentViewId() {
@@ -56,6 +59,7 @@ public class KategoriActivity extends BaseActivity {
         context = KategoriActivity.this;
         rvKategori = findViewById(R.id.rvkategori);
         tvSearch = findViewById(R.id.tvSearch);
+        ivCart = findViewById(R.id.ivCart);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvKategori.setLayoutManager(llm);
@@ -94,7 +98,12 @@ public class KategoriActivity extends BaseActivity {
                 return false;
             }
         });
-
+        ivCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(KategoriActivity.this , CartActivity.class));
+            }
+        });
 
 
     }
