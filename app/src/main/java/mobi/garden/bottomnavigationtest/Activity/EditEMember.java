@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -98,7 +98,7 @@ public class EditEMember extends AppCompatActivity {
     String m_city, namaLogin, strkota = "";
     Boolean verifikasiHp;
 
-    public static final String EDIT_URL = "http://sayasehat.apodoc.id/Edit.php";
+    public static final String EDIT_URL = "http://sayasehat.apodoc.id/editB2C.php";
     public static final String LISTKOTA_URL = "http://sayasehat.apodoc.id/listKota.php";
     //Kode bebas
     private static final String SALT_LOGIN = "Century";

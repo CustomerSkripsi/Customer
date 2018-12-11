@@ -49,22 +49,16 @@ public class SearchResultApotek extends AppCompatActivity {
         setContentView(R.layout.activity_search_result_apotek);
 
         tvApotekName = findViewById(R.id.tv_ApotekNameResult);
-
-
         tvApotekAddress = findViewById(R.id.tv_address_apotek_result);
         //tvApotekAddress.setText(ap.getAddress());
         tvApotekhoneNumber = findViewById(R.id.tv_PhoneNumber);
-
         tvApotekOperationalHour = findViewById(R.id.tv_OperationalHourApotek);
-
         rbApotek = findViewById(R.id.rbApotek);
         //rbApotek.setRating(rbApotek.getRating());
         rbApotek.setEnabled(false);
-
         rvObatPromo = findViewById(R.id.rvProdukPromo);
         rvObatPromo.setHasFixedSize(true);
         rvObatPromo.setLayoutManager(new LinearLayoutManager(this));
-
         rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
         rvObatFavorite.setHasFixedSize(true);
         rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));

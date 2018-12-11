@@ -41,8 +41,6 @@ import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.cart_adapter2;
 import mobi.garden.bottomnavigationtest.BaseActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.Login;
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
@@ -372,7 +370,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 
                     //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
                     //adapter = new cart_adapter2(context,cartlist,Integer.parseInt(CustomerID));
-                    adapter = new cart_adapter2(context, cartlist, CustomerID);
+                    adapter = new cart_adapter2(context, cartlist, Integer.parseInt(CustomerID));
                     recyclerViewCartList.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -465,20 +463,18 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 //    }
 //}
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if(userlocal.getUserLoggedIn()){
-            not_empty.setVisibility(not_empty.VISIBLE);
-            show_cart(urlbawah, Integer.parseInt(CustomerID));
-
-        }
-        else {
-            not_empty.setVisibility(not_empty.GONE);
-            empty.setVisibility(empty.GONE);
-            not_login.setVisibility(not_login.VISIBLE);
-
-        }
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if(userlocal.getUserLoggedIn()){
+//            not_empty.setVisibility(not_empty.VISIBLE);
+//            show_cart(urlbawah, Integer.parseInt(CustomerID));
+//        }
+//        else {
+//            not_empty.setVisibility(not_empty.GONE);
+//            empty.setVisibility(empty.GONE);
+//            not_login.setVisibility(not_login.VISIBLE);
+//        }
+//    }
 }

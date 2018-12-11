@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +38,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.json.JSONArray;
@@ -49,7 +53,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.obat_adapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
@@ -64,20 +67,19 @@ public class HomeActivity extends BaseActivity {
     //Slider Image
     private SliderPagerAdapter mAdapter;
     private SliderIndicator mIndicator;private SliderView sliderView;private LinearLayout mLinearLayout;
-
     private int context_pilihan;
+
     RecyclerView rvSearchGlobal;
     List<String> listRekomen = new ArrayList<>();
     List<String> listRekomenApotek = new ArrayList<>();
     List<String> listRekomenProduct = new ArrayList<>();
+    List<String>imageUrls = new ArrayList<>();
 
     //obat adapter
     RequestQueue queue;
     Context context;
-    obat_adapter pa;
-    RecyclerView cardListBrand;
-    RecyclerView cardListBrand2;
-    RecyclerView cardListBrand3;
+    //obat_adapter pa;
+    RecyclerView cardListBrand,cardListBrand2,cardListBrand3;
     List<obat> pr = new ArrayList<>();
     List<obat> pr2 = new ArrayList<>();
     List<obat> pr3 = new ArrayList<>();
@@ -86,20 +88,22 @@ public class HomeActivity extends BaseActivity {
 
     TextView editText;
     ViewPagerAdapter adapter;
-    String input;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
-    List<String>imageUrls = new ArrayList<>();
     private int dotscount;
     private ImageView[] dots;
     private static NotificationBadge mBadge;
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember,ivLainlain;
     EditText etSearch;
     AlertDialog.Builder builder;
     AlertDialog dialog;
+    double longitude;
+    double latitude;
+    private FusedLocationProviderClient mFusedLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,8 +117,32 @@ public class HomeActivity extends BaseActivity {
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+                                longitude = location.getLongitude();
+                                latitude = location.getLatitude();
+                                Log.d("test123", longitude + "");
+                            } else {
+                                Toast.makeText(HomeActivity.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
 
-        ivMember = findViewById(R.id.ivMember);
 
         InitiateSearchAdapter();
 
@@ -122,7 +150,6 @@ public class HomeActivity extends BaseActivity {
         ivkategory = findViewById(R.id.ivKategori);
         ivPromo = findViewById(R.id.ivPromo);
         ivFavorit = findViewById(R.id.ivFavorit);
-        ivMember = findViewById(R.id.ivMember);
         ivMember = findViewById(R.id.ivMember);
         ivLainlain = findViewById(R.id.ivLainlain);
         ivHistory.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +173,6 @@ public class HomeActivity extends BaseActivity {
                 startActivity(i);
             }
         });
-
         ivFavorit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,6 +181,13 @@ public class HomeActivity extends BaseActivity {
                 startActivity(i);
             }
         });
+        ivLainlain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         ivCart = findViewById(R.id.ivCart);
         ivCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +207,7 @@ public class HomeActivity extends BaseActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
 
         etSearch = findViewById(R.id.tvSearch);
         etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
@@ -204,12 +238,7 @@ public class HomeActivity extends BaseActivity {
                 startActivity(new Intent(HomeActivity.this,MemberActivity.class));
             }
         });
-        ivLainlain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,CartApotekActivity.class));
-            }
-        });
+
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -235,15 +264,6 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-        cardListBrand.setHasFixedSize(true);
-        cardListBrand.setVisibility(View.VISIBLE);
-        cardListBrand2.setHasFixedSize(true);
-        cardListBrand2.setVisibility(View.VISIBLE);
-        cardListBrand3.setHasFixedSize(true);
-        cardListBrand3.setVisibility(View.VISIBLE);
-
-//        userLocalStore = new UserLocalStore(this);
-//        userLocalStore.getUserLoggedIn();
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         LinearLayoutManager llm2 = new LinearLayoutManager(this);
@@ -253,16 +273,16 @@ public class HomeActivity extends BaseActivity {
         llm2.setOrientation(LinearLayoutManager.HORIZONTAL);
         llm3.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        cardListBrand.setLayoutManager(llm);
-        cardListBrand2.setLayoutManager(llm2);
-        cardListBrand3.setLayoutManager(llm3);
+//        cardListBrand.setLayoutManager(llm);
+//        cardListBrand2.setLayoutManager(llm2);
+//        cardListBrand3.setLayoutManager(llm3);
 
         queue = Volley.newRequestQueue(this);
         Intent i=getIntent();
 
         setStatusBarGradiant(this);
-        swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
 
+        swiperefresh = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -272,37 +292,11 @@ public class HomeActivity extends BaseActivity {
                         // Berhenti berputar/refreshing
                         swiperefresh.setRefreshing(false);
                         // fungsi-fungsi lain yang dijalankan saat refresh berhenti
-                        pa.notifyDataSetChanged();
+                        //pa.notifyDataSetChanged();
                     }
                 },3500);
             }
         });
-
-
-//        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        // Berhenti berputar/refreshing
-//                        swiperefresh.setRefreshing(false);
-//                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
-//                        pa.notifyDataSetChanged();
-//                    }
-//                }, 3500));
-//                editText.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        startActivity(new Intent(HomeActivity.this, Search_Activity.class));
-//                    }
-//                });
-//            }
-//
-
-        show_view(cardListBrand, pr, "http://pharmanet.apodoc.id/select_product_promo.php");
-        show_view(cardListBrand2, pr2, "http://pharmanet.apodoc.id/select_product_rekomendasi.php");
-        show_view(cardListBrand3, pr3, "http://pharmanet.apodoc.id/select_product_terlaris.php");
 
 
         //slider
@@ -396,8 +390,6 @@ public class HomeActivity extends BaseActivity {
         requestQueue.add(req);
     }
 
-
-
     private void showImageSlider(final View view) {
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.GET,
@@ -427,9 +419,7 @@ public class HomeActivity extends BaseActivity {
 //                                mIndicator = new SliderIndicator(getActivity(), mLinearLayout, sliderView, R.drawable.indicator_circle);
 //                                mIndicator.setPageCount(fragmentList.size());
 //                                mIndicator.show();
-
                             }
-
                             Dots(imageUrls.size());
 
                         } catch (JSONException e) {
@@ -486,7 +476,6 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
-
     public class MyTimerTask extends TimerTask {
         @Override
         public void run() {
@@ -533,58 +522,6 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    public void show_view(final RecyclerView cardlist, final List<obat> list, String url){
-        final JsonObjectRequest rec= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                JSONArray obats = null;
-
-                try {
-                    obats = response.getJSONArray("result");
-
-                    for (int i = 0; i < obats.length(); i++) {
-                        try {
-                            cardlist.setVisibility(View.VISIBLE);
-                            JSONObject obj = obats.getJSONObject(i);
-
-                            list.add(new obat(
-                                    obj.getString("ProductID"),
-                                    obj.getString("ProductName"),
-                                    obj.getString("ProductImage"),
-                                    obj.getString("ProductDescription"),
-                                    obj.getString("ProductIndicationUsage"),
-                                    obj.getString("ProductIngredients"),
-                                    obj.getString("ProductDosage"),
-                                    obj.getString("ProductHowToUse"),
-                                    obj.getString("ProductPackage"),
-                                    obj.getString("ProductClassification"),
-                                    obj.getString("ProductRecipe"),
-                                    obj.getString("ProductContraindication"),
-                                    obj.getString("ProductStorage"),
-                                    obj.getString("PrincipalName"),
-                                    obj.getString("CategoryID")));
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
-                            Toast.makeText(HomeActivity.this, e1.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    pa = new obat_adapter(HomeActivity.this,list);
-                    cardlist.setAdapter(pa);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(HomeActivity.this, "No Connection", Toast.LENGTH_SHORT).show();
-            }
-        });
-        queue.add(rec);
-    }
 
     public  int getContentViewId () {
         return R.layout.activity_home;
@@ -592,7 +529,7 @@ public class HomeActivity extends BaseActivity {
 
     public  int getNavigationMenuItemId () {
             return R.id.navigation_home;
-        }
+    }
 
     public  void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -607,3 +544,39 @@ public class HomeActivity extends BaseActivity {
 
 
 }
+
+////        cardListBrand.setHasFixedSize(true);
+////        cardListBrand.setVisibility(View.VISIBLE);
+////        cardListBrand2.setHasFixedSize(true);
+////        cardListBrand2.setVisibility(View.VISIBLE);
+////        cardListBrand3.setHasFixedSize(true);
+////        cardListBrand3.setVisibility(View.VISIBLE);
+//
+////        userLocalStore = new UserLocalStore(this);
+////        userLocalStore.getUserLoggedIn();
+
+//        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // Berhenti berputar/refreshing
+//                        swiperefresh.setRefreshing(false);
+//                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+//                        pa.notifyDataSetChanged();
+//                    }
+//                }, 3500));
+//                editText.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        startActivity(new Intent(HomeActivity.this, Search_Activity.class));
+//                    }
+//                });
+//            }
+//
+
+//        show_view(cardListBrand, pr, "http://pharmanet.apodoc.id/select_product_promo.php");
+//        show_view(cardListBrand2, pr2, "http://pharmanet.apodoc.id/select_product_rekomendasi.php");
+//        show_view(cardListBrand3, pr3, "http://pharmanet.apodoc.id/select_product_terlaris.php");
+//

@@ -96,65 +96,65 @@
                 android:textColor="#FFF" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/image_button_2"
-            style="@android:style/Widget.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/whitetransparent"
-            android:gravity="left|center">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/image_button_2"-->
+            <!--style="@android:style/Widget.Button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="24dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginEnd="24dp"-->
+            <!--android:background="@drawable/whitetransparent"-->
+            <!--android:gravity="left|center">-->
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/logo_google_small" />
+            <!--<ImageView-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@drawable/logo_google_small" />-->
 
-            <TextView
-                android:id="@+id/image_button_2_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:gravity="center"
-                android:text="Google"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+            <!--<TextView-->
+                <!--android:id="@+id/image_button_2_text"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="100dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Google"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@android:color/black" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/btnGoogle"
-            style="@android:style/Widget.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/whitetransparent"
-            android:gravity="left|center">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/btnGoogle"-->
+            <!--style="@android:style/Widget.Button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="24dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginEnd="24dp"-->
+            <!--android:background="@drawable/whitetransparent"-->
+            <!--android:gravity="left|center">-->
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/logo_facebook_small" />
+            <!--<ImageView-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@drawable/logo_facebook_small" />-->
 
-            <TextView
-                android:id="@+id/btnFacebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
-                android:gravity="center"
-                android:text="Facebook"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+            <!--<TextView-->
+                <!--android:id="@+id/btnFacebook"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="90dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Facebook"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@android:color/black" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
 
     </LinearLayout>

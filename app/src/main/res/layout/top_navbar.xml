@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@drawable/gradient"
+    android:background="@drawable/toolbar"
     android:focusableInTouchMode="true">
 
         <EditText
@@ -28,6 +28,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></EditText>
 
+        <ImageView
+            android:id="@+id/ivCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/imageView"
+            android:layout_toLeftOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/tvtest"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_cart_home"
+            tools:ignore="VectorDrawableCompat" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -57,33 +72,7 @@
 
         <!--</android.support.v7.widget.RecyclerView>-->
 
-        <ImageView
-            android:id="@+id/ivCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_toStartOf="@+id/imageView"
-            android:layout_toLeftOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/tvtest"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cart_home"
-            tools:ignore="VectorDrawableCompat" />
 
-        <com.nex3z.notificationbadge.NotificationBadge
-            android:id="@+id/badge"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-
-            android:layout_marginTop="8dp"
-            app:badgeBackground="@drawable/badge_bg_with_shadow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxTextLength="3"
-            tools:layout_editor_absoluteX="320dp"></com.nex3z.notificationbadge.NotificationBadge>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -3,9 +3,9 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -18,8 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import mobi.garden.bottomnavigationtest.Session.SessionManagement;
-import mobi.garden.bottomnavigationtest.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +25,9 @@ import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class EditLupaPasswordActivity extends AppCompatActivity {
 
@@ -43,7 +44,7 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
 
     //session
     SessionManagement session;
-    public static final String EDITLUPAPASSWORD_URL = "http://sayasehat.apodoc.id/editPassLupaPass.php";
+    public static final String EDITLUPAPASSWORD_URL = "http://sayasehat.apodoc.id/editPassLupaPassB2C.php";
 
     String Relasi_CardNumber;
     String nama,member,noHP,username,password;
