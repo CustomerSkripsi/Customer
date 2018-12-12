@@ -141,7 +141,7 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
                                 objDetail.put("password",etKonfirmasiPasswordLupaPass.getText().toString().trim());
                                 objDetail.put("member", member);
                                 objRegister.put("data", objDetail);
-
+                                Log.d("data1", objDetail.toString());
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
