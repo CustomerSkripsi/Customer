@@ -141,7 +141,7 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
                                 objDetail.put("password",etKonfirmasiPasswordLupaPass.getText().toString().trim());
                                 objDetail.put("member", member);
                                 objRegister.put("data", objDetail);
-                                Log.d("data1", objDetail.toString());
+//                                Log.d("data1", objDetail.toString());
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
@@ -153,17 +153,17 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
                                         public void onResponse(JSONObject response) {
                                             JSONArray users;
                                             try {
-                                                Log.d("qwer", "msk");
+//                                                Log.d("qwer", "msk");
                                                 if (response.getString("status").equals("OK")) {
 
                                                     users = response.getJSONArray("result");
-                                                    Log.d("qwer1", "msk1");
+//                                                    Log.d("qwer1", "msk1");
 
                                                     for(int i = 0;i < users.length();i++){
                                                         JSONObject obj = users.getJSONObject(i);
 
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
-                                                        Log.d("qwer2", Relasi_CardNumber);
+//                                                        Log.d("qwer2", Relasi_CardNumber);
 
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
