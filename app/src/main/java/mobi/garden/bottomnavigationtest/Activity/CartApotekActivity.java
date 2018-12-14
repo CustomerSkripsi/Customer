@@ -341,11 +341,11 @@ public class CartApotekActivity extends AppCompatActivity {
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
                 String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
-        show_cart(urlbawahs,1);
+        show_cart(urlbawahs,"8181200006");
     }
 
-    public static void show_cart(String urlbawah, int CustomerID) {
-        JsonObjectRequest rec = new JsonObjectRequest(urlbawah+CustomerID, null, new Response.Listener<JSONObject>() {
+    public static void show_cart(String urlbawah, String memberID) {
+        JsonObjectRequest rec = new JsonObjectRequest(urlbawah+memberID, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray products = null;
@@ -379,8 +379,8 @@ public class CartApotekActivity extends AppCompatActivity {
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
                 mBadge.setNumber(count);
-                Toast.makeText(context, cartList.size()+"sdah", Toast.LENGTH_SHORT).show();
-                adapterRvBelow = new cart_adapter(context,cartList,1);
+                Toast.makeText(context, cartList.size()+"sudah", Toast.LENGTH_SHORT).show();
+                adapterRvBelow = new cart_adapter(context,cartList);
                 recyclerViewCartList.setAdapter(adapterRvBelow);
             }
         }, new Response.ErrorListener() {
@@ -472,7 +472,7 @@ public class CartApotekActivity extends AppCompatActivity {
         }
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
-        adapterRvBelow = new cart_adapter(context,cartList,Integer.parseInt(CustomerID));
+        adapterRvBelow = new cart_adapter(context,cartList);
         recyclerViewCartList.setAdapter(adapterRvBelow);
     }
 
