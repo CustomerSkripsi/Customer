@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -69,7 +71,18 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
                     //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
                 }
             });
+
+        holder.llproduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,DetailObatHome.class);
+                i.putExtra("ProductName",mp.getPromoNameProduct());
+                context.startActivity(i);
+            }
+        });
+
 //        }
+
        // Picasso.with(context).load("http://pharmaapp.pharmanet.co.id/public/data/images/product/zoom/0100175.jpg").into(holder.imgProduct);
     }
 

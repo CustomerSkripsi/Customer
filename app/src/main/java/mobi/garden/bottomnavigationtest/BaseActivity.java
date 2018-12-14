@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import mobi.garden.bottomnavigationtest.Activity.CartActivity;
-import mobi.garden.bottomnavigationtest.Activity.HistoryActivity;
 import mobi.garden.bottomnavigationtest.Activity.HomeActivity;
 import mobi.garden.bottomnavigationtest.Activity.KategoriActivity;
 import mobi.garden.bottomnavigationtest.Activity.MyMenuActivity;
@@ -24,10 +24,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         navigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        navigationView.setOnNavigationItemSelectedListener(this);
+//        navigationView.setOnNavigationItemSelectedListener(this);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
+
+        bottomNavigationView.setVisibility(View.GONE);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
     }
@@ -60,17 +62,22 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
             } else if(itemId == R.id.navigation_notifications2){
                 startActivity(new Intent(this, MyMenuActivity.class));
             }
+            navigationView.setVisibility(View.GONE);
             finish();
         }, 50);
+        navigationView.setVisibility(View.GONE);
         return true;
+
     }
     private void updateNavigationBarState(){
         int actionId = getNavigationMenuItemId();
-        selectBottomNavigationBarItem(actionId);
+       // selectBottomNavigationBarItem(actionId);
     }
     void selectBottomNavigationBarItem(int itemId) {
         MenuItem item = navigationView.getMenu().findItem(itemId);
+        navigationView.setVisibility(View.GONE);
         item.setChecked(true);
+        navigationView.setVisibility(View.GONE);
     }
     public abstract int getContentViewId();
     public abstract int getNavigationMenuItemId();

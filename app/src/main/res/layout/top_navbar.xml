@@ -13,7 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="17dp"
             android:background="@drawable/edit_four_corner_background"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:fontFamily="sans-serif-light"
@@ -39,7 +39,7 @@
             android:layout_toStartOf="@+id/imageView"
             android:layout_toLeftOf="@+id/imageView"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/tvtest"
+            app:layout_constraintStart_toEndOf="@+id/tvSearch"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cart_home"
             tools:ignore="VectorDrawableCompat" />

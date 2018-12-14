@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -31,11 +32,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.KategoriAdapter;
-import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.Model.ModelKategori;
 import mobi.garden.bottomnavigationtest.R;
 
-public class KategoriActivity extends BaseActivity {
+public class KategoriActivity extends AppCompatActivity {
     Context context;
     RecyclerView rvKategori, rvDetailKategori;
     String url, kategoriname, tempNamekategoriname;
@@ -45,12 +45,6 @@ public class KategoriActivity extends BaseActivity {
     String content;
     ImageView ivCart;
 
-    @Override
-    public  int getContentViewId() {
-        return R.layout.activity_kategori;
-    }
-    @Override
-    public int getNavigationMenuItemId() { return R.id.navigation_dashboard; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

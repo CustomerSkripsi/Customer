@@ -21,11 +21,12 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
+            android:layout_marginTop="50dp"
             android:id="@+id/logo"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo_century" />
+            android:background="@drawable/logo_century_putih"/>
     </LinearLayout>
 
     <LinearLayout
@@ -166,14 +167,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="1dp"
-        android:background="@drawable/whitetransparent"
+        android:background="@drawable/whitetransparent2"
         android:gravity="center|bottom"
         android:onClick="lupa_Pass"
         android:padding="5dp"
         android:text="Belum memiliki akun? DAFTAR"
         android:textAlignment="center"
-        android:textColor="#000"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="OnClick"
         tools:layout_editor_absoluteX="0dp" />
