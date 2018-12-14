@@ -29,7 +29,6 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.CONFIG;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
@@ -143,7 +142,7 @@ public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapte
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartApotekActivity.initiateBelowAdapter();
+                              //  CartApotekActivity.initiateBelowAdapter();
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();

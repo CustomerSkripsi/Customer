@@ -95,7 +95,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 userLocalStore.storeUserData(new User(
                                         response.getString("CustomerUsername")
                                         , response.getString("CustomerID")
-                                ));
+                                )
+                                );
 
                                 dialogProgress.hideDialog();
                                 Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();

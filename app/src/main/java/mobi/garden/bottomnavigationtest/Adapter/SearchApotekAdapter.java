@@ -1,8 +1,11 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +15,23 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 
 public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapter.SearchApotekViewHolder> {
     List<apotek> apoteks;
     Context context;
+    double userLong;
+    double userlat;
+
+    public SearchApotekAdapter(List<apotek> apoteks, Context context, double userLong, double userlat) {
+        this.apoteks = apoteks;
+        this.context = context;
+        this.userLong = userLong;
+        this.userlat = userlat;
+    }
+
 
     public SearchApotekAdapter(List<apotek> apoteks, Context context) {
         this.apoteks = apoteks;
@@ -46,6 +60,34 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
 //                //i.putExtra("ProductName",);
 //            }
 //        });
+
+
+        Location loc1 = new Location("");
+        loc1.setLatitude(userlat);
+        loc1.setLongitude(userLong);
+
+        Location loc2 = new Location("");
+        loc2.setLatitude(ap.latitude);
+        loc2.setLongitude(ap.longitude);
+        double distanceInMeters = loc1.distanceTo(loc2)/1000;
+        Log.d("Jarak", distanceInMeters+"");
+        if(userLong != 0 && userlat !=0)
+        {
+            holder.tvJarak.setText(String.format("%.1f",distanceInMeters)+" KM");
+        }
+        else
+        {
+            holder.tvJarak.setText("0 KM");
+        }
+
+        holder.llapotek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,SearchResultApotek.class);
+                i.putExtra("ApotekName", ap.getNama_apotek());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -54,13 +96,14 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
     }
 
     public class SearchApotekViewHolder extends RecyclerView.ViewHolder{
-        TextView tvnamaapotek, tvJamOperasional;
+        TextView tvnamaapotek, tvJamOperasional,tvJarak;
         LinearLayout llapotek;
         RatingBar rbApotek;
         public SearchApotekViewHolder(View itemView){
             super(itemView);
             tvnamaapotek = itemView.findViewById(R.id.tvnamaapotek);
             tvJamOperasional = itemView.findViewById(R.id.tvJamOperasional);
+            tvJarak = itemView.findViewById(R.id.tvJarak);
             llapotek = itemView.findViewById(R.id.llApotek);
             rbApotek = itemView.findViewById(R.id.rbApotek);
         }

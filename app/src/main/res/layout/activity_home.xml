@@ -34,7 +34,9 @@
             android:id="@+id/include"
             layout="@layout/top_navbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="59dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="1dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSearchglobal"
@@ -202,6 +204,7 @@
                     android:background="@drawable/border"
                     android:orientation="vertical"
                     android:paddingTop="5dp"
+                    android:paddingBottom="20dp"
                     android:layout_marginTop="10dp">
 
                     <TextView
@@ -275,20 +278,17 @@
 
                 <!--</RelativeLayout>-->
 
-                <LinearLayout
-                    android:id="@+id/ll_rekomendasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/border">
+                //ProdukTerlaris
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_cv_obat_promo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+                <LinearLayout
+                    android:id="@+id/ll_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="10dp">
 
                     <!--<RelativeLayout-->
                     <!--android:layout_width="match_parent"-->
@@ -315,16 +315,14 @@
 
                     <!--</RelativeLayout>-->
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_cv_obat_rekomendasi"
+                    <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp">
-                    </android.support.v7.widget.RecyclerView>
-
+                        android:layout_height="240dp"
+                        android:layout_margin="20dp"
+                        app:srcCompat="@drawable/sayasehat" />
                 </LinearLayout>
 
-                //ProdukTerlaris
                 <LinearLayout
                     android:id="@+id/ll_terlaris"
                     android:layout_width="match_parent"
@@ -376,12 +374,14 @@
 
 
     //NavbarBottom
+
     <include
         android:id="@+id/navigation"
         layout="@layout/element_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        />
+        android:layout_marginBottom="2dp" />
 
 </RelativeLayout>

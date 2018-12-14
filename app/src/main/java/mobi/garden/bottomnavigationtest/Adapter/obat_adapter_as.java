@@ -1,7 +1,6 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,22 +25,23 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.Activity.InformasiObatAs;
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
-import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Model.obat;
+import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatViewHolder> {
 
     List<obat> obatlist;
     List<obat> cartlist;
-    Context context;
-    String CustomerID;
+    Context context;//String CustomerID;
     static DecimalFormat df;
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
 
     UserLocalStore userLocalStore;
     public obat_adapter_as(Context c, List<obat> obatlist, List<obat> cartlist) {
@@ -66,9 +66,15 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
     @Override
     public void onBindViewHolder(obat_adapter_as.obatViewHolder holder, int position) {
         final obat pr = obatlist.get(position);
-        userLocalStore  = new UserLocalStore(context);
-        User currUser = userLocalStore.getLoggedInUser();
-        CustomerID = currUser.getUserID();
+//        userLocalStore  = new UserLocalStore(context);
+//        User currUser = userLocalStore.getLoggedInUser();
+//        CustomerID = currUser.getUserID();
+
+        session = new SessionManagement(context);
+        login = session.getMemberDetails();
+        userName= login.get(SessionManagement.USERNAME);
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
+
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
@@ -156,7 +162,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartApotekActivity.initiateBelowAdapter();
+                                //CartApotekActivity.initiateBelowAdapter();
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();

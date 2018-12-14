@@ -1,6 +1,8 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,8 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -38,6 +44,30 @@ public class FavoritAdapter extends RecyclerView.Adapter<FavoritAdapter.FavoritV
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
         holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
 
+        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
+            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+//        if(mp.getProductNameUrl().equalsIgnoreCase("null")){
+//            Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+//        }else {
+            Picasso.with(context).load(mp.getProductNameUrl()).into(holder.imgProduct, new Callback() {
+                @Override
+                public void onSuccess() {}
+                @Override
+                public void onError() {
+                    holder.imgProduct.setImageResource(R.drawable.nopicture);
+                    //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+                }
+            });
+        holder.llproduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,DetailObatHome.class);
+                i.putExtra("ProductName",mp.getPromoNameProduct());
+                context.startActivity(i);
+            }
+        });
+//        }
     }
 
     @Override

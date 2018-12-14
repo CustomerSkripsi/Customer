@@ -18,7 +18,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@drawable/gradient"
+        android:background="@color/blued"
         android:orientation="horizontal">
 
         <ImageView
@@ -39,12 +39,15 @@
             android:src="@drawable/ic_people"></de.hdodenhof.circleimageview.CircleImageView>
 
         <ImageView
-            android:id="@+id/ivEditPhoto"
+            android:id="@+id/ivEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
             android:paddingRight="10dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/ic_edit"
+            android:backgroundTint="@color/white"/>
     </LinearLayout>
 
     <TextView
@@ -54,7 +57,7 @@
         android:layout_gravity="center"
         android:enabled="false"
         android:gravity="center"
-        android:background="@drawable/gradient"
+        android:background="@color/blued"
         android:textSize="16dp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -195,7 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/whitetransparent"
+                android:background="@color/white"
                 android:drawableLeft="@drawable/ic_settings_black_24dp"
                 android:drawablePadding="6dp"
                 android:gravity="left|center"
@@ -203,13 +206,14 @@
                 android:padding="6dp"
                 android:text="Ubah Password"
                 android:textColor="#000"
+                android:layout_margin="5dp"
                 android:id="@+id/btnEditPass"
                 />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/whitetransparent"
+                android:background="@color/white"
                 android:drawableLeft="@drawable/ic_exit_to_app_black_24dp"
                 android:drawablePadding="6dp"
                 android:gravity="left|center"
@@ -217,6 +221,7 @@
                 android:padding="6dp"
                 android:text="log out"
                 android:textColor="#000"
+                android:layout_margin="5dp"
                 android:id="@+id/btnLogout"
                 />
 

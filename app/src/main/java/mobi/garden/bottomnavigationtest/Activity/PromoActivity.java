@@ -105,8 +105,6 @@ public class PromoActivity extends AppCompatActivity {
         dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(PromoActivity.this, HomeActivity.class);
-                startActivity(i);
                 finish();
             }
         });

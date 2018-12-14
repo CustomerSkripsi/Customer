@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mobi.garden.bottomnavigationtest">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_century"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".Activity.HalamanAwalActivity">
@@ -24,7 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.Search_Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Activity.KategoriActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -53,19 +53,26 @@
         <activity android:name=".Activity.ProfileCustomerActivity" />
         <activity android:name=".Activity.EmailProfile" />
         <activity android:name=".Activity.AlamatProfile" />
-        <activity android:name=".Activity.AddAlamatActivity" />
-        <activity android:name=".Activity.LacakPesananDetail" />
-        <activity android:name=".Activity.UbahAlamatActivity" />
+        <activity android:name=".Activity.AddAlamatActivity"/>
+        <activity android:name=".Activity.LacakPesananDetail"/>
+        <activity android:name=".Activity.UbahAlamatActivity"/>
+        <activity android:name=".Activity.DetailKategori" />
+        <activity android:name=".Activity.SearchResultApotek">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".Activity.SearchProduk" />
+        <activity android:name=".Activity.SearchApotek" />
+        <activity android:name=".Activity.FavoritActivity" />
         <activity android:name=".Activity.LupaPass" />
         <activity android:name=".Activity.MemberActivity" />
         <activity android:name=".Activity.RegisterMember" />
         <activity android:name=".Activity.EditLupaPasswordActivity" />
-        <activity android:name=".Activity.gantiPassword"></activity>
-        <activity android:name=".Activity.DetailKategori" />
-        <activity android:name=".Activity.PromoActivity" />
-        <activity android:name=".Activity.SearchProduk" />
-        <activity android:name=".Activity.SearchApotek" />
-        <activity android:name=".Activity.FavoritActivity"></activity>
+        <activity android:name=".Activity.gantiPassword" />
+        <activity android:name=".Activity.EditEMember"></activity>
     </application>
 
 </manifest>

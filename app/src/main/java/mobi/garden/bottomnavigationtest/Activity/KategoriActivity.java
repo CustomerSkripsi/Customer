@@ -2,7 +2,9 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -12,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +32,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.KategoriAdapter;
-import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.Model.ModelKategori;
 import mobi.garden.bottomnavigationtest.R;
 
-public class KategoriActivity extends BaseActivity {
+public class KategoriActivity extends AppCompatActivity {
     Context context;
     RecyclerView rvKategori, rvDetailKategori;
     String url, kategoriname, tempNamekategoriname;
@@ -41,13 +43,8 @@ public class KategoriActivity extends BaseActivity {
     KategoriAdapter kAdapter;
     TextView tvSearch;
     String content;
+    ImageView ivCart;
 
-    @Override
-    public  int getContentViewId() {
-        return R.layout.activity_kategori;
-    }
-    @Override
-    public int getNavigationMenuItemId() { return R.id.navigation_dashboard; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +53,7 @@ public class KategoriActivity extends BaseActivity {
         context = KategoriActivity.this;
         rvKategori = findViewById(R.id.rvkategori);
         tvSearch = findViewById(R.id.tvSearch);
+        ivCart = findViewById(R.id.ivCart);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvKategori.setLayoutManager(llm);
@@ -94,7 +92,12 @@ public class KategoriActivity extends BaseActivity {
                 return false;
             }
         });
-
+        ivCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(KategoriActivity.this , CartActivity.class));
+            }
+        });
 
 
     }
