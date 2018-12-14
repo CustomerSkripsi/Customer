@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        //new LoadSuggestion().execute();
+//        new LoadSuggestion().execute();
         View myLayout = findViewById( R.id.test );
         TextView textView = myLayout.findViewById(R.id.tvtest);
         textView.setOnClickListener(new View.OnClickListener() {
