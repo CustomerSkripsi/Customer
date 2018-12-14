@@ -124,6 +124,8 @@ public class CartApotekActivity extends AppCompatActivity {
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         context = getApplicationContext();
 
+        Toast.makeText(this, memberID + "", Toast.LENGTH_SHORT).show();
+
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setCurrencySymbol("Rp. ");
@@ -358,7 +360,7 @@ public class CartApotekActivity extends AppCompatActivity {
                 count=0;
                 totalPrice=0;
                 for (int i = 0; i < products.length(); i++) {
-                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
                     try {
                         recyclerViewCartList.setVisibility(View.VISIBLE);
                         JSONObject obj = products.getJSONObject(i);

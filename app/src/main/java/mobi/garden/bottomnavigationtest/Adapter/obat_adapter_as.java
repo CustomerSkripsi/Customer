@@ -41,6 +41,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
     static DecimalFormat df;
     SessionManagement session;
     HashMap<String, String> login;
+
     public static String CustomerID,memberID, userName;
 
     UserLocalStore userLocalStore;

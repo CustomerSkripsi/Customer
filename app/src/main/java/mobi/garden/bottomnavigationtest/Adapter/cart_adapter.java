@@ -54,7 +54,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     SessionManagement session;
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
-    static LinearLayout empty, not_empty, not_login;
+
 
     public cart_adapter(Context context, List<obat> cartList) {
         this.context = context;
@@ -86,11 +86,11 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         holder.tvOutletStock.setText(product.getOutletProductStockQty() +"");
         holder.tvCartProductPrice.setText(df.format(product.getCartProductPrice()) + "");
         holder.edtQty.setText(product.getCartProductQty() + "");
-
-        userLocalStore  = new UserLocalStore(context);
-        User currUser = userLocalStore.getLoggedInUser();
-        CustomerID = currUser.getUserID();
-
+//
+//        userLocalStore  = new UserLocalStore(context);
+//        User currUser = userLocalStore.getLoggedInUser();
+//        CustomerID = currUser.getUserID();
+//
 
 
         holder.edtQty.setOnEditorActionListener(new DoneOnEditorActionListener() {
@@ -145,7 +145,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 
                 if (product.cartProductQty==0) {
                     Log.d("prdId",cartList.get(position).productID+"");
-                    delete(cartList.get(position).productID, cartList.get(position),Integer.parseInt(CustomerID));
+                    delete(cartList.get(position).productID, cartList.get(position),memberID);
                 }else {
                     //ubah(cartList.get(position).productID, --cartList.get(position).cartProductQty,Integer.parseInt(CustomerID));
                     holder.edtQty.setText(--product.cartProductQty+"");
@@ -276,20 +276,20 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     }
 
 
-    public void delete (final String product_id, final obat removedProduct, final int CustomerID){
+    public void delete (final String product_id, final obat removedProduct, final String memberID){
 
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("ProductID", product_id);
-            objDetail.put("CustomerID", CustomerID);
+            objDetail.put("CustomerID", memberID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/deleteCartCustomer.php", objAdd,
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/deleteCartCustomer.php", objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
 
