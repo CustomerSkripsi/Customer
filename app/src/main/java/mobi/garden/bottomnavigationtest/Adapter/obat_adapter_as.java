@@ -39,12 +39,13 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
     List<obat> cartlist;
     Context context;//String CustomerID;
     static DecimalFormat df;
+
+    //login
     SessionManagement session;
     HashMap<String, String> login;
-
     public static String CustomerID,memberID, userName;
 
-    UserLocalStore userLocalStore;
+//    UserLocalStore userLocalStore;
     public obat_adapter_as(Context c, List<obat> obatlist, List<obat> cartlist) {
         this.obatlist = obatlist;
         this.context = c;
@@ -54,6 +55,8 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
     public obat_adapter_as( List<obat> obatlist , Context context) {
         this.obatlist = obatlist;
         this.context = context;
+        this.memberID = CustomerID;
+        session = new SessionManagement(context);
     }
 
 
