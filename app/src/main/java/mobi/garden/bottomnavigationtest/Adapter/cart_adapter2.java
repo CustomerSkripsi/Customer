@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,23 +29,31 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
-import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Model.cart;
+import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewHolder> {
 
     Context context;
     List<cart> cartList;
     int userID;
-    String CustomerID;
+    //String CustomerID;
     int hargaProduct;
     static DecimalFormat df;
     boolean isStoppedClicked = true;
+
+    //login
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
+    static LinearLayout empty, not_empty, not_login;
+
 
     UserLocalStore userLocalStore;
     public cart_adapter2(Context context, List<cart> cartList, int userID) {
@@ -64,10 +73,10 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         final cart product = cartList.get(position);
         hargaProduct = product.getCartProductPrice() * product.getCartProductQty();
 
-
-        userLocalStore  = new UserLocalStore(context);
-        User currUser = userLocalStore.getLoggedInUser();
-        CustomerID = currUser.getUserID();
+//
+//        userLocalStore  = new UserLocalStore(context);
+//        User currUser = userLocalStore.getLoggedInUser();
+//        CustomerID = currUser.getUserID();
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
@@ -98,14 +107,14 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
                         holder.tvCartProductPrice.setText(df.format(hargaProduct)+"");
 
                         Toast.makeText(context, "Stock barang hanya "+  product.outletProductStockQty, Toast.LENGTH_SHORT).show();
-                        ubah(cartList.get(position).productID, product.cartProductQty, Integer.parseInt(CustomerID));
+                        ubah(cartList.get(position).productID, product.cartProductQty, memberID);
                     }
                     else {
                         product.cartProductQty = Integer.parseInt(holder.edtQty.getText().toString());
                         hargaProduct= product.cartProductQty * product.cartProductPrice;
                         holder.tvCartProductPrice.setText(df.format(hargaProduct)+"");
 
-                        ubah(cartList.get(position).productID, product.cartProductQty, Integer.parseInt(CustomerID));
+                        ubah(cartList.get(position).productID, product.cartProductQty, memberID);
                     }
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -166,7 +175,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         @Override
         protected Void doInBackground(cart... carts) {
             cart product =carts[0];
-            ubah(product.productID, product.cartProductQty, Integer.parseInt(CustomerID));
+            ubah(product.productID, product.cartProductQty, memberID);
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
             return null;
         }
@@ -197,7 +206,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         @Override
         protected Void doInBackground(cart... carts) {
             cart product = carts[0];
-            ubah(product.productID, product.cartProductQty, Integer.parseInt(CustomerID));
+            ubah(product.productID, product.cartProductQty, memberID);
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
 
             return null;
@@ -241,14 +250,14 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
     }
 
 
-    public void ubah(String id, int qty, int CustomerID) {
+    public void ubah(String id, int qty, String memberID) {
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("Id_Product", id);
             objDetail.put("Qty", qty);
-            objDetail.put("CustomerID",CustomerID);
+            objDetail.put("CustomerID",memberID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
         } catch (JSONException e1) {

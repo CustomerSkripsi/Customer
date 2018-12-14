@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,30 +29,38 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
-import mobi.garden.bottomnavigationtest.Model.session_obat;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHolder>{
 
     Context context;
     List<obat> cartList;
-    int userID;
-    String CustomerID;
+    //int userID;
+    //String CustomerID;
     boolean isStoppedClicked = true;
     DecimalFormat df;
-    session_obat session;
+    //session_obat session;
     UserLocalStore userLocalStore;
-    public cart_adapter(Context context, List<obat> cartList, int CustomerID) {
+
+    //login
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
+    static LinearLayout empty, not_empty, not_login;
+
+    public cart_adapter(Context context, List<obat> cartList) {
         this.context = context;
         this.cartList = cartList;
-        this.userID = CustomerID;
-        session = new session_obat(context);
+        this.memberID = CustomerID;
+        session = new SessionManagement(context);
     }
 
     @Override
@@ -95,11 +104,11 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                         product.cartProductQty = product.outletProductStockQty;
                         holder.edtQty.setText(product.cartProductQty+"");
                         Toast.makeText(context, "Stock barang hanya "+  product.outletProductStockQty, Toast.LENGTH_SHORT).show();
-                        ubah(cartList.get(position).productID, product.cartProductQty, userID);
+                        ubah(cartList.get(position).productID, product.cartProductQty, memberID);
                     }
                     else {
                         product.cartProductQty = Integer.parseInt(holder.edtQty.getText().toString());
-                        ubah(cartList.get(position).productID, product.cartProductQty, userID);
+                        ubah(cartList.get(position).productID, product.cartProductQty, memberID);
                     }
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -155,7 +164,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         @Override
         protected Void doInBackground(obat... obats) {
             obat product =obats[0];
-            ubah(product.productID, product.cartProductQty, Integer.parseInt(CustomerID));
+            ubah(product.productID, product.cartProductQty, memberID);
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
             return null;
         }
@@ -186,7 +195,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         @Override
         protected Void doInBackground(obat... obats) {
             obat product = obats[0];
-            ubah(product.productID, product.cartProductQty, Integer.parseInt(CustomerID));
+            ubah(product.productID, product.cartProductQty, memberID);
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
 
             return null;
@@ -228,14 +237,14 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 
     }
 
-    public void ubah(String id, int qty, int CustomerID) {
+    public void ubah(String id, int qty , String memberID) {
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("Id_Product", id);
             objDetail.put("Qty", qty);
-            objDetail.put("CustomerID",CustomerID);
+            objDetail.put("CustomerID",memberID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
         } catch (JSONException e1) {
