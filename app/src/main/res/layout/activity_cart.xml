@@ -477,12 +477,12 @@
         </LinearLayout>
     </FrameLayout>
 
-    <include
-        layout="@layout/element_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        />
+    <!--<include-->
+        <!--layout="@layout/element_bottom_navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--/>-->
 
 </LinearLayout>
 

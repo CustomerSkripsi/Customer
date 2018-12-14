@@ -76,7 +76,7 @@
             android:layout_toStartOf="@+id/imageView"
             android:layout_toLeftOf="@+id/imageView"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/tvtest"
+            app:layout_constraintStart_toEndOf="@+id/tvSearch"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cart_home"
             tools:ignore="VectorDrawableCompat" />
@@ -184,11 +184,11 @@
 
     </FrameLayout>
 
-    <include
-        layout="@layout/element_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        />
+    <!--<include-->
+        <!--layout="@layout/element_bottom_navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--/>-->
 
 </LinearLayout>

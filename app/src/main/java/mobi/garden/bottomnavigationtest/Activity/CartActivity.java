@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -40,13 +41,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.cart_adapter2;
-import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
-public class CartActivity extends BaseActivity implements View.OnClickListener {
+public class CartActivity extends AppCompatActivity {
 
     static TextView info, outlet_name, jumlah, jumlahPembayaran, alamat, biaya_pengiriman;
     static LinearLayout empty, not_empty, not_login;
@@ -122,7 +122,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         Toast.makeText(this, memberID + "", Toast.LENGTH_SHORT).show();
 
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
-        btnLanjutPembelian.setOnClickListener(this);
+        //btnLanjutPembelian.setOnClickListener(this);
         //myAlertDialog();
         setStatusBarGradiant(this);
 
@@ -157,17 +157,15 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         });
     }
 
-    public int getContentViewId() {
+//    public int getContentViewId() {
+//
+//        return R.layout.activity_cart;
+//    }
 
-        return R.layout.activity_cart;
-    }
 
-
-    public int getNavigationMenuItemId() {
-        return R.id.navigation_notifications1;
-    }
-
-    @Override
+//   public int getNavigationMenuItemId() {
+//        return R.id.navigation_notifications1;
+//    }
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.btnLanjutPembelian:

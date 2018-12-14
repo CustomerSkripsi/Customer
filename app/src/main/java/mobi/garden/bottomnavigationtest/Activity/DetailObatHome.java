@@ -51,7 +51,7 @@ public class DetailObatHome extends AppCompatActivity {
     TextView namaObat,tv_nama_obat2;
     RecyclerView RvApotek;
     HashMap<String, String> detail_obat;
-    List<apotek> pr = new ArrayList<>();
+    List<apotek> apoteks = new ArrayList<>();
     String obatName,gambarObat, ProductName,tempApotekDay;
 
     double longitude;
@@ -90,7 +90,7 @@ public class DetailObatHome extends AppCompatActivity {
 
 
                             } else {
-                                Toast.makeText(DetailObatHome.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(DetailObatHome.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -136,14 +136,13 @@ public class DetailObatHome extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
 
 
-
-
-        show_view(RvApotek, pr,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName);
+        show_view(RvApotek, apoteks,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName+"&day=");
 
     }
 
     public void show_view(final RecyclerView cardlist, final List<apotek> list, String url){
-        final JsonObjectRequest rec= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+        getDay();
+        final JsonObjectRequest rec= new JsonObjectRequest(url+tempApotekDay, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray apoteks = null;

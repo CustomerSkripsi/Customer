@@ -137,7 +137,7 @@ public class HomeActivity extends BaseActivity {
                                 latitude = location.getLatitude();
                                 Log.d("test123", longitude + "");
                             } else {
-                                Toast.makeText(HomeActivity.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(HomeActivity.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

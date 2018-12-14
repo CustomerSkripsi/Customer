@@ -26,16 +26,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
-import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
-import mobi.garden.bottomnavigationtest.Model.session_obat;
-import mobi.garden.bottomnavigationtest.Model.obat;
-import mobi.garden.bottomnavigationtest.R;
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
+
+import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
+import mobi.garden.bottomnavigationtest.LoginRegister.User;
+import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
+import mobi.garden.bottomnavigationtest.Model.obat;
+import mobi.garden.bottomnavigationtest.Model.session_obat;
+import mobi.garden.bottomnavigationtest.R;
 
 public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHolder>{
 
@@ -152,7 +152,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     }
 
     private class UpdateDataIncrease extends AsyncTask<obat,obat,Void> {
-
         @Override
         protected Void doInBackground(obat... obats) {
             obat product =obats[0];

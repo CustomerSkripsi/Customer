@@ -39,8 +39,8 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="7dp"
                         android:textAllCaps="true"
+                        android:textColor="@color/black"
                         android:textSize="12dp"
-                        android:textStyle="bold"
                         tools:text="nama apotik" />
 
                     <TextView
@@ -50,8 +50,8 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="7dp"
                         android:textAllCaps="true"
+                        android:textColor="@color/black"
                         android:textSize="12dp"
-                        android:textStyle="bold"
                         tools:text="jarak" />
 
                     <LinearLayout
@@ -66,6 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="13dp"
                             android:numStars="5"
+                            android:progressTint="@color/gold"
                             android:paddingBottom="3dp" />
 
                         <TextView
@@ -74,6 +75,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:paddingBottom="4dp"
+                            android:textColor="@color/black"
                             tools:text="JamOpen" />
 
                         <TextView
@@ -88,6 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="4dp"
+                            android:textColor="@color/black"
                             tools:text="JamClose" />
                     </LinearLayout>
                 </LinearLayout>
@@ -101,6 +104,7 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="7dp"
                     android:text="harga"
+                    android:textColor="@color/black"
                     android:textSize="13dp" />
 
                 <TextView
@@ -112,6 +116,7 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="7dp"
                     android:text="stock"
+                    android:textColor="@color/black"
                     android:textSize="13dp" />
 
             </LinearLayout>
