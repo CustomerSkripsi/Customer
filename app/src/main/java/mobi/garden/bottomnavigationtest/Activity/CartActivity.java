@@ -40,8 +40,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Adapter.CartHomeAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.cart_adapter2;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
@@ -76,6 +78,10 @@ public class CartActivity extends AppCompatActivity {
 
     SessionManagement session;
     HashMap<String, String> login;
+
+
+    List<ModelPromo> CartList = new ArrayList<>();
+    CartHomeAdapter cartHomeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +124,6 @@ public class CartActivity extends AppCompatActivity {
         userName= login.get(SessionManagement.USERNAME);
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
 
-
-        Toast.makeText(this, memberID + "", Toast.LENGTH_SHORT).show();
-
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
         //btnLanjutPembelian.setOnClickListener(this);
         //myAlertDialog();
@@ -131,7 +134,6 @@ public class CartActivity extends AppCompatActivity {
         recyclerViewCartList.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewCartList.setLayoutManager(setLayout);
-
 
         r_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -148,24 +150,60 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-
         btn_login_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CartActivity.this, MemberActivity.class));
             }
         });
+        cartshow();
     }
 
-//    public int getContentViewId() {
-//
-//        return R.layout.activity_cart;
-//    }
 
 
-//   public int getNavigationMenuItemId() {
-//        return R.id.navigation_notifications1;
-//    }
+    public void cartshow(){
+        String url="http://pharmanet.apodoc.id/customer/CartActivity.php";
+        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                    CartList.clear();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for(int i=0; i< result.length();i++){
+                    try {
+                        JSONObject object = result.getJSONObject(i);
+                        CartList.add(new ModelPromo( object.getString("ProductID"),object.getInt("CartProductPrice"),
+                                object.getString("ProductName"),object.getInt("CartProductQty"),object.getInt("OutletProductStockQty")));
+                        outlet_name.setText(object.getString("OutletName"));
+                        alamat.setText(object.getString("OutletAddress"));
+                        Log.d("rwar", object.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                cartHomeAdapter = new CartHomeAdapter(CartList,context);
+                recyclerViewCartList.setAdapter(cartHomeAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Sedang Gangguan Jaringan", Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(CartActivity.this);
+        queue.add(req);
+    }
+
+
+
+
+
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.btnLanjutPembelian:
@@ -264,7 +302,6 @@ public class CartActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(rec);
     }
-
 
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -444,35 +481,4 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        if (session.isLoggedIn()) {
-//            not_empty.setVisibility(not_empty.VISIBLE);
-//            show_cart(urlbawah, Integer.parseInt(memberID));
-//
-//        } else {
-//            not_empty.setVisibility(not_empty.GONE);
-//            empty.setVisibility(empty.GONE);
-//            not_login.setVisibility(not_login.VISIBLE);
-//
-//        }
-//    }
-//}
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        if(userlocal.getUserLoggedIn()){
-//            not_empty.setVisibility(not_empty.VISIBLE);
-//            show_cart(urlbawah, Integer.parseInt(CustomerID));
-//        }
-//        else {
-//            not_empty.setVisibility(not_empty.GONE);
-//            empty.setVisibility(empty.GONE);
-//            not_login.setVisibility(not_login.VISIBLE);
-//        }
-//    }
 }
