@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.CONFIG;
@@ -34,17 +36,23 @@ import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 //import mobi.garden.bottomnavigationtest.R;
 
 public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapter.viewObatHolder> {
     List<obat> obatlist;
     List<obat> cartlist;
     Context context;
-    User curruser;
-    String CustomerID;
+
+//    User curruser;
+//    String CustomerID;
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
+
     static DecimalFormat df;
 
-    UserLocalStore userLocalStore;
+//    UserLocalStore userLocalStore;
     public ProdukApotekAdapter(Context c, List<obat> obat, List<obat> cartlist) {
         this.obatlist = obat;
         this.context = c;
@@ -108,7 +116,7 @@ public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapte
 
             @Override
             public void onClick(View v) {
-                add(pr.productID,pr.productName, pr.outletProductStockQty,pr.outletProductPrice,"1",curruser.userID, curruser.outletID);
+                add(pr.productID,pr.productName, pr.outletProductStockQty,pr.outletProductPrice,memberID);
                 holder.btn_addObat.setEnabled(false);
                 holder.btn_addObat.setBackgroundResource(R.drawable.btn_beli_clicked);
                 
@@ -119,7 +127,7 @@ public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapte
 
 
 
-    public void add(String productID, String productName,int cartProductQty ,int outletProductPrice, String userID, String userID1, String outletID) {
+    public void add(String productID, String productName,int cartProductQty ,int outletProductPrice, String memberID) {
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
@@ -127,8 +135,8 @@ public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapte
             objDetail.put("ProductName", productName);
             objDetail.put("Price", outletProductPrice);
             objDetail.put("cartProductQty", cartProductQty);
-            objDetail.put("userID", userID);
-            objDetail.put("UpdatedBy",userID);
+            objDetail.put("userID", memberID);
+            objDetail.put("UpdatedBy",memberID);
             objDetail.put("ProductID", productID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
@@ -173,7 +181,7 @@ public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapte
         ImageView iv_foto_obat;
         LinearLayout ll_cv_product_apotik;
         TextView tv_nama_obat, tv_qty_obat, tv_harga_obat;
-        Button btn_addObat;
+        ImageButton btn_addObat;
 
         public viewObatHolder(View v) {
             super(v);
@@ -183,7 +191,7 @@ public class ProdukApotekAdapter extends RecyclerView.Adapter<ProdukApotekAdapte
             tv_nama_obat= (TextView) v.findViewById(R.id.tv_nama_obat);
             tv_qty_obat = (TextView) v.findViewById(R.id.tv_qty_obat);
             tv_harga_obat =(TextView) v.findViewById(R.id.tv_harga_obat);
-            btn_addObat =(Button)v.findViewById(R.id.btnDecrease);
+            btn_addObat =(ImageButton) v.findViewById(R.id.btnDecrease);
         }
     }
 

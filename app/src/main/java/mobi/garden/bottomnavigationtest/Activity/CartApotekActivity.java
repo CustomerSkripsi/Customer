@@ -62,6 +62,7 @@ public class CartApotekActivity extends AppCompatActivity {
     private SliderIndicator mIndicator;
     private SliderView sliderView;
     private LinearLayout mLinearLayout;
+    public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
 
     ViewPagerAdapter adapter;
     ViewPager viewPager;
@@ -99,7 +100,7 @@ public class CartApotekActivity extends AppCompatActivity {
 
 
     static String Outlet_ID , Product_ID, Outlet_Name , namaApotek;
-    String namaproduk,tempfoto;
+    String namaproduk,tempfoto,idProduk;
     int qty, hargaproduk;
 
    // static String CustomerID;
@@ -124,7 +125,7 @@ public class CartApotekActivity extends AppCompatActivity {
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         context = getApplicationContext();
 
-        Toast.makeText(this, memberID + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, memberID + " cartapotekact", Toast.LENGTH_SHORT).show();
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
@@ -438,12 +439,13 @@ public class CartApotekActivity extends AppCompatActivity {
                 for(int i=0; i< result.length();i++){
                     try {
                         JSONObject object = result.getJSONObject(i);
+                        idProduk = object.getString("ProductID");
                         namaproduk = object.getString("ProductName");
                         tempfoto = object.getString("ProductImage");
                         qty = object.getInt("OutletProductStockQty");
                         hargaproduk = object.getInt("OutletProductPrice");
                         Log.d("awasdaasd", namaproduk);
-                        pr.add(new obat(namaproduk,tempfoto,hargaproduk,qty));
+                        pr.add(new obat(idProduk,namaproduk,tempfoto,hargaproduk,qty));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("rwarfgss", object.toString());
                     } catch (JSONException e) {
@@ -496,7 +498,7 @@ public class CartApotekActivity extends AppCompatActivity {
         if(session.getUserLoggedIn()){
 //            not_empty.setVisibility(not_empty.VISIBLE);
             //show_cart(urlbawah, memberID);
-          //  show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
+//            show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
         }
 
 

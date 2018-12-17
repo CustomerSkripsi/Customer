@@ -13,6 +13,7 @@ public class obat implements Parcelable {
     public String productPhoto;
     public String productDescription;
     public String categoryID;
+    public String memberID;
     public int outletProductPrice;
     public int outletProductStockQty;
     public int outletProductPriceafterDsc;
@@ -21,7 +22,8 @@ public class obat implements Parcelable {
     public String indikasi,kandungan,dosis,carapakai,kemasan,golongan,resepYN,kontraindikasi,carasimpan,principal;
     String tempfoto;
 
-    public obat(String productName, String tempfoto, int outletProductPrice, int outletProductStockQty) {
+    public obat(String idProduk,String productName, String tempfoto, int outletProductPrice, int outletProductStockQty) {
+        productID =idProduk;
         this.productName = productName;
         this.tempfoto = tempfoto;
         this.outletProductPrice = outletProductPrice;
@@ -78,6 +80,13 @@ public class obat implements Parcelable {
         this.outletProductStockQty = outletProductStockQty;
         this.cartProductPrice = cartProductPrice;
         this.outletProductPriceafterDsc = outletProductPriceafterDsc;
+    }
+    public obat ( String productID,String productName,int outletProductStockQty,int outletProductPrice, String memberID){
+        this.productID = productID;
+        this.productName = productName;
+        this.outletProductStockQty = outletProductStockQty;
+        this.outletProductPrice = outletProductPrice;
+        this.memberID = memberID;
     }
 
     public obat(String productID, String productName, String productPhoto, int outletProductPrice) {

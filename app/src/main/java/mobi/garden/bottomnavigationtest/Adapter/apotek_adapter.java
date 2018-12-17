@@ -47,7 +47,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     session_obat session;
 
     String CustomerID,productName;
-    UserLocalStore userLocalStore;
+//    UserLocalStore userLocalStore;
     DecimalFormat df;
 
     Activity activity;
@@ -82,9 +82,9 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     @Override
     public void onBindViewHolder(apotek_adapter.apotekViewHolder holder, int position) {
         final apotek pr = apoteklist.get(position);
-        userLocalStore = new UserLocalStore(context);
-        User currUser = userLocalStore.getLoggedInUser();
-        CustomerID = currUser.getUserID();
+//        userLocalStore = new UserLocalStore(context);
+//        User currUser = userLocalStore.getLoggedInUser();
+//        CustomerID = currUser.getUserID();
 
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -159,6 +159,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     public void addkeranjang(String productname, String outletID){
        String url = "http://pharmanet.apodoc.id/customer/AddProductToCart.php?ProductName="+productname+"&OutletID="+outletID;
         Log.d("addkeranjangasd: ",url);
+
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
