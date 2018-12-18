@@ -33,16 +33,15 @@ import java.util.List;
 import mobi.garden.bottomnavigationtest.Activity.CartActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
-import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Model.cart;
+import mobi.garden.bottomnavigationtest.R;
 
 public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewHolder> {
 
     Context context;
     List<cart> cartList;
-    int userID;
+    int userID,hargaProduct;
     String CustomerID;
-    int hargaProduct;
     static DecimalFormat df;
     boolean isStoppedClicked = true;
 
@@ -85,7 +84,6 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         holder.edtQty.setOnEditorActionListener(new DoneOnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     if (holder.edtQty.getText().toString().equals("")){
                         holder.edtQty.setText("0");
@@ -180,7 +178,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
     }
 
 
-    class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
+    private class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -261,7 +259,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartActivity.refresh_total_cart(cartList);
+                               // CartActivity.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();

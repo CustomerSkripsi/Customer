@@ -169,7 +169,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     }
 
 
-    class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
+    private class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE) {

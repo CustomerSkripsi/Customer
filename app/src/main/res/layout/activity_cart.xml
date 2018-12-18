@@ -35,7 +35,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/gradient"
-                        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                        android:theme="@style/Base.Theme.AppCompat.Light"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
@@ -291,7 +291,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="10dp"
                                         android:layout_weight="60"
-                                        android:text="Jumlah" />
+                                        android:text="TOTAL PEMBAYARAN" />
 
                                     <TextView
                                         android:id="@+id/jumlah"
@@ -312,29 +312,29 @@
                                     android:layout_weight="100"
                                     android:orientation="horizontal">
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
+                                    <!--<ImageView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
 
-                                    <TextView
-                                        android:layout_width="20dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="60"
-                                        android:text="Biaya Pengiriman" />
+                                    <!--<TextView-->
+                                        <!--android:layout_width="20dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="60"-->
+                                        <!--android:text="Biaya Pengiriman" />-->
 
-                                    <TextView
-                                        android:id="@+id/biayaPengiriman"
-                                        android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="11dp"
-                                        android:layout_weight="39"
-                                        android:gravity="end"
-                                        android:text="total"
-                                        android:textAlignment="textEnd" />
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/biayaPengiriman"-->
+                                        <!--android:layout_width="45dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginRight="11dp"-->
+                                        <!--android:layout_weight="39"-->
+                                        <!--android:gravity="end"-->
+                                        <!--android:text="total"-->
+                                        <!--android:textAlignment="textEnd" />-->
 
                                 </LinearLayout>
 
@@ -345,29 +345,29 @@
                                     android:layout_weight="100"
                                     android:orientation="horizontal">
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
+                                    <!--<ImageView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
 
-                                    <TextView
-                                        android:layout_width="20dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="60"
-                                        android:text="Punya kode voucher ?" />
+                                    <!--<TextView-->
+                                        <!--android:layout_width="20dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="60"-->
+                                        <!--android:text="Punya kode voucher ?" />-->
 
-                                    <TextView
-                                        android:id="@+id/voucher"
-                                        android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="11dp"
-                                        android:layout_weight="39"
-                                        android:gravity="end"
-                                        android:text="total"
-                                        android:textAlignment="textEnd" />
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/voucher"-->
+                                        <!--android:layout_width="45dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginRight="11dp"-->
+                                        <!--android:layout_weight="39"-->
+                                        <!--android:gravity="end"-->
+                                        <!--android:text="total"-->
+                                        <!--android:textAlignment="textEnd" />-->
 
                                 </LinearLayout>
 
@@ -384,29 +384,29 @@
                                     android:layout_weight="100"
                                     android:orientation="horizontal">
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
+                                    <!--<ImageView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
 
-                                    <TextView
-                                        android:layout_width="20dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="60"
-                                        android:text="TOTAL PEMBAYARAN" />
+                                    <!--<TextView-->
+                                        <!--android:layout_width="20dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="60"-->
+                                        <!--android:text="TOTAL PEMBAYARAN" />-->
 
-                                    <TextView
-                                        android:id="@+id/totalPembayaran"
-                                        android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="11dp"
-                                        android:layout_weight="39"
-                                        android:gravity="end"
-                                        android:text="total"
-                                        android:textAlignment="textEnd" />
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/totalPembayaran"-->
+                                        <!--android:layout_width="45dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginRight="11dp"-->
+                                        <!--android:layout_weight="39"-->
+                                        <!--android:gravity="end"-->
+                                        <!--android:text="total"-->
+                                        <!--android:textAlignment="textEnd" />-->
 
                                 </LinearLayout>
 

@@ -69,18 +69,16 @@ public class CartActivity extends AppCompatActivity {
     //static final String CUSTOMER_ID = "CustomerID";
     public static String CustomerID,memberID, userName;
     TextView dialog_Nama, dialog_No_Telepon, dialog_Alamat;
-    Button btnLanjutPembelian, button_lanjut, button_Batal, btn_login_cart;
-    Button button_lanjut1, button_Batal1;
+    Button btnLanjutPembelian,btnTambahBarang, button_lanjut, button_Batal, btn_login_cart,button_lanjut1, button_Batal1;
     Dialog myDialog,myDialog1;
     String urlUser = "Http://Pharmanet.Apodoc.id/select_customer_confirm.php?id=";
     UserLocalStore userlocal;
-
 
     SessionManagement session;
     HashMap<String, String> login;
 
 
-    List<ModelPromo> CartList = new ArrayList<>();
+    static List<ModelPromo> CartList = new ArrayList<>();
     CartHomeAdapter cartHomeAdapter;
 
     @Override
@@ -93,8 +91,8 @@ public class CartActivity extends AppCompatActivity {
         outlet_name = (TextView) findViewById(R.id.outlet_name);
         alamat = findViewById(R.id.tvOutletAddress);
         jumlah = findViewById(R.id.jumlah);
-        jumlahPembayaran = findViewById(R.id.totalPembayaran);
-        biaya_pengiriman = findViewById(R.id.biayaPengiriman);
+        //jumlahPembayaran = findViewById(R.id.totalPembayaran);
+        //biaya_pengiriman = findViewById(R.id.biayaPengiriman);
         r_apotek = findViewById(R.id.radio_apotek);
         r_group = findViewById(R.id.radio_group);
         empty = (LinearLayout) findViewById(R.id.kosong);
@@ -123,6 +121,15 @@ public class CartActivity extends AppCompatActivity {
         login = session.getMemberDetails();
         userName= login.get(SessionManagement.USERNAME);
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
+      //  Toast.makeText(context, ""+memberID, Toast.LENGTH_SHORT).show();
+
+        btnTambahBarang = findViewById(R.id.btnTambahBarang);
+        btnTambahBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // startActivity(new Intent(CartActivity.this , DetailObatHome.class));
+            }
+        });
 
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
         //btnLanjutPembelian.setOnClickListener(this);
@@ -144,7 +151,6 @@ public class CartActivity extends AppCompatActivity {
                         Toast.makeText(context, "apotek", Toast.LENGTH_SHORT).show();
                         break;
                     default:
-
                         break;
                 }
             }
@@ -170,6 +176,7 @@ public class CartActivity extends AppCompatActivity {
                 try {
                     result = response.getJSONArray("result");
                     CartList.clear();
+                    total = 0;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -180,15 +187,19 @@ public class CartActivity extends AppCompatActivity {
                                 object.getString("ProductName"),object.getInt("CartProductQty"),object.getInt("OutletProductStockQty")));
                         outlet_name.setText(object.getString("OutletName"));
                         alamat.setText(object.getString("OutletAddress"));
+                        total += object.getInt("CartProductQty") * object.getInt("CartProductPrice");
+                        totalPembayaran = total;
                         Log.d("rwar", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
                 cartHomeAdapter = new CartHomeAdapter(CartList,context);
                 recyclerViewCartList.setAdapter(cartHomeAdapter);
+
+                jumlah.setText(df.format(total) + "");
+                //jumlahPembayaran.setText(df.format(totalPembayaran) + "");
+                info.setText("ANDA MEMILIKI " + CartList.size() + " BARANG DI KERANJANG BELANJA");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -199,7 +210,6 @@ public class CartActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(CartActivity.this);
         queue.add(req);
     }
-
 
 
 
@@ -317,31 +327,27 @@ public class CartActivity extends AppCompatActivity {
     public static void refresh_cart(List<cart> cartList) {
         total = 0;
         totalPembayaran = 0;
-
         for (int i = 0; i < cartlist.size(); i++) {
-
             total += cartlist.get(i).cartProductQty * cartlist.get(i).cartProductPrice;
             totalPembayaran = total + cartlist.get(0).outletDeliveryFee;
         }
         jumlah.setText(df.format(total) + "");
         jumlahPembayaran.setText(df.format(totalPembayaran) + "");
         info.setText("ANDA MEMILIKI " + cartlist.size() + " BARANG DI KERANJANG BELANJA");
-
         adapter = new cart_adapter2(context, cartlist, 1);
         recyclerViewCartList.setAdapter(adapter);
     }
 
-    public static void refresh_total_cart(List<cart> cartList) {
+    public static void refresh_total_cart(List<ModelPromo> cartList) {
         total = 0;
         totalPembayaran = 0;
-
         for (int i = 0; i < cartList.size(); i++) {
-            total += cartlist.get(i).cartProductQty*cartlist.get(i).cartProductPrice;
-            totalPembayaran = total + cartlist.get(0).outletDeliveryFee;
+            total += cartList.get(i).ProductQty*cartList.get(i).PriceProduct;
+            totalPembayaran = total;
         }
         jumlah.setText(df.format(total) + "");
-        jumlahPembayaran.setText(df.format(totalPembayaran) + "");
-        info.setText("ANDA MEMILIKI " + cartlist.size() + " BARANG DI KERANJANG BELANJA");
+        //jumlahPembayaran.setText(df.format(totalPembayaran) + "");
+        info.setText("ANDA MEMILIKI " + cartList.size() + " BARANG DI KERANJANG BELANJA");
     }
 
     public static void show_cart(String urlbawah, String CustomerID) {

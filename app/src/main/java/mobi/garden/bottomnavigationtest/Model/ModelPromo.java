@@ -2,6 +2,7 @@ package mobi.garden.bottomnavigationtest.Model;
 
 public class ModelPromo {
 
+
     public String ProductID,NameProduct, ProductNameUrl,AlamatApotek;
     public int PriceProduct, ProductPriceAfterDC, ProductQty, StockProductQty;
 
@@ -104,5 +105,11 @@ public class ModelPromo {
     public void setAlamatApotek(String alamatApotek) {
         AlamatApotek = alamatApotek;
     }
+    public int getStockProductQty() {
+        return StockProductQty;
+    }
 
+    public void setStockProductQty(int stockProductQty) {
+        StockProductQty = stockProductQty;
+    }
 }
