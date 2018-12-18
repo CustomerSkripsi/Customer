@@ -64,6 +64,7 @@ public class CartApotekActivity extends AppCompatActivity {
     private LinearLayout mLinearLayout;
     public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
     public static String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
+    public static String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName=";
 
     ViewPagerAdapter adapter;
     ViewPager viewPager;
@@ -432,8 +433,8 @@ public class CartApotekActivity extends AppCompatActivity {
     }
 
     public void showprodukterkait(){
-        String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek;
-        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+//        String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek;
+        JsonObjectRequest req = new JsonObjectRequest(url+namaApotek, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray result = null;
