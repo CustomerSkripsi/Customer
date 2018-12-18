@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
@@ -35,6 +36,7 @@ import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.Model.session_obat;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 /**
  * Created by ASUS on 5/8/2018.
@@ -48,6 +50,9 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
 
     String CustomerID,productName;
 //    UserLocalStore userLocalStore;
+//SessionManagement session;
+    HashMap<String, String> login;
+    public static String memberID, userName;
     DecimalFormat df;
 
     Activity activity;
@@ -200,13 +205,22 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         String url = "";
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, objAdd, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show();
+
+                public void onResponse(JSONObject response) {
+                try {
+                    if (response.getString("status").equals("OK")) {
+                        CartApotekActivity.show_cart(CartApotekActivity.add_url,memberID);
+                        Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);

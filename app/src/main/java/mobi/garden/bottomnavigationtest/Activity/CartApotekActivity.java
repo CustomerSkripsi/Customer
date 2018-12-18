@@ -63,6 +63,7 @@ public class CartApotekActivity extends AppCompatActivity {
     private SliderView sliderView;
     private LinearLayout mLinearLayout;
     public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
+    public static String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
 
     ViewPagerAdapter adapter;
     ViewPager viewPager;
@@ -76,7 +77,6 @@ public class CartApotekActivity extends AppCompatActivity {
 
     obat_adapter_as obatAdapter;
     List<obat> pr = new ArrayList<>();
-
     private static RecyclerView cardListBrand;
     private static RecyclerView recyclerViewCartList;
     private static List<obat> cartList = new ArrayList<>();
@@ -186,7 +186,7 @@ public class CartApotekActivity extends AppCompatActivity {
         recyclerViewCartList.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewCartList.setLayoutManager(setLayout);
-        //initiateBelowAdapter();
+        initiateBelowAdapter();
 
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,12 +343,13 @@ public class CartApotekActivity extends AppCompatActivity {
         rvCart.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
-                String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
+
         show_cart(urlbawahs,"8181200006");
     }
 
-    public static void show_cart(String urlbawah, String memberID) {
-        JsonObjectRequest rec = new JsonObjectRequest(urlbawah+memberID, null, new Response.Listener<JSONObject>() {
+    public static void show_cart(String urlbawahs, String memberID) {
+        Log.d("testurl", urlbawahs+ memberID);
+        JsonObjectRequest rec = new JsonObjectRequest(urlbawahs + memberID, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray products = null;
@@ -371,7 +372,7 @@ public class CartApotekActivity extends AppCompatActivity {
                                 obj.getInt("CartProductQty"),
                                 obj.getInt("CartProductPrice"),
                                 obj.getInt("CartProductPriceAfterDiscount")));
-                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
                         totalPrice += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
                         count += obj.getInt("CartProductQty");
                         Log.d("rwarqwe", obj.toString());
@@ -381,10 +382,16 @@ public class CartApotekActivity extends AppCompatActivity {
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
-                mBadge.setNumber(count);
-                Toast.makeText(context, cartList.size()+"sudah", Toast.LENGTH_SHORT).show();
+                mBadge.setNumber(cartList.size());
                 adapterRvBelow = new cart_adapter(context,cartList);
+                adapterRvBelow.setCartList(cartList);
                 recyclerViewCartList.setAdapter(adapterRvBelow);
+
+//                tvTotalPrice.setText(df.format(totalPrice)+"");
+//                mBadge.setNumber(count);
+////                Toast.makeText(context, cartList.size()+"sudah", Toast.LENGTH_SHORT).show();
+//                adapterRvBelow = new cart_adapter(context,cartList);
+//                recyclerViewCartList.setAdapter(adapterRvBelow);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -452,14 +459,19 @@ public class CartApotekActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
                 tvApotekName.setText(namaApotek);
                 obatAdapter = new obat_adapter_as(pr,context);
                 rvProdukAll.setAdapter(obatAdapter);
+
+//                tvApotekName.setText(namaApotek);
+//                obatAdapter = new obat_adapter_as(pr,context);
+//                rvProdukAll.setAdapter(obatAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(CartApotekActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CartApotekActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -477,6 +489,7 @@ public class CartApotekActivity extends AppCompatActivity {
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
         adapterRvBelow = new cart_adapter(context,cartList);
+        adapterRvBelow.setCartList(cartList);
         recyclerViewCartList.setAdapter(adapterRvBelow);
     }
 

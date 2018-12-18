@@ -43,6 +43,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 
     Context context;
     List<obat> cartList;
+
     //int userID;
     //String CustomerID;
     boolean isStoppedClicked = true;
@@ -61,6 +62,14 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         this.cartList = cartList;
         this.memberID = CustomerID;
         session = new SessionManagement(context);
+    }
+
+    public void setCartList(List<obat> cartList) {
+        this.cartList = cartList;
+    }
+
+    public void setProductList(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -302,6 +311,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                                 //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
                                 CartApotekActivity.initiateTopAdapter();
                                 CartApotekActivity.refresh_cart(cartList);
+                                Toast.makeText(context, "haduuhhhh", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();

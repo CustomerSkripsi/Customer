@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,7 +109,8 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
 //                context.startActivity(i);
             }
         });
-
+//        holder.btn_add_obat.setEnabled(true);
+//        holder.btn_add_obat.setBackgroundResource(R.drawable.btn_unclicked_home);
 //        for(int j=0;j<cartlist.size();j++){
 //            if(pr.productID.equals(cartlist.get(j).productID)){
 //                holder.btn_add_obat.setEnabled(false);
@@ -122,7 +122,6 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         holder.btn_add_obat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String product_id, String product_name, int product_price, int qty, String memberID
                 add(pr.productID, pr.outletProductPrice,1, memberID);
                 holder.btn_add_obat.setEnabled(false);
                 holder.btn_add_obat.setBackgroundResource(R.drawable.add_button_set_enabled);
@@ -130,7 +129,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                 Toast.makeText(context, "testclick", Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
-                String text = "Product Rekomendasi Activity";
+                String text = "test123123";
                 data.putExtra(CONFIG.PREV_PAGE,text);
             }
         });
@@ -161,6 +160,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
 
 
     public void add(String product_id, int product_price, int qty, String memberID) {
+        Log.d("dsa", memberID);
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
@@ -176,15 +176,18 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-        Log.d("testtest1", objAdd.toString());
+//        Log.d("testtest1", objAdd.toString());
+        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+//                        Toast.makeText(context, "asdqwe", Toast.LENGTH_SHORT).show();
                         try {
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
-                                CartApotekActivity.show_cart(CartApotekActivity.add_url,memberID);
+                                CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
+//                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -194,7 +197,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
