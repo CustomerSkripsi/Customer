@@ -39,7 +39,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     PromoSelengkapnyaAdapter favAdapter;
     PromoAdapter FavAdapter;
     int total_rating,outletProductPrice;
-
+ 
     List<ModelPromo> PromoList = new ArrayList<>();
     List<ModelPromo> FavList = new ArrayList<>();
 
