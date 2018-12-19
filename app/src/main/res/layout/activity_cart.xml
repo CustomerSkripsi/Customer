@@ -48,6 +48,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:foregroundGravity="left"
+                                android:onClick="BackBack"
                                 app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
                             <TextView
@@ -186,7 +187,7 @@
                                     android:paddingLeft="25dp"
                                     android:paddingRight="25dp"
                                     android:text="TAMBAH BARANG"
-                                    android:textColor="#b0ca8b"
+                                    android:textColor="#FB8C00"
                                     android:textSize="12dp" />
                             </LinearLayout>
 

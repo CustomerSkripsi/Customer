@@ -41,8 +41,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Adapter.CartHomeAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.cart_adapter2;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
@@ -90,7 +92,7 @@ public class CartActivity extends AppCompatActivity {
         info = (TextView) findViewById(R.id.info);
         outlet_name = (TextView) findViewById(R.id.outlet_name);
         alamat = findViewById(R.id.tvOutletAddress);
-        jumlah = findViewById(R.id.jumlah);
+        jumlah = findViewById(R.id.totalPembayaran);
         //jumlahPembayaran = findViewById(R.id.totalPembayaran);
         //biaya_pengiriman = findViewById(R.id.biayaPengiriman);
         r_apotek = findViewById(R.id.radio_apotek);
@@ -179,6 +181,10 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         cartshow();
+    }
+
+    public void BackBack(View view){
+        super.onBackPressed();
     }
 
     public void insertTransaction(String insertTransaction, String CustomerID) {

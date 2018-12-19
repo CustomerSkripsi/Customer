@@ -39,7 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.cart;
@@ -94,8 +93,8 @@ public class PickUpActivity extends AppCompatActivity {
         String barcode_member = "444111444";
 
         // barcode image
-        Bitmap bitmap = null;
-        btnBack = (Button) findViewById(R.id.btnBack);
+//        Bitmap bitmap = null;
+//        btnBack = (Button) findViewById(R.id.btnBack);
 
         BRegister = (Button) findViewById(R.id.BRegister);
         tv_apotek_name = (TextView) findViewById(R.id.tv_apotek_name);
@@ -123,12 +122,12 @@ public class PickUpActivity extends AppCompatActivity {
         Toast.makeText(this, CustomerID+"", Toast.LENGTH_SHORT).show();
         //show_view(urlApotek,memberID);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PickUpActivity.this, HomeActivity.class));
-            }
-        });
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(PickUpActivity.this, HomeActivity.class));
+//            }
+//        });
 
 
        // CartActivity.refresh_total_cart(CartModel);
