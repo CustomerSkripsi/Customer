@@ -57,34 +57,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="BARCODE PEMBELIAN"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="10dp">
-
-                    <ImageView
-
-                        android:backgroundTint="@color/white"
-                        android:id="@+id/iv_barcode"
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:background="#000"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
+                    android:paddingLeft="10dp"
+                    android:text="No Pesanan Anda" />
 
                 <TextView
+                    android:id="@+id/etNopesanan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="BARCODE Member"
-                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
                     android:paddingLeft="10dp"
-                    android:background="@color/white"/>
+                    android:text="No Pesanan Anda" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,15 +76,39 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="10dp">
 
-                    <ImageView
+                    <!--<ImageView-->
 
-                        android:backgroundTint="@color/white"
-                        android:id="@+id/iv_barcode_member"
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:background="#000"
-                        android:layout_centerInParent="true"/>
+                        <!--android:backgroundTint="@color/white"-->
+                        <!--android:id="@+id/iv_barcode"-->
+                        <!--android:layout_width="160dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:background="#000"-->
+                        <!--android:layout_centerInParent="true"/>-->
                 </RelativeLayout>
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="BARCODE Member"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:background="@color/white"/>-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:paddingTop="15dp"-->
+                    <!--android:paddingBottom="10dp">-->
+
+                    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;android:backgroundTint="@color/white"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/iv_barcode_member"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="160dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="100dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="#000"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_centerInParent="true"/>&ndash;&gt;-->
+                <!--</RelativeLayout>-->
 
             </LinearLayout>
 
@@ -113,18 +121,22 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvApotek"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingLeft="10dp"
                     android:text="Kami tunggu kehadiran Anda di di Apotek Kami"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"/>
+                    android:textColor="@color/black" />
+
                 <TextView
+                    android:id="@+id/tv_apotek_address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="ini jalan"
-                    android:id="@+id/tv_apotek_address"
+                    android:background="@color/white"
                     android:paddingLeft="10dp"
-                    android:background="@color/white"/>
+                    android:text="ini jalan"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -149,20 +161,26 @@
                     android:paddingLeft="10dp"
                     android:id="@+id/tv_apotek_pic_noTlp"
                     android:text="ini no tlp pic"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingLeft="10dp"
                     android:paddingTop="12dp"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:text="Terima Kasih," />
+                    android:text="Terima Kasih,"
+                    android:textColor="@color/black" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:paddingLeft="10dp"
-                    android:text="Semoga lekas sembuh" />
+                    android:text="Semoga lekas sembuh"
+                    android:textColor="@color/black"
+                    android:paddingBottom="20dp"/>
                 <Button
+                    android:layout_marginTop="200dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Balik ke Home"
@@ -189,22 +207,18 @@
                     android:orientation="vertical"
                     android:id="@+id/containerDaftar">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:text="Dapatkan keuntungan lebih dengan menjadi member"/>
+                   d:text="Dapatkan keuntungan lebih dengan menjadi member"/>
 
-                    <Button
-                        android:id="@+id/BRegister"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="25dp"
-                        android:background="@drawable/gradient"
-                        android:textColor="@color/white"
-                        android:text="Daftar"
-                        />
+                    <!--<Button-->
+                        <!--android:id="@+id/BRegister"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="25dp"-->
+                        <!--android:layout_marginRight="25dp"-->
+                        <!--android:background="@drawable/gradient"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:text="Daftar"-->
+                        <!--/>-->
 
                 </LinearLayout>
 

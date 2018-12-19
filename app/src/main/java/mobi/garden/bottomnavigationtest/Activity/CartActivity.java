@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -95,6 +96,15 @@ public class CartActivity extends AppCompatActivity {
         //biaya_pengiriman = findViewById(R.id.biayaPengiriman);
         r_apotek = findViewById(R.id.radio_apotek);
         r_group = findViewById(R.id.radio_group);
+        r_apotek.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Toast.makeText(CartActivity.this, "apotekkks", Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
         empty = (LinearLayout) findViewById(R.id.kosong);
         not_empty = (LinearLayout) findViewById(R.id.tidak_kosong);
         not_login = (LinearLayout) findViewById(R.id.belum_login);
@@ -121,7 +131,7 @@ public class CartActivity extends AppCompatActivity {
         login = session.getMemberDetails();
         userName= login.get(SessionManagement.USERNAME);
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
-      //  Toast.makeText(context, ""+memberID, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, ""+memberID, Toast.LENGTH_SHORT).show();
 
         btnTambahBarang = findViewById(R.id.btnTambahBarang);
         btnTambahBarang.setOnClickListener(new View.OnClickListener() {
@@ -132,29 +142,36 @@ public class CartActivity extends AppCompatActivity {
         });
 
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
-        //btnLanjutPembelian.setOnClickListener(this);
+        btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {//intent hal lain
+                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
+                insertTransaction(insertTransaction, memberID);
+                startActivity(new Intent(CartActivity.this, PickUpActivity.class));
+                //myDialog.cancel();
+            }
+        });
+
         //myAlertDialog();
         setStatusBarGradiant(this);
-
-
         recyclerViewCartList = findViewById(R.id.rvCartList2);
         recyclerViewCartList.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewCartList.setLayoutManager(setLayout);
 
-        r_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.radio_apotek:
-                        Toast.makeText(context, "apotek", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+///---ini radio
+//        r_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.radio_apotek:
+//                        Toast.makeText(context, "apotek", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
 
         btn_login_cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +182,46 @@ public class CartActivity extends AppCompatActivity {
         cartshow();
     }
 
-
+    public void insertTransaction(String insertTransaction, String CustomerID) {
+        JSONObject objAdd = new JSONObject();
+        Log.d("ini transaksi", objAdd.toString());
+        try {
+            JSONArray arrData = new JSONArray();
+            JSONObject objDetail = new JSONObject();
+            objDetail.put("CustomerID", CustomerID);
+            arrData.put(objDetail);
+            objAdd.put("data", arrData);
+            Log.d("nyas", ""+objAdd);
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, insertTransaction, objAdd, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //  etxt1.setText(response.getString("status"));
+                    Log.d("response", response.toString());
+                    if (response.getString("status").equals("success")) {
+                        Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Transaksi gagal", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(CartActivity.this, e.getMessage()+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(CartActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d("error_respon_transaksi", error.getMessage());
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
 
     public void cartshow(){
         String url="http://pharmanet.apodoc.id/customer/CartActivity.php";
@@ -211,9 +267,6 @@ public class CartActivity extends AppCompatActivity {
         queue.add(req);
     }
 
-
-
-
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.btnLanjutPembelian:
@@ -249,11 +302,11 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        button_lanjut.setOnClickListener(new View.OnClickListener() {
+        btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//intent hal lain
-                insertTransaction(insertTransaction, Integer.parseInt(CustomerID));
+            public void onClick(View v) {//intent hal lain
+                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
+                insertTransaction(insertTransaction, memberID);
                 startActivity(new Intent(CartActivity.this, PickUpActivity.class));
                 myDialog.cancel();
             }
@@ -428,47 +481,7 @@ public class CartActivity extends AppCompatActivity {
         requestQueue.add(rec);
     }
 
-    public void insertTransaction(String insertTransaction, int CustomerID) {
 
-        JSONObject objAdd = new JSONObject();
-        try {
-            JSONArray arrData = new JSONArray();
-            JSONObject objDetail = new JSONObject();
-            objDetail.put("CustomerID", CustomerID);
-            arrData.put(objDetail);
-            objAdd.put("data", arrData);
-            Log.d("ini transaksi", objAdd.toString());
-        } catch (JSONException e1) {
-            e1.printStackTrace();
-        }
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, insertTransaction, objAdd, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    //  etxt1.setText(response.getString("status"));
-
-                    Log.d("response", response.toString());
-                    if (response.getString("status").equals("success")) {
-                        Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Transaksi gagal", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(CartActivity.this, e.getMessage()+"", Toast.LENGTH_SHORT).show();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(CartActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("error_respon_transaksi", error.getMessage());
-                    }
-                }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-    }
 
     @Override
     protected void onResume() {
