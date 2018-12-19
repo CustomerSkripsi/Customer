@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:title="RATING APOTEK"
+        app:titleTextColor="@android:color/white"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:background="@color/green_yellow"/>
+
+    <TextView
+        android:id="@+id/tvNamaApotek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="NAMA APOTEK"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Alamat Apotek"
+        android:textColor="@android:color/black" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:numStars="5"
+        android:stepSize="1" />
+
+    <TextView
+        android:id="@+id/tvMohon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Rating Anda membantu Apotek kami untuk memberikan pelayanan terbaik" />
+
+    <TextView
+        android:id="@+id/tvRatingScale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Beri Peringkat"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvdialograting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/etKomentar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Komentar Anda"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnKirim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Kirim"
+        android:textColor="@android:color/white"
+        android:background="@color/green_yellow"/>
+</LinearLayout>
