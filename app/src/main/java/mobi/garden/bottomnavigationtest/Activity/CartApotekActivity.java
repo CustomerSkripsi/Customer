@@ -461,14 +461,16 @@ public class CartApotekActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+//
+//                tvApotekName.setText(namaApotek);
+//                obatAdapter = new obat_adapter_as(pr,context);
+//                obatAdapter.setProductList(pr);
+//                adapterRvBelow.setCartList(cartList);
+//                rvProdukAll.setAdapter(obatAdapter);
 
                 tvApotekName.setText(namaApotek);
                 obatAdapter = new obat_adapter_as(pr,context);
                 rvProdukAll.setAdapter(obatAdapter);
-
-//                tvApotekName.setText(namaApotek);
-//                obatAdapter = new obat_adapter_as(pr,context);
-//                rvProdukAll.setAdapter(obatAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
