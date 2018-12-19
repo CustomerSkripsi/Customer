@@ -396,9 +396,9 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(ratingNum == 0){
-                    Toast.makeText(context, "Rating harus diisi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Rating harus diisi", Toast.LENGTH_SHORT).show();
                 }else if(number == 0){
-                    Toast.makeText(context, "Ulasan harus diisi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Ulasan harus diisi", Toast.LENGTH_SHORT).show();
                 }else {
                     review = mFeedback.getText().toString();
                     saveFeedback(ratingNum,number,review);
@@ -418,7 +418,7 @@ public class HomeActivity extends BaseActivity {
             objdetail.put("RatingBar",ratingNum);
             arrdata.put(objdetail);
             objadd.put("data",arrdata);
-            Log.d("test",objadd.toString());
+            Log.d("testssss",objadd.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -464,7 +464,7 @@ public class HomeActivity extends BaseActivity {
             objDetail.put("review",review);
             arrdata.put(objDetail);
             objadd.put("data",arrdata);
-            Log.d("test",objadd.toString());
+            Log.d("testsave",objadd.toString());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(context, "aa", Toast.LENGTH_SHORT).show();
@@ -479,7 +479,7 @@ public class HomeActivity extends BaseActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Maaf Sedang Terjadi Gangguan", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Maaf Sedang Terjadi Gangguan", Toast.LENGTH_SHORT).show();
                 //Log.e("test",error+"");
             }
         });
