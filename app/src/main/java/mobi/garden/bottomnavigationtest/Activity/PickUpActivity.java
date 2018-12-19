@@ -48,13 +48,10 @@ import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 public class PickUpActivity extends AppCompatActivity {
 
     static final String OUTLET_ID = "OutletID";
-
     //static final String CUSTOMER_ID = "CustomerID";
-
     static List<cart> cartlist = new ArrayList<>();
 
     public static Context context;
-
     String OutletID;
     ImageView iv_barcode,iv_barcode_member;
     Button BRegister,btnBack;

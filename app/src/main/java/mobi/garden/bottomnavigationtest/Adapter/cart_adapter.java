@@ -1,7 +1,6 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
@@ -212,7 +209,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -220,7 +216,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             //Log.d("TAGG","do in background kelar");
         }
     }
-
 
     private class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
         @Override
@@ -278,35 +273,33 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 
             edtQty = itemView.findViewById(R.id.edtQty);
         }
-
     }
 
-    public void ubah(String id, int qty , String memberID) {
+    public void ubah(String id, int qty, String CustomerID) {
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("Id_Product", id);
             objDetail.put("Qty", qty);
-            objDetail.put("CustomerID",memberID);
+            objDetail.put("CustomerID",CustomerID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
+            Log.d("asd", "ubah: "+objAdd);
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/updateCartCustomer.php", objAdd,
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/UpdateCart.php", objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
-
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartApotekActivity.refresh_total_cart(cartList);
+                                //CartActivity.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -374,3 +367,4 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         requestQueue.add(stringRequest);
     }
 }
+
