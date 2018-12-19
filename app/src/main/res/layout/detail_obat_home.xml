@@ -38,7 +38,7 @@
             <ImageView
                 android:id="@+id/iv_picture_obat2"
                 android:paddingTop="10dp"
-                android:background="#000"
+                android:background="@drawable/nopicture"
                 android:layout_centerInParent="true"
                 android:layout_width="130dp"
                 android:layout_height="130dp" />

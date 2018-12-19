@@ -10,25 +10,38 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarResultApotek"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/toolbar"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme" >
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:foregroundGravity="left"
+        android:onClick="BackBack2"
+        android:background="@drawable/ic_chevron_left_black_24dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:orientation="vertical">
+
+
 
     <EditText
         android:id="@+id/et_searchApotek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundedbox"
         android:drawableLeft="@drawable/ic_search_black"
@@ -36,10 +49,11 @@
         android:ems="10"
         android:inputType="textPersonName"/>
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:id="@+id/tv_ApotekNameResult"
         tools:text="Apotek Name"
@@ -48,28 +62,35 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/gray"
         android:text="Rating Apotek"/>
 
         <RatingBar
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_weight="2"
             android:id="@+id/rbApotek"/>
 
-        <View
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#e4e4e4"/>
     </LinearLayout>
+
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e4e4e4"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
             android:text="Alamat"/>
 
         <RelativeLayout
@@ -77,8 +98,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <TextView
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:paddingBottom="15dp"
+            android:textStyle="bold"
             android:id="@+id/tv_address_apotek_result"
             tools:text="Jelambar"/>
 
@@ -93,22 +117,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
             android:text="No Telepon"/>
         
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:textStyle="bold"
             android:id="@+id/tv_PhoneNumber"
             tools:text="00000000000"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColor="@color/gray"
             android:text="Jam Operasional"/>
         
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:textStyle="bold"
             android:id="@+id/tv_OperationalHourApotek"
             tools:text="Minggu"/>
     </LinearLayout>
@@ -119,7 +149,8 @@
         android:orientation="horizontal">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -138,6 +169,7 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
                 android:id="@+id/rvProdukPromo"
                 tools:listitem="@layout/cv_obat_promo">
             </android.support.v7.widget.RecyclerView>

@@ -86,9 +86,9 @@ public class CartActivity extends AppCompatActivity {
         info = (TextView) findViewById(R.id.info);
         outlet_name = (TextView) findViewById(R.id.outlet_name);
         alamat = findViewById(R.id.tvOutletAddress);
-        jumlah = findViewById(R.id.jumlah);
+//        jumlah = findViewById(R.id.jumlah);
         jumlahPembayaran = findViewById(R.id.totalPembayaran);
-        biaya_pengiriman = findViewById(R.id.biayaPengiriman);
+//        biaya_pengiriman = findViewById(R.id.biayaPengiriman);
         r_apotek = findViewById(R.id.radio_apotek);
         r_group = findViewById(R.id.radio_group);
         empty = (LinearLayout) findViewById(R.id.kosong);

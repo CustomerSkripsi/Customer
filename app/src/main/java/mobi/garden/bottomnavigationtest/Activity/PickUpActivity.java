@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -38,8 +38,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-
-import mobi.garden.bottomnavigationtest.LoginRegister.Register;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.cart;
@@ -58,7 +56,8 @@ public class PickUpActivity extends AppCompatActivity {
     String OutletID;
     String CustomerID;
     ImageView iv_barcode,iv_barcode_member;
-    Button BRegister,btnBack;
+    TextView tvNomor;
+    Button BSelesai,btnBack;
     static TextView tv_apotek_name,tv_apotek_address,tv_apotek_noTlp,tv_apotek_pic,tv_apotek_pic_noTlp;
     String urlApotek = "Http://Pharmanet.Apodoc.id/select_detail_transaction.php?id=";
     UserLocalStore userLocalStore;
@@ -88,10 +87,12 @@ public class PickUpActivity extends AppCompatActivity {
 
         // barcode image
         Bitmap bitmap = null;
-        btnBack = (Button) findViewById(R.id.btnBack);
+ //       btnBack = (Button) findViewById(R.id.btnBack);
         iv_barcode = (ImageView) findViewById(R.id.iv_barcode);
-        iv_barcode_member = (ImageView) findViewById(R.id.iv_barcode_member);
-        BRegister = (Button) findViewById(R.id.BRegister);
+//        iv_barcode_member = (ImageView) findViewById(R.id.iv_barcode_member);
+
+        tvNomor = (TextView) findViewById(R.id.tv_nomor);
+        BSelesai = (Button) findViewById(R.id.BSelesai);
         tv_apotek_name = (TextView) findViewById(R.id.tv_apotek_name);
         tv_apotek_address = (TextView) findViewById(R.id.tv_apotek_address);
         tv_apotek_noTlp = (TextView) findViewById(R.id.tv_apotek_noTlp);
@@ -126,16 +127,19 @@ public class PickUpActivity extends AppCompatActivity {
             }
         });
 
-        BRegister.setOnClickListener(new View.OnClickListener() {
+        BSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PickUpActivity.this, Register.class));
+                startActivity(new Intent(PickUpActivity.this, HomeActivity.class));
             }
         });
 
         setStatusBarGradiant(this);
     }
 
+    public void BackBack5(View view){
+        super.onBackPressed();
+    }
     private static final int WHITE = 0xFFFFFFFF;
     private static final int BLACK = 0xFF000000;
 

@@ -3,18 +3,23 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,8 +28,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import mobi.garden.bottomnavigationtest.Session.SessionManagement;
-import mobi.garden.bottomnavigationtest.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -41,6 +44,9 @@ import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
+import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
+
 public class LupaPass extends AppCompatActivity {
 
     SessionManagement session;
@@ -51,7 +57,8 @@ public class LupaPass extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendTokenLupaPass;
     EditText etHPLupa_Pass, etLupaPassKodVerif;
     String nomorHPLupaAuth, mVerificationIdLupaPass;
-    Button btnMasukLupaPass, btnLupaPassKirimVer, btnLupaPassVerifikasi, btnLupaPassKirimUlang;
+    Button btnMasukLupaPass, btnLupaPassKirimVer, btnLupaPassVerifikasi;
+    TextView btnLupaPassKirimUlang;
     AlertDialog dialog;
     AlertDialog.Builder builder;
     long delay = 500;
@@ -148,8 +155,7 @@ public class LupaPass extends AppCompatActivity {
                     });
                     builder.show();
                     btnLupaPassKirimVer.setEnabled(true);
-                }
-                else {
+                } else {
                     jmlHps();
                     bar_LupaPassword.setVisibility(View.VISIBLE);
 
@@ -162,7 +168,7 @@ public class LupaPass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                resendVerificationCode(nomorHPLupaAuth,mResendTokenLupaPass);
+                resendVerificationCode(nomorHPLupaAuth, mResendTokenLupaPass);
                 builder.setMessage("Kode telah dikirim, Harap tunggu sebentar");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -179,10 +185,9 @@ public class LupaPass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String code = etLupaPassKodVerif.getText().toString().trim();
-                if(code.isEmpty()){
+                if (code.isEmpty()) {
                     Toast.makeText(LupaPass.this, "KODE tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     verifyPhoneNumberWithCode(mVerificationIdLupaPass, code);
                 }
             }
@@ -324,7 +329,7 @@ public class LupaPass extends AppCompatActivity {
     private Runnable input_finish_checker = new Runnable() {
         @Override
         public void run() {
-            if(System.currentTimeMillis()>(last_text_edit + delay - 5000)){
+            if (System.currentTimeMillis() > (last_text_edit + delay - 5000)) {
                 jmlHps();
             }
         }
@@ -332,9 +337,9 @@ public class LupaPass extends AppCompatActivity {
 
 
     //    //validasi nomor hape
-    private void jmlHps(){
+    private void jmlHps() {
 
-        String url1 = "http://sayasehat.apodoc.id/cekNomorHp.php?phone="+etHPLupa_Pass.getText().toString();
+        String url1 = "http://sayasehat.apodoc.id/cekNomorHp.php?phone=" + etHPLupa_Pass.getText().toString();
         JsonObjectRequest reqHp = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -347,7 +352,7 @@ public class LupaPass extends AppCompatActivity {
                             cekNomorHpLupaPass = Integer.parseInt(y);
 
 
-                            if(cekNomorHpLupaPass == 0){
+                            if (cekNomorHpLupaPass == 0) {
                                 verifikasiHpLupaPass = true;
                                 builder.setMessage("Member tidak ditemukan");
                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -360,8 +365,7 @@ public class LupaPass extends AppCompatActivity {
                                 bar_LupaPassword.setVisibility(View.GONE);
 //                                etHPMemberLama.setError("Member tidak ditemukan");
                                 btnLupaPassKirimVer.setEnabled(true);
-                            }
-                            else{
+                            } else {
                                 verifikasiHpLupaPass = false;
                                 builder.setMessage("Tekan OK untuk mengirimkan kode.");
                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -387,7 +391,7 @@ public class LupaPass extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Toast.makeText(ListPasien.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
-                Toast.makeText(LupaPass.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                Toast.makeText(LupaPass.this, "Terjadi Kendala Koneksi", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(reqHp);
@@ -395,7 +399,7 @@ public class LupaPass extends AppCompatActivity {
     }
 
     //ERROR MESSAGE
-    private void showErrorMessage(){
+    private void showErrorMessage() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LupaPass.this);
         dialogBuilder.setMessage("Incorrect members");
         dialogBuilder.setPositiveButton("Ok", null);
@@ -403,9 +407,7 @@ public class LupaPass extends AppCompatActivity {
     }
 
 
-
-
-    private void setUpVerificationCallback(){
+    private void setUpVerificationCallback() {
         mCallbacksLupaPass = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -416,11 +418,10 @@ public class LupaPass extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                if(e instanceof FirebaseAuthInvalidCredentialsException){
-                    Toast.makeText(LupaPass.this,"Kode salah", Toast.LENGTH_SHORT).show();
-                }
-                else if (e instanceof FirebaseTooManyRequestsException){
-                    Toast.makeText(LupaPass.this,"Request berlebihan", Toast.LENGTH_SHORT).show();
+                if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                    Toast.makeText(LupaPass.this, "Kode salah", Toast.LENGTH_SHORT).show();
+                } else if (e instanceof FirebaseTooManyRequestsException) {
+                    Toast.makeText(LupaPass.this, "Request berlebihan", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -430,7 +431,7 @@ public class LupaPass extends AppCompatActivity {
                 mVerificationIdLupaPass = s;
                 mResendTokenLupaPass = forceResendingToken;
 
-                Toast.makeText(LupaPass.this,"Kode sedang dikirim", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LupaPass.this, "Kode sedang dikirim", Toast.LENGTH_SHORT).show();
 
             }
         };
@@ -438,7 +439,7 @@ public class LupaPass extends AppCompatActivity {
     }
 
     //Kirim SMS
-    public void kirimSMS(String nomorHps){
+    public void kirimSMS(String nomorHps) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 nomorHps,
                 60,
@@ -449,7 +450,7 @@ public class LupaPass extends AppCompatActivity {
     }
 
     //Resend SMS
-    private void resendVerificationCode(String nomorHps, PhoneAuthProvider.ForceResendingToken token){
+    private void resendVerificationCode(String nomorHps, PhoneAuthProvider.ForceResendingToken token) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 nomorHps,
                 60,
@@ -461,8 +462,8 @@ public class LupaPass extends AppCompatActivity {
     }
 
     //Verifikasi Kode SMS
-    private void verifyPhoneNumberWithCode(String id, String code){
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id,code);
+    private void verifyPhoneNumberWithCode(String id, String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id, code);
         verifikasiPhoneCredential(credential);
         Toast.makeText(LupaPass.this, "Tunggu Sebentar, Proses Verifikasi....", Toast.LENGTH_SHORT).show();
     }
@@ -494,11 +495,10 @@ public class LupaPass extends AppCompatActivity {
 
     private void masuk() {
         String code = etHPLupa_Pass.getText().toString().trim();
-        if(code.isEmpty()){
+        if (code.isEmpty()) {
             Toast.makeText(LupaPass.this, "NOMOR tidak boleh kosong", Toast.LENGTH_SHORT).show();
             btnMasukLupaPass.setEnabled(true);
-        }
-        else if (!isValidphone(etHPLupa_Pass.getText().toString()) || etHPLupa_Pass.getText().length() < 7) {
+        } else if (!isValidphone(etHPLupa_Pass.getText().toString()) || etHPLupa_Pass.getText().length() < 7) {
             builder.setMessage("Format Nomor Handphone Anda salah");
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -509,7 +509,7 @@ public class LupaPass extends AppCompatActivity {
             builder.show();
             bar_LupaPassword.setVisibility(View.GONE);
             btnMasukLupaPass.setEnabled(true);
-        }else {
+        } else {
 
             JSONObject objadd = new JSONObject();
 //                    try {
@@ -520,11 +520,11 @@ public class LupaPass extends AppCompatActivity {
 
             try {
                 JSONObject objdetail = new JSONObject();
-                objdetail.put("nomor_hp",etHPLupa_Pass.getText().toString().trim());
-                objadd.put("data",objdetail);
+                objdetail.put("nomor_hp", etHPLupa_Pass.getText().toString().trim());
+                objadd.put("data", objdetail);
                 bar_LupaPassword.setVisibility(View.VISIBLE);
 
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -537,13 +537,13 @@ public class LupaPass extends AppCompatActivity {
                             try {
                                 if (response.getString("status").equals("OK")) {
                                     users = response.getJSONArray("result");
-                                    for(int i = 0;i < users.length();i++){
+                                    for (int i = 0; i < users.length(); i++) {
                                         JSONObject obj = users.getJSONObject(i);
 
                                         Relasi_cardNumber = obj.getString("Relasi_CardNumber").trim();
 
 
-                                        if(Relasi_cardNumber.equals("KOSONG")){
+                                        if (Relasi_cardNumber.equals("KOSONG")) {
                                             builder.setMessage("Maaf Member tidak ditemukan ");
                                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
@@ -555,7 +555,7 @@ public class LupaPass extends AppCompatActivity {
                                             dialog = builder.show();
                                             btnMasukLupaPass.setEnabled(true);
                                             bar_LupaPassword.setVisibility(View.GONE);
-                                        }else{
+                                        } else {
 
                                             Relasi_cardNumber = obj.getString("Relasi_CardNumber").trim();
                                             Relasi_nama = obj.getString("Relasi_Name").trim();
@@ -568,8 +568,6 @@ public class LupaPass extends AppCompatActivity {
                                             Relasi_Username = obj.getString("Relasi_Username").trim();
 
 
-
-
                                             builder.setMessage("Silahkan ubah password anda " + Relasi_nama.toUpperCase());
                                             bar_LupaPassword.setVisibility(View.GONE);
                                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -577,10 +575,10 @@ public class LupaPass extends AppCompatActivity {
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     // session.LoginSession(Relasi_nama,Relasi_cardNumber ,Relasi_Hp,Relasi_Username);
                                                     Intent intent = new Intent(LupaPass.this, EditLupaPasswordActivity.class);
-                                                    intent.putExtra("Relasi_nama",Relasi_nama);
-                                                    intent.putExtra("Relasi_cardNumber",Relasi_cardNumber);
-                                                    intent.putExtra("Relasi_Hp",Relasi_Hp);
-                                                    intent.putExtra("Relasi_Username",Relasi_Username);
+                                                    intent.putExtra("Relasi_nama", Relasi_nama);
+                                                    intent.putExtra("Relasi_cardNumber", Relasi_cardNumber);
+                                                    intent.putExtra("Relasi_Hp", Relasi_Hp);
+                                                    intent.putExtra("Relasi_Username", Relasi_Username);
                                                     startActivity(intent);
 //                                                            finish();
                                                 }
@@ -604,7 +602,7 @@ public class LupaPass extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             //  Toast.makeText(LupaPasswordActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LupaPass.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                            Toast.makeText(LupaPass.this, "Terjadi Kendala Koneksi", Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -622,16 +620,16 @@ public class LupaPass extends AppCompatActivity {
         sNomorHp = sNomorHp.replaceAll("[^+0-9]", "");
         String country_code = "62";
 
-        if(sNomorHp.substring(0,1).compareTo("0") == 0
-                && sNomorHp.substring(1,2).compareTo("0") != 0){
+        if (sNomorHp.substring(0, 1).compareTo("0") == 0
+                && sNomorHp.substring(1, 2).compareTo("0") != 0) {
             sNomorHp = "+" + country_code + sNomorHp.substring(1);
         }
-        sNomorHp = sNomorHp.replaceAll("^[0]{1,4}","+");
+        sNomorHp = sNomorHp.replaceAll("^[0]{1,4}", "+");
 
         return sNomorHp;
     }
 
-    private void timers(){
+    private void timers() {
         new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -646,9 +644,9 @@ public class LupaPass extends AppCompatActivity {
     }
 
 
-    public static boolean isValidphone(String phone){
+    public static boolean isValidphone(String phone) {
         boolean validate;
-        if (phone.substring(0,1).equals("0")) {
+        if (phone.substring(0, 1).equals("0")) {
             validate = true;
         } else {
             validate = false;
@@ -660,12 +658,23 @@ public class LupaPass extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(LupaPass.this,HalamanAwalActivity.class);
+        Intent i = new Intent(LupaPass.this, HalamanAwalActivity.class);
         startActivity(i);
 
     }
+
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.toolbar);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 }

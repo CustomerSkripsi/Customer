@@ -1,7 +1,6 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,11 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -32,6 +29,7 @@ public class HistoryActivity extends BaseActivity {
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     List<Fragment> fragmentList = new ArrayList<>();
+    ImageView ivBack;
 
 
     @Override
@@ -49,10 +47,7 @@ public class HistoryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toolbar toolbar = findViewById(R.id.tbHistory);
-        toolbar.setTitle("HISTORY");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
 
         viewPager = findViewById(R.id.pagerHistory);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -60,6 +55,7 @@ public class HistoryActivity extends BaseActivity {
         viewPagerAdapter.addFrag(new HistoryPending(), "Proses");
         viewPagerAdapter.addFrag(new HistoryGagal(), "Gagal");
         viewPager.setAdapter(viewPagerAdapter);
+
 
 
 
@@ -71,6 +67,9 @@ public class HistoryActivity extends BaseActivity {
 
     }
 
+    public void BackBack(View view){
+        super.onBackPressed();
+    }
 
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

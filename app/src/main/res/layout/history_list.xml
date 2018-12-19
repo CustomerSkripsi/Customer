@@ -73,12 +73,6 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <ImageView
-            android:id="@+id/iv_fotoApotek"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_people"/>
-
         <LinearLayout
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"

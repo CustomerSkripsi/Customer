@@ -75,7 +75,6 @@ public class MyMenuActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
-        setStatusBarGradiant(this);
 
         BLogin.setOnClickListener(this);
         BRegister.setOnClickListener(this);
@@ -108,8 +107,6 @@ public class MyMenuActivity extends BaseActivity implements View.OnClickListener
             Window window = activity.getWindow();
             Drawable background = activity.getResources().getDrawable(R.drawable.gradient);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-//            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
         }
     }

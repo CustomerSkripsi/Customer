@@ -15,12 +15,12 @@
             android:id="@+id/toolbar_as"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@drawable/gradient"
+            android:background="@drawable/toolbar"
             app:titleTextColor="@android:color/white">
 
             <TextView
                 android:id="@+id/tv_apotekname"
-                android:textSize="16dp"
+                android:textSize="17dp"
                 android:text="NAMA APOTEK"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -220,7 +220,7 @@
                         android:background="@drawable/substract" />
 
                     <ImageButton
-                        android:layout_width="20dp"
+                        android:layout_width="30dp"
                         android:layout_height="10dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"

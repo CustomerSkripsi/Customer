@@ -3,6 +3,8 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -101,7 +105,15 @@ public class KategoriActivity extends AppCompatActivity {
 
 
     }
-
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.toolbar);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
 
     public void kategoris(String input){
         url = "http://pharmanet.apodoc.id/customer/kategori.php?input="+input;
@@ -151,5 +163,6 @@ public class KategoriActivity extends AppCompatActivity {
 //            window.setBackgroundDrawable(background);
 //        }
 //    }
+
 
 }

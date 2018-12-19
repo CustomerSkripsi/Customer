@@ -34,8 +34,7 @@
                         android:id="@+id/toolbar_cart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gradient"
-                        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                        android:background="@drawable/toolbar"                        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
@@ -44,10 +43,18 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical">
 
+                            <ImageView
+                                android:id="@+id/iv_back"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:foregroundGravity="left"
+                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
+                                android:layout_marginRight="35dp"
                                 android:text="KERANJANG BELANJA"
                                 android:textColor="#fff"
                                 android:textSize="17dp"
@@ -69,7 +76,7 @@
                             android:id="@+id/info"
                             android:layout_width="match_parent"
                             android:layout_height="10pt"
-                            android:background="@color/green_yellow"
+                            android:background="#FFB74D"
                             android:paddingLeft="15dp"
                             android:paddingTop="2dp"
                             android:textSize="11dp"
@@ -179,7 +186,7 @@
                                     android:paddingLeft="25dp"
                                     android:paddingRight="25dp"
                                     android:text="TAMBAH BARANG"
-                                    android:textColor="#b0ca8b"
+                                    android:textColor="#FB8C00"
                                     android:textSize="12dp" />
                             </LinearLayout>
 
@@ -223,7 +230,9 @@
                                             android:id="@+id/radio_apotek"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="50dp" />
+                                            android:layout_marginLeft="50dp"
+                                            android:buttonTint="#FB8C00"
+                                            android:checked="true" />
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
@@ -249,147 +258,147 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="170dp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginLeft="7dp"
                                 android:layout_marginRight="7dp"
                                 android:layout_marginTop="7dp"
                                 android:background="@android:color/white"
                                 android:orientation="vertical">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginTop="7dp"
-                                    android:text="DETAIL PEMBAYARAN"
-                                    android:textColor="#a4a4a4"
-                                    android:textStyle="bold" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginLeft="15dp"-->
+                                    <!--android:layout_marginTop="7dp"-->
+                                    <!--android:text="DETAIL PEMBAYARAN"-->
+                                    <!--android:textColor="#a4a4a4"-->
+                                    <!--android:textStyle="bold" />-->
 
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="2dp"
-                                    android:layout_marginTop="7dp"
-                                    android:background="#f7f7f7" />
+                                <!--<View-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="2dp"-->
+                                    <!--android:layout_marginTop="7dp"-->
+                                    <!--android:background="#f7f7f7" />-->
 
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:layout_weight="100"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<ImageView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:layout_width="20dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="60"-->
+                                        <!--android:text="Jumlah" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/jumlah"-->
+                                        <!--android:layout_width="45dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginRight="11dp"-->
+                                        <!--android:layout_weight="39"-->
+                                        <!--android:gravity="end"-->
+                                        <!--android:text="total"-->
+                                        <!--android:textAlignment="textEnd" />-->
+
+                                <!--</LinearLayout>-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:layout_weight="100"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<ImageView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:layout_width="20dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="60"-->
+                                        <!--android:text="Biaya Pengiriman" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/biayaPengiriman"-->
+                                        <!--android:layout_width="45dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginRight="11dp"-->
+                                        <!--android:layout_weight="39"-->
+                                        <!--android:gravity="end"-->
+                                        <!--android:text="total"-->
+                                        <!--android:textAlignment="textEnd" />-->
+
+                                <!--</LinearLayout>-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:layout_weight="100"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<ImageView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:layout_width="20dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="10dp"-->
+                                        <!--android:layout_weight="60"-->
+                                        <!--android:text="Punya kode voucher ?" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/voucher"-->
+                                        <!--android:layout_width="45dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginRight="11dp"-->
+                                        <!--android:layout_weight="39"-->
+                                        <!--android:gravity="end"-->
+                                        <!--android:text="total"-->
+                                        <!--android:textAlignment="textEnd" />-->
+
+                                <!--</LinearLayout>-->
+
+                                <!--<View-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="2dp"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:background="#f7f7f7" />-->
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:layout_weight="100"
+                                    android:layout_weight="20"
                                     android:orientation="horizontal">
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
-
-                                    <TextView
-                                        android:layout_width="20dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="60"
-                                        android:text="Jumlah" />
-
-                                    <TextView
-                                        android:id="@+id/jumlah"
-                                        android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="11dp"
-                                        android:layout_weight="39"
-                                        android:gravity="end"
-                                        android:text="total"
-                                        android:textAlignment="textEnd" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_weight="100"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
-
-                                    <TextView
-                                        android:layout_width="20dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="60"
-                                        android:text="Biaya Pengiriman" />
-
-                                    <TextView
-                                        android:id="@+id/biayaPengiriman"
-                                        android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="11dp"
-                                        android:layout_weight="39"
-                                        android:gravity="end"
-                                        android:text="total"
-                                        android:textAlignment="textEnd" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_weight="100"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
-
-                                    <TextView
-                                        android:layout_width="20dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="60"
-                                        android:text="Punya kode voucher ?" />
-
-                                    <TextView
-                                        android:id="@+id/voucher"
-                                        android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="11dp"
-                                        android:layout_weight="39"
-                                        android:gravity="end"
-                                        android:text="total"
-                                        android:textAlignment="textEnd" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="2dp"
-                                    android:layout_marginTop="5dp"
-                                    android:background="#f7f7f7" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_weight="100"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/ic_shopping_cart_black_24dp" />
+                                        android:layout_weight="1" />
+                                    <!--android:background="@drawable/ic_shopping_cart_black_24dp" />-->
 
                                     <TextView
                                         android:layout_width="20dp"
@@ -422,8 +431,8 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginRight="20dp"
                                 android:layout_marginTop="20dp"
-                                android:background="@drawable/gradient"
-                                android:text="Lanjut Pembelian"
+                                android:background="@drawable/orangebutton"
+                                android:text="PROSES SEKARANG"
                                 android:textColor="@android:color/white" />
                         </LinearLayout>
 
