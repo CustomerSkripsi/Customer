@@ -161,7 +161,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             @Override
             public void onClick(View v) {
                 Log.d("qtynya",product.cartProductQty+"");
-//                if (product.cartProductQty==1) {
+//                if (product.cartProductQty==1) {/
 //                    builder = new AlertDialog.Builder(context);
 ////                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 //                    builder.setTitle("Konfirmasi Hapus Product "+product.getProductName()+" dari keranjang");
