@@ -91,7 +91,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setCurrencySymbol("Rp. ");
-        dfs.setMonetaryDecimalSeparator(',');
+        dfs.setMonetaryDecimalSeparator('.');
         dfs.setGroupingSeparator('.');
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
@@ -123,6 +123,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
             @Override
             public void onClick(View v) {
                 add(pr.productID, pr.outletProductPrice,1, memberID);
+
                 holder.btn_add_obat.setEnabled(false);
                 holder.btn_add_obat.setBackgroundResource(R.drawable.add_button_set_enabled);
                 Toast.makeText(context, ""+pr.productID, Toast.LENGTH_SHORT).show();

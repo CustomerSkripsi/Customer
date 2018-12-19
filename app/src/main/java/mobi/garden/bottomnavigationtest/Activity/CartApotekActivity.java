@@ -131,7 +131,7 @@ public class CartApotekActivity extends AppCompatActivity {
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setCurrencySymbol("Rp. ");
-        dfs.setMonetaryDecimalSeparator(',');
+        dfs.setMonetaryDecimalSeparator('.');
         dfs.setGroupingSeparator('.');
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
@@ -371,6 +371,7 @@ public class CartApotekActivity extends AppCompatActivity {
                                 obj.getString("ProductName"),
                                 obj.getString("ProductID"),
                                 obj.getInt("CartProductQty"),
+                                obj.getInt("OutletProductStockQty"),
                                 obj.getInt("CartProductPrice"),
                                 obj.getInt("CartProductPriceAfterDiscount")));
 //                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
@@ -554,24 +555,24 @@ public class CartApotekActivity extends AppCompatActivity {
 //                                    cardListBrand.setVisibility(View.VISIBLE);
 //                                    JSONObject obj = obats.getJSONObject(i);
 ////
-////                                    pr.add(new obat(
-////                                            obj.getString("ProductID"),
-////                                            obj.getString("ProductName"),
-////                                            obj.getString("ProductImage"),
-////                                            //obj.getString("ProductDescription"),
-////                                            obj.getString("ProductIndicationUsage"),
-////                                            obj.getString("ProductIngredients"),
-////                                            obj.getString("ProductDosage"),
-////                                            obj.getString("ProductHowToUse"),
-////                                            obj.getString("ProductPackage"),
-////                                            obj.getString("ProductClassification"),
-////                                            obj.getString("ProductRecipe"),
-////                                            obj.getString("ProductContraindication"),
-////                                            obj.getString("ProductStorage"),
-////                                            obj.getString("PrincipalName"),
-////                                            obj.getString("CategoryID"),
-////                                            obj.getInt("OutletProductPrice"),
-////                                            obj.getInt("OutletProductStockQty")));
+//                                    pr.add(new obat(
+//                                            obj.getString("ProductID"),
+//                                            obj.getString("ProductName"),
+//                                            obj.getString("ProductImage"),
+//                                            obj.getString("ProductDescription"),
+//                                            obj.getString("ProductIndicationUsage"),
+//                                            obj.getString("ProductIngredients"),
+//                                            obj.getString("ProductDosage"),
+//                                            obj.getString("ProductHowToUse"),
+//                                            obj.getString("ProductPackage"),
+//                                            obj.getString("ProductClassification"),
+//                                            obj.getString("ProductRecipe"),
+//                                            obj.getString("ProductContraindication"),
+//                                            obj.getString("ProductStorage"),
+//                                            obj.getString("PrincipalName"),
+//                                            obj.getString("CategoryID"),
+//                                            obj.getInt("OutletProductPrice"),
+//                                            obj.getInt("OutletProductStockQty")));
 //                                } catch (JSONException e1) {
 //                                    e1.printStackTrace();
 //                                    Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();

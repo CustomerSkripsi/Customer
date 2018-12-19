@@ -10,6 +10,9 @@ import android.os.Parcelable;
 public class obat implements Parcelable {
     public String productID;
     public String productName;
+
+
+
     public String productPhoto;
     public String productDescription;
     public String categoryID;
@@ -29,7 +32,9 @@ public class obat implements Parcelable {
         this.outletProductPrice = outletProductPrice;
         this.outletProductStockQty = outletProductStockQty;
     }
-
+    public obat(int outletProductStockQty) {
+        this.outletProductStockQty = outletProductStockQty;
+    }
     public obat(String productID, String productName, String productPhoto, String productDescription,
                 String indikasi, String kandungan, String dosis, String carapakai, String kemasan,
                 String golongan, String resepYN, String kontraindikasi, String carasimpan, String principal, String categoryID)
@@ -74,9 +79,10 @@ public class obat implements Parcelable {
         this.outletProductStockQty = outletProductStockQty;
     }
 
-    public obat(String productName, String productID,int outletProductStockQty, int cartProductPrice,  int outletProductPriceafterDsc){
+    public obat(String productName, String productID,int cartproductQty,int outletProductStockQty, int cartProductPrice,  int outletProductPriceafterDsc){
         this.productName = productName;
         this.productID = productID;
+        cartProductQty = cartproductQty;
         this.outletProductStockQty = outletProductStockQty;
         this.cartProductPrice = cartProductPrice;
         this.outletProductPriceafterDsc = outletProductPriceafterDsc;

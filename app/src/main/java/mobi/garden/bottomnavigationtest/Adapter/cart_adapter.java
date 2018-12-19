@@ -92,7 +92,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         login = session.getMemberDetails();
         userName= login.get(SessionManagement.USERNAME);
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
-
+        obat ob;
         final obat product = cartList.get(position);
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -106,8 +106,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         holder.tvCartProductName.setText(product.getProductName());
         holder.tvOutletStock.setText(product.getOutletProductStockQty() +"");
         holder.tvCartProductPrice.setText(df.format(product.getCartProductPrice()) + "");
-        holder.edtQty.setText(product.getCartProductQty() + "");
-//
+        holder.edtQty.setText(product.cartProductQty+ "");
 //        userLocalStore  = new UserLocalStore(context);
 //        User currUser = userLocalStore.getLoggedInUser();
 //        CustomerID = currUser.getUserID();
@@ -118,8 +117,10 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (holder.edtQty.getText().toString().equals("")){
-                        holder.edtQty.setText("0");
+                    if (holder.edtQty.getText().toString().equals("")||Integer.parseInt(holder.edtQty.getText().toString())==0) {
+                        holder.edtQty.setText("1");
+                        product.cartProductQty = 1;
+                        ubah(cartList.get(position).productID, product.cartProductQty,memberID);
                     }
                     else if(Integer.parseInt(holder.edtQty.getText().toString())>product.outletProductStockQty){
                         product.cartProductQty = product.outletProductStockQty;
@@ -188,6 +189,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                 if (product.cartProductQty==0) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
+
                 }else {
                     //ubah(cartList.get(position).productID, --cartList.get(position).cartProductQty,Integer.parseInt(CustomerID));
                     holder.edtQty.setText(--product.cartProductQty+"");
@@ -351,8 +353,9 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 //                                CartApotekActivity.initiateTopAdapter();
 //                                CartApotekActivity.refresh_cart(cartList,removedProduct);
                                 CartApotekActivity.refresh_cart(cartList);
-//                                CartApotekActivity.sh
+//                                CartApotekActivity.showprodukterkait(cartList, CartApotekActivity.url);
                                 Toast.makeText(context, "terhapus", Toast.LENGTH_SHORT).show();
+
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
