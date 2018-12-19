@@ -64,7 +64,7 @@ public class CartApotekActivity extends AppCompatActivity {
     private LinearLayout mLinearLayout;
     public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
     public static String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
-    public static String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName=";
+    public static String url ="http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName=" ;
 
     ViewPagerAdapter adapter;
     ViewPager viewPager;
@@ -76,13 +76,13 @@ public class CartApotekActivity extends AppCompatActivity {
     public static Context context;
     public static DecimalFormat df;
 
-    obat_adapter_as obatAdapter;
-    List<obat> pr = new ArrayList<>();
+    static obat_adapter_as obatAdapter;
+    static List<obat> pr = new ArrayList<>();
     private static RecyclerView cardListBrand;
     private static RecyclerView recyclerViewCartList;
     private static List<obat> cartList = new ArrayList<>();
     private static cart_adapter adapterRvBelow;
-    RecyclerView rvProdukAll;
+    static RecyclerView rvProdukAll;
     RecyclerView rvCart;
 
     private static TextView tvApotekName;
@@ -99,10 +99,10 @@ public class CartApotekActivity extends AppCompatActivity {
     public static final String PRODUCT_ID="product_id";
     public static final String OUTLET_NAME = "outlet_name";
 
-
+    public static String temp;
     static String Outlet_ID , Product_ID, Outlet_Name , namaApotek;
-    String namaproduk,tempfoto,idProduk;
-    int qty, hargaproduk;
+    static String namaproduk,tempfoto,idProduk;
+    static int qty, hargaproduk;
 
    // static String CustomerID;
     ImageButton buyBtn;
@@ -203,6 +203,8 @@ public class CartApotekActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         cardListBrand.setLayoutManager(llm);
 
+        Intent is = getIntent();
+        String ProductName = is.getStringExtra("ProductName");
 
 
         initiateBelowAdapter();
@@ -374,6 +376,8 @@ public class CartApotekActivity extends AppCompatActivity {
                                 obj.getInt("OutletProductStockQty"),
                                 obj.getInt("CartProductPrice"),
                                 obj.getInt("CartProductPriceAfterDiscount")));
+
+                        temp = obj.getString("ProductName");
 //                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
                         totalPrice += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
                         count += obj.getInt("CartProductQty");
@@ -433,9 +437,8 @@ public class CartApotekActivity extends AppCompatActivity {
         });
     }
 
-    public void showprodukterkait(){
-//        String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek;
-        JsonObjectRequest req = new JsonObjectRequest(url+namaApotek, null, new Response.Listener<JSONObject>() {
+    public static void showprodukterkait(){
+        JsonObjectRequest req = new JsonObjectRequest("http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray result = null;
@@ -492,6 +495,7 @@ public class CartApotekActivity extends AppCompatActivity {
         }
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
+
         adapterRvBelow = new cart_adapter(context,cartList);
         adapterRvBelow.setCartList(cartList);
         recyclerViewCartList.setAdapter(adapterRvBelow);
