@@ -1,6 +1,8 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -41,7 +43,7 @@ import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHolder>{
 
     Context context;
-    List<obat> cartList;
+    public static List<obat> cartList;
 
     AlertDialog dialog;
     AlertDialog.Builder builder;
@@ -58,8 +60,15 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     SessionManagement session;
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
+    String ProductName;
 
-
+    public cart_adapter(Context context, List<obat> cartList, String productName) {
+        this.context = context;
+        this.cartList = cartList;
+        this.memberID = CustomerID;
+        ProductName = productName;
+        session = new SessionManagement(context);
+    }
     public cart_adapter(Context context, List<obat> cartList) {
         this.context = context;
         this.cartList = cartList;
@@ -186,6 +195,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                 if (product.cartProductQty==0) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
+                   if(ProductName != product.getProductName()){
+                       Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+                   }
+                    if(CartApotekActivity.temp == product.getProductName()){
+                        Log.d("gak tauuu", "onBindViewHolder:"+CartApotekActivity.temp);
+                    }
 
                 }else {
                     //ubah(cartList.get(position).productID, --cartList.get(position).cartProductQty,Integer.parseInt(CustomerID));
@@ -275,31 +290,33 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         }
     }
 
-    public void ubah(String id, int qty, String CustomerID) {
+    public void ubah(String id, int qty , String memberID) {
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("Id_Product", id);
             objDetail.put("Qty", qty);
-            objDetail.put("CustomerID",CustomerID);
+            objDetail.put("CustomerID",memberID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
             Log.d("asd", "ubah: "+objAdd);
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/UpdateCart.php", objAdd,
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/updateCartCustomer.php", objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
+
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                //CartActivity.refresh_total_cart(cartList);
+                                CartApotekActivity.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -346,7 +363,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 //                                CartApotekActivity.initiateTopAdapter();
 //                                CartApotekActivity.refresh_cart(cartList,removedProduct);
                                 CartApotekActivity.refresh_cart(cartList);
-//                                CartApotekActivity.showprodukterkait(cartList, CartApotekActivity.url);
+                                CartApotekActivity.showprodukterkait();
                                 Toast.makeText(context, "terhapus", Toast.LENGTH_SHORT).show();
 
                             }

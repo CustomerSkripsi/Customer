@@ -40,7 +40,7 @@ import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatViewHolder> {
 
     List<obat> obatlist;
-    List<obat> cartlist;
+    obat ss;
     Context context;//String CustomerID;
     static DecimalFormat df;
     public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
@@ -111,13 +111,14 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         });
 //        holder.btn_add_obat.setEnabled(true);
 //        holder.btn_add_obat.setBackgroundResource(R.drawable.btn_unclicked_home);
-//        for(int j=0;j<cartlist.size();j++){
-//            if(pr.productID.equals(cartlist.get(j).productID)){
-//                holder.btn_add_obat.setEnabled(false);
-//                holder.btn_add_obat.setBackgroundResource(R.drawable.add_button_set_enabled);
-//                break;
-//            }
-//        }
+        for(int j=0;j<cart_adapter.cartList.size();j++){
+            if(pr.productID.equals(cart_adapter.cartList.get(j).productID)){
+                holder.btn_add_obat.setEnabled(false);
+                holder.btn_add_obat.setBackgroundResource(R.drawable.add_button_set_enabled);
+                break;
+            }
+        }
+
 
         holder.btn_add_obat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +135,9 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                 data.putExtra(CONFIG.PREV_PAGE,text);
             }
         });
+
+
+      // CartApotekActivity.show_cart();
 
     }
 
@@ -188,6 +192,9 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
+
+                              //  String temp = ss.getProductName();
+                                //Log.d("hahahhas", "onResponse: "+temp);
 //                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e1) {
