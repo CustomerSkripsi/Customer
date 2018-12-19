@@ -3,12 +3,21 @@ package mobi.garden.bottomnavigationtest.Model;
 public class ModelPromo {
 
     String ProductID,PromoNameProduct, ProductNameUrl;
-    int PriceProduct, ProductPriceAfterDC;
+    int PriceProduct, ProductPriceAfterDC,outletID;
     public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct,int productPriceAfterDC) {
         this.PromoNameProduct = promoNameProduct;
         this.ProductNameUrl = productNameUrl;
         this.PriceProduct = priceProduct;
         this.ProductPriceAfterDC = productPriceAfterDC;
+    }
+
+    public ModelPromo(String productID, String promoNameProduct, String productNameUrl, int outletID ,int priceProduct, int productPriceAfterDC) {
+        ProductID = productID;
+        PromoNameProduct = promoNameProduct;
+        ProductNameUrl = productNameUrl;
+        this.outletID = outletID;
+        PriceProduct = priceProduct;
+        ProductPriceAfterDC = productPriceAfterDC;
     }
 
     public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct) {
