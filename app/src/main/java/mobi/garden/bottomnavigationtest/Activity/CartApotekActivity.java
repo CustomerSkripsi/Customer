@@ -62,6 +62,9 @@ public class CartApotekActivity extends AppCompatActivity {
     private SliderIndicator mIndicator;
     private SliderView sliderView;
     private LinearLayout mLinearLayout;
+    public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
+    public static String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
+    public static String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName=";
 
     ViewPagerAdapter adapter;
     ViewPager viewPager;
@@ -75,7 +78,6 @@ public class CartApotekActivity extends AppCompatActivity {
 
     obat_adapter_as obatAdapter;
     List<obat> pr = new ArrayList<>();
-
     private static RecyclerView cardListBrand;
     private static RecyclerView recyclerViewCartList;
     private static List<obat> cartList = new ArrayList<>();
@@ -99,7 +101,7 @@ public class CartApotekActivity extends AppCompatActivity {
 
 
     static String Outlet_ID , Product_ID, Outlet_Name , namaApotek;
-    String namaproduk,tempfoto;
+    String namaproduk,tempfoto,idProduk;
     int qty, hargaproduk;
 
    // static String CustomerID;
@@ -124,10 +126,12 @@ public class CartApotekActivity extends AppCompatActivity {
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         context = getApplicationContext();
 
+        Toast.makeText(this, memberID + " cartapotekact", Toast.LENGTH_SHORT).show();
+
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setCurrencySymbol("Rp. ");
-        dfs.setMonetaryDecimalSeparator(',');
+        dfs.setMonetaryDecimalSeparator('.');
         dfs.setGroupingSeparator('.');
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
@@ -162,15 +166,16 @@ public class CartApotekActivity extends AppCompatActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots2);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new CartApotekActivity.MyTimerTask(), 2000, 4000);
-
+        tvApotekName = findViewById(R.id.tv_apotekname);
         Intent intent = getIntent();
         namaApotek =  intent.getStringExtra("ApotekName");
+        tvApotekName.setText(namaApotek);
         Log.d("test", "jass: "+namaApotek);
         if(namaApotek.contains(" ")){
             namaApotek = namaApotek.replace(" "," ");
         }
 
-        tvApotekName = findViewById(R.id.tv_apotekname);
+
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
         mBadge = findViewById(R.id.badge);
 
@@ -183,7 +188,7 @@ public class CartApotekActivity extends AppCompatActivity {
         recyclerViewCartList.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewCartList.setLayoutManager(setLayout);
-        //initiateBelowAdapter();
+        initiateBelowAdapter();
 
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,12 +349,13 @@ public class CartApotekActivity extends AppCompatActivity {
         rvCart.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
-                String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
+
         show_cart(urlbawahs,"8181200006");
     }
 
-    public static void show_cart(String urlbawah, String memberID) {
-        JsonObjectRequest rec = new JsonObjectRequest(urlbawah+memberID, null, new Response.Listener<JSONObject>() {
+    public static void show_cart(String urlbawahs, String memberID) {
+        Log.d("testurl", urlbawahs+ memberID);
+        JsonObjectRequest rec = new JsonObjectRequest(urlbawahs + memberID, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray products = null;
@@ -362,7 +368,7 @@ public class CartApotekActivity extends AppCompatActivity {
                 count=0;
                 totalPrice=0;
                 for (int i = 0; i < products.length(); i++) {
-                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
                     try {
                         recyclerViewCartList.setVisibility(View.VISIBLE);
                         JSONObject obj = products.getJSONObject(i);
@@ -370,9 +376,10 @@ public class CartApotekActivity extends AppCompatActivity {
                                 obj.getString("ProductName"),
                                 obj.getString("ProductID"),
                                 obj.getInt("CartProductQty"),
+                                obj.getInt("OutletProductStockQty"),
                                 obj.getInt("CartProductPrice"),
                                 obj.getInt("CartProductPriceAfterDiscount")));
-                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
                         totalPrice += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
                         count += obj.getInt("CartProductQty");
                         Log.d("rwarqwe", obj.toString());
@@ -382,10 +389,16 @@ public class CartApotekActivity extends AppCompatActivity {
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
-                mBadge.setNumber(count);
-                Toast.makeText(context, cartList.size()+"sudah", Toast.LENGTH_SHORT).show();
+                mBadge.setNumber(cartList.size());
                 adapterRvBelow = new cart_adapter(context,cartList);
+                adapterRvBelow.setCartList(cartList);
                 recyclerViewCartList.setAdapter(adapterRvBelow);
+
+//                tvTotalPrice.setText(df.format(totalPrice)+"");
+//                mBadge.setNumber(count);
+////                Toast.makeText(context, cartList.size()+"sudah", Toast.LENGTH_SHORT).show();
+//                adapterRvBelow = new cart_adapter(context,cartList);
+//                recyclerViewCartList.setAdapter(adapterRvBelow);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -426,8 +439,8 @@ public class CartApotekActivity extends AppCompatActivity {
     }
 
     public void showprodukterkait(){
-        String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek;
-        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+//        String url = "http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek;
+        JsonObjectRequest req = new JsonObjectRequest(url+namaApotek, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray result = null;
@@ -440,26 +453,34 @@ public class CartApotekActivity extends AppCompatActivity {
                 for(int i=0; i< result.length();i++){
                     try {
                         JSONObject object = result.getJSONObject(i);
+                        idProduk = object.getString("ProductID");
                         namaproduk = object.getString("ProductName");
                         tempfoto = object.getString("ProductImage");
                         qty = object.getInt("OutletProductStockQty");
                         hargaproduk = object.getInt("OutletProductPrice");
                         Log.d("awasdaasd", namaproduk);
-                        pr.add(new obat(namaproduk,tempfoto,hargaproduk,qty));
+                        pr.add(new obat(idProduk,namaproduk,tempfoto,hargaproduk,qty));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("rwarfgss", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                tvApotekName.setText(namaApotek);
+//
+//                tvApotekName.setText(namaApotek);
+//                obatAdapter = new obat_adapter_as(pr,context);
+//                obatAdapter.setProductList(pr);
+//                adapterRvBelow.setCartList(cartList);
+//                rvProdukAll.setAdapter(obatAdapter);
+
+
                 obatAdapter = new obat_adapter_as(pr,context);
                 rvProdukAll.setAdapter(obatAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(CartApotekActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CartApotekActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -477,6 +498,7 @@ public class CartApotekActivity extends AppCompatActivity {
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
         adapterRvBelow = new cart_adapter(context,cartList);
+        adapterRvBelow.setCartList(cartList);
         recyclerViewCartList.setAdapter(adapterRvBelow);
     }
 
@@ -498,7 +520,7 @@ public class CartApotekActivity extends AppCompatActivity {
         if(session.getUserLoggedIn()){
 //            not_empty.setVisibility(not_empty.VISIBLE);
             //show_cart(urlbawah, memberID);
-          //  show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
+//            show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
         }
 
 
@@ -540,24 +562,24 @@ public class CartApotekActivity extends AppCompatActivity {
 //                                    cardListBrand.setVisibility(View.VISIBLE);
 //                                    JSONObject obj = obats.getJSONObject(i);
 ////
-////                                    pr.add(new obat(
-////                                            obj.getString("ProductID"),
-////                                            obj.getString("ProductName"),
-////                                            obj.getString("ProductImage"),
-////                                            //obj.getString("ProductDescription"),
-////                                            obj.getString("ProductIndicationUsage"),
-////                                            obj.getString("ProductIngredients"),
-////                                            obj.getString("ProductDosage"),
-////                                            obj.getString("ProductHowToUse"),
-////                                            obj.getString("ProductPackage"),
-////                                            obj.getString("ProductClassification"),
-////                                            obj.getString("ProductRecipe"),
-////                                            obj.getString("ProductContraindication"),
-////                                            obj.getString("ProductStorage"),
-////                                            obj.getString("PrincipalName"),
-////                                            obj.getString("CategoryID"),
-////                                            obj.getInt("OutletProductPrice"),
-////                                            obj.getInt("OutletProductStockQty")));
+//                                    pr.add(new obat(
+//                                            obj.getString("ProductID"),
+//                                            obj.getString("ProductName"),
+//                                            obj.getString("ProductImage"),
+//                                            obj.getString("ProductDescription"),
+//                                            obj.getString("ProductIndicationUsage"),
+//                                            obj.getString("ProductIngredients"),
+//                                            obj.getString("ProductDosage"),
+//                                            obj.getString("ProductHowToUse"),
+//                                            obj.getString("ProductPackage"),
+//                                            obj.getString("ProductClassification"),
+//                                            obj.getString("ProductRecipe"),
+//                                            obj.getString("ProductContraindication"),
+//                                            obj.getString("ProductStorage"),
+//                                            obj.getString("PrincipalName"),
+//                                            obj.getString("CategoryID"),
+//                                            obj.getInt("OutletProductPrice"),
+//                                            obj.getInt("OutletProductStockQty")));
 //                                } catch (JSONException e1) {
 //                                    e1.printStackTrace();
 //                                    Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();

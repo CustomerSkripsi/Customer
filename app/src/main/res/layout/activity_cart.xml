@@ -186,7 +186,7 @@
                                     android:paddingLeft="25dp"
                                     android:paddingRight="25dp"
                                     android:text="TAMBAH BARANG"
-                                    android:textColor="#FB8C00"
+                                    android:textColor="#b0ca8b"
                                     android:textSize="12dp" />
                             </LinearLayout>
 

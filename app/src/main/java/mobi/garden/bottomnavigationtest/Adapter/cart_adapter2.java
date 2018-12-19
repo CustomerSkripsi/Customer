@@ -12,7 +12,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,31 +28,22 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartActivity;
+import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
-import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewHolder> {
 
     Context context;
     List<cart> cartList;
-    int userID;
-    //String CustomerID;
-    int hargaProduct;
+    int userID,hargaProduct;
+    String CustomerID;
     static DecimalFormat df;
     boolean isStoppedClicked = true;
-
-    //login
-    SessionManagement session;
-    HashMap<String, String> login;
-    public static String CustomerID,memberID, userName;
-    static LinearLayout empty, not_empty, not_login;
-
 
     UserLocalStore userLocalStore;
     public cart_adapter2(Context context, List<cart> cartList, int userID) {
@@ -73,10 +63,10 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         final cart product = cartList.get(position);
         hargaProduct = product.getCartProductPrice() * product.getCartProductQty();
 
-//
-//        userLocalStore  = new UserLocalStore(context);
-//        User currUser = userLocalStore.getLoggedInUser();
-//        CustomerID = currUser.getUserID();
+
+        userLocalStore  = new UserLocalStore(context);
+        User currUser = userLocalStore.getLoggedInUser();
+        CustomerID = currUser.getUserID();
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
@@ -94,7 +84,6 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         holder.edtQty.setOnEditorActionListener(new DoneOnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     if (holder.edtQty.getText().toString().equals("")){
                         holder.edtQty.setText("0");
@@ -107,14 +96,14 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
                         holder.tvCartProductPrice.setText(df.format(hargaProduct)+"");
 
                         Toast.makeText(context, "Stock barang hanya "+  product.outletProductStockQty, Toast.LENGTH_SHORT).show();
-                        ubah(cartList.get(position).productID, product.cartProductQty, memberID);
+                        ubah(cartList.get(position).productID, product.cartProductQty, Integer.parseInt(CustomerID));
                     }
                     else {
                         product.cartProductQty = Integer.parseInt(holder.edtQty.getText().toString());
                         hargaProduct= product.cartProductQty * product.cartProductPrice;
                         holder.tvCartProductPrice.setText(df.format(hargaProduct)+"");
 
-                        ubah(cartList.get(position).productID, product.cartProductQty, memberID);
+                        ubah(cartList.get(position).productID, product.cartProductQty, Integer.parseInt(CustomerID));
                     }
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -175,7 +164,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         @Override
         protected Void doInBackground(cart... carts) {
             cart product =carts[0];
-            ubah(product.productID, product.cartProductQty, memberID);
+            ubah(product.productID, product.cartProductQty, Integer.parseInt(CustomerID));
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
             return null;
         }
@@ -189,7 +178,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
     }
 
 
-    class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
+    private class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -206,7 +195,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
         @Override
         protected Void doInBackground(cart... carts) {
             cart product = carts[0];
-            ubah(product.productID, product.cartProductQty, memberID);
+            ubah(product.productID, product.cartProductQty, Integer.parseInt(CustomerID));
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
 
             return null;
@@ -250,14 +239,14 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
     }
 
 
-    public void ubah(String id, int qty, String memberID) {
+    public void ubah(String id, int qty, int CustomerID) {
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("Id_Product", id);
             objDetail.put("Qty", qty);
-            objDetail.put("CustomerID",memberID);
+            objDetail.put("CustomerID",CustomerID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
         } catch (JSONException e1) {
@@ -270,7 +259,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartActivity.refresh_total_cart(cartList);
+                               // CartActivity.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
