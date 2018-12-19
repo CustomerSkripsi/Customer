@@ -871,6 +871,8 @@ public class RegisterMember extends AppCompatActivity{
                                 e.printStackTrace();
                             }
                             Log.d("test123", objRegister.toString());
+
+//                            gak masuk sini?????
                             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, REGISTER_URL, objRegister,
                                     new Response.Listener<JSONObject>() {
                                         @Override

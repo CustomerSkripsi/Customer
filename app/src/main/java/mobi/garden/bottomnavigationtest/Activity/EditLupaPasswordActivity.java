@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -139,7 +141,7 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
                                 objDetail.put("password",etKonfirmasiPasswordLupaPass.getText().toString().trim());
                                 objDetail.put("member", member);
                                 objRegister.put("data", objDetail);
-
+//                                Log.d("data1", objDetail.toString());
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
@@ -151,13 +153,17 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
                                         public void onResponse(JSONObject response) {
                                             JSONArray users;
                                             try {
+//                                                Log.d("qwer", "msk");
                                                 if (response.getString("status").equals("OK")) {
 
                                                     users = response.getJSONArray("result");
+//                                                    Log.d("qwer1", "msk1");
+
                                                     for(int i = 0;i < users.length();i++){
                                                         JSONObject obj = users.getJSONObject(i);
 
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
+//                                                        Log.d("qwer2", Relasi_CardNumber);
 
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
@@ -187,7 +193,7 @@ public class EditLupaPasswordActivity extends AppCompatActivity {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            // Toast.makeText(Register.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                                             Toast.makeText(EditLupaPasswordActivity.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
                                         }
                                     });
                             RequestQueue requestQueue = Volley.newRequestQueue(EditLupaPasswordActivity.this);

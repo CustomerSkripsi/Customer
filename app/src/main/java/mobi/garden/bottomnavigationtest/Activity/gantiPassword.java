@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -246,6 +247,7 @@ public class gantiPassword extends AppCompatActivity {
                                 objDetail.put("password",etKonfirmasiPassBaruGantiPass.getText().toString().trim());
                                 objDetail.put("member", member.get(SessionManagement.KEY_KODEMEMBER));
                                 objRegister.put("data", objDetail);
+//                                Log.d("qwer", "asdqwe");
 
                             }catch (JSONException e){
                                 e.printStackTrace();
@@ -258,14 +260,15 @@ public class gantiPassword extends AppCompatActivity {
                                         public void onResponse(JSONObject response) {
                                             JSONArray users;
                                             try {
+//                                                Log.d("qwer1", "q");
                                                 if (response.getString("status").equals("OK")) {
-
                                                     users = response.getJSONArray("result");
+//                                                    Log.d("qwer", "ccc");
                                                     for(int i = 0;i < users.length();i++)
                                                     {
                                                         JSONObject obj = users.getJSONObject(i);
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
-
+//                                                        Log.d("qwer", Relasi_CardNumber);
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
                                                         }else {
@@ -290,7 +293,7 @@ public class gantiPassword extends AppCompatActivity {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            Toast.makeText(gantiPassword.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                                            Toast.makeText(gantiPassword.this,"aaa",Toast.LENGTH_LONG ).show();
                                         }
                                     });
                                 RequestQueue requestQueue = Volley.newRequestQueue(gantiPassword.this);

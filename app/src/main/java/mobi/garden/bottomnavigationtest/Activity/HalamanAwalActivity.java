@@ -48,7 +48,7 @@ public class HalamanAwalActivity extends AppCompatActivity {
 
     EditText etUsername, etPassword;
     Button btnLogin, btnDaftar, btnSudah, btnBelum, btnLupaPass;
-    TextView tvDaftar,tvLupaPass;
+    TextView tvDaftar,tvLupaPass, tvGoogle, tvFacebook;
 
 
     //Kode bebas
@@ -66,7 +66,8 @@ public class HalamanAwalActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvDaftar = findViewById(R.id.tvdaftar);
         tvLupaPass = findViewById(R.id.tvLupaPass);
-
+//        tvGoogle = findViewById(R.id.tvGoogle);
+//        tvFacebook = findViewById(R.id.tvfacebook);
         etUsername = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);
 
@@ -106,6 +107,19 @@ public class HalamanAwalActivity extends AppCompatActivity {
             }
         });
 
+//       tvGoogle.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               Toast.makeText(HalamanAwalActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+//           }
+//       });
+//
+//       tvFacebook.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               Toast.makeText(HalamanAwalActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+//           }
+//       });
     }
 
     //GENERATE PASSWORD

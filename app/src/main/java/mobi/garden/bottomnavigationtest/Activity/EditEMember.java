@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -62,6 +63,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mobi.garden.bottomnavigationtest.Adapter.SearchAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.SearchAdapterEdit;
 import mobi.garden.bottomnavigationtest.Model.CityItem;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
@@ -89,7 +91,7 @@ public class EditEMember extends AppCompatActivity {
     RecyclerView recyclerView;
     List<CityItem> cityItemList = new ArrayList<>();
     List<CityItem> searchList = new ArrayList<>();
-    SearchAdapter searchAdapter;
+    SearchAdapterEdit searchAdapter;
 
 
     public static EditText etKota;
@@ -374,7 +376,7 @@ public class EditEMember extends AppCompatActivity {
                         }
                     }
                 }
-                searchAdapter = new SearchAdapter(searchList, getBaseContext());
+                searchAdapter = new SearchAdapterEdit(searchList, getBaseContext());
                 recyclerView.setAdapter(searchAdapter);
 
             }
@@ -598,7 +600,7 @@ public class EditEMember extends AppCompatActivity {
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
-
+                            Log.d("testedit", objRegister.toString());
                             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, EDIT_URL, objRegister,
                                     new Response.Listener<JSONObject>() {
                                         @Override
@@ -614,11 +616,12 @@ public class EditEMember extends AppCompatActivity {
                                                         JSONObject obj = users.getJSONObject(i);
 
                                                         Relasi_CardNumber = obj.getString("Relasi_CardNumber").trim();
+                                                        Toast.makeText(EditEMember.this, "qwe", Toast.LENGTH_SHORT).show();
 
                                                         if(Relasi_CardNumber.equals("KOSONG")){
                                                             showErrorMessage();
                                                         }else {
-
+                                                            Toast.makeText(context, "123123", Toast.LENGTH_SHORT).show();
                                                             builder2.setMessage("Data sudah tersimpan");
                                                             builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                 @Override
@@ -642,7 +645,7 @@ public class EditEMember extends AppCompatActivity {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            // Toast.makeText(Register.this,"Terjadi Kendala Koneksi",Toast.LENGTH_LONG ).show();
+                                             Toast.makeText(EditEMember.this,"aaa",Toast.LENGTH_LONG ).show();
                                         }
                                     });
                             RequestQueue requestQueue = Volley.newRequestQueue(EditEMember.this);
@@ -993,30 +996,26 @@ public class EditEMember extends AppCompatActivity {
 
     private void listKota(){
         JsonObjectRequest stringGet = new JsonObjectRequest(LISTKOTA_URL, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        JSONArray users;
-                        try {
-                            users = response.getJSONArray("result");
-                            JSONObject obj;
+                response -> {
+                    JSONArray users;
+                    try {
+                        users = response.getJSONArray("result");
+                        JSONObject obj;
 
-                            for (int i = 0; i < users.length(); i++) {
-                                obj = users.getJSONObject(i);
-                                strkota = obj.getString("Cty_Name").trim();
-                                cityItemList.add(new CityItem(strkota));
-                                searchAdapter = new SearchAdapter(cityItemList,context);
-                                recyclerView.setAdapter(searchAdapter);
+                        for (int i = 0; i < users.length(); i++) {
+                            obj = users.getJSONObject(i);
+                            strkota = obj.getString("Cty_Name").trim();
+                            cityItemList.add(new CityItem(strkota));
+                            searchAdapter = new SearchAdapterEdit(cityItemList,context);
+                            recyclerView.setAdapter(searchAdapter);
 
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
 
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+
 
                 }, new Response.ErrorListener() {
             @Override

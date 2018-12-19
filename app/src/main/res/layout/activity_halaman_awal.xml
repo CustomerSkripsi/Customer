@@ -8,6 +8,14 @@
     tools:layout_editor_absoluteY="25dp"
     android:background="@color/blued">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/linLogo"
         android:layout_width="match_parent"
@@ -91,14 +99,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
-                android:onClick="lupaPass"
+
                 android:text="Lupa Password?"
                 android:textAlignment="center"
                 android:textColor="#FFF" />
         </LinearLayout>
 
         <!--<LinearLayout-->
-            <!--android:id="@+id/image_button_2"-->
+            <!--android:id="@+id/Google"-->
             <!--style="@android:style/Widget.Button"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
@@ -116,10 +124,9 @@
                 <!--android:src="@drawable/logo_google_small" />-->
 
             <!--<TextView-->
-                <!--android:id="@+id/image_button_2_text"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="100dp"-->
+                <!--android:id="@+id/tvGoogle"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
                 <!--android:gravity="center"-->
                 <!--android:text="Google"-->
                 <!--android:textStyle="bold"-->
@@ -128,7 +135,7 @@
         <!--</LinearLayout>-->
 
         <!--<LinearLayout-->
-            <!--android:id="@+id/btnGoogle"-->
+            <!--android:id="@+id/Facebook"-->
             <!--style="@android:style/Widget.Button"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
@@ -146,10 +153,9 @@
                 <!--android:src="@drawable/logo_facebook_small" />-->
 
             <!--<TextView-->
-                <!--android:id="@+id/btnFacebook"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="90dp"-->
+                <!--android:id="@+id/tvfacebook"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
                 <!--android:gravity="center"-->
                 <!--android:text="Facebook"-->
                 <!--android:textStyle="bold"-->
@@ -160,6 +166,9 @@
 
     </LinearLayout>
 
+
+</LinearLayout>
+    </ScrollView>
     <TextView
         android:id="@+id/tvdaftar"
         android:layout_width="match_parent"
@@ -175,7 +184,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="OnClick"
+        tools:ignore="MissingConstraints,OnClick"
         tools:layout_editor_absoluteX="0dp" />
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
