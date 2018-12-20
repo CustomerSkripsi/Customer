@@ -50,11 +50,11 @@ public class GlobalSearchAdapter extends RecyclerView.Adapter<GlobalSearchAdapte
                 if(context_pilihan!=0){
                     if(context_pilihan == 1){ // INTEN KE APOTEK
                         Intent i = new Intent(context,SearchApotek.class);
-                        i.putExtra("ApotekName", ProductName);
+                        i.putExtra(SearchApotek.SEARCH_RESULT, ProductName);
                         context.startActivity(i);
                     }else{
                         Intent i = new Intent(context,SearchProduk.class);
-                        i.putExtra("ProdukName", ProductName);
+                        i.putExtra(SearchProduk.SEARCH_RESULT, ProductName);
                         context.startActivity(i);
 //                        intent.putExtra("PreregisOwnerID",u.getUserid());//UserID
 //                        intent.putExtra("OutletID",u.getOutletid());
