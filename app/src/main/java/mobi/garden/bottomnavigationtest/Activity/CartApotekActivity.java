@@ -126,7 +126,7 @@ public class CartApotekActivity extends AppCompatActivity {
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         context = getApplicationContext();
 
-        Toast.makeText(this, memberID + " cartapotekact", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, memberID + " cartapotekact", Toast.LENGTH_SHORT).show();
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();

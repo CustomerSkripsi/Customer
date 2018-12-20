@@ -29,9 +29,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Adapter.ObatFavoriteAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
-import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 
 public class SearchResultApotek extends AppCompatActivity {
@@ -104,15 +104,15 @@ public class SearchResultApotek extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        btnSelengFav = findViewById(R.id.btnSelengFavorite);
-        btnSelengFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
-                i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
-                startActivity(i);
-            }
-        });
+      //  btnSelengFav = findViewById(R.id.btnSelengFavorite);
+//        btnSelengFav.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
+//                i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
+//                startActivity(i);
+//            }
+//        });
 
         showApotek();
         showView(rvObatPromo,urlPromo+apotekk);
@@ -254,7 +254,7 @@ public class SearchResultApotek extends AppCompatActivity {
             }
         });
         RequestQueue req = Volley.newRequestQueue(this);
-        req.add(rec1);
+        req.add(rec);
     }
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
