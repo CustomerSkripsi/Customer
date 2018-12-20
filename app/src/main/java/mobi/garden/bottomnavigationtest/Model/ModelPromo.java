@@ -10,7 +10,6 @@ public class ModelPromo {
         this.PriceProduct = priceProduct;
         this.ProductPriceAfterDC = productPriceAfterDC;
     }
-
     public ModelPromo(String productID, String promoNameProduct, String productNameUrl, int outletID ,int priceProduct, int productPriceAfterDC) {
         ProductID = productID;
         PromoNameProduct = promoNameProduct;
@@ -19,7 +18,6 @@ public class ModelPromo {
         PriceProduct = priceProduct;
         ProductPriceAfterDC = productPriceAfterDC;
     }
-
     public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct) {
         PromoNameProduct = promoNameProduct;
         ProductNameUrl = productNameUrl;
