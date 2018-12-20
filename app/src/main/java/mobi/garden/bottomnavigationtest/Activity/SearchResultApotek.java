@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -78,7 +79,22 @@ public class SearchResultApotek extends AppCompatActivity {
         llPromo.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvObatPromo.setLayoutManager(llPromo);
 
-
+        Intent intent = getIntent();
+        apotekk =  intent.getStringExtra("ApotekName");
+        Log.d("test", "jass: "+apotekk);
+        tvApotekName.setText(apotekk);
+        Toolbar dToolbar = findViewById(R.id.toolbarResultApotek);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        dToolbar.setTitle(apotekk);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        if(apotekk.contains(" ")){
+            apotekk = apotekk.replace(" ","%20");
+        }
 
         rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
         rvObatFavorite.setHasFixedSize(true);
@@ -87,13 +103,7 @@ public class SearchResultApotek extends AppCompatActivity {
         rvObatFavorite.setLayoutManager(llFavorite);
 
 
-        Intent intent = getIntent();
-        apotekk =  intent.getStringExtra("ApotekName");
-        Log.d("test", "jass: "+apotekk);
-        tvApotekName.setText(apotekk);
-        if(apotekk.contains(" ")){
-            apotekk = apotekk.replace(" ","%20");
-        }
+
 
         btnSelengPromo = findViewById(R.id.btnSelengPromo);
         btnSelengPromo.setOnClickListener(new View.OnClickListener() {
@@ -104,15 +114,15 @@ public class SearchResultApotek extends AppCompatActivity {
                 startActivity(i);
             }
         });
-      //  btnSelengFav = findViewById(R.id.btnSelengFavorite);
-//        btnSelengFav.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
-//                i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
-//                startActivity(i);
-//            }
-//        });
+        btnSelengFav = findViewById(R.id.btnSelengFavorite);
+        btnSelengFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
+                i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
+                startActivity(i);
+            }
+        });
 
         showApotek();
         showView(rvObatPromo,urlPromo+apotekk);
@@ -149,7 +159,7 @@ public class SearchResultApotek extends AppCompatActivity {
                     } //
                 }
 
-                tvApotekName.setText(apotekk);
+
                 rbApotek.setRating(total_rating);
                 tvApotekAddress.setText(outletAddress);
                 tvApotekhoneNumber.setText(outletPhone);
