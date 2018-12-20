@@ -248,17 +248,25 @@ public class HomeActivity extends BaseActivity {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId== EditorInfo.IME_ACTION_SEARCH||actionId == EditorInfo.IME_ACTION_DONE){
                     String input = etSearch.getText().toString();
+
+                    Log.d("context_pilihan",context_pilihan+"");
+                    Log.d("inputnya",input+"");
+
                     if(input.contains(" ")){input = input.replace(" ","%20"); }
                     if(input.contains("+")){input = input.replace("+","%2B"); }
                     if(input.contains("/")){input = input.replace("/","\\/"); }
                     if(input.contains(",")){input = input.replace(",","%2C"); }
-                    Log.d("inputnya",input+"");
+
                     if(context_pilihan==1){
                         Intent i = new Intent(HomeActivity.this,SearchProduk.class);
                         i.putExtra(SearchProduk.SEARCH_RESULT, input);
+                        Log.d("hasilnyaproduk", ""+input);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
                     }else if(context_pilihan==2){
-                        //Intent i = new Intent(HomeActivity.this,);
+                        Intent i = new Intent(HomeActivity.this,SearchApotek.class);
+                        i.putExtra(SearchApotek.SEARCH_RESULT, input);
+                        startActivity(i);
                     }
                 }
                 return false;
@@ -283,7 +291,7 @@ public class HomeActivity extends BaseActivity {
 //                    Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
                 }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
                     //set ulang rekomendasinya
-                    Log.d("jumlah",etSearch.getText().toString());
+                    Log.d("jumlahnamaapotek",etSearch.getText().toString());
                     search(etSearch.getText().toString());
             }
             @Override
