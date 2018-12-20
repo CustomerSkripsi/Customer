@@ -104,15 +104,15 @@ public class SearchResultApotek extends AppCompatActivity {
                 startActivity(i);
             }
         });
-      //  btnSelengFav = findViewById(R.id.btnSelengFavorite);
-//        btnSelengFav.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
-//                i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
-//                startActivity(i);
-//            }
-//        });
+        btnSelengFav = findViewById(R.id.btnSelengFavorite);
+        btnSelengFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
+                i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
+                startActivity(i);
+            }
+        });
 
         showApotek();
         showView(rvObatPromo,urlPromo+apotekk);
