@@ -198,7 +198,7 @@ public class SearchResultApotek extends AppCompatActivity {
                     }
                 }
                 promoAdapter = new PromoAdapter(PromoList,SearchResultApotek.this);
-                cardlist.setAdapter(promoAdapter);
+                cardlist.setAdapter(promoAdapter);//
             }
         }, new Response.ErrorListener() {
             @Override
