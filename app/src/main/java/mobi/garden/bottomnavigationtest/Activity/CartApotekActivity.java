@@ -437,7 +437,7 @@ public class CartApotekActivity extends AppCompatActivity {
             }
         });
     }
-
+  //
     public static void showprodukterkait(){
         JsonObjectRequest req = new JsonObjectRequest("http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek, null, new Response.Listener<JSONObject>() {
             @Override
