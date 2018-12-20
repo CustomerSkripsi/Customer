@@ -178,12 +178,14 @@
                         android:id="@+id/rv_cv_obat_terkait"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+                        android:elevation="0dp"
+                        android:layout_margin="5dp" ></android.support.v7.widget.RecyclerView>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvProdukAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="75dp"
                         android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
                 </LinearLayout>
@@ -208,7 +210,7 @@
                 android:layout_height="350dp"
                 android:background="@android:color/white"
                 app:behavior_hideable="true"
-                app:behavior_peekHeight="85dp"
+                app:behavior_peekHeight="75dp"
                 app:layout_behavior="@string/bottom_sheet_behavior">
 
                 <LinearLayout
