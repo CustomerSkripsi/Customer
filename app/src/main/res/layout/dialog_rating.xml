@@ -12,12 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:title="RATING APOTEK"
         app:titleTextColor="@android:color/white"
         android:gravity="center"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        android:background="@color/green_yellow"/>
+        android:background="@color/toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RATING APOTEK"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:gravity="center"
+
+            />
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/tvNamaApotek"
@@ -37,20 +49,23 @@
         android:gravity="center"
         android:text="Alamat Apotek"
         android:textColor="@android:color/black" />
-
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center"
         android:numStars="5"
-        android:stepSize="1" />
+        android:stepSize="1"
+        android:progressTint="@color/oren"
+        />
 
     <TextView
         android:id="@+id/tvMohon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="Rating Anda membantu Apotek kami untuk memberikan pelayanan terbaik" />
 
     <TextView
@@ -59,13 +74,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Beri Peringkat"
+        android:gravity="center"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvdialograting"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         android:layout_weight="1" />
 
     <TextView
@@ -75,7 +91,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="Komentar Anda"
-        android:textColor="@android:color/black"
+        android:textColor="#FB8C00"
         android:textStyle="bold" />
 
     <EditText
@@ -93,5 +109,5 @@
         android:layout_weight="1"
         android:text="Kirim"
         android:textColor="@android:color/white"
-        android:background="@color/green_yellow"/>
+        android:background="@drawable/orangebutton"/>
 </LinearLayout>

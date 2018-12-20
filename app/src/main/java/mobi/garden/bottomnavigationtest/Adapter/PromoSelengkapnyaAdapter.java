@@ -21,7 +21,7 @@ import java.util.List;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
-public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder>{
+public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder> {
     List<ModelPromo> modelPromo;
     Context context;
     String tempurl;
@@ -35,7 +35,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
     @Override
     public PromoSelengkapnyaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.cv_promo_selengkapnya,parent,false);
+        View view = inflater.inflate(R.layout.cv_promo_selengkapnya, parent, false);
         return new PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder(view);
     }
 
@@ -44,23 +44,24 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         final ModelPromo mp = modelPromo.get(position);
 
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
-        holder.tvharga.setText("Rp. "+String.valueOf(mp.getProductPriceAfterDC()));
+        holder.tvHargaCoret.setText("Rp. " + String.valueOf(mp.getPriceProduct()));
+        holder.tvharga.setText("Rp. " + String.valueOf(mp.getProductPriceAfterDC()));
 
-        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
-            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+        if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
+            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         tempurl = mp.getProductNameUrl();
-        Log.d("onBindViewHolder: ",tempurl);
-        if(tempurl.contains(" ")){
-            tempurl = tempurl.replace(" ","%20");
+        Log.d("onBindViewHolder: ", tempurl);
+        if (tempurl.contains(" ")) {
+            tempurl = tempurl.replace(" ", "%20");
         }
         Picasso.with(context).load(tempurl).into(holder.imgProduct, new Callback() {
             @Override
             public void onSuccess() {
                 Picasso.with(context).load(tempurl).into(holder.imgProduct);
             }
+
             @Override
             public void onError() {
                 holder.imgProduct.setImageResource(R.drawable.nopicture);
@@ -81,11 +82,12 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         return modelPromo.size();
     }
 
-    public static class PromoSelengkapnyaViewHolder extends RecyclerView.ViewHolder{
-        TextView tvNamaProdukPromo,tvHargaCoret, tvharga;
+    public static class PromoSelengkapnyaViewHolder extends RecyclerView.ViewHolder {
+        TextView tvNamaProdukPromo, tvHargaCoret, tvharga;
         ImageView imgProduct;
         LinearLayout llproduk;
         Button btnAdd;
+
         public PromoSelengkapnyaViewHolder(View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
@@ -97,3 +99,4 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         }
     }
 }
+
