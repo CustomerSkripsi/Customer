@@ -91,8 +91,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                                 obj.getInt("OutletProductPrice"),
                                 obj.getInt("ProductPriceAfterDiscount")));
                         Log.d("masuk", obj.toString());
-                        Toast.makeText(PromoSelengkapnyaActivity.this, "woiiii", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(PromoSelengkapnyaActivity.this, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
