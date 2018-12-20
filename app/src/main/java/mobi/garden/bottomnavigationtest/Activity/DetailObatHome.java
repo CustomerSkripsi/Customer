@@ -90,10 +90,7 @@ public class DetailObatHome extends AppCompatActivity {
                                 // Logic to handle location object
                                 longitude = location.getLongitude();
                                 latitude = location.getLatitude();
-
                                 Log.d("test123", longitude + "");
-
-
                             } else {
                               //  Toast.makeText(DetailObatHome.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
                             }
@@ -120,13 +117,10 @@ public class DetailObatHome extends AppCompatActivity {
 //        obatName = getIntent().getStringExtra("ProductName");
         gambarObat = getIntent().getStringExtra("ProductImage");
 
-
         Picasso.with(DetailObatHome.this).load(gambarObat).into(iv_picture_obat2);
 
         RvApotek = findViewById(R.id.rv_detail_obat);
         RvApotek.setHasFixedSize(true);
-
-
 
         Intent intent = getIntent();
         ProductName = intent.getStringExtra("ProductName");
@@ -139,7 +133,6 @@ public class DetailObatHome extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         RvApotek.setLayoutManager(llm);
         queue = Volley.newRequestQueue(this);
-
 
         show_view(RvApotek, apoteks,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName+"&day=");
 

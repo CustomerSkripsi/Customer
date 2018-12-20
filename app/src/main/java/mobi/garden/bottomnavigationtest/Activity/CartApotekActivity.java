@@ -85,8 +85,7 @@ public class CartApotekActivity extends AppCompatActivity {
     static RecyclerView rvProdukAll;
     RecyclerView rvCart;
 
-    private static TextView tvApotekName;
-    private static TextView tvTotalPrice;
+    private static TextView tvApotekName,tvTotalPrice;
     private static NotificationBadge mBadge;
     private static int totalPrice = 0;
     private static int count = 0;
@@ -112,7 +111,6 @@ public class CartApotekActivity extends AppCompatActivity {
     SessionManagement session;
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
-    static LinearLayout empty, not_empty, not_login;
 
 
     @Override
@@ -172,7 +170,7 @@ public class CartApotekActivity extends AppCompatActivity {
         tvApotekName.setText(namaApotek);
         Log.d("test", "jass: "+namaApotek);
         if(namaApotek.contains(" ")){
-            namaApotek = namaApotek.replace(" "," ");
+            namaApotek = namaApotek.replace(" ","%20");
         }
 
 
@@ -207,9 +205,9 @@ public class CartApotekActivity extends AppCompatActivity {
         Intent is = getIntent();
         String ProductName = is.getStringExtra("ProductName");
 
-
-        initiateBelowAdapter();
         showprodukterkait();
+        initiateBelowAdapter();
+
     }
 
     public void BackBack3(View view){
@@ -465,25 +463,20 @@ public class CartApotekActivity extends AppCompatActivity {
                         pr.add(new obat(idProduk,namaproduk,tempfoto,hargaproduk,qty));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("rwarfgss", object.toString());
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-//
-//                tvApotekName.setText(namaApotek);
-//                obatAdapter = new obat_adapter_as(pr,context);
-//                obatAdapter.setProductList(pr);
-//                adapterRvBelow.setCartList(cartList);
-//                rvProdukAll.setAdapter(obatAdapter);
-
 
                 obatAdapter = new obat_adapter_as(pr,context);
                 rvProdukAll.setAdapter(obatAdapter);
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(CartApotekActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
