@@ -15,7 +15,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
@@ -172,7 +170,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             @Override
             public void onClick(View v) {
                 Log.d("qtynya",product.cartProductQty+"");
-//                if (product.cartProductQty==1) {
+//                if (product.cartProductQty==1) {/
 //                    builder = new AlertDialog.Builder(context);
 ////                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 //                    builder.setTitle("Konfirmasi Hapus Product "+product.getProductName()+" dari keranjang");
@@ -226,7 +224,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             //Log.d("TAGGG", "doInBackground: "+product.cartProductQty);
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -235,8 +232,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         }
     }
 
-
-    class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
+    private class DoneOnEditorActionListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -292,7 +288,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 
             edtQty = itemView.findViewById(R.id.edtQty);
         }
-
     }
 
     public void ubah(String id, int qty , String memberID) {
@@ -305,6 +300,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             objDetail.put("CustomerID",memberID);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
+            Log.d("asd", "ubah: "+objAdd);
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
@@ -388,3 +384,4 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         requestQueue.add(stringRequest);
     }
 }
+

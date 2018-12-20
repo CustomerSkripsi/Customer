@@ -166,15 +166,16 @@ public class CartApotekActivity extends AppCompatActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots2);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new CartApotekActivity.MyTimerTask(), 2000, 4000);
-
+        tvApotekName = findViewById(R.id.tv_apotekname);
         Intent intent = getIntent();
         namaApotek =  intent.getStringExtra("ApotekName");
+        tvApotekName.setText(namaApotek);
         Log.d("test", "jass: "+namaApotek);
         if(namaApotek.contains(" ")){
             namaApotek = namaApotek.replace(" ","%20");
         }
 
-        tvApotekName = findViewById(R.id.tv_apotekname);
+
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
         mBadge = findViewById(R.id.badge);
 
@@ -471,7 +472,7 @@ public class CartApotekActivity extends AppCompatActivity {
 //                adapterRvBelow.setCartList(cartList);
 //                rvProdukAll.setAdapter(obatAdapter);
 
-                tvApotekName.setText(namaApotek);
+
                 obatAdapter = new obat_adapter_as(pr,context);
                 rvProdukAll.setAdapter(obatAdapter);
             }
