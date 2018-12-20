@@ -112,6 +112,7 @@ public class HomeActivity extends BaseActivity {
     double latitude;
     private FusedLocationProviderClient mFusedLocationClient;
 
+    //speech
     private ImageView textToSpeech;
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
@@ -128,9 +129,6 @@ public class HomeActivity extends BaseActivity {
     RatingAdapter buttonRatingAdapteradapter;
     List<Rating> ratingList = new ArrayList<>();
     public String review;
-
-    private ImageView textToSpeech;
-    private final int REQ_CODE_SPEECH_INPUT = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -346,6 +344,22 @@ public class HomeActivity extends BaseActivity {
 
     }
 
+    private void promptSpeechInput(){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "in_ID");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.speech_prompt));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.speech_not_supported),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void dialograting(String title){
         final Dialog dialog = new Dialog(HomeActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -414,6 +428,8 @@ public class HomeActivity extends BaseActivity {
                 ratinginput(ratingNum);
             }
         });
+
+
 
         mSendFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -508,21 +524,6 @@ public class HomeActivity extends BaseActivity {
         });
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(req);
-    }
-    private void promptSpeechInput(){
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "in_ID");
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                getString(R.string.speech_prompt));
-        try {
-            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
-        } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(),
-                    getString(R.string.speech_not_supported),
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

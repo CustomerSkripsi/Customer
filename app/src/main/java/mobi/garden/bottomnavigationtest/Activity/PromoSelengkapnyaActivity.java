@@ -65,8 +65,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         showViewFav(rvSelengkapnya, geturl);
     }
 
-
-
     public void showViewPromo(final RecyclerView cardlist, String url) {
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
