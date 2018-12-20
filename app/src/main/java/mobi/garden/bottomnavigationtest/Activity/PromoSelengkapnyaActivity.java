@@ -57,7 +57,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         geturl = i.getStringExtra("link");
-        Log.d("URL", geturl);
+        Log.d("URL", geturl);//
 
 
 
