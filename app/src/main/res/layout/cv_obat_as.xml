@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_obat_as"
     android:layout_width="130dp"
@@ -20,7 +19,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
-            android:background="#000000" />
+            android:background="@drawable/nopicture" />
 
         <TextView
             android:id="@+id/tv_nama_obat_as"
@@ -30,10 +29,11 @@
             android:textAlignment="center"
             android:paddingTop="1dp"
             android:textSize="12dp"
+            android:maxLength="14"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:layout_weight="1"
-            tools:text="nama obat" />
+            tools:text="Nama Obat" />
 
         <TextView
             android:id="@+id/tv_qty_obat_as"

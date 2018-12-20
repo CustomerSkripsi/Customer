@@ -172,7 +172,7 @@ public class CartApotekActivity extends AppCompatActivity {
         tvApotekName.setText(namaApotek);
         Log.d("test", "jass: "+namaApotek);
         if(namaApotek.contains(" ")){
-            namaApotek = namaApotek.replace(" ","%20");
+            namaApotek = namaApotek.replace(" "," ");
         }
 
 
@@ -210,6 +210,10 @@ public class CartApotekActivity extends AppCompatActivity {
 
         initiateBelowAdapter();
         showprodukterkait();
+    }
+
+    public void BackBack3(View view){
+        super.onBackPressed();
     }
 
     public static void setStatusBarGradiant(Activity activity) {

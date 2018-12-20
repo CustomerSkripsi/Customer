@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,8 +32,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.Adapter.obat_adapter_as;
+import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 
 public class ApotekActivity extends AppCompatActivity {
@@ -82,6 +82,8 @@ public class ApotekActivity extends AppCompatActivity {
         LinearLayoutManager llm2 = new LinearLayoutManager(this);
         LinearLayoutManager llm3 = new LinearLayoutManager(this);
 
+
+
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         llm2.setOrientation(LinearLayoutManager.HORIZONTAL);
         llm3.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -100,30 +102,30 @@ public class ApotekActivity extends AppCompatActivity {
         tv_address_apotek=(TextView) findViewById(R.id.tv_address_apotek);
         tv_no_telepon=(TextView) findViewById(R.id.tv_no_telepon);
         tv_jam_operasional= (TextView) findViewById(R.id.tv_jam_operasional);
-        tv_no_sia=(TextView) findViewById(R.id.tv_no_sia);
-        tv_no_sipa= (TextView) findViewById(R.id.tv_no_sipa);
-        tv_metode_pengiriman = (TextView) findViewById(R.id.tv_metode_pengiriman);
+//        tv_no_sia=(TextView) findViewById(R.id.tv_no_sia);
+//        tv_no_sipa= (TextView) findViewById(R.id.tv_no_sipa);
+//        tv_metode_pengiriman = (TextView) findViewById(R.id.tv_metode_pengiriman);
         //iv_picture_apotek = (ImageView) findViewById(R.id.iv_picture_apotek);
 
 
-        hideButton = (Button) findViewById(R.id.hideButton);
-        containerHide = (LinearLayout) findViewById(R.id.containerHide);
-        Toast.makeText(this, OutletID+"", Toast.LENGTH_SHORT).show();
+//        hideButton = (Button) findViewById(R.id.hideButton);
+//        containerHide = (LinearLayout) findViewById(R.id.containerHide);
+//        Toast.makeText(this, OutletID+"", Toast.LENGTH_SHORT).show();
 
-        hideButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!isPressed) {
-                    containerHide.setVisibility(View.GONE);
-                    isPressed=true;
-                    hideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_right_black_24dp));
-                }else{
-                    isPressed = false;
-                    containerHide.setVisibility(View.VISIBLE);
-                    hideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp));
-                }
-            }
-        });
+//        hideButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(!isPressed) {
+//                    containerHide.setVisibility(View.GONE);
+//                    isPressed=true;
+//                    hideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_right_black_24dp));
+//                }else{
+//                    isPressed = false;
+//                    containerHide.setVisibility(View.VISIBLE);
+//                    hideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp));
+//                }
+//            }
+//        });
 
         show_view(OutletID);
         show_view1(cardListBrandd,prr,"http://pharmanet.apodoc.id/select_product_promo_apotik.php?id=");
@@ -131,7 +133,9 @@ public class ApotekActivity extends AppCompatActivity {
         show_view1(cardListBrandd3,prr3,"http://pharmanet.apodoc.id/select_product_terlaris_apotik.php?id=");
 
 
+
     }
+
 
 
     public void show_view1(final RecyclerView cardlist, final List<obat> list, String url){
@@ -223,7 +227,7 @@ public class ApotekActivity extends AppCompatActivity {
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
-            Drawable background = activity.getResources().getDrawable(R.drawable.gradient);
+            Drawable background = activity.getResources().getDrawable(R.drawable.toolbar);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
 //            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));

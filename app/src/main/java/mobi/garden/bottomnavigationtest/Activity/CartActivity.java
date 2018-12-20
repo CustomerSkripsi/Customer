@@ -75,6 +75,7 @@ public class CartActivity extends AppCompatActivity {
     String urlUser = "Http://Pharmanet.Apodoc.id/select_customer_confirm.php?id=";
     UserLocalStore userlocal;
 
+
     SessionManagement session;
     HashMap<String, String> login;
 
@@ -91,7 +92,7 @@ public class CartActivity extends AppCompatActivity {
         info = (TextView) findViewById(R.id.info);
         outlet_name = (TextView) findViewById(R.id.outlet_name);
         alamat = findViewById(R.id.tvOutletAddress);
-        jumlah = findViewById(R.id.jumlah);
+        jumlah = findViewById(R.id.totalPembayaran);
         //jumlahPembayaran = findViewById(R.id.totalPembayaran);
         //biaya_pengiriman = findViewById(R.id.biayaPengiriman);
         r_apotek = findViewById(R.id.radio_apotek);
@@ -180,6 +181,10 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         cartshow();
+    }
+
+    public void BackBack(View view){
+        super.onBackPressed();
     }
 
     public void insertTransaction(String insertTransaction, String CustomerID) {
