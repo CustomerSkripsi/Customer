@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -35,19 +33,30 @@
                 android:id="@+id/tvLupaPassVerifikasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="150dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#000"
-                android:gravity="center"
+                android:gravity="left"
                 android:maxLength="50"
-                android:text="Verifikasi Nomor"
-                android:textAllCaps="true"
+                android:text="Verifikasi nomor ponsel"
                 android:textColor="#000"
                 android:textColorHint="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:text="Masukan 4 angka verifikasi yang telah di kirim ke nomor ponsel Anda."
+                android:textColor="@color/grey"
+                android:textColorHint="#000"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/etLupaPassKodVerif"
@@ -64,10 +73,28 @@
                 android:textColor="#000"
                 android:textColorHint="#000" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Tidak menerima kode verifikasi?"
+                android:textColor="@color/grey"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/btnLupaPassKirimUlang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Kirim Ulang Kode"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
+
             <Button
                 android:id="@+id/btnLupaPassVerifikasi"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -77,18 +104,7 @@
                 android:textSize="20sp"
                 android:background="@drawable/orangebutton"/>
 
-            <Button
-                android:id="@+id/btnLupaPassKirimUlang"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:text="Kirim Ulang"
-                android:textColor="#FFF"
-                android:textSize="20sp"
-                android:background="@drawable/orangebutton"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -155,7 +171,7 @@
             <Button
                 android:id="@+id/btnMasukLupaPass"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -169,7 +185,7 @@
             <Button
                 android:id="@+id/btnLupaPassKirimVer"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"

@@ -14,8 +14,26 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@android:color/white"
-        android:background="@drawable/gradient"
+        android:background="@drawable/toolbar"
         android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:foregroundGravity="left"
+            android:onClick="BackBack4"
+            android:background="@drawable/ic_chevron_left_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:gravity="center"
+            android:text="Riwayat Detail"
+            android:textColor="#fff"
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
 

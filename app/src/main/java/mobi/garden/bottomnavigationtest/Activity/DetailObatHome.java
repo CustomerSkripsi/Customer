@@ -1,9 +1,12 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,10 +90,7 @@ public class DetailObatHome extends AppCompatActivity {
                                 // Logic to handle location object
                                 longitude = location.getLongitude();
                                 latitude = location.getLatitude();
-
                                 Log.d("test123", longitude + "");
-
-
                             } else {
                               //  Toast.makeText(DetailObatHome.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
                             }
@@ -115,13 +117,10 @@ public class DetailObatHome extends AppCompatActivity {
 //        obatName = getIntent().getStringExtra("ProductName");
         gambarObat = getIntent().getStringExtra("ProductImage");
 
-
         Picasso.with(DetailObatHome.this).load(gambarObat).into(iv_picture_obat2);
 
         RvApotek = findViewById(R.id.rv_detail_obat);
         RvApotek.setHasFixedSize(true);
-
-
 
         Intent intent = getIntent();
         ProductName = intent.getStringExtra("ProductName");
@@ -134,7 +133,6 @@ public class DetailObatHome extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         RvApotek.setLayoutManager(llm);
         queue = Volley.newRequestQueue(this);
-
 
         show_view(RvApotek, apoteks,"http://pharmanet.apodoc.id/customer/DetailObatB2C.php?ProductName="+ProductName+"&day=");
 
@@ -217,6 +215,15 @@ public class DetailObatHome extends AppCompatActivity {
                 // Current day is Saturday
                 tempApotekDay = "Sabtu";
                 break;
+        }
+    }
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.toolbar);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
         }
     }
 

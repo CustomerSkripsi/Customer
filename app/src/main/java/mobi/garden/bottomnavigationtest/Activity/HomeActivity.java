@@ -129,6 +129,9 @@ public class HomeActivity extends BaseActivity {
     List<Rating> ratingList = new ArrayList<>();
     public String review;
 
+    private ImageView textToSpeech;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -332,7 +335,6 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         showImageSlider(viewPager);
@@ -340,9 +342,7 @@ public class HomeActivity extends BaseActivity {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
-
         dialograting("RATING APOTEK");
-
 
     }
 
@@ -527,13 +527,13 @@ public class HomeActivity extends BaseActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
-
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Bundle SearchVoice = new Bundle();
+                    SearchVoice.putString(FirebaseAnalytics.Param.SEARCH_TERM, result.get(0));
 //                    search.setText(result.get(0));
 //                    Bundle SearchVoice = new Bundle();
 //                    SearchVoice.putString(FirebaseAnalytics.Param.SEARCH_TERM, result.get(0));

@@ -41,10 +41,10 @@ public class RatingAdapter  extends RecyclerView.Adapter<RatingAdapter.buttonVie
     public void onBindViewHolder(@NonNull RatingAdapter.buttonViewHolder holder, int position) {
         final Rating butt = RatingList.get(position);        holder.btnFeedback.setText(butt.mFeedbackOption);
         if (!butt.isChecked){
-            holder.btnFeedback.setBackgroundResource(R.drawable.btn_choise);
-            holder.btnFeedback.setTextColor(ContextCompat.getColor(context, R.color.green));
+            holder.btnFeedback.setBackgroundResource(R.drawable.border_trans_green);
+            holder.btnFeedback.setTextColor(ContextCompat.getColor(context, R.color.oren));
         }else{
-            holder.btnFeedback.setBackgroundResource(R.drawable.btn_beli_clicked);
+            holder.btnFeedback.setBackgroundResource(R.drawable.orangebutton);
             holder.btnFeedback.setTextColor(ContextCompat.getColor(context, R.color.white));
         }
 

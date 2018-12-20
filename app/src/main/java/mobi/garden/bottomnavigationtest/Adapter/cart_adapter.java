@@ -1,8 +1,6 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -110,7 +108,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         df.setMaximumFractionDigits(0);
 
         holder.tvCartProductName.setText(product.getProductName());
-        holder.tvOutletStock.setText(product.getOutletProductStockQty() +"");
+//        holder.tvOutletStock.setText(product.getOutletProductStockQty() +"");
         holder.tvCartProductPrice.setText(df.format(product.getCartProductPrice()) + "");
         holder.edtQty.setText(product.cartProductQty+ "");
 //        userLocalStore  = new UserLocalStore(context);
@@ -284,7 +282,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             tvCartProductName = itemView.findViewById(R.id.tvCartProductName);
             tvCartProductPrice = itemView.findViewById(R.id.tvCartProductPrice);
-            tvOutletStock = itemView.findViewById(R.id.tvOutletStock);
+//            tvOutletStock = itemView.findViewById(R.id.tvOutletStock);
 
             edtQty = itemView.findViewById(R.id.edtQty);
         }
