@@ -289,7 +289,6 @@ public class HomeActivity extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
                     rvSearchGlobal.setVisibility(View.GONE);
-//                    Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
                 }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
                     //set ulang rekomendasinya
                     Log.d("jumlahnamaapotek",etSearch.getText().toString());
@@ -332,7 +331,6 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         showImageSlider(viewPager);
@@ -340,9 +338,7 @@ public class HomeActivity extends BaseActivity {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
-
         dialograting("RATING APOTEK");
-
 
     }
 
@@ -527,14 +523,11 @@ public class HomeActivity extends BaseActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
-
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-//                    search.setText(result.get(0));
                     Bundle SearchVoice = new Bundle();
                     SearchVoice.putString(FirebaseAnalytics.Param.SEARCH_TERM, result.get(0));
 

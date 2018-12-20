@@ -53,7 +53,7 @@ public class KategoriActivity extends AppCompatActivity {
         context = KategoriActivity.this;
         rvKategori = findViewById(R.id.rvkategori);
         tvSearch = findViewById(R.id.tvSearch);
-        ivCart = findViewById(R.id.ivCart);
+        ivCart = findViewById(R.id.ImageView);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvKategori.setLayoutManager(llm);

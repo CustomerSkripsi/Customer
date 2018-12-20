@@ -38,8 +38,8 @@
             android:layout_marginEnd="4dp"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
-            android:layout_toLeftOf="@+id/imageView"
-            android:layout_toStartOf="@+id/imageView"
+            android:layout_toLeftOf="@+id/ivCart"
+            android:layout_toStartOf="@+id/ivCart"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintStart_toEndOf="@+id/tvSearch"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
 
 
         <ImageView
-            android:id="@+id/ivCart"
+            android:id="@+id/ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -75,16 +75,16 @@
         <!--</android.support.v7.widget.RecyclerView>-->
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ivCart"
+            android:layout_alignTop="@+id/ImageView"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_toLeftOf="@+id/ivCart"
-            android:layout_toStartOf="@+id/ivCart"
-            app:layout_constraintEnd_toStartOf="@+id/ivCart"
+            android:layout_toLeftOf="@+id/ImageView"
+            android:layout_toStartOf="@+id/ImageView"
+            app:layout_constraintEnd_toStartOf="@+id/ImageView"
             app:layout_constraintStart_toEndOf="@+id/Mic"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cart_home"
