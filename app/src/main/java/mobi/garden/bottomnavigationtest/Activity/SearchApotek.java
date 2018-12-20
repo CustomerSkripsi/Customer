@@ -52,7 +52,7 @@ import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 public class SearchApotek extends AppCompatActivity {
     List<apotek> apoteklist = new ArrayList<>();
     List<String>imageUrls = new ArrayList<>();
-
+    public static final String SEARCH_RESULT= "search_result";
     Context context;
     RecyclerView rvhasilSearchApotek;
     String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose, tempApotekDay;
@@ -117,14 +117,8 @@ public class SearchApotek extends AppCompatActivity {
         rvhasilSearchApotek.setLayoutManager(llm);
 
 
+        getapoteksearched();
 
-        Intent intent = getIntent();
-        apotek =  intent.getStringExtra("ApotekName");
-        Log.d("test", "jass: "+apotek);
-        if(apotek.contains(" ")){
-            apotek = apotek.replace(" ","%20");
-        }
-        showhasilapotek();
 
 
         //slider
@@ -134,6 +128,16 @@ public class SearchApotek extends AppCompatActivity {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
+    }
+
+    public void getapoteksearched(){
+        Intent intent = getIntent();
+        apotek =  intent.getStringExtra(SearchApotek.SEARCH_RESULT);
+        Log.d("test", "jassya: "+apotek);
+        if(apotek.contains(" ")){
+            apotek = apotek.replace(" ","%20");
+        }
+        showhasilapotek();
     }
 
 

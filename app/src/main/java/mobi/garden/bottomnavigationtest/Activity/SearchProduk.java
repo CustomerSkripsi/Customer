@@ -3,6 +3,7 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class SearchProduk extends AppCompatActivity {
     private RequestQueue queue;
     RecyclerView rvhasilSearchProduk;
     public static final String SEARCH_RESULT= "search_result";
-    String produkNama, url,produkid,promoName,productUrl;
+    public static String produkNama, url,produkid,promoName,productUrl;
     List<ModelPromo> prodk = new ArrayList<>();
     List<String>imageUrls = new ArrayList<>();
 
@@ -67,13 +68,11 @@ public class SearchProduk extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvhasilSearchProduk.setLayoutManager(llm);
 
-        Intent intent = getIntent();
-        produkNama =  intent.getStringExtra("ProdukName");
-        Log.d("test", "jasidjas: "+produkNama);
-        if(produkNama.contains(" ")){
-            produkNama = produkNama.replace(" ","%20");
-        }
-        showhasilproduk();
+
+
+        getProdukSearched();
+
+
 
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -81,6 +80,18 @@ public class SearchProduk extends AppCompatActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
+    }
+
+    public void getProdukSearched(){
+        Intent intent = getIntent();
+        produkNama =  intent.getStringExtra(SearchProduk.SEARCH_RESULT);
+        Log.d("test", "jasidjas: "+produkNama);
+        if(produkNama.contains(" ")){
+            produkNama = produkNama.replace(" ","%20");
+        }
+
+        showhasilproduk();
 
     }
 

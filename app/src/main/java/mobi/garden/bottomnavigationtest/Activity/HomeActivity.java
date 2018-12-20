@@ -3,6 +3,7 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -44,6 +46,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.json.JSONArray;
@@ -123,6 +126,9 @@ public class HomeActivity extends BaseActivity {
     List<Rating> ratingList = new ArrayList<>();
     public String review;
 
+    private ImageView textToSpeech;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +141,15 @@ public class HomeActivity extends BaseActivity {
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
+
+        textToSpeech = findViewById(R.id.Mic);
+
+        textToSpeech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptSpeechInput();
+            }
+        });
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -234,17 +249,25 @@ public class HomeActivity extends BaseActivity {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId== EditorInfo.IME_ACTION_SEARCH||actionId == EditorInfo.IME_ACTION_DONE){
                     String input = etSearch.getText().toString();
+
+
                     if(input.contains(" ")){input = input.replace(" ","%20"); }
                     if(input.contains("+")){input = input.replace("+","%2B"); }
                     if(input.contains("/")){input = input.replace("/","\\/"); }
                     if(input.contains(",")){input = input.replace(",","%2C"); }
-                    Log.d("inputnya",input+"");
+
+                    Log.d("inputnya",input+"  "+context_pilihan+"");
+
                     if(context_pilihan==1){
+                        Intent i = new Intent(HomeActivity.this,SearchApotek.class);
+                        i.putExtra(SearchApotek.SEARCH_RESULT, input);
+                        Log.d("hasilnyaproduk", ""+input);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }else if(context_pilihan==2){
                         Intent i = new Intent(HomeActivity.this,SearchProduk.class);
                         i.putExtra(SearchProduk.SEARCH_RESULT, input);
                         startActivity(i);
-                    }else if(context_pilihan==2){
-                        //Intent i = new Intent(HomeActivity.this,);
                     }
                 }
                 return false;
@@ -269,7 +292,7 @@ public class HomeActivity extends BaseActivity {
 //                    Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
                 }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
                     //set ulang rekomendasinya
-                    Log.d("jumlah",etSearch.getText().toString());
+                    Log.d("jumlahnamaapotek",etSearch.getText().toString());
                     search(etSearch.getText().toString());
             }
             @Override
@@ -485,6 +508,54 @@ public class HomeActivity extends BaseActivity {
         });
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(req);
+    }
+    private void promptSpeechInput(){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "in_ID");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.speech_prompt));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.speech_not_supported),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+//                    search.setText(result.get(0));
+                    Bundle SearchVoice = new Bundle();
+                    SearchVoice.putString(FirebaseAnalytics.Param.SEARCH_TERM, result.get(0));
+
+                    search(result.get(0));
+
+                    if(context_pilihan==1){
+                        Intent i = new Intent(HomeActivity.this,SearchApotek.class);
+                        i.putExtra(SearchApotek.SEARCH_RESULT, result.get(0));
+                        Log.d("hasilnyaproduk", ""+result.get(0));
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }else if(context_pilihan==2){
+                        Intent i = new Intent(HomeActivity.this,SearchProduk.class);
+                        i.putExtra(SearchProduk.SEARCH_RESULT, result.get(0));
+                        startActivity(i);
+                    }
+                }
+                break;
+            }
+
+        }
     }
 
     private void search(String s) {
