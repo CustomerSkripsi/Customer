@@ -9,10 +9,8 @@
 
         <EditText
             android:id="@+id/tvSearch"
-            android:layout_width="0dp"
+            android:layout_width="262dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="17dp"
             android:background="@drawable/edit_four_corner_background"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:fontFamily="sans-serif-light"
@@ -23,9 +21,9 @@
             android:textColor="@color/searchText"
             android:textColorHint="@color/searchHint"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/Mic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            tools:layout_editor_absoluteX="13dp"
+            tools:layout_editor_absoluteY="16dp"
+            tools:ignore="MissingConstraints" />
 
 
         <ImageView
