@@ -191,7 +191,7 @@ public class SearchResultApotek extends AppCompatActivity {
                                 diskon));
                         Log.d("asd", obj.toString());
 
-                        //Toast.makeText(SearchResultApotek.this, "sesuat", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SearchResultApotek.this, "sesuat", Toast.LENGTH_SHORT).show(); /
                         Toast.makeText(SearchResultApotek.this, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
