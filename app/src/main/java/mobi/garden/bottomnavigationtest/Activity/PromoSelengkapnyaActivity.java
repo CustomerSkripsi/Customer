@@ -349,7 +349,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     }
 
 
-
     protected void onResume() {
         super.onResume();
         if(session.getUserLoggedIn()){
