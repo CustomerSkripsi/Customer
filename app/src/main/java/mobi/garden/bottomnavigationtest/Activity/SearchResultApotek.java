@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.ObatFavoriteAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
-import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
@@ -34,24 +32,15 @@ import mobi.garden.bottomnavigationtest.R;
 public class SearchResultApotek extends AppCompatActivity {
 
     TextView tvApotekName,tvApotekAddress,tvApotekhoneNumber,tvApotekOperationalHour;
-    TextView btnSelengFav,btnSelengPromo;
     RatingBar rbApotek;
     RecyclerView rvObatPromo, rvObatFavorite;
     String apotekk;
-    String urlPromo="http://pharmanet.apodoc.id/customer/select_obat_promo_outlet.php?OutletName=";
-    String urlFavorite="http://pharmanet.apodoc.id/customer/select_obat_favorite_outlet.php?OutletName=";
-
-
-    PromoAdapter promoAdapter;
-    PromoAdapter FavAdapter;
-    int total_rating,outletProductPrice;
+    apotek ap;
+    ObatFavoriteAdapter favoriteAdapter;
+    int total_rating;
     String outletID, OutletOprOpen, OutletOprClose, outletAddress ,outletPhone;
-    int diskon;
     List<apotek> ApotekList = new ArrayList<>();
-    List<ModelPromo> PromoList = new ArrayList<>();
-    List<ModelPromo> FavList = new ArrayList<>();
 
-    ModelPromo mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,19 +58,11 @@ public class SearchResultApotek extends AppCompatActivity {
         rbApotek.setEnabled(false);
         rvObatPromo = findViewById(R.id.rvProdukPromo);
         rvObatPromo.setHasFixedSize(true);
-
-
-        LinearLayoutManager llPromo = new LinearLayoutManager(this);
-        llPromo.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvObatPromo.setLayoutManager(llPromo);
-
-
-
+        rvObatPromo.setLayoutManager(new LinearLayoutManager(this));
         rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
         rvObatFavorite.setHasFixedSize(true);
-        LinearLayoutManager llFavorite = new LinearLayoutManager(this);
-        llFavorite.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvObatFavorite.setLayoutManager(llFavorite);
+        rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));
+
 
 
         Intent intent = getIntent();
@@ -112,8 +93,7 @@ public class SearchResultApotek extends AppCompatActivity {
         });
 
         showApotek();
-        showView(rvObatPromo,urlPromo+apotekk);
-        showViewFav();
+//        showView();
     }
 
     public void showApotek() {
@@ -146,10 +126,13 @@ public class SearchResultApotek extends AppCompatActivity {
                     } //
                 }
 
+                tvApotekName.setText(apotekk);
                 rbApotek.setRating(total_rating);
                 tvApotekAddress.setText(outletAddress);
                 tvApotekhoneNumber.setText(outletPhone);
-                tvApotekOperationalHour.setText(OutletOprOpen +" - "+ OutletOprClose);
+//                tvApotekOperationalHour.setText(ope);
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -161,8 +144,8 @@ public class SearchResultApotek extends AppCompatActivity {
         req.add(rec1);
     }
 
-    public void showView(final RecyclerView cardlist, String url) {
-
+    public void showView(final RecyclerView cardlist, final List<obat> list, String url) {
+        url ="http://pharmanet.apodoc.id/customer/select_apotek_result.php?"+apotekk;
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

@@ -1,12 +1,18 @@
 package mobi.garden.bottomnavigationtest.Model;
 
 public class cart {
-    public String apotekName, apotekAddress,apotekPhone, productName, productID,userName,userPhone;
+    public String apotekName, apotekAddress,apotekPhone, productName, productID,userName,userPhone,ProductNameUrl;
     public int outletDeliveryFee, outletProductStockQty, cartProductQty, cartProductPrice;
 
     public int cartID,customerID,statudOrderID,orderLocationID,confirmID,deliveryStatusID;
     public String outletID,orderDate,confirmDate;
 
+    public cart(String apotekName, String productNameUrl, int outletProductStockQty, int cartProductPrice) {
+        this.apotekName = apotekName;
+        ProductNameUrl = productNameUrl;
+        this.outletProductStockQty = outletProductStockQty;
+        this.cartProductPrice = cartProductPrice;
+    }
 
 
     public cart(String apotekName, String apotekAddress, String productName, String productID, int outletDeliveryFee, int outletProductStockQty, int cartProductQty, int cartProductPrice) {

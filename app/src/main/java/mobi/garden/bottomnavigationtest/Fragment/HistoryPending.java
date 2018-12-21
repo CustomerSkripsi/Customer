@@ -56,6 +56,7 @@ public class HistoryPending extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history_pending, container, false);
 
+        Log.d("process", "onCreateView: ");
 
         recyclerView = view.findViewById(R.id.rv_historyPending);
         recyclerView.setHasFixedSize(true);

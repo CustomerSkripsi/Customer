@@ -1,222 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Activity.SearchResultApotek">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activity.SearchResultApotek">
+        android:orientation="vertical">
 
-        <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarResultApotek"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <EditText
+        android:id="@+id/et_searchApotek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roundedbox"
+        android:drawableLeft="@drawable/ic_search_black"
+        android:hint="Cari di Apotek ini"
+        android:ems="10"
+        android:inputType="textPersonName"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:id="@+id/tv_ApotekNameResult"
+        tools:text="Apotek Name"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rating Apotek"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/rbApotek"/>
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e4e4e4"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Alamat"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_address_apotek_result"
+            tools:text="Jelambar"/>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbarResultApotek"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/toolbar"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_location_on_black2_24dp"
+            />
+        </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/et_searchApotek"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/roundedbox"
-                    android:drawableLeft="@drawable/ic_search_black"
-                    android:hint="Cari di Apotek ini"
-                    android:ems="10"
-                    android:inputType="textPersonName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Telepon"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:id="@+id/tv_ApotekNameResult"
-                    tools:text="Apotek Name"
-                    />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_PhoneNumber"
+            tools:text="00000000000"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Rating Apotek"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Jam Operasional"/>
 
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:id="@+id/rbApotek"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_OperationalHourApotek"
+            tools:text="Minggu"/>
+    </LinearLayout>
 
-                <View
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#e4e4e4"/>
-            </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PRODUK PROMO"
+            android:layout_alignParentLeft="true"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Alamat"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_address_apotek_result"
-                        tools:text="Jelambar"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="5dp"/>
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/ic_location_on_black2_24dp"
-                        />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No Telepon"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_PhoneNumber"
-                    tools:text="00000000000"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Jam Operasional"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_OperationalHourApotek"
-                    tools:text="Minggu"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="PRODUK PROMO"
-                        android:textSize="16dp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/btnSelengPromo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="10dp"
-                        android:background="#ffffff"
-                        android:text="SELENGKAPNYA >"
-                        android:textColor="#7c7c7c"
-                        android:textSize="11dp" />
-                </RelativeLayout>
-            </LinearLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Selengkapnya >"/>
+    </RelativeLayout>
+    </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rvProdukPromo">
+                android:id="@+id/rvProdukPromo"
+                tools:listitem="@layout/cv_obat_promo">
             </android.support.v7.widget.RecyclerView>
 
-            <RelativeLayout
-                android:id="@+id/p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="PRODUK FAVORITE"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/btnSelengFavorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    android:background="#ffffff"
-                    android:text="SELENGKAPNYA >"
-                    android:textColor="#7c7c7c"
-                    android:textSize="11dp" />
-            </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rvProdukFavaorit">
+                android:id="@+id/rvProdukFavaorit"
+                tools:listitem="@layout/cv_obat_favorite">
             </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

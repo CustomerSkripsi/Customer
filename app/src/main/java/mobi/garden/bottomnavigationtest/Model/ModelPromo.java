@@ -2,30 +2,44 @@ package mobi.garden.bottomnavigationtest.Model;
 
 public class ModelPromo {
 
-    String ProductID,PromoNameProduct, ProductNameUrl;
-    int PriceProduct, ProductPriceAfterDC,outletID;
-    public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct,int productPriceAfterDC) {
-        this.PromoNameProduct = promoNameProduct;
+
+    public String ProductID,NameProduct, ProductNameUrl,AlamatApotek;
+    public int PriceProduct, ProductPriceAfterDC, ProductQty, StockProductQty;
+
+
+    public ModelPromo(String productID, int priceProduct, String nameProduct, int productQty, int stockProductQty) {
+        ProductID = productID;
+        PriceProduct = priceProduct;
+        NameProduct = nameProduct;
+        ProductQty = productQty;
+        StockProductQty =stockProductQty;
+    }
+
+    public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct, int productPriceAfterDC) {
+        this.NameProduct = promoNameProduct;
         this.ProductNameUrl = productNameUrl;
         this.PriceProduct = priceProduct;
         this.ProductPriceAfterDC = productPriceAfterDC;
     }
     public ModelPromo(String productID, String promoNameProduct, String productNameUrl, int outletID ,int priceProduct, int productPriceAfterDC) {
+
+
+
+
+    public ModelPromo(String productID, String promoNameProduct, String productNameUrl, int productPriceAfterDC) {
         ProductID = productID;
-        PromoNameProduct = promoNameProduct;
+        NameProduct = promoNameProduct;
         ProductNameUrl = productNameUrl;
-        this.outletID = outletID;
-        PriceProduct = priceProduct;
         ProductPriceAfterDC = productPriceAfterDC;
     }
     public ModelPromo(String promoNameProduct, String productNameUrl, int priceProduct) {
-        PromoNameProduct = promoNameProduct;
+        NameProduct = promoNameProduct;
         ProductNameUrl = productNameUrl;
         PriceProduct = priceProduct;
     }
 
     public ModelPromo(String promoNameProduct, String productNameUrl) {
-        this.PromoNameProduct = promoNameProduct;
+        this.NameProduct = promoNameProduct;
         this.ProductNameUrl = productNameUrl;
     }
 
@@ -37,11 +51,37 @@ public class ModelPromo {
         ProductPriceAfterDC = productPriceAfterDC;
     }
 
+
+    public ModelPromo() {
+
+    }
+
+    public String getProductID() {
+        return ProductID;
+    }
+    public void setProductID(String productID) {
+        ProductID = productID;
+    }
+
+    public String getNameProduct() {
+        return NameProduct;
+    }
+    public void setNameProduct(String nameProduct) {
+        NameProduct = nameProduct;
+    }
+
     public int getPriceProduct() {
         return PriceProduct;
     }
     public void setPriceProduct(int priceProduct) {
         PriceProduct = priceProduct;
+    }
+
+    public int getProductQty() {
+        return ProductQty;
+    }
+    public void setProductQty(int productQty) {
+        ProductQty = productQty;
     }
 
     public String getProductNameUrl() {
@@ -51,16 +91,25 @@ public class ModelPromo {
         this.ProductNameUrl = productNameUrl;
     }
 
-    public ModelPromo() {
-
-    }
-
-
     public String getPromoNameProduct() {
-        return PromoNameProduct;
+        return NameProduct;
+    }
+    public void setPromoNameProduct(String promoNameProduct) {
+        this.NameProduct = promoNameProduct;
     }
 
-    public void setPromoNameProduct(String promoNameProduct) {
-        this.PromoNameProduct = promoNameProduct;
+    public String getAlamatApotek() {
+        return AlamatApotek;
+    }
+
+    public void setAlamatApotek(String alamatApotek) {
+        AlamatApotek = alamatApotek;
+    }
+    public int getStockProductQty() {
+        return StockProductQty;
+    }
+
+    public void setStockProductQty(int stockProductQty) {
+        StockProductQty = stockProductQty;
     }
 }

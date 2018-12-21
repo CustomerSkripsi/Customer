@@ -1,11 +1,15 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,18 +24,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.SearchApotekAdapter;
-import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
@@ -42,7 +50,8 @@ public class SearchApotek extends AppCompatActivity {
 
     Context context;
     RecyclerView rvhasilSearchApotek;
-    String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose;
+    String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose, tempApotekDay;
+    int ratingbar;
 
 
     SearchApotekAdapter searchapotekAdapter;
@@ -51,6 +60,9 @@ public class SearchApotek extends AppCompatActivity {
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
 
+    double longitude,latitude;
+    GoogleApiClient mGoogleApiClient;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +70,47 @@ public class SearchApotek extends AppCompatActivity {
         setContentView(R.layout.activity_search_apotek);
         context = SearchApotek.this;
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SearchApotek.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+                                longitude = location.getLongitude();
+                                latitude = location.getLatitude();
+                                Log.d("test123", longitude + "");
+                            } else {
+                                Toast.makeText(SearchApotek.this, "Gagal menarik lokasi anda", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
+
         rvhasilSearchApotek = findViewById(R.id.rvHasilSearchApotek);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvhasilSearchApotek.setLayoutManager(llm);
+
 
 
         Intent intent = getIntent();
@@ -72,6 +120,7 @@ public class SearchApotek extends AppCompatActivity {
             apotek = apotek.replace(" ","%20");
         }
         showhasilapotek();
+
 
         //slider
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -84,7 +133,9 @@ public class SearchApotek extends AppCompatActivity {
 
 
     public void showhasilapotek(){
-        url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek;
+        getDay();
+        url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek+"&day="+tempApotekDay;
+        //url = "http://pharmanet.apodoc.id/customer/showSearchApotek.php?NamaApotek="+apotek;
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -100,16 +151,19 @@ public class SearchApotek extends AppCompatActivity {
                         JSONObject object = result.getJSONObject(i);
                         id_apotek = object.getString("OutletID");
                         apoteknama = object.getString("OutletName");
+                        ratingbar = object.getInt("TotalRating");
                         outletOprOpen = object.getString("OutletOprOpen");
                         outletOprClose = object.getString("OutletOprClose");
-                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,outletOprClose));
+                        longitude = object.getDouble("OutletLatitude");
+                        latitude = object.getDouble("OutletLongitude");
+                        apoteklist.add(new apotek(id_apotek,apoteknama,outletOprOpen,ratingbar,outletOprClose,longitude,latitude));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("ssqwes", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                searchapotekAdapter = new SearchApotekAdapter(apoteklist,context);
+                searchapotekAdapter = new SearchApotekAdapter(apoteklist,context,longitude,latitude);
                 rvhasilSearchApotek.setAdapter(searchapotekAdapter);
             }
         }, new Response.ErrorListener() {
@@ -215,6 +269,42 @@ public class SearchApotek extends AppCompatActivity {
                 }
             });
 
+        }
+    }
+
+    private void getDay(){
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (day) {
+            case Calendar.SUNDAY:
+                // Current day is Sunday
+                tempApotekDay = "Minggu";
+                break;
+            case Calendar.MONDAY:
+                // Current day is Monday
+                tempApotekDay = "Senin";
+                break;
+            case Calendar.TUESDAY:
+                // Current day is Tuesday
+                tempApotekDay = "Selasa";
+                break;
+            case Calendar.WEDNESDAY:
+                // Current day is Wednesday
+                tempApotekDay = "Rabu";
+                break;
+            case Calendar.THURSDAY:
+                // Current day is Thursday
+                tempApotekDay = "Kamis";
+                break;
+            case Calendar.FRIDAY:
+                // Current day is Friday
+                tempApotekDay = "Jumat";
+                break;
+            case Calendar.SATURDAY:
+                // Current day is Saturday
+                tempApotekDay = "Sabtu";
+                break;
         }
     }
 

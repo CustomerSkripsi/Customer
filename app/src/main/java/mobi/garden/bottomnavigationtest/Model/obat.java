@@ -10,25 +10,34 @@ import android.os.Parcelable;
 public class obat implements Parcelable {
     public String productID;
     public String productName;
+
+
+
     public String productPhoto;
     public String productDescription;
-
     public String categoryID;
-
+    public String memberID;
     public int outletProductPrice;
     public int outletProductStockQty;
-
-
-
     public int outletProductPriceafterDsc;
     public int cartProductPrice;
     public int cartProductQty;
-
     public String indikasi,kandungan,dosis,carapakai,kemasan,golongan,resepYN,kontraindikasi,carasimpan,principal;
+    String tempfoto;
 
+    public obat(String idProduk,String productName, String tempfoto, int outletProductPrice, int outletProductStockQty) {
+        productID =idProduk;
+        this.productName = productName;
+        this.tempfoto = tempfoto;
+        this.outletProductPrice = outletProductPrice;
+        this.outletProductStockQty = outletProductStockQty;
+    }
+    public obat(int outletProductStockQty) {
+        this.outletProductStockQty = outletProductStockQty;
+    }
     public obat(String productID, String productName, String productPhoto, String productDescription,
                 String indikasi, String kandungan, String dosis, String carapakai, String kemasan,
-                String golongan, String resepYN, String kontraindikasi, String carasimpan, String principal,String categoryID)
+                String golongan, String resepYN, String kontraindikasi, String carasimpan, String principal, String categoryID)
     {
         this.productID = productID;
         this.productName = productName;
@@ -70,12 +79,20 @@ public class obat implements Parcelable {
         this.outletProductStockQty = outletProductStockQty;
     }
 
-    public obat(String productName, String productID,int outletProductStockQty, int cartProductPrice,  int cartProductStockQty){
+    public obat(String productName, String productID,int cartproductQty,int outletProductStockQty, int cartProductPrice,  int outletProductPriceafterDsc){
+        this.productName = productName;
+        this.productID = productID;
+        cartProductQty = cartproductQty;
+        this.outletProductStockQty = outletProductStockQty;
+        this.cartProductPrice = cartProductPrice;
+        this.outletProductPriceafterDsc = outletProductPriceafterDsc;
+    }
+    public obat ( String productID,String productName,int outletProductStockQty,int outletProductPrice, String memberID){
         this.productID = productID;
         this.productName = productName;
         this.outletProductStockQty = outletProductStockQty;
-        this.cartProductPrice = cartProductPrice;
-        this.cartProductQty = cartProductStockQty;
+        this.outletProductPrice = outletProductPrice;
+        this.memberID = memberID;
     }
 
     public obat(String productID, String productName, String productPhoto, int outletProductPrice) {

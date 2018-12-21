@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 
 import mobi.garden.bottomnavigationtest.Activity.LacakPesananDetail;
@@ -37,10 +39,13 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
     public void onBindViewHolder(@NonNull LacakPesananAdapter.LacakPesananViewHolder holder, int position) {
         final Lacak currentItem = mLacakList.get(position);
 
+
         holder.orderID.setText(currentItem.getOrderID());
         holder.tanggalTransaksi.setText(currentItem.getTanggal());
         holder.outletName.setText(currentItem.getOutletName());
         holder.statusOrder.setText(currentItem.getStatusOrder());
+
+
 
         if (currentItem.getStatusOrder().equals("Accepted"))
         {
@@ -68,7 +73,8 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
                 i.putExtra("Tanggal", currentItem.getTanggal());
                 i.putExtra("OutletName", currentItem.getOutletName());
                 i.putExtra("StatusOrder", currentItem.getStatusOrder());
-                // i.putExtra("StatusOrderID", currentItem.getStatusOrderId());
+                //i.putExtra("StatusOrderID", currentItem.getStatusOrderId());
+                i.putExtra("LacakDetail", currentItem.getLacakDetail());
 
 
                 v.getContext().startActivity(i);
@@ -82,6 +88,18 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
         return mLacakList.size();
     }
 
+    public static String ConvertNominal(double input){
+        DecimalFormat df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setCurrencySymbol("Rp. ");
+        dfs.setMonetaryDecimalSeparator(',');
+        dfs.setGroupingSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+        df.setMaximumFractionDigits(0);
+        String hsl = df.format(input);
+        return hsl;
+    }
+
     public class LacakPesananViewHolder extends RecyclerView.ViewHolder{
         TextView orderID, tanggalTransaksi, outletName, statusOrder;
         ImageView transaksiDetail;
@@ -91,6 +109,8 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
             orderID = itemView.findViewById(R.id.tv_OrderID);
             tanggalTransaksi = itemView.findViewById(R.id.tv_tanggalTransaksi);
             outletName = itemView.findViewById(R.id.tv_namaApotek);
+
+
             statusOrder = itemView.findViewById(R.id.tv_StatusOrder);
             transaksiDetail = itemView.findViewById(R.id.iv_transaksiDetail);
         }

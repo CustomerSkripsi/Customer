@@ -2,41 +2,24 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Adapter.DetailKategoriAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
-import mobi.garden.bottomnavigationtest.Model.ModelKategori;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Searching;
@@ -122,8 +105,6 @@ public class PromoActivity extends AppCompatActivity {
         dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(PromoActivity.this, HomeActivity.class);
-                startActivity(i);
                 finish();
             }
         });
@@ -136,6 +117,9 @@ public class PromoActivity extends AppCompatActivity {
         searching = new Searching(context,text,rvPromo);
         searching.search();
     }
+
+
+
 
     public void searchpromocategory(){
         searching = new Searching(context, rvPromo);

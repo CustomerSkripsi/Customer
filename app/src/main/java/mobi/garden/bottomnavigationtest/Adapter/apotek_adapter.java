@@ -1,14 +1,16 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
-import android.app.Dialog;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +27,16 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.ApotekActivity;
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.Login;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.Model.session_obat;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 /**
  * Created by ASUS on 5/8/2018.
@@ -46,17 +48,32 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     Context context;
     session_obat session;
 
-    String CustomerID;
-    UserLocalStore userLocalStore;
+    String CustomerID,productName;
+//    UserLocalStore userLocalStore;
+//SessionManagement session;
+    HashMap<String, String> login;
+    public static String memberID, userName;
     DecimalFormat df;
 
-    Button button_lanjut, button_Batal;
-    Dialog myDialog;
+    Activity activity;
 
-    public apotek_adapter(Context c, List<apotek> apoteklist) {
+    double userLong;
+    double userlat;
+
+    public apotek_adapter(Context c, List<apotek> apoteklist,double longitude,double latitude) {
         this.apoteklist = apoteklist;
         this.context = c;
         session = new session_obat(c);
+        userLong = longitude;
+        userlat = latitude;
+    }
+
+
+    public apotek_adapter(Context c, List<apotek> apoteklist, Activity activity) {
+        this.apoteklist = apoteklist;
+        this.context = c;
+        session = new session_obat(c);
+        this.activity = activity;
     }
 
     @Override
@@ -70,9 +87,10 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     @Override
     public void onBindViewHolder(apotek_adapter.apotekViewHolder holder, int position) {
         final apotek pr = apoteklist.get(position);
-        userLocalStore  = new UserLocalStore(context);
-        User currUser = userLocalStore.getLoggedInUser();
-        CustomerID = currUser.getUserID();
+//        userLocalStore = new UserLocalStore(context);
+//        User currUser = userLocalStore.getLoggedInUser();
+//        CustomerID = currUser.getUserID();
+
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
@@ -82,96 +100,41 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
 
+        Location loc1 = new Location("");
+        loc1.setLatitude(userlat);
+        loc1.setLongitude(userLong);
+        Location loc2 = new Location("");
+        loc2.setLatitude(pr.latitude);
+        loc2.setLongitude(pr.longitude);
+        double distanceInMeters = loc1.distanceTo(loc2)/1000;
+
+        Log.d("Jarak", distanceInMeters+"");
         holder.tv_nama_apotek.setText(pr.getNama_apotek());
         holder.tv_harga_obat_apotek.setText(df.format(pr.getHarga())+"");
         holder.tv_stok_obat_apotek.setText(String.valueOf(pr.getStok()));
-        holder.tv_keterangan_apotek.setText("Min. "+df.format(Integer.parseInt(pr.getKeterangan())));
+        if(userLong != 0 && userlat !=0) { holder.tv_jarak.setText(String.format("%.1f",distanceInMeters)+" KM"); }
+        else { holder.tv_jarak.setText("0 KM"); }
 
-        holder.btn_beli.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(userLocalStore.getUserLoggedIn()){
-                    Intent i = new Intent(context,CartApotekActivity.class);
-                    i.putExtra(CartApotekActivity.OUTLET_ID, pr.id_apotek);
-                    i.putExtra(CartApotekActivity.CATEGORY_ID, session.getUserDetails().get(session_obat.CATEGORYID));
-                    i.putExtra(CartApotekActivity.PRODUCT_ID, session.getUserDetails().get(session_obat.ID));
-                    i.putExtra(CartApotekActivity.OUTLET_NAME, pr.nama_apotek);
-
-                    add(session.getUserDetails().get(session_obat.ID),session.getUserDetails().get(session_obat.NAMA)
-                            , pr.getHarga(),1, Integer.parseInt(CustomerID), pr.id_apotek);
-
-
-                    context.startActivity(i);
-                }
-                else {
-                    Intent i = new Intent(context,Login.class);
-                    context.startActivity(i);
-                }
-
-//                outletid[0] = pr.id_apotek;
-//
-//                if(outletid[0] != pr.id_apotek){
-//                    myDialog = new Dialog(context);
-//                    myDialog.setContentView(R.layout.dialog_layout2);
-//
-//                    button_lanjut = (Button) myDialog.findViewById(R.id.button_lanjut);
-//                    button_Batal = (Button) myDialog.findViewById(R.id.button_batal);
-//
-//                    button_Batal.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            myDialog.cancel();
-//                        }
-//                    });
-//
-//                    button_lanjut.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Intent i=new Intent(context,CartApotekActivity.class);
-//                            i.putExtra(CartApotekActivity.OUTLET_ID, pr.id_apotek);
-//                            i.putExtra(CartApotekActivity.CATEGORY_ID, session.getUserDetails().get(session_obat.CATEGORYID));
-//                            i.putExtra(CartApotekActivity.PRODUCT_ID, session.getUserDetails().get(session_obat.ID));
-//                            i.putExtra(CartApotekActivity.OUTLET_NAME, pr.nama_apotek);
-//
-//                            add(session.getUserDetails().get(session_obat.ID),session.getUserDetails().get(session_obat.NAMA)
-//                                    , pr.getHarga(),1, Integer.parseInt(CustomerID), pr.id_apotek);
-//
-//
-//                            context.startActivity(i);
-//                        }
-//                    });
-//                    myDialog.show();
-//
-//                    outletid[0] = pr.id_apotek;
-//                }
-//                else{
-//                    Intent i=new Intent(context,CartApotekActivity.class);
-//                    i.putExtra(CartApotekActivity.OUTLET_ID, pr.id_apotek);
-//                    i.putExtra(CartApotekActivity.CATEGORY_ID, session.getUserDetails().get(session_obat.CATEGORYID));
-//                    i.putExtra(CartApotekActivity.PRODUCT_ID, session.getUserDetails().get(session_obat.ID));
-//                    i.putExtra(CartApotekActivity.OUTLET_NAME, pr.nama_apotek);
-//
-//                    add(session.getUserDetails().get(session_obat.ID),session.getUserDetails().get(session_obat.NAMA)
-//                            , pr.getHarga(),1, Integer.parseInt(CustomerID), pr.id_apotek);
-//
-//
-//                    context.startActivity(i);
-//
-//                    outletid[0] = pr.id_apotek;
-//                }
-
-            }
-        });
-
+        holder.RatObat.setRating(pr.getRating());
+        holder.RatObat.setEnabled(false);
+        holder.tv_jam_open.setText(pr.getOutletOprOpen());
+        holder.tv_jam_close.setText(pr.getOutletOprClose());
         holder.containerApotek.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ApotekActivity.class);
-                intent.putExtra(ApotekActivity.OUTLET_ID,pr.id_apotek);
-                context.startActivity(intent);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            public void onClick(View v) {
+                productName = pr.getProductName();
+                if(productName.contains(" ")){
+                    productName = productName.replace(" ","%20");
+                }
+                addkeranjang(productName ,pr.getId_apotek());
+                Intent i = new Intent(context,CartApotekActivity.class);
+                i.putExtra("ApotekName", pr.getNama_apotek());
+                Log.d( "ssssssss",pr.getNama_apotek());
+                context.startActivity(i);
             }
         });
+
+
     }
 
     @Override
@@ -180,61 +143,90 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     }
 
     public static class apotekViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tv_nama_apotek,tv_harga_obat_apotek,tv_stok_obat_apotek,tv_keterangan_apotek;
+        RatingBar RatObat;
+        TextView tv_nama_apotek,tv_harga_obat_apotek,tv_stok_obat_apotek,tv_jarak, tv_jam_open, tv_jam_close;
         LinearLayout containerApotek;
-        Button btn_beli;
-
         public apotekViewHolder(View v) {
             super(v);
-
+            RatObat =v.findViewById(R.id.ratingBar);
             containerApotek=v.findViewById(R.id.containerApotek);
             tv_nama_apotek= (TextView) v.findViewById(R.id.tv_nama_apotek);
             tv_harga_obat_apotek=(TextView) v.findViewById(R.id.tv_harga_obat_apotek);
             tv_stok_obat_apotek=(TextView) v.findViewById(R.id.tv_stok_obat_apotek);
-            tv_keterangan_apotek= (TextView) v.findViewById(R.id.tv_keterangan_apotek);
-            btn_beli = (Button)v.findViewById(R.id.btn_beli);
+            tv_jarak= v.findViewById(R.id.tv_jarak);
+            tv_jam_open = v.findViewById(R.id.tv_jam_open);
+            tv_jam_close = v.findViewById(R.id.tv_jam_close);
+            //containerApotek = v.findViewById(R.id.containerApotek);
         }
     }
-    public void add(String product_id, String product_name, int product_price, int qty, int CustomerID , String outletID) {
+
+
+    public void addkeranjang(String productname, String outletID){
+       String url = "http://pharmanet.apodoc.id/customer/AddProductToCart.php?ProductName="+productname+"&OutletID="+outletID;
+        Log.d("addkeranjangasd: ",url);
+
+        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Err", Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(req);
+    }
+
+
+    public void add(String productID,String outletID, int productPrice,int productPriceAfterDiscount,int qty){
         JSONObject objAdd = new JSONObject();
         try {
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
-            objDetail.put("ProductName", product_name);
-            objDetail.put("Price", product_price);
-            objDetail.put("Qty", qty);
-            objDetail.put("CustomerID", CustomerID);
-            objDetail.put("UpdatedBy",CustomerID);
-            objDetail.put("ProductID", product_id);
-            objDetail.put("OutletID", outletID);
+            objDetail.put("ProductID",productID);
+            objDetail.put("OutletID",outletID);
+            objDetail.put("Price",productPrice);
+            objDetail.put("PriceAfterDiscount",productPriceAfterDiscount);
+            objDetail.put("Qty",qty);
             arrData.put(objDetail);
             objAdd.put("data", arrData);
-        } catch (JSONException e1) {
-            e1.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/addCartCustomer_apotek.php", objAdd,
-                new Response.Listener<JSONObject>() {
-                    @Override
+        Log.d("objaddnya",objAdd.toString());
+        String url = "";
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, objAdd, new Response.Listener<JSONObject>() {
+            @Override
 
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.getString("status").equals("OK")) {
-                                CartApotekActivity.initiateBelowAdapter();
-                            }
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
+                public void onResponse(JSONObject response) {
+                try {
+                    if (response.getString("status").equals("OK")) {
+                        CartApotekActivity.show_cart(CartApotekActivity.add_url,memberID);
+                        Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
 
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
+        requestQueue.add(req);
     }
+
+
+
 }

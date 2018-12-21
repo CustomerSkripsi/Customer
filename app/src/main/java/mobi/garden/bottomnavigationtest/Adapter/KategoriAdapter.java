@@ -23,14 +23,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.katego
         this.context = context;
     }
 
-    public static class kategoriViewHolder extends RecyclerView.ViewHolder {
-        android.widget.Button btnFeedback;
 
-        public kategoriViewHolder(View itemView) {
-            super(itemView);
-            btnFeedback = itemView.findViewById(R.id.btn_feedback);
-        }
-    }
 
     @Override
     public KategoriAdapter.kategoriViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,5 +52,12 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.katego
         return modelKategoris.size();
     }
 
+    public static class kategoriViewHolder extends RecyclerView.ViewHolder {
+        android.widget.Button btnFeedback;
+        public kategoriViewHolder(View itemView) {
+            super(itemView);
+            btnFeedback = itemView.findViewById(R.id.btn_feedback);
+        }
+    }
 
 }
