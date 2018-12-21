@@ -77,6 +77,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
             public void onClick(View view) {
                 Intent i = new Intent(context,DetailObatHome.class);
                 i.putExtra("ProductName",mp.getPromoNameProduct());
+                Log.d("namaputexxtrny", ""+mp.getPromoNameProduct());
                 context.startActivity(i);
             }
         });

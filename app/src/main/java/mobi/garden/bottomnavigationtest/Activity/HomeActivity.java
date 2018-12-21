@@ -126,6 +126,10 @@ public class HomeActivity extends BaseActivity {
     List<Rating> ratingList = new ArrayList<>();
     public String review;
 
+    private ImageView textToSpeech;
+
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

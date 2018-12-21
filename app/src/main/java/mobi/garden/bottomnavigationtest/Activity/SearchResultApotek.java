@@ -180,8 +180,8 @@ public class SearchResultApotek extends AppCompatActivity {
         req.add(rec1);
     }
 
-    public void showView(final RecyclerView cardlist, final List<obat> list, String url) {
-        url ="http://pharmanet.apodoc.id/customer/select_apotek_result.php?"+apotekk;
+    public void showView(final RecyclerView cardlist, String url) {
+//        url ="http://pharmanet.apodoc.id/customer/select_apotek_result.php?"+apotekk;
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
