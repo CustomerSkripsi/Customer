@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.PromoSelengkapnyaAdapter;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
@@ -46,8 +47,8 @@ public class SearchResultApotek extends AppCompatActivity {
     String urlFavorite="http://pharmanet.apodoc.id/customer/select_obat_favorite_outlet.php?OutletName=";
 
 
-    PromoAdapter promoAdapter;
-    PromoAdapter FavAdapter;
+    PromoSelengkapnyaAdapter promoAdapter;
+    PromoSelengkapnyaAdapter FavAdapter;
     int total_rating,outletProductPrice;
     String outletID, OutletOprOpen, OutletOprClose, outletAddress ,outletPhone;
     int diskon;
@@ -73,6 +74,10 @@ public class SearchResultApotek extends AppCompatActivity {
         rbApotek.setEnabled(false);
         rvObatPromo = findViewById(R.id.rvProdukPromo);
         rvObatPromo.setHasFixedSize(true);
+        rvObatPromo.setLayoutManager(new LinearLayoutManager(this));
+        rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
+        rvObatFavorite.setHasFixedSize(true);
+        rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));
 
 
         LinearLayoutManager llPromo = new LinearLayoutManager(this);
@@ -159,7 +164,7 @@ public class SearchResultApotek extends AppCompatActivity {
                     } //
                 }
 
-
+                tvApotekName.setText(apotekk);
                 rbApotek.setRating(total_rating);
                 tvApotekAddress.setText(outletAddress);
                 tvApotekhoneNumber.setText(outletPhone);
@@ -175,8 +180,8 @@ public class SearchResultApotek extends AppCompatActivity {
         req.add(rec1);
     }
 
-    public void showView(final RecyclerView cardlist, String url) {
-
+    public void showView(final RecyclerView cardlist, final List<obat> list, String url) {
+        url ="http://pharmanet.apodoc.id/customer/select_apotek_result.php?"+apotekk;
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -211,7 +216,7 @@ public class SearchResultApotek extends AppCompatActivity {
                         e1.printStackTrace();
                     }
                 }
-                promoAdapter = new PromoAdapter(PromoList,SearchResultApotek.this);
+                promoAdapter = new PromoSelengkapnyaAdapter(PromoList,SearchResultApotek.this);
                 cardlist.setAdapter(promoAdapter);//
             }
         }, new Response.ErrorListener() {
@@ -254,7 +259,7 @@ public class SearchResultApotek extends AppCompatActivity {
                         e1.printStackTrace();
                     }
                 }
-                FavAdapter = new PromoAdapter(FavList,SearchResultApotek.this);
+                FavAdapter = new PromoSelengkapnyaAdapter(FavList,SearchResultApotek.this);
                 rvObatFavorite.setAdapter(FavAdapter);
             }
         }, new Response.ErrorListener() {

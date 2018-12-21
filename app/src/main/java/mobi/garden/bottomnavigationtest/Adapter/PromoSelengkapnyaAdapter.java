@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.R;
 
@@ -75,7 +77,18 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
 
             }
         });
+
+        holder.ll_obat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,DetailObatHome.class);
+                i.putExtra("ProductName",mp.getPromoNameProduct());
+                context.startActivity(i);
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -85,7 +98,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
     public static class PromoSelengkapnyaViewHolder extends RecyclerView.ViewHolder {
         TextView tvNamaProdukPromo, tvHargaCoret, tvharga;
         ImageView imgProduct;
-        LinearLayout llproduk;
+        LinearLayout ll_obat;
         Button btnAdd;
 
         public PromoSelengkapnyaViewHolder(View itemView) {
@@ -95,7 +108,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             tvHargaCoret = itemView.findViewById(R.id.tvHargaCoret);
             tvharga = itemView.findViewById(R.id.tvHarga);
             btnAdd = itemView.findViewById(R.id.btn_add_obat);
-            llproduk = itemView.findViewById(R.id.llproduk);
+            ll_obat = itemView.findViewById(R.id.ll_obat);
         }
     }
 }

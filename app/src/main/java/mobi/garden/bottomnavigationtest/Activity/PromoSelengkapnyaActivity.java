@@ -2,6 +2,7 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -45,6 +46,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     String urlFavorite="";
     int diskon;
 
+
     PromoSelengkapnyaAdapter promoAdapter;
     PromoSelengkapnyaAdapter favAdapter;
     PromoAdapter FavAdapter;
@@ -87,8 +89,11 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         geturl = i.getStringExtra("link");
         Log.d("URL", geturl);//
 
+
+
         showViewPromo(rvSelengkapnya,geturl);
         showViewFav(rvSelengkapnya, geturl);
+    }
 
         session = new SessionManagement(getApplicationContext());
         login = session.getMemberDetails();
@@ -121,8 +126,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                                 obj.getInt("OutletProductPrice"),
                                 obj.getInt("ProductPriceAfterDiscount")));
                         Log.d("masuk", obj.toString());
-                        Toast.makeText(PromoSelengkapnyaActivity.this, "woiiii", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(PromoSelengkapnyaActivity.this, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }

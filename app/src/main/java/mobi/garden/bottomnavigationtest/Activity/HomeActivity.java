@@ -112,10 +112,6 @@ public class HomeActivity extends BaseActivity {
     double latitude;
     private FusedLocationProviderClient mFusedLocationClient;
 
-    //speech
-    private ImageView textToSpeech;
-    private final int REQ_CODE_SPEECH_INPUT = 100;
-
 
     //rating
     Button btn, mSendFeedback, btnKategori;
@@ -290,7 +286,6 @@ public class HomeActivity extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(etSearch.getText().toString().equals("")||etSearch.getText().toString().length()==0||etSearch.getText().toString().isEmpty()) {
                     rvSearchGlobal.setVisibility(View.GONE);
-//                    Toast.makeText(HomeActivity.this, "blblalblabla", Toast.LENGTH_SHORT).show();
                 }else if(listRekomenApotek.size()!=0 && listRekomenProduct.size()!=0)
                     //set ulang rekomendasinya
                     Log.d("jumlahnamaapotek",etSearch.getText().toString());
