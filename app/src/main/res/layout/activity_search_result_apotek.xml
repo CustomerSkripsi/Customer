@@ -379,7 +379,7 @@ android:layout_marginTop="0dp">
                     android:layout_marginTop="18dp"
                     android:layout_marginRight="10dp"
                     tools:listitem="@layout/cart_list_row">
-                    
+
 
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
