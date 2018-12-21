@@ -14,7 +14,29 @@
         android:id="@+id/tbHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient">
+        android:textAlignment="center"
+        app:titleTextColor="@color/white"
+        android:background="@drawable/toolbar">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:foregroundGravity="left"
+            android:onClick="BackBack"
+            app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:gravity="center"
+            android:text="R I W A Y A T"
+            android:textColor="#fff"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+
 
     </android.support.v7.widget.Toolbar>
 

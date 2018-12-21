@@ -1,12 +1,18 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,23 +30,33 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Adapter.ObatFavoriteAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
+import mobi.garden.bottomnavigationtest.Adapter.PromoSelengkapnyaAdapter;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
-import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 
 public class SearchResultApotek extends AppCompatActivity {
 
     TextView tvApotekName,tvApotekAddress,tvApotekhoneNumber,tvApotekOperationalHour;
+    TextView btnSelengFav,btnSelengPromo;
     RatingBar rbApotek;
     RecyclerView rvObatPromo, rvObatFavorite;
     String apotekk;
-    apotek ap;
-    ObatFavoriteAdapter favoriteAdapter;
-    int total_rating;
-    String outletID, OutletOprOpen, OutletOprClose, outletAddress ,outletPhone;
-    List<apotek> ApotekList = new ArrayList<>();
+    String urlPromo="http://pharmanet.apodoc.id/customer/select_obat_promo_outlet.php?OutletName=";
+    String urlFavorite="http://pharmanet.apodoc.id/customer/select_obat_favorite_outlet.php?OutletName=";
 
+
+    PromoSelengkapnyaAdapter promoAdapter;
+    PromoSelengkapnyaAdapter FavAdapter;
+    int total_rating,outletProductPrice;
+    String outletID, OutletOprOpen, OutletOprClose, outletAddress ,outletPhone;
+    int diskon;
+    List<apotek> ApotekList = new ArrayList<>();
+    List<ModelPromo> PromoList = new ArrayList<>();
+    List<ModelPromo> FavList = new ArrayList<>();
+
+    ModelPromo mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,20 +74,37 @@ public class SearchResultApotek extends AppCompatActivity {
         rbApotek.setEnabled(false);
         rvObatPromo = findViewById(R.id.rvProdukPromo);
         rvObatPromo.setHasFixedSize(true);
-        rvObatPromo.setLayoutManager(new LinearLayoutManager(this));
-        rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
-        rvObatFavorite.setHasFixedSize(true);
-        rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));
 
 
+        LinearLayoutManager llPromo = new LinearLayoutManager(this);
+        llPromo.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvObatPromo.setLayoutManager(llPromo);
 
         Intent intent = getIntent();
         apotekk =  intent.getStringExtra("ApotekName");
         Log.d("test", "jass: "+apotekk);
         tvApotekName.setText(apotekk);
+        Toolbar dToolbar = findViewById(R.id.toolbarResultApotek);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        dToolbar.setTitle(apotekk);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         if(apotekk.contains(" ")){
             apotekk = apotekk.replace(" ","%20");
         }
+
+        rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
+        rvObatFavorite.setHasFixedSize(true);
+        LinearLayoutManager llFavorite = new LinearLayoutManager(this);
+        llFavorite.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvObatFavorite.setLayoutManager(llFavorite);
+
+
+
 
         btnSelengPromo = findViewById(R.id.btnSelengPromo);
         btnSelengPromo.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +126,8 @@ public class SearchResultApotek extends AppCompatActivity {
         });
 
         showApotek();
-//        showView();
+        showView(rvObatPromo,urlPromo+apotekk);
+        showViewFav();
     }
 
     public void showApotek() {
@@ -126,13 +160,11 @@ public class SearchResultApotek extends AppCompatActivity {
                     } //
                 }
 
-                tvApotekName.setText(apotekk);
+
                 rbApotek.setRating(total_rating);
                 tvApotekAddress.setText(outletAddress);
                 tvApotekhoneNumber.setText(outletPhone);
-//                tvApotekOperationalHour.setText(ope);
-
-
+                tvApotekOperationalHour.setText(OutletOprOpen +" - "+ OutletOprClose);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -144,8 +176,8 @@ public class SearchResultApotek extends AppCompatActivity {
         req.add(rec1);
     }
 
-    public void showView(final RecyclerView cardlist, final List<obat> list, String url) {
-        url ="http://pharmanet.apodoc.id/customer/select_apotek_result.php?"+apotekk;
+    public void showView(final RecyclerView cardlist, String url) {
+
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -180,7 +212,7 @@ public class SearchResultApotek extends AppCompatActivity {
                         e1.printStackTrace();
                     }
                 }
-                promoAdapter = new PromoAdapter(PromoList,SearchResultApotek.this);
+                promoAdapter = new PromoSelengkapnyaAdapter(PromoList,SearchResultApotek.this);
                 cardlist.setAdapter(promoAdapter);//
             }
         }, new Response.ErrorListener() {
@@ -223,17 +255,26 @@ public class SearchResultApotek extends AppCompatActivity {
                         e1.printStackTrace();
                     }
                 }
-                FavAdapter = new PromoAdapter(FavList,SearchResultApotek.this);
+                FavAdapter = new PromoSelengkapnyaAdapter(FavList,SearchResultApotek.this);
                 rvObatFavorite.setAdapter(FavAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SearchResultApotek.this, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue req = Volley.newRequestQueue(this);
         req.add(rec);
+    }
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.toolbar);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 }
 

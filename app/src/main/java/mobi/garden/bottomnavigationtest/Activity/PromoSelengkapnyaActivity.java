@@ -1,8 +1,8 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -57,11 +57,11 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         geturl = i.getStringExtra("link");
-        Log.d("URL", geturl);
+        Log.d("URL", geturl);//
 
 
 
-        // showViewPromo(rvObatPromo,geturl);
+        showViewPromo(rvSelengkapnya,geturl);
         showViewFav(rvSelengkapnya, geturl);
     }
 
@@ -91,8 +91,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                                 obj.getInt("OutletProductPrice"),
                                 obj.getInt("ProductPriceAfterDiscount")));
                         Log.d("masuk", obj.toString());
-                        Toast.makeText(PromoSelengkapnyaActivity.this, "woiiii", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(PromoSelengkapnyaActivity.this, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }

@@ -18,7 +18,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@color/blued"
+        android:background="@color/toolbar"
         android:orientation="horizontal">
 
         <ImageView
@@ -57,7 +57,7 @@
         android:layout_gravity="center"
         android:enabled="false"
         android:gravity="center"
-        android:background="@color/blued"
+        android:background="@color/toolbar"
         android:textSize="16dp"
         android:textStyle="bold"
         android:textColor="@color/white"

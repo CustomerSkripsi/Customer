@@ -20,7 +20,7 @@
             android:id="@+id/iv_foto_obat"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:background="#000000"/>
+            android:background="@drawable/nopicture"/>
         <TextView
             android:id="@+id/tv_nama_obat"
             android:layout_width="wrap_content"

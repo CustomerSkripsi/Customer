@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#20B2AA</color>
     <color name="toolbar">#20B2AA</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#20B2AA</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorHijau">#00e600</color>
     <color name="colorGrey">#404040</color>
@@ -10,8 +10,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="green">#5bb531</color>
-    <color name="blue">#0093d9</color>
-    <color name="blued">#0093b9</color>
+    <color name="blue">#20B2AA</color>
+    <color name="blued">#20B2AA</color>
     <color name="gray">#C0C0C0</color>
     <color name="grey">#a5a5a5</color>
     <color name="green1">#a0db8e</color>
@@ -19,11 +19,11 @@
     <color name="green_yellow">#B1FB17</color>
     <color name="orange">#FF8040</color>
     <color name="gold">#FFD700</color>
-    <!--<color name="orange">#FFA500</color>-->
+    <color name="oren">#FB8C00</color>
 
     //gradient
-    <color name="ijo">#5bb531</color>
-    <color name="biru">#0093d9</color>
+    <color name="ijo">#20B2AA</color>
+    <color name="biru">#20B2AA</color>
     <color name="whitetransparent">#ddffffff</color>
 
     //search

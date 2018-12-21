@@ -4,7 +4,16 @@ public class ModelPromo {
 
 
     public String ProductID,NameProduct, ProductNameUrl,AlamatApotek;
-    public int PriceProduct, ProductPriceAfterDC, ProductQty, StockProductQty;
+    public int PriceProduct, outletID ,ProductPriceAfterDC, ProductQty, StockProductQty;
+
+    public ModelPromo(String productID, String nameProduct, String productNameUrl, int outletID ,int priceProduct,int productPriceAfterDC) {
+        ProductID = productID;
+        NameProduct = nameProduct;
+        ProductNameUrl = productNameUrl;
+        PriceProduct = priceProduct;
+        this.outletID = outletID;
+        ProductPriceAfterDC = productPriceAfterDC;
+    }
 
 
     public ModelPromo(String productID, int priceProduct, String nameProduct, int productQty, int stockProductQty) {
@@ -21,7 +30,6 @@ public class ModelPromo {
         this.PriceProduct = priceProduct;
         this.ProductPriceAfterDC = productPriceAfterDC;
     }
-    public ModelPromo(String productID, String promoNameProduct, String productNameUrl, int outletID ,int priceProduct, int productPriceAfterDC) {
 
 
 

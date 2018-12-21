@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,48 +10,51 @@
         <EditText
             android:id="@+id/tvSearch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="17dp"
             android:background="@drawable/edit_four_corner_background"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:fontFamily="sans-serif-light"
-            android:hint="Search Apotek and Product"
+            android:hint="Search On Pharmanet"
             android:imeOptions="actionSearch"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:textColor="@color/searchText"
             android:textColorHint="@color/searchHint"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/ivCart"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/Mic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></EditText>
 
-        <ImageView
-            android:id="@+id/ivCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toStartOf="@+id/imageView"
-            android:layout_toLeftOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/tvSearch"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cart_home"
-            tools:ignore="VectorDrawableCompat" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/Mic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="4dp"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_toLeftOf="@+id/ivCart"
+            android:layout_toStartOf="@+id/ivCart"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/tvSearch"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_mic"
+            tools:ignore="VectorDrawableCompat" />
+
+
+        <ImageView
+            android:id="@+id/ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_notifications_black_24dp"
@@ -72,7 +74,131 @@
 
         <!--</android.support.v7.widget.RecyclerView>-->
 
+        <ImageView
+            android:id="@+id/ivCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivCart"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_toLeftOf="@+id/ImageView"
+            android:layout_toStartOf="@+id/ImageView"
+            app:layout_constraintEnd_toStartOf="@+id/ImageView"
+            app:layout_constraintStart_toEndOf="@+id/Mic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_cart_home"
+            tools:ignore="VectorDrawableCompat" />
+
+        <!--<com.nex3z.notificationbadge.NotificationBadge-->
+            <!--android:id="@+id/badge"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_alignParentTop="true"-->
+
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:badgeBackground="@drawable/badge_bg_with_shadow"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:maxTextLength="3"-->
+            <!--tools:layout_editor_absoluteX="320dp"></com.nex3z.notificationbadge.NotificationBadge>-->
 
 
 
 </android.support.constraint.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.constraint.ConstraintLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@drawable/toolbar"-->
+    <!--android:focusableInTouchMode="true">-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/tvSearch"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:background="@drawable/edit_four_corner_background"-->
+            <!--android:drawableLeft="@drawable/ic_search_black_24dp"-->
+            <!--android:fontFamily="sans-serif-light"-->
+            <!--android:hint="Search Apotek and Product"-->
+            <!--android:imeOptions="actionSearch"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:maxLines="1"-->
+            <!--android:textColor="@color/searchText"-->
+            <!--android:textColorHint="@color/searchHint"-->
+            <!--android:textSize="12sp"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/Mic"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"></EditText>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/Mic"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginEnd="4dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_toLeftOf="@+id/ivCart"-->
+            <!--android:layout_toStartOf="@+id/ivCart"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/imageView"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tvSearch"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:srcCompat="@drawable/ic_mic"-->
+            <!--tools:ignore="VectorDrawableCompat"/>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivCart"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@+id/imageView"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_toStartOf="@+id/imageView"-->
+            <!--android:layout_toLeftOf="@+id/imageView"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/imageView"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tvSearch"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:srcCompat="@drawable/ic_cart_home"-->
+            <!--tools:ignore="VectorDrawableCompat" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:srcCompat="@drawable/ic_notifications_black_24dp"-->
+            <!--tools:ignore="VectorDrawableCompat" />-->
+
+        <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/rvSearchGlobal"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginEnd="7dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginStart="7dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:layout_constraintEnd_toEndOf="@+id/tvtest"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="@id/tvtest"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:layout_constraintTop_toBottomOf="@id/tvtest"&ndash;&gt;-->
+        <!--&lt;!&ndash;tools:listitem="@layout/dropdown"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:translationZ="10dp">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</android.support.v7.widget.RecyclerView>&ndash;&gt;-->
+
+
+
+
+<!--</android.support.constraint.ConstraintLayout>-->

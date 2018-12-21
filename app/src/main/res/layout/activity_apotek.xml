@@ -16,6 +16,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toolbar">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:foregroundGravity="left"
+                    android:onClick="BackBack"
+                    app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+            </android.support.v7.widget.Toolbar>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -55,11 +71,11 @@
                     android:layout_centerInParent="true"
                     android:layout_marginRight="16dp">
 
-                    <Button
-                        android:id="@+id/hideButton"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                    <!--<Button-->
+                        <!--android:id="@+id/hideButton"-->
+                        <!--android:layout_width="35dp"-->
+                        <!--android:layout_height="35dp"-->
+                        <!--android:background="@drawable/ic_keyboard_arrow_down_black_24dp" />-->
                 </LinearLayout>
 
 
@@ -76,164 +92,170 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/white"
-                android:id="@+id/containerHide">
+                android:background="@color/white">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
+                    android:layout_marginBottom="7dp"
                     android:layout_marginTop="7dp"
-                    android:layout_marginBottom="7dp">
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Alamat"
-                        android:textSize="13dp"
-                        android:textColor="@color/gray"/>
+                        android:textColor="@color/grey"
+                        android:textSize="13dp" />
 
                     <TextView
                         android:id="@+id/tv_address_apotek"
-                        tools:text="ini alamat"
-                        android:textSize="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        tools:text="ini alamat" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="left"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:layout_marginBottom="7dp">
+                    android:paddingLeft="20dp">
 
                     <TextView
-                        android:text="No. Telepon"
-                        android:textSize="13dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray"/>
+                        android:text="No. Telepon"
+                        android:textColor="@color/grey"
+                        android:textSize="13dp" />
 
                     <TextView
                         android:id="@+id/tv_no_telepon"
-                        tools:text="ini nomer telepon"
-                        android:textSize="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        tools:text="ini nomer telepon" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="left"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:layout_marginBottom="7dp">
+                    android:paddingLeft="20dp">
 
                     <TextView
-                        android:text="Jam Operasional"
-                        android:textSize="13dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray"/>
+                        android:text="Jam Operasional"
+                        android:textColor="@color/grey"
+                        android:textSize="13dp" />
 
                     <TextView
                         android:id="@+id/tv_jam_operasional"
-                        tools:text="ini jam operasional"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
                         android:textSize="15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"/>
+                        tools:text="ini jam operasional" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:layout_marginBottom="7dp">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:paddingLeft="20dp"-->
+                    <!--android:layout_marginBottom="7dp">-->
 
-                    <TextView
-                        android:text="No. SIA"
-                        android:textSize="13dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/gray"/>
+                    <!--<TextView-->
+                        <!--android:text="No. SIA"-->
+                        <!--android:textSize="13dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/gray"/>-->
 
-                    <TextView
-                        android:id="@+id/tv_no_sia"
-                        tools:text="ini no sia"
-                        android:textSize="15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_no_sia"-->
+                        <!--tools:text="ini nomor SIA"-->
+                        <!--android:textSize="15dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/black"/>-->
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:layout_marginBottom="7dp">
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:paddingLeft="20dp"-->
+                    <!--android:layout_marginBottom="7dp">-->
 
-                    <TextView
-                        android:text="No. SIPA"
-                        android:textSize="13dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/gray"/>
+                    <!--<TextView-->
+                        <!--android:text="No. SIPA"-->
+                        <!--android:textSize="13dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/gray"/>-->
 
-                    <TextView
-                        android:id="@+id/tv_no_sipa"
-                        tools:text="ini no sipa"
-                        android:textSize="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_no_sipa"-->
+                        <!--tools:text="ini no sipa"-->
+                        <!--android:textSize="15dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/black"/>-->
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:layout_marginBottom="7dp">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:paddingLeft="20dp"-->
+                    <!--android:layout_marginBottom="7dp">-->
 
-                    <TextView
-                        android:text="Metode Pengiriman"
-                        android:textSize="13dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/gray"/>
+                    <!--<TextView-->
+                        <!--android:text="Metode Pengiriman"-->
+                        <!--android:textSize="13dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/gray"/>-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal">-->
 
-                        <TextView
-                            android:id="@+id/tv_metode_pengiriman"
-                            tools:text="ini metode pengiriman"
-                            android:textSize="15dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:paddingRight="10dp"/>
+                        <!--<TextView-->
+                            <!--android:id="@+id/tv_metode_pengiriman"-->
+                            <!--tools:text="ini metode pengiriman"-->
+                            <!--android:textSize="15dp"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textColor="@color/black"-->
+                            <!--android:paddingRight="10dp"/>-->
 
-                    </LinearLayout>
-                </LinearLayout>
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -310,9 +332,9 @@
             </LinearLayout>
 
 
-            //ProdukRekomendasi
+            //ProdukFavorit
             <LinearLayout
-                android:id="@+id/ll_rekomendasi"
+                android:id="@+id/ll_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -326,7 +348,7 @@
 
                     <TextView
                         android:textSize="16dp"
-                        android:text="PRODUK REKOMENDASI"
+                        android:text="PRODUK FAVORIT"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -355,48 +377,48 @@
             </LinearLayout>
 
             //ProdukTerlaris
-            <LinearLayout
-                android:id="@+id/ll_terlaris"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/white">
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_terlaris"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingTop="5dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:background="@color/white">-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp">-->
 
-                    <TextView
-                        android:textSize="16dp"
-                        android:text="PRODUK TERLARIS"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        />
+                    <!--<TextView-->
+                        <!--android:textSize="16dp"-->
+                        <!--android:text="PRODUK "-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:gravity="center"-->
+                        <!--/>-->
 
-                    <Button
-                        android:background="#ffffff"
-                        android:text="selengkapnya >"
-                        android:textSize="11dp"
-                        android:textColor="#7c7c7c"
-                        android:layout_alignParentEnd="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <!--<Button-->
+                        <!--android:background="#ffffff"-->
+                        <!--android:text="selengkapnya >"-->
+                        <!--android:textSize="11dp"-->
+                        <!--android:textColor="#7c7c7c"-->
+                        <!--android:layout_alignParentEnd="true"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_cv_obat_terlaris"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
-                </android.support.v7.widget.RecyclerView>
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/rv_cv_obat_terlaris"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="5dp">-->
+                <!--</android.support.v7.widget.RecyclerView>-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 
