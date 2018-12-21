@@ -136,6 +136,13 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
                 context.startActivity(i);
             }
         });
+        for(int j=0;j<cart_adapter.cartList.size();j++){
+            if(mp.ProductID.equals(cart_adapter.cartList.get(j).productID)){
+                holder.btnAdd.setEnabled(false);
+                holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
+                break;
+            }
+        }
 
     }
 
@@ -162,6 +169,29 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             ll_obat = itemView.findViewById(R.id.llproduk);
         }
     }
+    public void addkeranjang(String productname, String outletID){
+        String url = "http://pharmanet.apodoc.id/customer/AddProductToCart.php?ProductName="+productname+"&OutletID="+outletID;
+        Log.d("addkeranjangasd: ",url);
+
+        JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Err", Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(req);
+    }
     public void add(String product_id, int product_price, int qty, String memberID) {
         Log.d("dsa", memberID);
         JSONObject objAdd = new JSONObject();
@@ -169,7 +199,6 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             JSONArray arrData = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("ProductID", product_id);
-//            objDetail.put("ProductName", product_name);
             objDetail.put("outletProductPrice", product_price);
             objDetail.put("Qty", qty);
             objDetail.put("CustomerID", memberID);
@@ -179,7 +208,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-//        Log.d("testtest1", objAdd.toString());
+        Log.d("cartpromo", objAdd.toString());
         Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {

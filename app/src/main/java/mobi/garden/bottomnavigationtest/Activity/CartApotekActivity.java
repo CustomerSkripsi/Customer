@@ -510,8 +510,6 @@ public class CartApotekActivity extends AppCompatActivity {
         mBadge.setNumber(count);
     }
 
-
-
     protected void onResume() {
         super.onResume();
         if(session.getUserLoggedIn()){

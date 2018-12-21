@@ -102,6 +102,9 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         llFavorite.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvSelengkapnya.setLayoutManager(llFavorite);
 
+        tvTotalPrice = findViewById(R.id.tvTotalPrice);
+        mBadge = findViewById(R.id.badge);
+
         Intent i = getIntent();
         geturl = i.getStringExtra("link");
         Log.d("URL", geturl);//
@@ -138,6 +141,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         recyclerViewCartList.setLayoutManager(setLayout);
         initiateBelowAdapter();
     }
+
 
     public static void showViewPromo(final RecyclerView cardlist, String url) {
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
@@ -321,33 +325,33 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         });
     }
 
-//    public static void refresh_cart(List<obat>cartList){
-//        count=0;
-//        totalPrice=0;
-//
-//        for (int i = 0; i < cartList.size(); i++) {
-//            totalPrice+= cartList.get(i).cartProductPrice*cartList.get(i).cartProductQty;
-//            count += cartList.get(i).cartProductQty;
-//        }
-//        tvTotalPrice.setText(df.format(totalPrice)+"");
-//        mBadge.setNumber(count);
-//
-//        adapterRvBelow = new cart_adapter(context,cartList);
-//        adapterRvBelow.setCartList(cartList);
-//        recyclerViewCartList.setAdapter(adapterRvBelow);
-//    }
-
-    public static void refresh_total_cart(List<obat> cartList){
+    public static void refresh_cart(List<obat>cartList){
         count=0;
         totalPrice=0;
+
         for (int i = 0; i < cartList.size(); i++) {
             totalPrice+= cartList.get(i).cartProductPrice*cartList.get(i).cartProductQty;
             count += cartList.get(i).cartProductQty;
         }
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
+
+        adapterRvBelow = new cart_adapter(context,cartList);
+        adapterRvBelow.setCartList(cartList);
+        recyclerViewCartList.setAdapter(adapterRvBelow);
     }
 
+    public static void refresh_total_cart(List<obat> cartList){
+        count=0;
+        totalPrice=0;
+        for (int i = 0; i < cartList.size(); i++) {
+            totalPrice+= cartList.get(i).cartProductPrice*cartList.get(i).cartProductQty;
+            Log.d("refresh_total_cart: ", ""+totalPrice);
+            count += cartList.get(i).cartProductQty;
+        }
+        tvTotalPrice.setText(df.format(totalPrice)+"");
+        mBadge.setNumber(count);
+    }
 
     protected void onResume() {
         super.onResume();
@@ -360,5 +364,12 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 
 
     }
+
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        refresh_total_cart(cartList);
+//        refresh_cart(cartList);
+//    }
 }
 
