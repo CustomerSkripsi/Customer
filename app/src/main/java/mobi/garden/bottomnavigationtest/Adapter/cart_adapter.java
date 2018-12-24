@@ -33,8 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
-import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
@@ -312,8 +310,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                         try {
                             if (response.getString("status").equals("OK")) {
                                 CartApotekActivity.refresh_total_cart(cartList);
-//                                PromoSelengkapnyaActivity.refresh_total_cart(cartList);
-  //                              SearchResultApotek.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -366,11 +362,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 //                                CartApotekActivity.refresh_cart(cartList,removedProduct);
                                 CartApotekActivity.refresh_cart(cartList);
                                 CartApotekActivity.showprodukterkait();
-
-   //                             PromoSelengkapnyaActivity.refresh_cart(cartList);
-//                                PromoSelengkapnyaActivity.showViewPromo();
- //                               SearchResultApotek.refresh_cart(cartList);
-
                                 Toast.makeText(context, "terhapus", Toast.LENGTH_SHORT).show();
 
                             }

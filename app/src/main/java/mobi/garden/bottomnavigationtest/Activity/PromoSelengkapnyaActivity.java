@@ -275,7 +275,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 //                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
                         totalPrice += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
                         count += obj.getInt("CartProductQty");
-                        Log.d("rwarqwe", obj.toString());
+                        Log.d("asdqwe", obj.toString());
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                         Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
@@ -364,12 +364,59 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 
 
     }
-
+//
 //    @Override
 //    protected void onRestart() {
+//        Log.d("url_onRestart",urlbawahs + memberID);
+//        JsonObjectRequest rec = new JsonObjectRequest(urlbawahs + memberID, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                JSONArray products = null;
+//                try {
+//                    products = response.getJSONArray("result");
+//                    cartList.clear();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                count=0;
+//                totalPrice=0;
+//                for (int i = 0; i < products.length(); i++) {
+//                    try {
+//                        recyclerViewCartList.setVisibility(View.VISIBLE);
+//                        JSONObject obj = products.getJSONObject(i);
+//                        cartList.add(new obat(
+//                                obj.getString("ProductName"),
+//                                obj.getString("ProductID"),
+//                                obj.getInt("CartProductQty"),
+//                                obj.getInt("OutletProductStockQty"),
+//                                obj.getInt("CartProductPrice"),
+//                                obj.getInt("CartProductPriceAfterDiscount")));
+//
+//                        temp = obj.getString("ProductName");
+//                        totalPrice += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
+//                        count += obj.getInt("CartProductQty");
+//                        Log.d("1restart", obj.toString());
+//                    } catch (JSONException e1) {
+//                        e1.printStackTrace();
+//                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                tvTotalPrice.setText(df.format(totalPrice)+"");
+//                mBadge.setNumber(cartList.size());
+//                adapterRvBelow = new cart_adapter(context,cartList);
+//                adapterRvBelow.setCartList(cartList);
+//                recyclerViewCartList.setAdapter(adapterRvBelow);
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.d("ini errors", "onErrorResponse: ");
+//            }
+//        });
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(rec);
 //        super.onRestart();
-//        refresh_total_cart(cartList);
-//        refresh_cart(cartList);
 //    }
 }
 
