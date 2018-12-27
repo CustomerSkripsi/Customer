@@ -171,7 +171,7 @@ public class SearchResultApotek extends AppCompatActivity {
         btnSelengFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),PromoSelengkapnyaActivity.class);
+                Intent i = new Intent(getApplicationContext(),FavoritSelengkapnyaActivity.class);
                 i.putExtra("link","http://pharmanet.apodoc.id/customer/select_selengkapnya_favorite.php?OutletName="+apotekk);
                 startActivity(i);
             }
