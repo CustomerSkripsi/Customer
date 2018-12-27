@@ -39,11 +39,10 @@ import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
 import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.CONFIG;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
-import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
-public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder> {
+public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResultApotekAdapter.SearchResultApotekAdapterViewHolder> {
     List<ModelPromo> modelPromo;
     Context context;
     String tempurl;
@@ -55,23 +54,21 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
 
-    public PromoSelengkapnyaAdapter(List<ModelPromo> modelPromo, Context context) {
+    public SearchResultApotekAdapter(List<ModelPromo> modelPromo, Context context) {
         this.modelPromo = modelPromo;
         this.context = context;
-        this.memberID = CustomerID;
-        session = new SessionManagement(context);
     }
 
     @NonNull
     @Override
-    public PromoSelengkapnyaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchResultApotekAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.cv_promo_selengkapnya, parent, false);
-        return new PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder(view);
+        return new SearchResultApotekAdapter.SearchResultApotekAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PromoSelengkapnyaViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchResultApotekAdapterViewHolder holder, int position) {
         final ModelPromo mp = modelPromo.get(position);
 
 
@@ -141,41 +138,36 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
                 context.startActivity(i);
             }
         });
-        for(int j = 0; j<PromoSelengkapnyaActivity.cartList.size(); j++){
-            if(mp.getProductID().equals(PromoSelengkapnyaActivity.cartList.get(j).getProductID())){
+        for(int j=0;j<SearchResultApotek.cartList.size();j++){
+            if(mp.ProductID.equals(SearchResultApotek.cartList.get(j).productID)){
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, "looppromo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "searchsearch", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
-
-//        for(int j = 0; j<SearchResultApotek.cartList.size(); j++){
-//           if(mp.getProductID().equals(SearchResultApotek.cartList.get(j).getProductID())){
-//               holder.btnAdd.setEnabled(false);
-//               holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-//               Toast.makeText(context, "loopsearch", Toast.LENGTH_SHORT).show();
-//               break;
-//           }
+//        for(int j = 0; j<PromoSelengkapnyaActivity.cartList.size(); j++){
+//            if(mp.ProductID.equals(PromoSelengkapnyaActivity.cartList.get(j).productID)){
+//                holder.btnAdd.setEnabled(false);
+//                holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
+//                Toast.makeText(context, "searchpromo", Toast.LENGTH_SHORT).show();
+//                break;
+//            }
 //        }
-
-
     }
-
-
 
     @Override
     public int getItemCount() {
         return modelPromo.size();
     }
 
-    public static class PromoSelengkapnyaViewHolder extends RecyclerView.ViewHolder {
+    public class SearchResultApotekAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView tvNamaProdukPromo, tvHargaCoret, tvharga;
         ImageView imgProduct;
         LinearLayout ll_obat;
         Button btnAdd;
 
-        public PromoSelengkapnyaViewHolder(View itemView) {
+        public SearchResultApotekAdapterViewHolder(View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
             tvNamaProdukPromo = itemView.findViewById(R.id.tvNamaProdukPromo);
@@ -208,7 +200,6 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(req);
     }
-
     public void add(String product_id, int product_price, int qty, String memberID) {
         Log.d("dsa", memberID);
         JSONObject objAdd = new JSONObject();
@@ -226,7 +217,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             e1.printStackTrace();
         }
         Log.d("cartpromo", objAdd.toString());
-        Toast.makeText(context, "promoselengkapnya", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -234,9 +225,9 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
 //                        Toast.makeText(context, "asdqwe", Toast.LENGTH_SHORT).show();
                         try {
                             if (response.getString("status").equals("OK")) {
+                                //CartApotekActivity.initiateBelowAdapter();
+                                SearchResultApotek.show_cart(SearchResultApotek.urlbawahs,memberID);
 
-                                PromoSelengkapnyaActivity.show_cart(PromoSelengkapnyaActivity.urlbawahs,memberID);
-                                Toast.makeText(context, "masuk?", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {
@@ -255,4 +246,4 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
     }
 
 }
-
+//searchresultapotekadapter

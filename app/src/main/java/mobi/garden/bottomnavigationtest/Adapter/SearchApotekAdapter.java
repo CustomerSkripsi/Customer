@@ -173,7 +173,7 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
                         try {
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
-                                CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
+                                SearchResultApotek.show_cart(SearchResultApotek.urlbawahs,memberID);
 
                                 //  String temp = ss.getProductName();
                                 //Log.d("hahahhas", "onResponse: "+temp);

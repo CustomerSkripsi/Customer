@@ -40,7 +40,7 @@ import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.PromoSelengkapnyaAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.cart_adapter;
+import mobi.garden.bottomnavigationtest.Adapter.CartPromoSelengkapnyaAdapter;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
@@ -51,15 +51,15 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     public static String urlbawahs = "http://pharmanet.apodoc.id/customer/selectCurrentCartCustomer.php?CustomerID=";
 
 
-    RecyclerView rvSelengkapnya,rvObatFavorite;
-    String apotekk,geturl;
-    String urlPromo="";
-    String urlFavorite="";
-    int diskon;
+    public static RecyclerView rvSelengkapnya,rvObatFavorite;
+    public static String apotekk,geturl;
+    static String urlPromo="";
+    static String urlFavorite="";
+    static int diskon;
 
 
-    static PromoSelengkapnyaAdapter promoAdapter;
-    static PromoSelengkapnyaAdapter favAdapter;
+    public static PromoSelengkapnyaAdapter promoAdapter;
+    public static PromoSelengkapnyaAdapter favAdapter;
     PromoAdapter FavAdapter;
     int total_rating,outletProductPrice;
 
@@ -78,11 +78,11 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     public static Context context;
     public static DecimalFormat df;
 
-    private static List<obat> cartList = new ArrayList<>();
+    public static List<obat> cartList = new ArrayList<>();
     public static String temp;
     RecyclerView rvCart;
     private static RecyclerView recyclerViewCartList;
-    private static cart_adapter adapterRvBelow;
+    private static CartPromoSelengkapnyaAdapter adapterRvBelow;
     static RecyclerView rvProdukAll;
     private static TextView tvApotekName,tvTotalPrice;
     private static NotificationBadge mBadge;
@@ -131,6 +131,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 
         showViewPromo(rvSelengkapnya,geturl);
         showViewFav(rvSelengkapnya, geturl);
+        show_cart(PromoSelengkapnyaActivity.urlbawahs,memberID);
         initBottomSheet();
 
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
@@ -184,7 +185,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         req.add(rec1);
     }
 
-    public void showViewFav(final RecyclerView cardlist, String url) {
+    public static void showViewFav(final RecyclerView cardlist, String url) {
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -193,7 +194,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                 try {
                     Obats = response.getJSONArray("result");
                     FavList.clear();
-                    Toast.makeText(PromoSelengkapnyaActivity.this, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -217,21 +218,21 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 //                                obj.getInt("ProductPriceAfterDiscount")));
                         Log.d("masuk", obj.toString());
 //                        Toast.makeText(PromoSelengkapnyaActivity.this, "woiiii", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(PromoSelengkapnyaActivity.this, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
                 }
-                favAdapter = new PromoSelengkapnyaAdapter(FavList,PromoSelengkapnyaActivity.this);
+                favAdapter = new PromoSelengkapnyaAdapter(FavList,context);
                 cardlist.setAdapter(favAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PromoSelengkapnyaActivity.this, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
             }
         });
-        RequestQueue req = Volley.newRequestQueue(this);
+        RequestQueue req = Volley.newRequestQueue(context);
         req.add(rec1);
     }
 
@@ -245,7 +246,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     }
 
     public static void show_cart(String urlbawahs, String memberID) {
-        Log.d("testurl", urlbawahs+ memberID);
+        Log.d("testurlpromoselengkapny", urlbawahs+ memberID);
         JsonObjectRequest rec = new JsonObjectRequest(urlbawahs + memberID, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -259,7 +260,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                 count=0;
                 totalPrice=0;
                 for (int i = 0; i < products.length(); i++) {
-//                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
                     try {
                         recyclerViewCartList.setVisibility(View.VISIBLE);
                         JSONObject obj = products.getJSONObject(i);
@@ -272,7 +272,6 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                                 obj.getInt("CartProductPriceAfterDiscount")));
 
                         temp = obj.getString("ProductName");
-//                        Toast.makeText(context, ""+obj.getString("ProductName"), Toast.LENGTH_SHORT).show();
                         totalPrice += obj.getInt("CartProductQty")*obj.getInt("CartProductPrice");
                         count += obj.getInt("CartProductQty");
                         Log.d("asdqwe", obj.toString());
@@ -283,7 +282,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
                 mBadge.setNumber(cartList.size());
-                adapterRvBelow = new cart_adapter(context,cartList);
+                adapterRvBelow = new CartPromoSelengkapnyaAdapter(context,cartList);
                 adapterRvBelow.setCartList(cartList);
                 recyclerViewCartList.setAdapter(adapterRvBelow);
             }
@@ -336,7 +335,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
 
-        adapterRvBelow = new cart_adapter(context,cartList);
+        adapterRvBelow = new CartPromoSelengkapnyaAdapter(context,cartList);
         adapterRvBelow.setCartList(cartList);
         recyclerViewCartList.setAdapter(adapterRvBelow);
     }
@@ -354,6 +353,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
     }
 
     protected void onResume() {
+
         super.onResume();
         if(session.getUserLoggedIn()){
 //            not_empty.setVisibility(not_empty.VISIBLE);
@@ -364,7 +364,17 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 
 
     }
-//
+
+    @Override
+    protected void onRestart() {
+        showViewPromo(rvSelengkapnya,geturl);
+        showViewFav(rvSelengkapnya, geturl);
+        show_cart(PromoSelengkapnyaActivity.urlbawahs,memberID);
+        initBottomSheet();
+        Toast.makeText(context, "restart", Toast.LENGTH_SHORT).show();
+        super.onRestart();
+    }
+    //
 //    @Override
 //    protected void onRestart() {
 //        Log.d("url_onRestart",urlbawahs + memberID);
@@ -420,3 +430,4 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 //    }
 }
 
+//promoselengkapnyaactivity

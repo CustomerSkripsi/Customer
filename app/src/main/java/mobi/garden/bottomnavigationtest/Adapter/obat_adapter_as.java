@@ -183,7 +183,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
-
+                                Toast.makeText(context, "iopiop", Toast.LENGTH_SHORT).show();
                               //  String temp = ss.getProductName();
                                 //Log.d("hahahhas", "onResponse: "+temp);
 //                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();
