@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,12 +23,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import mobi.garden.bottomnavigationtest.Adapter.LacakPesananAdapter;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.Lacak;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,10 +39,14 @@ public class HistoryPending extends Fragment {
     public static ArrayList<Lacak> lacakItem;
     private static RecyclerView recyclerView;
     private static LacakPesananAdapter lacakPesananAdapter;
+    public static Context context;
 
     private static UserLocalStore userLocal;
     static User currUser;
 
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
 
 
     public static RequestQueue mQueue;
@@ -58,6 +65,13 @@ public class HistoryPending extends Fragment {
 
         Log.d("process", "onCreateView: ");
 
+        session = new SessionManagement(getContext());
+        login = session.getMemberDetails();
+        userName= login.get(SessionManagement.USERNAME);
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
+
+
+
         recyclerView = view.findViewById(R.id.rv_historyPending);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,7 +85,7 @@ public class HistoryPending extends Fragment {
 
         lacakItem = new ArrayList<>();
 
-        link = "http://pharmanet.apodoc.id/select_lacak_proses_customer.php?CustomerID="+currUser.getUserID();
+        link = "http://pharmanet.apodoc.id/select_lacak_proses_customer.php?CustomerID=";
         mQueue = Volley.newRequestQueue(getContext());
         JSON();
 
@@ -83,7 +97,7 @@ public class HistoryPending extends Fragment {
     public static void JSON()
     {
         Log.d("lnk", "JSON: "+link);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, link , null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, link+memberID , null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -120,5 +134,14 @@ public class HistoryPending extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
 
+            super.onResume();
+            if(session.getUserLoggedIn()){
+//            not_empty.setVisibility(not_empty.VISIBLE);
+                //show_cart(urlbawah, memberID);
+//            show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
+            }
+    }
 }

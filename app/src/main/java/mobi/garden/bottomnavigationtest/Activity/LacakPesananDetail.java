@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -40,6 +41,7 @@ public class LacakPesananDetail extends AppCompatActivity {
     int harga;
     String jumlah;
     String berat;
+    RecyclerView rvLacakDetail;
 
 
     TextView lacakPesananDetail_OrderID, lacakPesananDetail_Date, lacakPesananDetail_apoName, lacakPesananDetail_Nama_Item;
@@ -61,8 +63,14 @@ public class LacakPesananDetail extends AppCompatActivity {
         lacakPesananDetail_Qty = findViewById(R.id.lacakPesananDetail_Qty);
         lacakPesananDetail_Berat = findViewById(R.id.lacakPesananDetail_Berat);
         sub_total_detail = findViewById(R.id.sub_total_detail);
+//
+//        lacakPesananDetail_Nama_Item = findViewById(R.id.product_name);
+//        lacakPesananDetail_Price = findViewById(R.id.product_price);
+//        lacakPesananDetail_Qty = findViewById(R.id.product_quantity);
+//        lacakPesananDetail_Berat = findViewById(R.id.product_weight);
 
-
+        rvLacakDetail = findViewById(R.id.rvLacakDetail);
+ 
         //parse data intent
         ID = getIntent().getStringExtra("OrderID");
         Date = getIntent().getStringExtra("Tanggal");
