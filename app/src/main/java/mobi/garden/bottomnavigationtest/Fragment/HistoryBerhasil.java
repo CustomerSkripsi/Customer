@@ -95,7 +95,6 @@ public class HistoryBerhasil extends Fragment {
         return view;
     }
 
-
     public static void JSON()
     {
         Log.d("lnk", "JSON: "+link);
