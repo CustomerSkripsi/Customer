@@ -34,7 +34,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
     @Override
     public PromoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.cv_promo_selengkapnya,parent,false);
+        View view = inflater.inflate(R.layout.cv_produk,parent,false);
         return new PromoViewHolder(view);
     }
 
