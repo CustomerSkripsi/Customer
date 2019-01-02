@@ -340,12 +340,9 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             arrData.put(objDetail);
             objAdd.put("data", arrData);
             Log.d("testapus", arrData.toString());
-
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-
-
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/deleteCartCustomer.php", objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override

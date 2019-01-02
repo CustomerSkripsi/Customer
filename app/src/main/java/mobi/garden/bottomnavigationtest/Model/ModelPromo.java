@@ -3,8 +3,9 @@ package mobi.garden.bottomnavigationtest.Model;
 public class ModelPromo {
 
 
-    public String ProductID,NameProduct, ProductNameUrl,AlamatApotek;
+    public String ProductID,NameProduct, ProductNameUrl,AlamatApotek, CustomerID;
     public int PriceProduct, outletID ,ProductPriceAfterDC, ProductQty, StockProductQty;
+
 
     public ModelPromo(String productID, String nameProduct, String productNameUrl, int outletID ,int priceProduct,int productPriceAfterDC) {
         ProductID = productID;
@@ -46,10 +47,13 @@ public class ModelPromo {
         PriceProduct = priceProduct;
     }
 
-    public ModelPromo(String promoNameProduct, String productNameUrl) {
-        this.NameProduct = promoNameProduct;
-        this.ProductNameUrl = productNameUrl;
+    public ModelPromo (String customerID , String productID, String nameProduct, String productNameUrl) {
+        CustomerID = customerID;
+        ProductID = productID;
+        NameProduct = nameProduct;
+        ProductNameUrl = productNameUrl;
     }
+
 
     public int getProductPriceAfterDC() {
         return ProductPriceAfterDC;
@@ -104,7 +108,10 @@ public class ModelPromo {
     }
     public void setPromoNameProduct(String promoNameProduct) {
         this.NameProduct = promoNameProduct;
+    } public String getCustomerID() {
+        return CustomerID;
     }
+
 
     public String getAlamatApotek() {
         return AlamatApotek;

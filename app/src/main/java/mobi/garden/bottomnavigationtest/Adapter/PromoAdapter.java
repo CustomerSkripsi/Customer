@@ -61,16 +61,16 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
             tempurl = tempurl.replace(" ","%20");
         }
             Picasso.with(context).load(tempurl).into(holder.imgProduct, new Callback() {
-                @Override
-                public void onSuccess() {
-                    Picasso.with(context).load(tempurl).into(holder.imgProduct);
-                }
-                @Override
-                public void onError() {
-                    holder.imgProduct.setImageResource(R.drawable.nopicture);
-                    //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
-                }
-            });
+            @Override
+            public void onSuccess() {
+                Picasso.with(context).load(tempurl).into(holder.imgProduct);
+            }
+            @Override
+            public void onError() {
+                holder.imgProduct.setImageResource(R.drawable.nopicture);
+                //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+            }
+        });
 
         holder.llproduk.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,6 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,14 +42,14 @@ import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 
 public class SearchProduk extends AppCompatActivity {
     private RequestQueue queue;
-    RecyclerView rvhasilSearchProduk;
+    static RecyclerView rvhasilSearchProduk;
     public static final String SEARCH_RESULT= "search_result";
     public static String produkNama, url,produkid,promoName,productUrl;
-    List<ModelPromo> prodk = new ArrayList<>();
+    static List<ModelPromo> prodk = new ArrayList<>();
     List<String>imageUrls = new ArrayList<>();
 
-    SearchProdukAdapter searchprodukAdapter;
-    Context context;
+    static  SearchProdukAdapter searchprodukAdapter;
+    static Context context;
     ViewPagerAdapter adapter;
     ViewPager viewPager;
     private ImageView[] dots;
@@ -95,7 +94,7 @@ public class SearchProduk extends AppCompatActivity {
 
     }
 
-    public void showhasilproduk(){
+    public static void showhasilproduk(){
         url="http://pharmanet.apodoc.id/customer/showSearchProduk.php?ProdukNama="+produkNama;
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -110,9 +109,9 @@ public class SearchProduk extends AppCompatActivity {
                 for(int i =0; i<result.length();i++){
                     try {
                         JSONObject object = result.getJSONObject(i);
-                        promoName = object.getString("ProductName");
-                        productUrl = object.getString("ProductImage");
-                        prodk.add(new ModelPromo(promoName,productUrl));
+                        prodk.add(new ModelPromo(object.getString("CustomerID"),object.getString("ProductID"),
+                                object.getString("ProductName"),
+                                object.getString("ProductImage")));
                         //Toast.makeText(context, "pjg:"+result.length(), Toast.LENGTH_SHORT).show();
                         Log.d("ssqwe", object.toString());
                     } catch (JSONException e) {
@@ -125,10 +124,10 @@ public class SearchProduk extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SearchProduk.this, "Gangguan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Gangguan", Toast.LENGTH_SHORT).show();
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(req);
     }
 

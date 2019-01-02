@@ -104,7 +104,7 @@ public class HomeActivity extends BaseActivity {
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember,ivLainlain;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember,ivLainlain,ivWishList;
     EditText etSearch;
     AlertDialog.Builder builder;
     AlertDialog dialog;
@@ -219,6 +219,13 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ivWishList = findViewById(R.id.ivWishList);
+        ivWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,WishList.class));
             }
         });
 
