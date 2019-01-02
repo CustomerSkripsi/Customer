@@ -296,7 +296,7 @@ public class gantiPassword extends AppCompatActivity {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            Toast.makeText(gantiPassword.this,"aaa",Toast.LENGTH_LONG ).show();
+//                                            Toast.makeText(gantiPassword.this,"aaa",Toast.LENGTH_LONG ).show();
                                         }
                                     });
                                 RequestQueue requestQueue = Volley.newRequestQueue(gantiPassword.this);

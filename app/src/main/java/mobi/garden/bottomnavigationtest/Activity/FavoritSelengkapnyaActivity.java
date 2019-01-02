@@ -195,7 +195,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
                 try {
                     Obats = response.getJSONArray("result");
                     FavList.clear();
-                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -219,7 +219,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
 //                                obj.getInt("ProductPriceAfterDiscount")));
                         Log.d("masuk", obj.toString());
 //                        Toast.makeText(PromoSelengkapnyaActivity.this, "woiiii", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
@@ -230,7 +230,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error loading obat", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue req = Volley.newRequestQueue(context);
@@ -372,7 +372,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
         showViewFav(rvSelengkapnya, geturl);
         show_cart(FavoritSelengkapnyaActivity.urlbawahs,memberID);
         initBottomSheet();
-        Toast.makeText(context, "restart", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "restart", Toast.LENGTH_SHORT).show();
         super.onRestart();
     }
     //

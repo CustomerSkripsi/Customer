@@ -236,7 +236,7 @@ public class SearchResultApotek extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error loading obat", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue req = Volley.newRequestQueue(context);
@@ -252,7 +252,7 @@ public class SearchResultApotek extends AppCompatActivity {
                 try {
                     Obats = response.getJSONArray("result");
                     PromoList.clear();
-                    Toast.makeText(context, "promo"+Obats.length(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "promo"+Obats.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -275,7 +275,7 @@ public class SearchResultApotek extends AppCompatActivity {
                         Log.d("asd", obj.toString());
 
                         //Toast.makeText(SearchResultApotek.this, "sesuat", Toast.LENGTH_SHORT).show(); /
-                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
@@ -286,7 +286,7 @@ public class SearchResultApotek extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error loading obat", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue req = Volley.newRequestQueue(context);
@@ -301,7 +301,7 @@ public class SearchResultApotek extends AppCompatActivity {
                 try {
                     Obat = response.getJSONArray("result");
                     FavList.clear();
-                    Toast.makeText(context, "fs"+Obat.length(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "fs"+Obat.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -318,7 +318,7 @@ public class SearchResultApotek extends AppCompatActivity {
                                 obj.getInt("OutletProductPrice"),
                                 diskon));
                         Log.d("asdtest", obj.toString());
-                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
@@ -467,8 +467,6 @@ public class SearchResultApotek extends AppCompatActivity {
 //            show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
         }
 
-
-
     }
 
     @Override
@@ -478,7 +476,7 @@ public class SearchResultApotek extends AppCompatActivity {
         showViewFav();
         show_cart(SearchResultApotek.urlbawahs,memberID);
         initBottomSheet();
-        Toast.makeText(context, "onrestart", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "onrestart", Toast.LENGTH_SHORT).show();
         super.onRestart();
         
     }

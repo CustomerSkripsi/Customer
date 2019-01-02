@@ -100,7 +100,7 @@ public class CartActivity extends AppCompatActivity {
         r_apotek.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Toast.makeText(CartActivity.this, "apotekkks", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CartActivity.this, "apotekkks", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -146,7 +146,7 @@ public class CartActivity extends AppCompatActivity {
         btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//intent hal lain
-                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
                 insertTransaction(insertTransaction, memberID);
                 startActivity(new Intent(CartActivity.this, PickUpActivity.class));
                 //myDialog.cancel();

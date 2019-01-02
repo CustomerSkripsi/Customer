@@ -195,7 +195,7 @@ public class CartSearchResultApotekAdapter extends RecyclerView.Adapter<CartSear
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                     if(ProductName != product.getProductName()){
-                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
                     }
                     if(SearchResultApotek.temp == product.getProductName()){
                         Log.d("gak tauuu", "onBindViewHolder:"+SearchResultApotek.temp);
@@ -362,7 +362,7 @@ public class CartSearchResultApotekAdapter extends RecyclerView.Adapter<CartSear
                                 SearchResultApotek.showView(SearchResultApotek.rvObatPromo,SearchResultApotek.urlPromo+SearchResultApotek.apotekk);
                                 SearchResultApotek.showViewFav();
 
-                                Toast.makeText(context, "terhapus2", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "terhapus2", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

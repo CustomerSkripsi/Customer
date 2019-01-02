@@ -173,7 +173,7 @@ public class CartPromoSelengkapnyaAdapter  extends RecyclerView.Adapter<CartProm
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                     if(ProductName != product.getProductName()){
-                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
                     }
                     if(PromoSelengkapnyaActivity.temp == product.getProductName()){
                         Log.d("gak tauuu", "onBindViewHolder:"+PromoSelengkapnyaActivity.temp);
@@ -340,7 +340,7 @@ public class CartPromoSelengkapnyaAdapter  extends RecyclerView.Adapter<CartProm
 //                                PromoSelengkapnyaActivity.showViewFav(PromoSelengkapnyaActivity.rvObatFavorite,PromoSelengkapnyaActivity.geturl);
 
 
-                                Toast.makeText(context, "terhapus3", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "terhapus3", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

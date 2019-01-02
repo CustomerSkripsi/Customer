@@ -118,8 +118,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
 
                 holder.btn_add_obat.setEnabled(false);
                 holder.btn_add_obat.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, ""+pr.productID, Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "testclick", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+pr.productID, Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
                 String text = "test123123";
@@ -173,7 +172,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
             e1.printStackTrace();
         }
         Log.d("testtest1", objAdd.toString());
-        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -183,7 +182,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
-                                Toast.makeText(context, "iopiop", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "iopiop", Toast.LENGTH_SHORT).show();
                               //  String temp = ss.getProductName();
                                 //Log.d("hahahhas", "onResponse: "+temp);
 //                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();
