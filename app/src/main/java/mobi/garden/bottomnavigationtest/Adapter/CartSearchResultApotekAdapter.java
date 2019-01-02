@@ -361,6 +361,7 @@ public class CartSearchResultApotekAdapter extends RecyclerView.Adapter<CartSear
                                 SearchResultApotek.refresh_cart(cartList);
                                 SearchResultApotek.showView(SearchResultApotek.rvObatPromo,SearchResultApotek.urlPromo+SearchResultApotek.apotekk);
                                 SearchResultApotek.showViewFav();
+                                SearchResultApotek.showViewAll();
 
 //                                Toast.makeText(context, "terhapus2", Toast.LENGTH_SHORT).show();
 

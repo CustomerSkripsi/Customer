@@ -310,7 +310,7 @@ public class SearchResultApotek extends AppCompatActivity {
         req.add(rec1);
     }
 
-    public static void showViewFav() { // ,
+    public static void showViewFav() {
         JsonObjectRequest rec= new JsonObjectRequest(urlFavorite+apotekk, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -353,7 +353,7 @@ public class SearchResultApotek extends AppCompatActivity {
         req.add(rec);
     }
 
-    public static void showViewAll() { // ,
+    public static void showViewAll() {
         JsonObjectRequest rec= new JsonObjectRequest(urlAllProduct+apotekk, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
