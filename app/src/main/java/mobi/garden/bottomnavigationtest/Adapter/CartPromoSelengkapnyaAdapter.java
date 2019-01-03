@@ -172,12 +172,6 @@ public class CartPromoSelengkapnyaAdapter  extends RecyclerView.Adapter<CartProm
                 if (product.cartProductQty==0) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
-                    if(ProductName != product.getProductName()){
-//                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
-                    }
-                    if(PromoSelengkapnyaActivity.temp == product.getProductName()){
-                        Log.d("gak tauuu", "onBindViewHolder:"+PromoSelengkapnyaActivity.temp);
-                    }
 
                 }else {
                     //ubah(cartList.get(position).productID, --cartList.get(position).cartProductQty,Integer.parseInt(CustomerID));

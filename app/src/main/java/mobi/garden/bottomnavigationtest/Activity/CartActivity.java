@@ -74,6 +74,7 @@ public class CartActivity extends AppCompatActivity {
     Button btnLanjutPembelian,btnTambahBarang, button_lanjut, button_Batal, btn_login_cart,button_lanjut1, button_Batal1;
     Dialog myDialog,myDialog1;
     String urlUser = "Http://Pharmanet.Apodoc.id/select_customer_confirm.php?id=";
+    static String OutletName;
     UserLocalStore userlocal;
 
 
@@ -115,7 +116,7 @@ public class CartActivity extends AppCompatActivity {
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setCurrencySymbol("Rp. ");
-        dfs.setMonetaryDecimalSeparator(',');
+        dfs.setMonetaryDecimalSeparator('.');
         dfs.setGroupingSeparator('.');
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
@@ -135,24 +136,6 @@ public class CartActivity extends AppCompatActivity {
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         Toast.makeText(context, ""+memberID, Toast.LENGTH_SHORT).show();
 
-        btnTambahBarang = findViewById(R.id.btnTambahBarang);
-        btnTambahBarang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // startActivity(new Intent(CartActivity.this , DetailObatHome.class));
-            }
-        });
-
-        btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
-        btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {//intent hal lain
-//                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
-                insertTransaction(insertTransaction, memberID);
-                startActivity(new Intent(CartActivity.this, PickUpActivity.class));
-                //myDialog.cancel();
-            }
-        });
 
         //myAlertDialog();
         setStatusBarGradiant(this);
@@ -182,6 +165,28 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         cartshow();
+        btnTambahBarang = findViewById(R.id.btnTambahBarang);
+        btnTambahBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // startActivity(new Intent(CartActivity.this , DetailObatHome.class));
+                Intent i = new Intent(context,SearchResultApotek.class);
+                i.putExtra("ApotekName", OutletName);
+                context.startActivity(i);
+            }
+        });
+
+        btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
+        btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {//intent hal lain
+//                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
+                insertTransaction(insertTransaction, memberID);
+                startActivity(new Intent(CartActivity.this, PickUpActivity.class));
+                //myDialog.cancel();
+            }
+        });
+
     }
 
     public void BackBack(View view){
@@ -248,6 +253,7 @@ public class CartActivity extends AppCompatActivity {
                         CartList.add(new ModelPromo( object.getString("ProductID"),object.getInt("CartProductPrice"),
                                 object.getString("ProductName"),object.getInt("CartProductQty"),object.getInt("OutletProductStockQty")));
                         outlet_name.setText(object.getString("OutletName"));
+                        OutletName = object.getString("OutletName");
                         alamat.setText(object.getString("OutletAddress"));
                         total += object.getInt("CartProductQty") * object.getInt("CartProductPrice");
                         totalPembayaran = total;

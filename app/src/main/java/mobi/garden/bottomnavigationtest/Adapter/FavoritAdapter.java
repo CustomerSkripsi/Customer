@@ -42,11 +42,11 @@ public class FavoritAdapter extends RecyclerView.Adapter<FavoritAdapter.FavoritV
     public void onBindViewHolder(@NonNull FavoritAdapter.FavoritViewHolder holder, int position) {
         final ModelPromo mp = modelPromo.get(position);
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
+        holder.tvharga.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
 
-        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
-            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
-        }
+//        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
+//            holder.tvharga.setPaintFlags(holder.tvharga.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+//        }
 //        if(mp.getProductNameUrl().equalsIgnoreCase("null")){
 //            Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
 //        }else {

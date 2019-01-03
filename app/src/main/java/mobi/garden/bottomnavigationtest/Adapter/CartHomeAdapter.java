@@ -94,6 +94,7 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
             public void onClick(View view) {
                 if (carts.getProductQty()==1) {
                     delete(CartModel.get(position).ProductID, CartModel.get(position),memberID);
+                    //new CartHomeAdapter.delete().execute(carts);
 //                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 //                    builder.setTitle("Konfirmasi Hapus Product "+carts.getNameProduct()+" dari keranjang");
 //                    builder.setMessage("Apakah anda yakin?");
@@ -197,6 +198,8 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
         }
     }
 
+
+
     public void ubah(String id, int qty, String CustomerID) {
         JSONObject objAdd = new JSONObject();
         try {
@@ -255,9 +258,10 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
                             if (response.getString("status").equals("OK")) {
                                 CartModel.remove(removedProduct);
                                 notifyDataSetChanged();
+
                                 //CartActivity.refresh_cart(cartListFull,removedProduct);
                                 //CartActivity.refresh_total_cart(cartListFull);
-//                                CartActivity.refresh_total_cart(cartList);
+                                CartActivity.refresh_total_cart(CartModel);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
