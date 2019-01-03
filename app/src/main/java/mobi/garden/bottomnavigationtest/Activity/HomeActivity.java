@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -104,7 +105,7 @@ public class HomeActivity extends BaseActivity {
     GlobalSearchAdapter globalSearchAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember,ivLainlain;
+    ImageView ivHistory, ivkategory ,ivPromo, ivFavorit,ivCart,ivMember,ivLainlain,ivWishList;
     EditText etSearch;
     AlertDialog.Builder builder;
     AlertDialog dialog;
@@ -220,6 +221,13 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ivWishList = findViewById(R.id.ivWishList);
+        ivWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,WishList.class));
             }
         });
 
@@ -789,6 +797,10 @@ public class HomeActivity extends BaseActivity {
 //            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
         }
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 

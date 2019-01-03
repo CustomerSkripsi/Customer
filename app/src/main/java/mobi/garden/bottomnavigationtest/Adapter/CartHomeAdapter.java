@@ -93,6 +93,7 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
             @Override
             public void onClick(View view) {
                 if (carts.getProductQty()==1) {
+                    delete(CartModel.get(position).ProductID, CartModel.get(position),memberID);
 //                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 //                    builder.setTitle("Konfirmasi Hapus Product "+carts.getNameProduct()+" dari keranjang");
 //                    builder.setMessage("Apakah anda yakin?");

@@ -942,7 +942,7 @@ public class RegisterMember extends AppCompatActivity{
 
 
     // Nomor HP dikasi Kode Negara +62
-    private String plusNomorHp(String sNomorHp) {
+    private  String plusNomorHp(String sNomorHp) {
         sNomorHp = sNomorHp.replaceAll("[^+0-9]", "");
         String country_code = "62";
 

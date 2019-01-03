@@ -1,5 +1,6 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -153,7 +155,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                 try {
                     Obats = response.getJSONArray("result");
                     PromoList.clear();
-                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -178,7 +180,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error loading obat", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue req = Volley.newRequestQueue(context);
@@ -194,7 +196,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                 try {
                     Obats = response.getJSONArray("result");
                     FavList.clear();
-                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -218,7 +220,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
 //                                obj.getInt("ProductPriceAfterDiscount")));
                         Log.d("masuk", obj.toString());
 //                        Toast.makeText(PromoSelengkapnyaActivity.this, "woiiii", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
@@ -229,7 +231,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error loading obat", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue req = Volley.newRequestQueue(context);
@@ -371,8 +373,12 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         showViewFav(rvSelengkapnya, geturl);
         show_cart(PromoSelengkapnyaActivity.urlbawahs,memberID);
         initBottomSheet();
-        Toast.makeText(context, "restart", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "restart", Toast.LENGTH_SHORT).show();
         super.onRestart();
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
     //
 //    @Override

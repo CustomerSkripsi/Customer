@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -259,6 +260,9 @@ public class PromoActivity extends AppCompatActivity {
         }
     }
 
-
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }

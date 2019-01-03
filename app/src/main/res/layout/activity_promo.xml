@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="hideKeyboard"
     tools:context=".Activity.PromoActivity">
 
     <LinearLayout
@@ -17,7 +18,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/toolbar"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            android:focusableInTouchMode="true"/>
 
         <EditText
             android:id="@+id/search"
@@ -36,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="hideKeyboard"
             >
 
             <android.support.v7.widget.RecyclerView

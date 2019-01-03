@@ -164,7 +164,7 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
             e1.printStackTrace();
         }
 //        Log.d("testtest1", objAdd.toString());
-        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override

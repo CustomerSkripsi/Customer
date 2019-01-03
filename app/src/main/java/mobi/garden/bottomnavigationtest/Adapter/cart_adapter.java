@@ -196,7 +196,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                    if(ProductName != product.getProductName()){
-                       Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
                    }
                     if(CartApotekActivity.temp == product.getProductName()){
                         Log.d("gak tauuu", "onBindViewHolder:"+CartApotekActivity.temp);
@@ -340,12 +340,9 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             arrData.put(objDetail);
             objAdd.put("data", arrData);
             Log.d("testapus", arrData.toString());
-
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-
-
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/deleteCartCustomer.php", objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -364,7 +361,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 
                                 CartApotekActivity.refresh_cart(cartList);
                                 CartApotekActivity.showprodukterkait();
-                                Toast.makeText(context, "terhapus1", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "terhapus1", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

@@ -123,7 +123,7 @@ public class FavoritSelengkapnyaAdapter extends RecyclerView.Adapter<FavoritSele
 
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
                 String text = "test123123";
@@ -143,7 +143,6 @@ public class FavoritSelengkapnyaAdapter extends RecyclerView.Adapter<FavoritSele
             if(mp.getProductID().equals(FavoritSelengkapnyaActivity.cartList.get(j).getProductID())){
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, "loopfav", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -190,7 +189,7 @@ public class FavoritSelengkapnyaAdapter extends RecyclerView.Adapter<FavoritSele
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Err", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:onClick="hideKeyboard"
     tools:context="mobi.garden.bottomnavigationtest.Activity.HomeActivity">
 
 
@@ -190,6 +191,12 @@
                             android:layout_height="65dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/iconfavorit" />
+                        <ImageView
+                            android:id="@+id/ivWishList"
+                            android:layout_width="60dp"
+                            android:layout_height="65dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/iconwhislist" />
                     </LinearLayout>
 
 

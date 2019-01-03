@@ -121,8 +121,7 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
 
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "testclick", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
                 String text = "test123123";
@@ -142,7 +141,6 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
             if(mp.ProductID.equals(SearchResultApotek.cartList.get(j).productID)){
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, "searchsearch", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -194,7 +192,7 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Err", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -217,7 +215,7 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
             e1.printStackTrace();
         }
         Log.d("cartpromo", objAdd.toString());
-        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -227,6 +225,9 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 SearchResultApotek.show_cart(SearchResultApotek.urlbawahs,memberID);
+                                SearchResultApotek.showView(SearchResultApotek.rvObatPromo,SearchResultApotek.urlPromo+SearchResultApotek.apotekk);
+                                SearchResultApotek.showViewFav();
+                                SearchResultApotek.showViewAll();
 
 
                             }

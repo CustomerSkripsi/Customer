@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -100,7 +101,7 @@ public class CartActivity extends AppCompatActivity {
         r_apotek.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Toast.makeText(CartActivity.this, "apotekkks", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CartActivity.this, "apotekkks", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -146,7 +147,7 @@ public class CartActivity extends AppCompatActivity {
         btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//intent hal lain
-                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
                 insertTransaction(insertTransaction, memberID);
                 startActivity(new Intent(CartActivity.this, PickUpActivity.class));
                 //myDialog.cancel();
@@ -503,6 +504,10 @@ public class CartActivity extends AppCompatActivity {
             not_login.setVisibility(not_login.VISIBLE);
 
         }
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 }
