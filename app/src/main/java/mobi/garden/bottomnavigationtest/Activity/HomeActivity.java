@@ -55,17 +55,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mobi.garden.bottomnavigationtest.Adapter.FavoritAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.RatingAdapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.Rating;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 import mobi.garden.bottomnavigationtest.Slider.SliderIndicator;
 import mobi.garden.bottomnavigationtest.Slider.SliderPagerAdapter;
 import mobi.garden.bottomnavigationtest.Slider.SliderView;
@@ -126,10 +130,15 @@ public class HomeActivity extends BaseActivity {
     RatingAdapter buttonRatingAdapteradapter;
     List<Rating> ratingList = new ArrayList<>();
     public String review;
-
     private ImageView textToSpeech;
 
     private final int REQ_CODE_SPEECH_INPUT = 100;
+
+
+    //session
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String memberID, userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +146,10 @@ public class HomeActivity extends BaseActivity {
 //        sliderView = (SliderView) findViewById(R.id.sliderView);
 //        mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 //        setupSlider();
+
+        session = new SessionManagement(getApplicationContext());
+        login = session.getMemberDetails();
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         rvSearchGlobal = findViewById(R.id.rvSearchglobal);
         builder = new AlertDialog.Builder(this);
         editText = (TextView) findViewById(R.id.editText);
@@ -145,7 +158,6 @@ public class HomeActivity extends BaseActivity {
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
 
         textToSpeech = findViewById(R.id.Mic);
-
         textToSpeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -382,7 +394,6 @@ public class HomeActivity extends BaseActivity {
         rvButton = dialog.findViewById(R.id.rvdialograting);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rvButton.setLayoutManager(llm);
-
         rtBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
@@ -435,9 +446,6 @@ public class HomeActivity extends BaseActivity {
                 ratinginput(ratingNum);
             }
         });
-
-
-
         mSendFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -453,8 +461,39 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
+
+        JsonObjectRequest requestt = new JsonObjectRequest( "http://pharmanet.apodoc.id/customer/ShowRating.php?CustomerID="+memberID, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for(int i=0; i< result.length();i++){
+                    try {
+                        JSONObject object = result.getJSONObject(i);
+                        tvNamaApotek.setText(object.getString("OutletName"));
+                        tvalamat.setText(object.getString("OutletAddress"));
+                        Log.d("hayaysdy", object.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(HomeActivity.this, "Sedang Gangguan", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(requestt);
+
         dialog.show();
     }
+
 
     public void ratinginput (int ratingNum){
         final JSONObject objadd = new JSONObject();
