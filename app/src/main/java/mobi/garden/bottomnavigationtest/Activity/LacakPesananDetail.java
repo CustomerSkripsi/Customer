@@ -70,7 +70,7 @@ public class LacakPesananDetail extends AppCompatActivity {
 //        lacakPesananDetail_Berat = findViewById(R.id.product_weight);
 
         rvLacakDetail = findViewById(R.id.rvLacakDetail);
- 
+
         //parse data intent
         ID = getIntent().getStringExtra("OrderID");
         Date = getIntent().getStringExtra("Tanggal");
