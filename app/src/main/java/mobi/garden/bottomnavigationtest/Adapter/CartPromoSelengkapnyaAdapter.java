@@ -32,14 +32,14 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartActivity;
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
+import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
-public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHolder>{
+public class CartPromoSelengkapnyaAdapter  extends RecyclerView.Adapter<CartPromoSelengkapnyaAdapter .cartViewHolder>{
 
     Context context;
     public static List<obat> cartList;
@@ -61,14 +61,14 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     public static String CustomerID,memberID, userName;
     String ProductName;
 
-    public cart_adapter(Context context, List<obat> cartList, String productName) {
+    public CartPromoSelengkapnyaAdapter (Context context, List<obat> cartList, String productName) {
         this.context = context;
         this.cartList = cartList;
         this.memberID = CustomerID;
         ProductName = productName;
         session = new SessionManagement(context);
     }
-    public cart_adapter(Context context, List<obat> cartList) {
+    public CartPromoSelengkapnyaAdapter (Context context, List<obat> cartList) {
         this.context = context;
         this.cartList = cartList;
         this.memberID = CustomerID;
@@ -116,7 +116,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 //        User currUser = userLocalStore.getLoggedInUser();
 //        CustomerID = currUser.getUserID();
 //
-
 
 
         holder.edtQty.setOnEditorActionListener(new DoneOnEditorActionListener() {
@@ -170,36 +169,14 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             @Override
             public void onClick(View v) {
                 Log.d("qtynya",product.cartProductQty+"");
-//                if (product.cartProductQty==1) {/
-//                    builder = new AlertDialog.Builder(context);
-////                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                    builder.setTitle("Konfirmasi Hapus Product "+product.getProductName()+" dari keranjang");
-//                    builder.setMessage("Apakah anda yakin?");
-//                    builder.setCancelable(false);
-//
-//                    builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.cancel();
-//                        }
-//                    });
-//
-//                    builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-////                            Log.d("prdId",product.productId+"");
-//                            delete(cartList.get(position).productID, cartList.get(position),memberID);
-//                        }
-//                    });
-//                    dialog = builder.show();
                 if (product.cartProductQty==0) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
-                   if(ProductName != product.getProductName()){
-                       Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
-                   }
-                    if(CartApotekActivity.temp == product.getProductName()){
-                        Log.d("gak tauuu", "onBindViewHolder:"+CartApotekActivity.temp);
+                    if(ProductName != product.getProductName()){
+                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+                    }
+                    if(PromoSelengkapnyaActivity.temp == product.getProductName()){
+                        Log.d("gak tauuu", "onBindViewHolder:"+PromoSelengkapnyaActivity.temp);
                     }
 
                 }else {
@@ -310,7 +287,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartApotekActivity.refresh_total_cart(cartList);
+                                PromoSelengkapnyaActivity.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -327,6 +304,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
+
 
     public void delete (final String product_id, final obat removedProduct, final String memberID){
 
@@ -357,14 +335,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                                 cartList.remove(removedProduct);
                                 notifyDataSetChanged();
 
-                                //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
-//                                CartApotekActivity.initiateTopAdapter();
-//                                CartApotekActivity.refresh_cart(cartList,removedProduct);
+                                PromoSelengkapnyaActivity.refresh_cart(cartList);
+                                PromoSelengkapnyaActivity.showViewPromo(PromoSelengkapnyaActivity.rvSelengkapnya,PromoSelengkapnyaActivity.geturl);
+//                                PromoSelengkapnyaActivity.showViewFav(PromoSelengkapnyaActivity.rvObatFavorite,PromoSelengkapnyaActivity.geturl);
 
 
-                                CartApotekActivity.refresh_cart(cartList);
-                                CartApotekActivity.showprodukterkait();
-                                Toast.makeText(context, "terhapus1", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "terhapus3", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

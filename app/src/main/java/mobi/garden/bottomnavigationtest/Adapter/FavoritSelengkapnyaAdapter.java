@@ -1,3 +1,4 @@
+
 package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
@@ -33,17 +34,15 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
+import mobi.garden.bottomnavigationtest.Activity.FavoritSelengkapnyaActivity;
 import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
-import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.CONFIG;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
-import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
-public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder> {
+public class FavoritSelengkapnyaAdapter extends RecyclerView.Adapter<FavoritSelengkapnyaAdapter.FavoritSelengkapnyaViewHolder> {
     List<ModelPromo> modelPromo;
     Context context;
     String tempurl;
@@ -55,7 +54,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
 
-    public PromoSelengkapnyaAdapter(List<ModelPromo> modelPromo, Context context) {
+    public FavoritSelengkapnyaAdapter(List<ModelPromo> modelPromo, Context context) {
         this.modelPromo = modelPromo;
         this.context = context;
         this.memberID = CustomerID;
@@ -64,14 +63,14 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
 
     @NonNull
     @Override
-    public PromoSelengkapnyaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavoritSelengkapnyaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.cv_promo_selengkapnya, parent, false);
-        return new PromoSelengkapnyaAdapter.PromoSelengkapnyaViewHolder(view);
+        return new FavoritSelengkapnyaAdapter.FavoritSelengkapnyaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PromoSelengkapnyaViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavoritSelengkapnyaViewHolder holder, int position) {
         final ModelPromo mp = modelPromo.get(position);
 
 
@@ -125,7 +124,6 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
                 Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "testclick", Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
                 String text = "test123123";
@@ -141,24 +139,14 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
                 context.startActivity(i);
             }
         });
-        for(int j = 0; j<PromoSelengkapnyaActivity.cartList.size(); j++){
-            if(mp.getProductID().equals(PromoSelengkapnyaActivity.cartList.get(j).getProductID())){
+        for(int j = 0; j<FavoritSelengkapnyaActivity.cartList.size(); j++){
+            if(mp.getProductID().equals(FavoritSelengkapnyaActivity.cartList.get(j).getProductID())){
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, "looppromo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "loopfav", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
-
-//        for(int j = 0; j<SearchResultApotek.cartList.size(); j++){
-//           if(mp.getProductID().equals(SearchResultApotek.cartList.get(j).getProductID())){
-//               holder.btnAdd.setEnabled(false);
-//               holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-//               Toast.makeText(context, "loopsearch", Toast.LENGTH_SHORT).show();
-//               break;
-//           }
-//        }
-
 
     }
 
@@ -169,13 +157,13 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         return modelPromo.size();
     }
 
-    public static class PromoSelengkapnyaViewHolder extends RecyclerView.ViewHolder {
+    public static class FavoritSelengkapnyaViewHolder extends RecyclerView.ViewHolder {
         TextView tvNamaProdukPromo, tvHargaCoret, tvharga;
         ImageView imgProduct;
         LinearLayout ll_obat;
         Button btnAdd;
 
-        public PromoSelengkapnyaViewHolder(View itemView) {
+        public FavoritSelengkapnyaViewHolder(View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
             tvNamaProdukPromo = itemView.findViewById(R.id.tvNamaProdukPromo);
@@ -226,17 +214,17 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             e1.printStackTrace();
         }
         Log.d("cartpromo", objAdd.toString());
-        Toast.makeText(context, "promoselengkapnya", Toast.LENGTH_SHORT).show();
+
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        Toast.makeText(context, "asdqwe", Toast.LENGTH_SHORT).show();
+//
                         try {
                             if (response.getString("status").equals("OK")) {
 
-                                PromoSelengkapnyaActivity.show_cart(PromoSelengkapnyaActivity.urlbawahs,memberID);
-                                Toast.makeText(context, "masuk?", Toast.LENGTH_SHORT).show();
+                                FavoritSelengkapnyaActivity.show_cart(FavoritSelengkapnyaActivity.urlbawahs,memberID);
+
 
                             }
                         } catch (JSONException e1) {

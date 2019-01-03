@@ -439,7 +439,7 @@ public class CartApotekActivity extends AppCompatActivity {
             }
         });
     }
-
+  //
     public static void showprodukterkait(){
         JsonObjectRequest req = new JsonObjectRequest("http://pharmanet.apodoc.id/customer/showProductTerkait.php?ApotekName="+namaApotek, null, new Response.Listener<JSONObject>() {
             @Override
@@ -509,8 +509,6 @@ public class CartApotekActivity extends AppCompatActivity {
         tvTotalPrice.setText(df.format(totalPrice)+"");
         mBadge.setNumber(count);
     }
-
-
 
     protected void onResume() {
         super.onResume();
