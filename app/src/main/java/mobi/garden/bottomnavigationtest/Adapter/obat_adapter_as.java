@@ -20,19 +20,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.CONFIG;
-import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
@@ -85,6 +84,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         dfs.setCurrencySymbol("Rp. ");
         dfs.setMonetaryDecimalSeparator('.');
         dfs.setGroupingSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
         df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
 

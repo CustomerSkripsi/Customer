@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
@@ -25,6 +27,7 @@ import mobi.garden.bottomnavigationtest.R;
 public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHolder> {
     List<ModelPromo> modelPromo;
     Context context;
+    static DecimalFormat df;
     String tempurl;
     public PromoAdapter(List<ModelPromo> modelPromo, Context context) {
         this.modelPromo = modelPromo;
@@ -43,12 +46,27 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
         final ModelPromo mp = modelPromo.get(position);
         //Toast.makeText(context, "Test", Toast.LENGTH_SHORT).show();
 
+        df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setCurrencySymbol("Rp. ");
+        dfs.setMonetaryDecimalSeparator('.');
+        dfs.setGroupingSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+        df.setDecimalFormatSymbols(dfs);
+        df.setMaximumFractionDigits(0);
+
+
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
-        holder.tvharga.setText("Rp. "+String.valueOf(mp.getProductPriceAfterDC()));
+        holder.tvHargaCoret.setText(String.valueOf(df.format(mp.getPriceProduct())));
+//        holder.tvharga.setText("Rp. "+String.valueOf(mp.getProductPriceAfterDC()));
+
+        holder.tvharga.setText(String.valueOf(df.format(mp.getProductPriceAfterDC())));
 //        if(mp.getProductPriceAfterDC()==0){
 //            holder.tvharga.setText();
 //        }
+
+
+
         if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
         }

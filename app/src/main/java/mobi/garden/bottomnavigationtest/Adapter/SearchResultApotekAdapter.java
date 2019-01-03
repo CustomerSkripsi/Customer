@@ -33,9 +33,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
-import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
 import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.CONFIG;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
@@ -89,8 +87,9 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
 
 
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. " + String.valueOf(mp.getPriceProduct()));
-        holder.tvharga.setText("Rp. " + String.valueOf(mp.getProductPriceAfterDC()));
+        holder.tvHargaCoret.setText(String.valueOf(df.format(mp.getPriceProduct())));
+//        holder.tvharga.setText("Rp. " + String.valueOf(mp.getProductPriceAfterDC()));
+        holder.tvharga.setText(String.valueOf(df.format(mp.getProductPriceAfterDC())));
 
         if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

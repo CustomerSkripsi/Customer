@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -55,6 +56,9 @@ public class SearchApotek extends AppCompatActivity {
     List<String>imageUrls = new ArrayList<>();
     public static final String SEARCH_RESULT= "search_result";
     Context context;
+    ImageView btnCancelSearch;
+    EditText etSearch;
+
     RecyclerView rvhasilSearchApotek;
     String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose, tempApotekDay;
     int ratingbar;
@@ -76,6 +80,8 @@ public class SearchApotek extends AppCompatActivity {
         setContentView(R.layout.activity_search_apotek);
         context = SearchApotek.this;
 
+        etSearch = findViewById(R.id.tvSearch);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -128,6 +134,13 @@ public class SearchApotek extends AppCompatActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearch.setText("");
+            }
+        });
 
     }
 

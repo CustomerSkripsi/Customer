@@ -43,7 +43,7 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
         holder.orderID.setText(currentItem.getOrderID());
         holder.tanggalTransaksi.setText(currentItem.getTanggal());
         holder.outletName.setText(currentItem.getOutletName());
-        holder.statusOrder.setText(currentItem.getStatusOrder());
+//        holder.statusOrder.setText(currentItem.getStatusOrder());
 
 
 
@@ -111,7 +111,7 @@ public class LacakPesananAdapter extends RecyclerView.Adapter<LacakPesananAdapte
             outletName = itemView.findViewById(R.id.tv_namaApotek);
 
 
-            statusOrder = itemView.findViewById(R.id.tv_StatusOrder);
+//            statusOrder = itemView.findViewById(R.id.tv_StatusOrder);
             transaksiDetail = itemView.findViewById(R.id.iv_transaksiDetail);
         }
     }

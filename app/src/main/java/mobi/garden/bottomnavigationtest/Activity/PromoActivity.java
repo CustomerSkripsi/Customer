@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -36,6 +37,8 @@ public class PromoActivity extends AppCompatActivity {
     private static ProgressBar pgBot;
     private static JSONArray products = new JSONArray();
     private static int countAddList;
+    ImageView btnCancelSearch;
+
     String url,input;
     RecyclerView rvPromo;
     Searching searching;
@@ -53,6 +56,7 @@ public class PromoActivity extends AppCompatActivity {
 
         pgBot = findViewById(R.id.pgBot);
         rvPromo = findViewById(R.id.rvActivityPromo);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -70,6 +74,14 @@ public class PromoActivity extends AppCompatActivity {
 //
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
 //        rvPromo.setLayoutManager(gridLayoutManager);
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearchPromo.setText("");
+            }
+        });
+
+
         etSearchPromo = findViewById(R.id.search);
 //        etSearchPromo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
@@ -264,5 +276,6 @@ public class PromoActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
 
 }

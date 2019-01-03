@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import mobi.garden.bottomnavigationtest.R;
@@ -28,13 +29,15 @@ public class FavoritActivity extends AppCompatActivity {
     Context context;
     public static String geturl;
     TextView etSearchFavorite;
-
+    ImageView btnCancelSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorit);
         context = FavoritActivity.this;
+
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
 
         rvFavorit = findViewById(R.id.rvActivityFavorit);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -82,6 +85,13 @@ public class FavoritActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(FavoritActivity.this, HomeActivity.class);
                 startActivity(i);
+            }
+        });
+
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearchFavorite.setText("");
             }
         });
 

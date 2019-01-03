@@ -19,6 +19,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="hideKeyboard"
         tools:context=".Activity.SearchResultApotek">
 
         <LinearLayout
@@ -32,6 +33,7 @@
                 android:layout_height="match_parent"
                 app:titleTextColor="@color/white"
                 android:background="@drawable/toolbar"
+                android:onClick="hideKeyboard"
                 android:focusableInTouchMode="true">
 
                 <!--<ImageView-->
@@ -52,19 +54,31 @@
 
 
 
-                <EditText
-                    android:id="@+id/et_searchApotek"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/roundedbox"
-                    android:drawableLeft="@drawable/ic_search_black"
-                    android:hint="Cari di Apotek ini"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                   />
+                    android:layout_marginTop="10dp">
+                    <EditText
+                        android:id="@+id/search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/roundedbox"
+                        android:drawableLeft="@drawable/ic_search_black"
+                        android:hint="Cari Produk"
+                        android:ems="10"
+                        android:inputType="textPersonName"/>
+
+                    <ImageView
+                        android:id="@+id/btnCancelSearch"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:paddingRight="4dp"
+                        app:srcCompat="@drawable/cancel_black"
+                        android:layout_alignParentRight="true"
+                        />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -269,7 +283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:paddingBottom="80dp"
+                android:paddingBottom="20dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/rvProdukFavaorit">
             </android.support.v7.widget.RecyclerView>

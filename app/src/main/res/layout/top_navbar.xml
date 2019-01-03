@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@drawable/toolbar"
+    android:paddingLeft="4dp"
     android:focusableInTouchMode="true">
 
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="17dp">
         <EditText
             android:id="@+id/tvSearch"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="17dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/edit_four_corner_background"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:fontFamily="sans-serif-light"
-            android:hint="Search On Pharmanet"
+            android:hint="Search On Pharmaneth"
             android:imeOptions="actionSearch"
             android:inputType="textPersonName"
-            android:maxLines="1"
             android:textColor="@color/searchText"
             android:textColorHint="@color/searchHint"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/Mic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            android:textSize="18sp"></EditText>
 
+        <ImageView
+            android:id="@+id/btnCancelSearch"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingRight="4dp"
+            app:srcCompat="@drawable/cancel"
+            android:layout_alignParentRight="true"
+            />
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/Mic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -40,23 +49,29 @@
             android:layout_marginStart="8dp"
             android:layout_toLeftOf="@+id/ivCart"
             android:layout_toStartOf="@+id/ivCart"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintStart_toEndOf="@+id/tvSearch"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_mic"
             tools:ignore="VectorDrawableCompat" />
 
+        <ImageView
+            android:id="@+id/ivCart"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/ivCart"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_toLeftOf="@+id/ImageView"
+            android:layout_toStartOf="@+id/ImageView"
+            app:srcCompat="@drawable/ic_cart_home"
+            tools:ignore="VectorDrawableCompat" />
 
         <ImageView
             android:id="@+id/ImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_notifications_black_24dp"
             tools:ignore="VectorDrawableCompat" />
 
@@ -74,21 +89,7 @@
 
         <!--</android.support.v7.widget.RecyclerView>-->
 
-        <ImageView
-            android:id="@+id/ivCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ivCart"
-            android:layout_marginEnd="4dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_toLeftOf="@+id/ImageView"
-            android:layout_toStartOf="@+id/ImageView"
-            app:layout_constraintEnd_toStartOf="@+id/ImageView"
-            app:layout_constraintStart_toEndOf="@+id/Mic"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cart_home"
-            tools:ignore="VectorDrawableCompat" />
+
 
         <!--<com.nex3z.notificationbadge.NotificationBadge-->
             <!--android:id="@+id/badge"-->
@@ -102,9 +103,7 @@
             <!--app:maxTextLength="3"-->
             <!--tools:layout_editor_absoluteX="320dp"></com.nex3z.notificationbadge.NotificationBadge>-->
 
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<android.support.constraint.ConstraintLayout-->
