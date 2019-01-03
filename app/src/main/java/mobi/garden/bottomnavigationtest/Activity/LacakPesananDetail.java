@@ -111,6 +111,7 @@ public class LacakPesananDetail extends AppCompatActivity {
 
                     lacakPesananDetail_Nama_Item.setText(namaproduk);
                     lacakPesananDetail_Price.setText(CONFIG.ConvertNominal(harga));
+                    sub_total_detail.setText(CONFIG.ConvertNominal(harga));
                     lacakPesananDetail_Qty.setText("Jumlah : "+jumlah);
 
                     if(berat=="null"){

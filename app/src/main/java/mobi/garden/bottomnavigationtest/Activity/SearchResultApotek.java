@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +42,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Adapter.CartSearchResultApotekAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.PromoSelengkapnyaAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.SearchResultApotekAdapter;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.apotek;
@@ -55,6 +55,8 @@ public class SearchResultApotek extends AppCompatActivity {
 
     static TextView tvApotekName,tvApotekAddress,tvApotekhoneNumber,tvApotekOperationalHour;
     TextView btnSelengFav,btnSelengPromo;
+    ImageView btnCancelSearch;
+    EditText search;
     static RatingBar rbApotek;
     public static RecyclerView rvObatPromo, rvObatFavorite, rvAllProduct;
     public static String apotekk;
@@ -106,6 +108,9 @@ public class SearchResultApotek extends AppCompatActivity {
         setContentView(R.layout.activity_search_result_apotek);
         tvApotekName = findViewById(R.id.tv_ApotekNameResult);
         tvApotekAddress = findViewById(R.id.tv_address_apotek_result);
+
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
+        search = findViewById(R.id.search);
         //tvApotekAddress.setText(ap.getAddress());
         tvApotekhoneNumber = findViewById(R.id.tv_PhoneNumber);
         tvApotekOperationalHour = findViewById(R.id.tv_OperationalHourApotek);
@@ -205,6 +210,13 @@ public class SearchResultApotek extends AppCompatActivity {
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewCartList.setLayoutManager(setLayout);
         initiateBelowAdapter();
+
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search.setText("");
+            }
+        });
 
     }
     private void initiateBelowAdapter(){

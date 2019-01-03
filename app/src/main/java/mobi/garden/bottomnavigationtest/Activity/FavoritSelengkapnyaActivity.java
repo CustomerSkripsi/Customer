@@ -3,24 +3,22 @@ package mobi.garden.bottomnavigationtest.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -37,14 +35,10 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import mobi.garden.bottomnavigationtest.Adapter.CartFavoritSelengkapnyaAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.FavoritSelengkapnyaAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.PromoAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.PromoSelengkapnyaAdapter;
-import mobi.garden.bottomnavigationtest.Adapter.CartPromoSelengkapnyaAdapter;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
@@ -60,7 +54,8 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
     static String urlPromo="";
     static String urlFavorite="";
     static int diskon;
-
+    EditText search;
+    ImageView btnCancelSearch;
 
     public static FavoritSelengkapnyaAdapter promoAdapter;
     public static FavoritSelengkapnyaAdapter favAdapter;
@@ -100,6 +95,8 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorit_selengkapnya);
 
+        search = findViewById(R.id.search);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
         rvSelengkapnya = findViewById(R.id.rvActivitySelengkapnya);
         rvSelengkapnya.setHasFixedSize(true);
         LinearLayoutManager llFavorite = new LinearLayoutManager(this);
@@ -144,6 +141,14 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewCartList.setLayoutManager(setLayout);
         initiateBelowAdapter();
+
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search.setText("");
+            }
+        });
+
     }
 
 

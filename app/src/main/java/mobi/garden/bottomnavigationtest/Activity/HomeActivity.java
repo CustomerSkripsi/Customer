@@ -2,8 +2,8 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -116,6 +116,7 @@ public class HomeActivity extends BaseActivity {
 
     //rating
     Button btn, mSendFeedback, btnKategori;
+    ImageView btnCancelSearch;
     RatingBar rtBar;
     TextView mRatingScale;
     EditText mFeedback;
@@ -143,6 +144,7 @@ public class HomeActivity extends BaseActivity {
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
 
         textToSpeech = findViewById(R.id.Mic);
 
@@ -251,6 +253,12 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearch.setText("");
+            }
+        });
         etSearch = findViewById(R.id.tvSearch);
         etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
