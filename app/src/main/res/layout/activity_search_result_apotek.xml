@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="hideKeyboard"
     tools:context=".Activity.SearchResultApotek">
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:titleTextColor="@color/white"
-                android:background="@drawable/toolbar">
+                android:background="@drawable/toolbar"
+                android:focusableInTouchMode="true">
 
                 <!--<ImageView-->
                     <!--android:id="@+id/iv_back"-->
@@ -61,7 +63,8 @@
                     android:drawableLeft="@drawable/ic_search_black"
                     android:hint="Cari di Apotek ini"
                     android:ems="10"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName"
+                   />
 
                 <TextView
                     android:layout_width="match_parent"

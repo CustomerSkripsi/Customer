@@ -1,5 +1,6 @@
 package mobi.garden.bottomnavigationtest.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -373,6 +375,10 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         initBottomSheet();
 //        Toast.makeText(context, "restart", Toast.LENGTH_SHORT).show();
         super.onRestart();
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
     //
 //    @Override

@@ -225,6 +225,9 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 SearchResultApotek.show_cart(SearchResultApotek.urlbawahs,memberID);
+                                SearchResultApotek.showView(SearchResultApotek.rvObatPromo,SearchResultApotek.urlPromo+SearchResultApotek.apotekk);
+                                SearchResultApotek.showViewFav();
+                                SearchResultApotek.showViewAll();
 
 
                             }

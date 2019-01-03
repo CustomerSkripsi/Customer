@@ -191,7 +191,7 @@ public class CartSearchResultApotekAdapter extends RecyclerView.Adapter<CartSear
 //                        }
 //                    });
 //                    dialog = builder.show();
-                if (product.cartProductQty==0) {
+                if (product.cartProductQty==1) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                     if(ProductName != product.getProductName()){

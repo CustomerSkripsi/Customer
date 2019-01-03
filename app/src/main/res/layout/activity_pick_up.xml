@@ -239,7 +239,7 @@
 
 
                         <Button
-                            android:id="@+id/BRegister"
+                            android:id="@+id/btnSelesai"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="25dp"
