@@ -29,9 +29,11 @@
 
         <TextView
             android:id="@+id/tvNamaProdukPromo"
-            android:layout_width="wrap_content"
+            android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_weight="1"
             android:text="Produk"
             android:paddingTop="1dp"

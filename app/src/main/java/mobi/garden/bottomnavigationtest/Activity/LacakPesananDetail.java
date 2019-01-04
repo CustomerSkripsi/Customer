@@ -35,10 +35,12 @@ import mobi.garden.bottomnavigationtest.R;
 public class LacakPesananDetail extends AppCompatActivity {
     Context context;
     static String ID;
+    static int total = 0;
+    static int totalPembayaran = 0;
     String Date, OutletName, StatusOrder;
     String url, lacakdetail;
     String namaproduk;
-    int harga;
+    static int harga;
     String jumlah;
     String berat;
     RecyclerView rvLacakDetail;
@@ -46,7 +48,7 @@ public class LacakPesananDetail extends AppCompatActivity {
 
     TextView lacakPesananDetail_OrderID, lacakPesananDetail_Date, lacakPesananDetail_apoName, lacakPesananDetail_Nama_Item;
     TextView lacakPesananDetail_Qty, lacakPesananDetail_Price, lacakPesananDetail_Berat ;// lacakPesananDetail_Status;
-    TextView sub_total_detail;
+    TextView totaltotal;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class LacakPesananDetail extends AppCompatActivity {
         lacakPesananDetail_Price = findViewById(R.id.lacakPesananDetail_Price);
         lacakPesananDetail_Qty = findViewById(R.id.lacakPesananDetail_Qty);
         lacakPesananDetail_Berat = findViewById(R.id.lacakPesananDetail_Berat);
-        sub_total_detail = findViewById(R.id.sub_total_detail);
+        totaltotal = findViewById(R.id.sub_total_detail);
 //
 //        lacakPesananDetail_Nama_Item = findViewById(R.id.product_name);
 //        lacakPesananDetail_Price = findViewById(R.id.product_price);
@@ -97,6 +99,7 @@ public class LacakPesananDetail extends AppCompatActivity {
                     result = response.getJSONArray("result");
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    total = 0;
                 }
                 for(int i=0;i<result.length();i++){
                     try {
@@ -105,13 +108,19 @@ public class LacakPesananDetail extends AppCompatActivity {
                         harga = object.getInt("OrderProductPrice");
                         jumlah = object.getString("OrderProductQty");
                         berat = object.getString("ProductWeight");
+                        total += object.getInt("OrderProductQty") * object.getInt("OrderProductPrice");
+                        totalPembayaran = total;
+                        Log.d("asd678", jumlah);
+                        Log.d("qeqq", String.valueOf(harga));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
+
+
+                    totaltotal.setText(CONFIG.ConvertNominal(total)+" ");
                     lacakPesananDetail_Nama_Item.setText(namaproduk);
                     lacakPesananDetail_Price.setText(CONFIG.ConvertNominal(harga));
-                    sub_total_detail.setText(CONFIG.ConvertNominal(harga));
                     lacakPesananDetail_Qty.setText("Jumlah : "+jumlah);
 
                     if(berat=="null"){

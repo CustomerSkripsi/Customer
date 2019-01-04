@@ -92,7 +92,7 @@ public class SearchProdukAdapter extends RecyclerView.Adapter<SearchProdukAdapte
                 @Override
                 public void onClick(View view) {
                     if(m.getCustomerID().equalsIgnoreCase("0") || !isClicked){
-                        holder.ivStar.setColorFilter(Color.parseColor("#000000"));
+                        holder.ivStar.setColorFilter(Color.parseColor("#0Dffffff"));
                         isClicked = !isClicked; //membuat dia jadi hitam klo ada merah
                         deletewishList(m.getProductID(),memberID);
                     }
@@ -105,7 +105,7 @@ public class SearchProdukAdapter extends RecyclerView.Adapter<SearchProdukAdapte
                 }
             });
         }else{
-            holder.ivStar.setColorFilter(Color.parseColor(  "#000000"));
+            holder.ivStar.setColorFilter(Color.parseColor(  "#0Dffffff"));
             holder.ivStar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {// bwh bener
@@ -116,7 +116,7 @@ public class SearchProdukAdapter extends RecyclerView.Adapter<SearchProdukAdapte
 //                    }
 //                    else {
                         if(m.getCustomerID().equalsIgnoreCase("0") || !isClicked){
-                        holder.ivStar.setColorFilter(Color.parseColor("#000000"));
+                        holder.ivStar.setColorFilter(Color.parseColor("#0Dffffff"));
                         isClicked = !isClicked;
                         insertWishList(m.getProductID(),memberID);
                     }
