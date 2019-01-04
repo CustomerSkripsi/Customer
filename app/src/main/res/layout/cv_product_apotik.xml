@@ -23,9 +23,11 @@
             android:background="@drawable/nopicture"/>
         <TextView
             android:id="@+id/tv_nama_obat"
-            android:layout_width="wrap_content"
+            android:layout_width="105dp"
             android:layout_height="wrap_content"
             tools:text="nama obat"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="13dp"
             android:textStyle="bold"
             android:textAllCaps="true"
