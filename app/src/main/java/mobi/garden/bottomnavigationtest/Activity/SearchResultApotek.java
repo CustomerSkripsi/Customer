@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class SearchResultApotek extends AppCompatActivity {
     static TextView tvApotekName,tvApotekAddress,tvApotekhoneNumber,tvApotekOperationalHour;
     TextView btnSelengFav,btnSelengPromo;
     ImageView btnCancelSearch;
+    ImageButton buyBtn;
     EditText search;
     static RatingBar rbApotek;
     public static RecyclerView rvObatPromo, rvObatFavorite, rvAllProduct;
@@ -108,7 +110,7 @@ public class SearchResultApotek extends AppCompatActivity {
         setContentView(R.layout.activity_search_result_apotek);
         tvApotekName = findViewById(R.id.tv_ApotekNameResult);
         tvApotekAddress = findViewById(R.id.tv_address_apotek_result);
-
+        buyBtn = (ImageButton) findViewById(R.id.buyBtn);
         btnCancelSearch = findViewById(R.id.btnCancelSearch);
         search = findViewById(R.id.search);
         //tvApotekAddress.setText(ap.getAddress());
@@ -218,6 +220,12 @@ public class SearchResultApotek extends AppCompatActivity {
             }
         });
 
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SearchResultApotek.this, CartActivity.class));
+            }
+        });
     }
     private void initiateBelowAdapter(){
         rvCart = findViewById(R.id.rvCartList);

@@ -485,6 +485,9 @@ public class HomeActivity extends BaseActivity {
                         JSONObject object = result.getJSONObject(i);
                         tvNamaApotek.setText(object.getString("OutletName"));
                         tvalamat.setText(object.getString("OutletAddress"));
+                        if(object.length() == 0){
+                            dialog.cancel();
+                        }dialog.show();
                         Log.d("hayaysdy", object.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -497,9 +500,10 @@ public class HomeActivity extends BaseActivity {
                 Toast.makeText(HomeActivity.this, "Sedang Gangguan", Toast.LENGTH_SHORT).show();
             }
         });
+
         queue.add(requestt);
 
-        dialog.show();
+
     }
 
 
@@ -547,13 +551,14 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    public void saveFeedback (int ratingNum, int number, String review){
+    public void saveFeedback (int ratingNum,int number, String review){
         JSONObject objadd = new JSONObject();
         try {
             JSONArray arrdata = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("RatingBar",ratingNum);
             objDetail.put("number",number);
+            objDetail.put("customerID",memberID);
             objDetail.put("review",review);
             arrdata.put(objDetail);
             objadd.put("data",arrdata);

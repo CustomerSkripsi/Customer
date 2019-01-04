@@ -170,9 +170,15 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // startActivity(new Intent(CartActivity.this , DetailObatHome.class));
-                Intent i = new Intent(context,SearchResultApotek.class);
-                i.putExtra("ApotekName", OutletName);
-                context.startActivity(i);
+                if(OutletName != null) {
+                    Intent i = new Intent(context, SearchResultApotek.class);
+                    i.putExtra("ApotekName", OutletName);
+                    context.startActivity(i);
+                }else{
+                    Intent i = new Intent(getApplicationContext(),PromoActivity.class);
+                    i.putExtra("allpromo","http://pharmanet.apodoc.id/customer/ProductPromoAll.php?input=");
+                    startActivity(i);
+                }
             }
         });
 
@@ -389,7 +395,7 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
-    public static void refresh_cart(List<cart> cartList) {
+    public static void refresh_cart(List<ModelPromo> cartList) {
         total = 0;
         totalPembayaran = 0;
         for (int i = 0; i < cartlist.size(); i++) {

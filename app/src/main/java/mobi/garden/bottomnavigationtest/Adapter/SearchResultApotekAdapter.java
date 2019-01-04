@@ -116,7 +116,7 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add(mp.ProductID, mp.getPriceProduct(),1, memberID);
+                add(mp.ProductID, mp.getProductPriceAfterDC(),1, memberID);
 
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);

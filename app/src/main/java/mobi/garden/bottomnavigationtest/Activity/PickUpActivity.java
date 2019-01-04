@@ -219,6 +219,10 @@ public class PickUpActivity extends AppCompatActivity {
         return bitmap;
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 
     private static String guessAppropriateEncoding(CharSequence contents) {
         // Very crude at the moment

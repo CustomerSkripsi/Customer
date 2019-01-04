@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -75,7 +76,18 @@ public class SearchProduk extends AppCompatActivity {
 
 
         getProdukSearched();
-
+        Toolbar dToolbar = findViewById(R.id.toolbar2);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        if(produkNama.contains("%20")){
+            produkNama = produkNama.replace("%20"," ");
+        }
+        dToolbar.setTitle(produkNama);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         //slider
@@ -85,12 +97,7 @@ public class SearchProduk extends AppCompatActivity {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
-        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                etSearch.setText("");
-            }
-        });
+
     }
 
     public void getProdukSearched(){

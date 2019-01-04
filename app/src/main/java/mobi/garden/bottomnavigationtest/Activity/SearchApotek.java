@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -117,6 +118,7 @@ public class SearchApotek extends AppCompatActivity {
         }
 
 
+
         rvhasilSearchApotek = findViewById(R.id.rvHasilSearchApotek);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -125,7 +127,18 @@ public class SearchApotek extends AppCompatActivity {
 
 
         getapoteksearched();
-
+        Toolbar dToolbar = findViewById(R.id.toolbar2);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        if(apotek.contains("%20")){
+            apotek = apotek.replace("%20"," ");
+        }
+        dToolbar.setTitle(apotek);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         //slider
@@ -135,12 +148,7 @@ public class SearchApotek extends AppCompatActivity {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
-        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                etSearch.setText("");
-            }
-        });
+
 
     }
 

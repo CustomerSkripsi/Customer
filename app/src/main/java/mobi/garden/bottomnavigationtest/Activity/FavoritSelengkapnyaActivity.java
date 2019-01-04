@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
     static int diskon;
     EditText search;
     ImageView btnCancelSearch;
+    ImageButton buyBtn;
 
     public static FavoritSelengkapnyaAdapter promoAdapter;
     public static FavoritSelengkapnyaAdapter favAdapter;
@@ -104,6 +106,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
         rvSelengkapnya.setLayoutManager(llFavorite);
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
         mBadge = findViewById(R.id.badge);
+        buyBtn = (ImageButton) findViewById(R.id.buyBtn);
 
         Intent i = getIntent();
         geturl = i.getStringExtra("link");
@@ -148,7 +151,12 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
                 search.setText("");
             }
         });
-
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FavoritSelengkapnyaActivity.this, CartActivity.class));
+            }
+        });
     }
 
 
