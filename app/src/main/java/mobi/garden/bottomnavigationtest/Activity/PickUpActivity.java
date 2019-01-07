@@ -39,7 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.cart;
 import mobi.garden.bottomnavigationtest.R;
@@ -57,10 +56,9 @@ public class PickUpActivity extends AppCompatActivity {
     Button BRegister,btnBack;
     static TextView tv_apotek_name,tv_apotek_address,tv_apotek_noTlp,tv_apotek_pic,tv_apotek_pic_noTlp;
     String urlApotek = "Http://Pharmanet.Apodoc.id/select_detail_transaction.php?id=";
-    UserLocalStore userLocalStore;
     LinearLayout containerDaftar;
     public static String CustomerID,memberID, userName;
-    TextView tvApotek, etNopesanan;
+    TextView tvApotek, tvNopesanan;
 
     SessionManagement session;
     HashMap<String, String> login;
@@ -132,7 +130,7 @@ public class PickUpActivity extends AppCompatActivity {
 
        // CartActivity.refresh_total_cart(CartModel);
         tvApotek = findViewById(R.id.tvApotek);
-        etNopesanan = findViewById(R.id.etNopesanan);
+        tvNopesanan = findViewById(R.id.etNopesanan);
         viewdetail();
         setStatusBarGradiant(this);
     }
@@ -159,7 +157,7 @@ public class PickUpActivity extends AppCompatActivity {
                     try {
                         JSONObject object = result.getJSONObject(i);
                         tv_apotek_name.setText(object.getString("OutletName"));
-                        etNopesanan.setText(object.getString("OrderID"));
+                        tvNopesanan.setText(object.getString("OrderID"));
                         tvApotek.setText("Kami tunggu kehadiran Anda di Apotek "+object.getString("OutletName"));
                         tv_apotek_address.setText(object.getString("OutletAddress"));
                         Log.d("rwar", object.toString());

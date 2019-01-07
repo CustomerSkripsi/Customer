@@ -124,10 +124,6 @@ public class CartActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         Intent intent = getIntent();
-//        userlocal  = new UserLocalStore(this);
-//        User currUser = userlocal.getLoggedInUser();
-//        CustomerID = currUser.getUserID();
-
         session = new SessionManagement(getApplicationContext());
         login = session.getMemberDetails();
         userName= login.get(SessionManagement.USERNAME);
