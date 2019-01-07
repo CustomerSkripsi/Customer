@@ -11,10 +11,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -45,6 +48,8 @@ public class SearchProduk extends AppCompatActivity {
     static RecyclerView rvhasilSearchProduk;
     public static final String SEARCH_RESULT= "search_result";
     public static String produkNama, url,produkid,promoName,productUrl;
+    ImageView btnCancelSearch;
+    EditText etSearch;
     static List<ModelPromo> prodk = new ArrayList<>();
     List<String>imageUrls = new ArrayList<>();
 
@@ -66,11 +71,23 @@ public class SearchProduk extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvhasilSearchProduk.setLayoutManager(llm);
-
+        etSearch = findViewById(R.id.tvSearch);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
 
 
         getProdukSearched();
-
+        Toolbar dToolbar = findViewById(R.id.toolbar2);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        if(produkNama.contains("%20")){
+            produkNama = produkNama.replace("%20"," ");
+        }
+        dToolbar.setTitle(produkNama);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         //slider
@@ -79,6 +96,7 @@ public class SearchProduk extends AppCompatActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
 
     }
 
@@ -235,6 +253,9 @@ public class SearchProduk extends AppCompatActivity {
             window.setBackgroundDrawable(background);
         }
     }
-
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }
 

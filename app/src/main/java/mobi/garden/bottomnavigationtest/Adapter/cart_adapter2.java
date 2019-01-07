@@ -300,7 +300,7 @@ public class cart_adapter2 extends  RecyclerView.Adapter<cart_adapter2.cartViewH
                             if (response.getString("status").equals("OK")) {
 
                                 cartList.remove(removedProduct);
-                                CartActivity.refresh_cart(cartList);
+                                //CartActivity.refresh_cart(cartList);
                                 //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e1) {

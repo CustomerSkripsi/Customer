@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,15 +76,25 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
         holder.edtQty.setOnEditorActionListener(new DoneOnEditorActionListener(){
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if(Integer.parseInt(holder.edtQty.getText().toString())>100){
-                        Toast.makeText(context, "hai", Toast.LENGTH_SHORT).show();
-                        carts.ProductQty = 100;
-                        holder.edtQty.setText(carts.ProductQty+"");
+                    if (holder.edtQty.getText().toString().equals("")||Integer.parseInt(holder.edtQty.getText().toString())==0) {
+                        holder.edtQty.setText("1");
+                        carts.cartProductQty = 1;
+                        ubah(CartModel.get(position).ProductID, carts.cartProductQty,memberID);
+                    }
+                   else if(Integer.parseInt(holder.edtQty.getText().toString())>100){
+                       int ProductQty = 100;
+                       holder.edtQty.setText(ProductQty+"");
                         Toast.makeText(context, "Maximum pembelian 100", Toast.LENGTH_SHORT).show();
                         holder.tvCartProductPrice.setText("Total : "+String.valueOf(carts.ProductQty*100));
                         ubah(CartModel.get(position).getProductID(), carts.ProductQty, memberID);
-
+                   }
+                    else {
+                        carts.cartProductQty = Integer.parseInt(holder.edtQty.getText().toString());
+                        ubah(CartModel.get(position).getProductID(), carts.cartProductQty, memberID);
                     }
+                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
                 }
                 return false;
             }
@@ -93,25 +104,8 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
             @Override
             public void onClick(View view) {
                 if (carts.getProductQty()==1) {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                    builder.setTitle("Konfirmasi Hapus Product "+carts.getNameProduct()+" dari keranjang");
-//                    builder.setMessage("Apakah anda yakin?");
-//                    builder.setCancelable(false);
-//                    builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.cancel();
-//                        }
-//                    });
-//                    builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Log.d("prdId",carts.ProductID+"");
-//                            delete(CartModel.get(position).ProductID, CartModel.get(position),"8181200006");
-//                        }
-//                    });
-//                    AlertDialog alert = builder.create();
-//                    alert.show();
+                    delete(CartModel.get(position).ProductID, CartModel.get(position),memberID);
+
                 }else{
                     Log.d("qtynya", carts.getProductQty() + "");
                     holder.edtQty.setText(--carts.ProductQty + "");
@@ -196,6 +190,8 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
         }
     }
 
+
+
     public void ubah(String id, int qty, String CustomerID) {
         JSONObject objAdd = new JSONObject();
         try {
@@ -217,6 +213,7 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
                         try {
                             if (response.getString("status").equals("OK")) {
                                 CartActivity.refresh_total_cart(CartModel);
+//                                CartActivity.refresh_cart(CartModel);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -253,11 +250,13 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
                         try {
                             if (response.getString("status").equals("OK")) {
                                 CartModel.remove(removedProduct);
+
+
+                                //CartActivity.refresh_cart(CartModel);
+                                //CartActivity.refresh_total_cart(CartModel);
+                                CartActivity.refresh_total_cart(CartModel);
                                 notifyDataSetChanged();
-                                //CartActivity.refresh_cart(cartListFull,removedProduct);
-                                //CartActivity.refresh_total_cart(cartListFull);
-//                                CartActivity.refresh_total_cart(cartList);
-                            }
+                        }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
@@ -294,3 +293,26 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
         }
     }
 }
+
+
+
+//new CartHomeAdapter.delete().execute(carts);
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                    builder.setTitle("Konfirmasi Hapus Product "+carts.getNameProduct()+" dari keranjang");
+//                    builder.setMessage("Apakah anda yakin?");
+//                    builder.setCancelable(false);
+//                    builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//                    builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Log.d("prdId",carts.ProductID+"");
+//                            delete(CartModel.get(position).ProductID, CartModel.get(position),"8181200006");
+//                        }
+//                    });
+//                    AlertDialog alert = builder.create();
+//                    alert.show();

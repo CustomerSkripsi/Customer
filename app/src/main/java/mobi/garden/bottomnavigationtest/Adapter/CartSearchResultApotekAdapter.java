@@ -191,11 +191,11 @@ public class CartSearchResultApotekAdapter extends RecyclerView.Adapter<CartSear
 //                        }
 //                    });
 //                    dialog = builder.show();
-                if (product.cartProductQty==0) {
+                if (product.cartProductQty==1) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                     if(ProductName != product.getProductName()){
-                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
                     }
                     if(SearchResultApotek.temp == product.getProductName()){
                         Log.d("gak tauuu", "onBindViewHolder:"+SearchResultApotek.temp);
@@ -361,8 +361,9 @@ public class CartSearchResultApotekAdapter extends RecyclerView.Adapter<CartSear
                                 SearchResultApotek.refresh_cart(cartList);
                                 SearchResultApotek.showView(SearchResultApotek.rvObatPromo,SearchResultApotek.urlPromo+SearchResultApotek.apotekk);
                                 SearchResultApotek.showViewFav();
+                                SearchResultApotek.showViewAll();
 
-                                Toast.makeText(context, "terhapus2", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "terhapus2", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

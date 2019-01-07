@@ -92,8 +92,8 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
 
 
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. " + String.valueOf(mp.getPriceProduct()));
-        holder.tvharga.setText("Rp. " + String.valueOf(mp.getProductPriceAfterDC()));
+        holder.tvHargaCoret.setText(String.valueOf(df.format(mp.getPriceProduct())));
+        holder.tvharga.setText(String.valueOf(df.format(mp.getProductPriceAfterDC())));
 
         if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -120,12 +120,11 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add(mp.ProductID, mp.getPriceProduct(),1, memberID);
+                add(mp.ProductID, mp.getProductPriceAfterDC(),1, memberID);
 
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "testclick", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
                 String text = "test123123";
@@ -145,7 +144,6 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             if(mp.getProductID().equals(PromoSelengkapnyaActivity.cartList.get(j).getProductID())){
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, "looppromo", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -202,7 +200,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Err", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -226,7 +224,7 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
             e1.printStackTrace();
         }
         Log.d("cartpromo", objAdd.toString());
-        Toast.makeText(context, "promoselengkapnya", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "promoselengkapnya", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -236,7 +234,6 @@ public class PromoSelengkapnyaAdapter extends RecyclerView.Adapter<PromoSelengka
                             if (response.getString("status").equals("OK")) {
 
                                 PromoSelengkapnyaActivity.show_cart(PromoSelengkapnyaActivity.urlbawahs,memberID);
-                                Toast.makeText(context, "masuk?", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="hideKeyboard"
     tools:context=".Activity.PromoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="hideKeyboard"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -17,31 +19,48 @@
             android:layout_height="wrap_content"
             android:background="@drawable/toolbar"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            android:onClick="hideKeyboard"
+            android:focusableInTouchMode="true"/>
 
-        <EditText
-            android:id="@+id/search"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="10dp">
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/roundedbox"
             android:drawableLeft="@drawable/ic_search_black"
             android:hint="Cari Produk"
             android:ems="10"
             android:inputType="textPersonName"/>
 
+            <ImageView
+                android:id="@+id/btnCancelSearch"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:paddingRight="4dp"
+                app:srcCompat="@drawable/cancel_black"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="hideKeyboard"
             >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvActivityPromo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:onClick="hideKeyboard">
 
             </android.support.v7.widget.RecyclerView>
 

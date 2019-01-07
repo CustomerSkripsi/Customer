@@ -170,11 +170,11 @@ public class CartFavoritSelengkapnyaAdapter  extends RecyclerView.Adapter<CartFa
             @Override
             public void onClick(View v) {
                 Log.d("qtynya",product.cartProductQty+"");
-                if (product.cartProductQty==0) {
+                if (product.cartProductQty==1) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                     if(ProductName != product.getProductName()){
-                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
                     }
                     if(FavoritSelengkapnyaActivity.temp == product.getProductName()){
                         Log.d("gak tauuu", "onBindViewHolder:"+FavoritSelengkapnyaActivity.temp);
@@ -341,7 +341,7 @@ public class CartFavoritSelengkapnyaAdapter  extends RecyclerView.Adapter<CartFa
                                 FavoritSelengkapnyaActivity.showViewFav(FavoritSelengkapnyaActivity.rvSelengkapnya,FavoritSelengkapnyaActivity.geturl);
 
 
-                                Toast.makeText(context, "terhapusfavorit", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "terhapusfavorit", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

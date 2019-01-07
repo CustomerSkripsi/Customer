@@ -2,8 +2,8 @@ package mobi.garden.bottomnavigationtest.Activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,17 +55,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mobi.garden.bottomnavigationtest.Adapter.FavoritAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.GlobalSearchAdapter;
 import mobi.garden.bottomnavigationtest.Adapter.RatingAdapter;
 import mobi.garden.bottomnavigationtest.BaseActivity;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
+import mobi.garden.bottomnavigationtest.Model.ModelPromo;
 import mobi.garden.bottomnavigationtest.Model.Rating;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 import mobi.garden.bottomnavigationtest.Slider.SliderIndicator;
 import mobi.garden.bottomnavigationtest.Slider.SliderPagerAdapter;
 import mobi.garden.bottomnavigationtest.Slider.SliderView;
@@ -115,6 +120,7 @@ public class HomeActivity extends BaseActivity {
 
     //rating
     Button btn, mSendFeedback, btnKategori;
+    ImageView btnCancelSearch;
     RatingBar rtBar;
     TextView mRatingScale;
     EditText mFeedback;
@@ -125,10 +131,15 @@ public class HomeActivity extends BaseActivity {
     RatingAdapter buttonRatingAdapteradapter;
     List<Rating> ratingList = new ArrayList<>();
     public String review;
-
     private ImageView textToSpeech;
 
     private final int REQ_CODE_SPEECH_INPUT = 100;
+
+
+    //session
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String memberID, userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,15 +147,19 @@ public class HomeActivity extends BaseActivity {
 //        sliderView = (SliderView) findViewById(R.id.sliderView);
 //        mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 //        setupSlider();
+
+        session = new SessionManagement(getApplicationContext());
+        login = session.getMemberDetails();
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
         rvSearchGlobal = findViewById(R.id.rvSearchglobal);
         builder = new AlertDialog.Builder(this);
         editText = (TextView) findViewById(R.id.editText);
         cardListBrand = (RecyclerView) findViewById(R.id.rv_cv_obat_promo);
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
 
         textToSpeech = findViewById(R.id.Mic);
-
         textToSpeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,6 +265,12 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearch.setText("");
+            }
+        });
         etSearch = findViewById(R.id.tvSearch);
         etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -381,7 +402,6 @@ public class HomeActivity extends BaseActivity {
         rvButton = dialog.findViewById(R.id.rvdialograting);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rvButton.setLayoutManager(llm);
-
         rtBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
@@ -434,9 +454,6 @@ public class HomeActivity extends BaseActivity {
                 ratinginput(ratingNum);
             }
         });
-
-
-
         mSendFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -452,8 +469,43 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-        dialog.show();
+
+        JsonObjectRequest requestt = new JsonObjectRequest( "http://pharmanet.apodoc.id/customer/ShowRating.php?CustomerID="+memberID, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray result = null;
+                try {
+                    result = response.getJSONArray("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for(int i=0; i< result.length();i++){
+                    try {
+                        JSONObject object = result.getJSONObject(i);
+                        tvNamaApotek.setText(object.getString("OutletName"));
+                        tvalamat.setText(object.getString("OutletAddress"));
+                        if(object.length() == 0){
+                            dialog.cancel();
+                        }dialog.show();
+                        Log.d("hayaysdy", object.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(HomeActivity.this, "Sedang Gangguan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(requestt);
+
+
     }
+
 
     public void ratinginput (int ratingNum){
         final JSONObject objadd = new JSONObject();
@@ -499,13 +551,14 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    public void saveFeedback (int ratingNum, int number, String review){
+    public void saveFeedback (int ratingNum,int number, String review){
         JSONObject objadd = new JSONObject();
         try {
             JSONArray arrdata = new JSONArray();
             JSONObject objDetail = new JSONObject();
             objDetail.put("RatingBar",ratingNum);
             objDetail.put("number",number);
+            objDetail.put("customerID",memberID);
             objDetail.put("review",review);
             arrdata.put(objDetail);
             objadd.put("data",arrdata);
@@ -796,6 +849,10 @@ public class HomeActivity extends BaseActivity {
 //            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
         }
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 

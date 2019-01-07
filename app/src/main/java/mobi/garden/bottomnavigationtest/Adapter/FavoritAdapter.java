@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
@@ -24,6 +26,7 @@ import mobi.garden.bottomnavigationtest.R;
 public class FavoritAdapter extends RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder> {
     List<ModelPromo> modelPromo;
     Context context;
+    static DecimalFormat df;
 
     public FavoritAdapter(List<ModelPromo> modelPromo, Context context) {
         this.modelPromo = modelPromo;
@@ -41,12 +44,22 @@ public class FavoritAdapter extends RecyclerView.Adapter<FavoritAdapter.FavoritV
     @Override
     public void onBindViewHolder(@NonNull FavoritAdapter.FavoritViewHolder holder, int position) {
         final ModelPromo mp = modelPromo.get(position);
-        holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
 
-        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
-            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
-        }
+        df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setCurrencySymbol("Rp. ");
+        dfs.setMonetaryDecimalSeparator('.');
+        dfs.setGroupingSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+        df.setDecimalFormatSymbols(dfs);
+        df.setMaximumFractionDigits(0);
+
+        holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
+        holder.tvharga.setText("Rp. "+String.valueOf(mp.getPriceProduct()));
+
+//        if(mp.getPriceProduct() != mp.getProductPriceAfterDC()){
+//            holder.tvharga.setPaintFlags(holder.tvharga.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+//        }
 //        if(mp.getProductNameUrl().equalsIgnoreCase("null")){
 //            Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
 //        }else {

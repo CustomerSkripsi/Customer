@@ -20,19 +20,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.CONFIG;
-import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
@@ -86,6 +85,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         dfs.setMonetaryDecimalSeparator('.');
         dfs.setGroupingSeparator('.');
         df.setDecimalFormatSymbols(dfs);
+        df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(0);
 
         Picasso.with(context).load(pr.productPhoto).into(holder.iv_picture_obat_as);
@@ -118,8 +118,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
 
                 holder.btn_add_obat.setEnabled(false);
                 holder.btn_add_obat.setBackgroundResource(R.drawable.add_button_set_enabled);
-                Toast.makeText(context, ""+pr.productID, Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "testclick", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+pr.productID, Toast.LENGTH_SHORT).show();
 
                 Intent data = new Intent();
                 String text = "test123123";
@@ -173,7 +172,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
             e1.printStackTrace();
         }
         Log.d("testtest1", objAdd.toString());
-        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -183,7 +182,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
-                                Toast.makeText(context, "iopiop", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "iopiop", Toast.LENGTH_SHORT).show();
                               //  String temp = ss.getProductName();
                                 //Log.d("hahahhas", "onResponse: "+temp);
 //                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();

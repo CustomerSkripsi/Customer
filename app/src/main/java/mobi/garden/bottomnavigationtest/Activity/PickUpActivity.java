@@ -53,7 +53,7 @@ public class PickUpActivity extends AppCompatActivity {
     public static Context context;
     String OutletID;
     ImageView iv_barcode,iv_barcode_member;
-    Button BRegister,btnBack;
+    Button btnSelesai,btnBack;
     static TextView tv_apotek_name,tv_apotek_address,tv_apotek_noTlp,tv_apotek_pic,tv_apotek_pic_noTlp;
     String urlApotek = "Http://Pharmanet.Apodoc.id/select_detail_transaction.php?id=";
     LinearLayout containerDaftar;
@@ -94,7 +94,13 @@ public class PickUpActivity extends AppCompatActivity {
 //        Bitmap bitmap = null;
 //        btnBack = (Button) findViewById(R.id.btnBack);
 
-        BRegister = (Button) findViewById(R.id.BRegister);
+        btnSelesai = (Button) findViewById(R.id.btnSelesai);
+        btnSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PickUpActivity.this, HomeActivity.class));
+            }
+        });
         tv_apotek_name = (TextView) findViewById(R.id.tv_apotek_name);
         tv_apotek_address = (TextView) findViewById(R.id.tv_apotek_address);
         tv_apotek_noTlp = (TextView) findViewById(R.id.tv_apotek_noTlp);
@@ -211,6 +217,10 @@ public class PickUpActivity extends AppCompatActivity {
         return bitmap;
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 
     private static String guessAppropriateEncoding(CharSequence contents) {
         // Very crude at the moment

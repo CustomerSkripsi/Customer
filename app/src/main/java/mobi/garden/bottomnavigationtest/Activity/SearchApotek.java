@@ -15,10 +15,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -54,6 +57,9 @@ public class SearchApotek extends AppCompatActivity {
     List<String>imageUrls = new ArrayList<>();
     public static final String SEARCH_RESULT= "search_result";
     Context context;
+    ImageView btnCancelSearch;
+    EditText etSearch;
+
     RecyclerView rvhasilSearchApotek;
     String url ,apotek,id_apotek,apoteknama,outletOprOpen,outletOprClose, tempApotekDay;
     int ratingbar;
@@ -75,6 +81,8 @@ public class SearchApotek extends AppCompatActivity {
         setContentView(R.layout.activity_search_apotek);
         context = SearchApotek.this;
 
+        etSearch = findViewById(R.id.tvSearch);
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -110,6 +118,7 @@ public class SearchApotek extends AppCompatActivity {
         }
 
 
+
         rvhasilSearchApotek = findViewById(R.id.rvHasilSearchApotek);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -118,7 +127,18 @@ public class SearchApotek extends AppCompatActivity {
 
 
         getapoteksearched();
-
+        Toolbar dToolbar = findViewById(R.id.toolbar2);
+        dToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        if(apotek.contains("%20")){
+            apotek = apotek.replace("%20"," ");
+        }
+        dToolbar.setTitle(apotek);
+        dToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         //slider
@@ -127,6 +147,8 @@ public class SearchApotek extends AppCompatActivity {
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
+
 
     }
 
@@ -325,6 +347,9 @@ public class SearchApotek extends AppCompatActivity {
             window.setBackgroundDrawable(background);
         }
     }
-
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }
 
