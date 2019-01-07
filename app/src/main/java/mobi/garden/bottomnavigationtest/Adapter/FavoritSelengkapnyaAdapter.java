@@ -91,8 +91,8 @@ public class FavoritSelengkapnyaAdapter extends RecyclerView.Adapter<FavoritSele
 
 
         holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText("Rp. " + String.valueOf(mp.getPriceProduct()));
-        holder.tvharga.setText("Rp. " + String.valueOf(mp.getProductPriceAfterDC()));
+        holder.tvHargaCoret.setText(String.valueOf(df.format(mp.getPriceProduct())));
+        holder.tvharga.setText(String.valueOf(df.format(mp.getProductPriceAfterDC())));
 
         if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -119,7 +119,7 @@ public class FavoritSelengkapnyaAdapter extends RecyclerView.Adapter<FavoritSele
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add(mp.ProductID, mp.getPriceProduct(),1, memberID);
+                add(mp.ProductID, mp.getProductPriceAfterDC(),1, memberID);
 
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);

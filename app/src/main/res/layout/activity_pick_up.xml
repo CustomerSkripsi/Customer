@@ -26,13 +26,13 @@
                     android:layout_height="50dp"
                     android:background="@drawable/toolbar">
 
-                    <ImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:foregroundGravity="left"
-                        android:onClick="BackBack5"
-                        android:background="@drawable/ic_chevron_left_black_24dp" />
+                    <!--<ImageView-->
+                        <!--android:id="@+id/iv_back"-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:foregroundGravity="left"-->
+                        <!--android:onClick="BackBack5"-->
+                        <!--android:background="@drawable/ic_chevron_left_black_24dp" />-->
 
                     <TextView
                         android:layout_width="match_parent"

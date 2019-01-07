@@ -134,7 +134,6 @@ public class CartActivity extends AppCompatActivity {
         login = session.getMemberDetails();
         userName= login.get(SessionManagement.USERNAME);
         memberID = login.get(SessionManagement.KEY_KODEMEMBER);
-        Toast.makeText(context, ""+memberID, Toast.LENGTH_SHORT).show();
 
 
         //myAlertDialog();
@@ -181,16 +180,20 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         });
-
+        
         btnLanjutPembelian = (Button) findViewById(R.id.btnLanjutPembelian);
         btnLanjutPembelian.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//intent hal lain
-//                Toast.makeText(CartActivity.this, "msk", Toast.LENGTH_SHORT).show();
-                insertTransaction(insertTransaction, memberID);
-                startActivity(new Intent(CartActivity.this, PickUpActivity.class));
-                //myDialog.cancel();
-            }
+            public void onClick(View v) {
+                if(CartList.size()==0){
+                    btnLanjutPembelian.setEnabled(false);
+                    Toast.makeText(CartActivity.this, "Anda belum memiliki keranjang belanja. Silahkan belanja terlebih dahulu", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    insertTransaction(insertTransaction, memberID);
+                    startActivity(new Intent(CartActivity.this, PickUpActivity.class));
+                    //myDialog.cancel();
+                }}
         });
 
     }

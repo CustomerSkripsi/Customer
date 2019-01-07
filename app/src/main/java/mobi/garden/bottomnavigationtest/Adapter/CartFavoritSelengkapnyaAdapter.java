@@ -170,7 +170,7 @@ public class CartFavoritSelengkapnyaAdapter  extends RecyclerView.Adapter<CartFa
             @Override
             public void onClick(View v) {
                 Log.d("qtynya",product.cartProductQty+"");
-                if (product.cartProductQty==0) {
+                if (product.cartProductQty==1) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                     if(ProductName != product.getProductName()){
