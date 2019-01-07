@@ -192,7 +192,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 //                        }
 //                    });
 //                    dialog = builder.show();
-                if (product.cartProductQty==0) {
+                if (product.cartProductQty==1) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
                    if(ProductName != product.getProductName()){
@@ -321,7 +321,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(context);

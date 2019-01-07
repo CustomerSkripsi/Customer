@@ -293,7 +293,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
                         Log.d("asdqwe", obj.toString());
                     } catch (JSONException e1) {
                         e1.printStackTrace();
-                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");

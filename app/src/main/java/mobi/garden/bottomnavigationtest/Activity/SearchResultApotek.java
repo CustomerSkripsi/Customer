@@ -128,7 +128,7 @@ public class SearchResultApotek extends AppCompatActivity {
         rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));
 
         rvAllProduct = findViewById(R.id.rvAllProduk);
-        rvAllProduct.setHasFixedSize(true);
+        rvAllProduct.setHasFixedSize(false); //biar tidak double scrollnya (false)
         rvAllProduct.setLayoutManager(new LinearLayoutManager(this));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
         rvAllProduct.setLayoutManager(gridLayoutManager);
@@ -405,6 +405,7 @@ public class SearchResultApotek extends AppCompatActivity {
                     }
                 }
                 searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(AllProduct,context);
+                rvAllProduct.setNestedScrollingEnabled(false); //biar tidak double scrollnya
                 rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
             }
         }, new Response.ErrorListener() {
@@ -443,7 +444,6 @@ public class SearchResultApotek extends AppCompatActivity {
                 count=0;
                 totalPrice=0;
                 for (int i = 0; i < products.length(); i++) {
-//                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
                     try {
                         recyclerViewCartList.setVisibility(View.VISIBLE);
                         JSONObject obj = products.getJSONObject(i);
@@ -462,7 +462,7 @@ public class SearchResultApotek extends AppCompatActivity {
                         Log.d("yyyyyy", obj.toString());
                     } catch (JSONException e1) {
                         e1.printStackTrace();
-                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
@@ -561,7 +561,6 @@ public class SearchResultApotek extends AppCompatActivity {
         showViewAll();
         show_cart(SearchResultApotek.urlbawahs,memberID);
         initBottomSheet();
-//        Toast.makeText(context, "onrestart", Toast.LENGTH_SHORT).show();
         super.onRestart();
 
     }
@@ -570,6 +569,3 @@ public class SearchResultApotek extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
-
-
-//searchresultapotek

@@ -91,6 +91,7 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
                     else {
                         carts.ProductQty = Integer.parseInt(holder.edtQty.getText().toString());
                         ubah(CartModel.get(position).getProductID(), carts.ProductQty, memberID);
+                        holder.tvCartProductPrice.setText(""+String.valueOf(ConvertNominal(carts.PriceProduct*carts.ProductQty)));
                     }
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -107,7 +108,6 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
                     delete(CartModel.get(position).ProductID, CartModel.get(position),memberID);
 
                 }else{
-                    Log.d("qtynya", carts.getProductQty() + "");
                     holder.edtQty.setText(--carts.ProductQty + "");
                     hargaProduk = carts.getPriceProduct() * carts.getProductQty();
                     holder.tvCartProductPrice.setText(String.valueOf(hargaProduk));

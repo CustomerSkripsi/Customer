@@ -94,6 +94,10 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
         if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
             holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
+        if(mp.getProductPriceAfterDC() == 0){
+            holder.tvHargaCoret.setText(" ");
+            holder.tvharga.setText(String.valueOf(df.format(mp.getPriceProduct())));
+        }
 
         tempurl = mp.getProductNameUrl();
         Log.d("onBindViewHolder: ", tempurl);
@@ -116,8 +120,11 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add(mp.ProductID, mp.getProductPriceAfterDC(),1, memberID);
-
+                if(mp.getProductPriceAfterDC() == 0){
+                    add(mp.ProductID, mp.getPriceProduct(), 1, memberID);
+                }else {
+                    add(mp.ProductID, mp.getProductPriceAfterDC(), 1, memberID);
+                }
                 holder.btnAdd.setEnabled(false);
                 holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
 //                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
@@ -191,7 +198,7 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
