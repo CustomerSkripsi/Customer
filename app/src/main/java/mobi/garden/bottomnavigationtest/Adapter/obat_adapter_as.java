@@ -50,12 +50,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
 
-//    UserLocalStore userLocalStore;
-//    public obat_adapter_as(Context c, List<obat> obatlist, List<obat> cartlist) {
-//        this.obatlist = obatlist;
-//        this.context = c;
-//        this.cartlist = cartlist;
-//    }
+
 
     public obat_adapter_as( List<obat> obatlist , Context context) {
         this.obatlist = obatlist;
@@ -78,9 +73,6 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
     @Override
     public void onBindViewHolder(obat_adapter_as.obatViewHolder holder, int position) {
         final obat pr = obatlist.get(position);
-//        userLocalStore  = new UserLocalStore(context);
-//        User currUser = userLocalStore.getLoggedInUser();
-//        CustomerID = currUser.getUserID();
 
         session = new SessionManagement(context);
         login = session.getMemberDetails();
@@ -109,8 +101,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
 //                context.startActivity(i);
             }
         });
-//        holder.btn_add_obat.setEnabled(true);
-//        holder.btn_add_obat.setBackgroundResource(R.drawable.btn_unclicked_home);
+
         for(int j=0;j<cart_adapter.cartList.size();j++){
             if(pr.productID.equals(cart_adapter.cartList.get(j).productID)){
                 holder.btn_add_obat.setEnabled(false);
@@ -181,7 +172,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
-//        Log.d("testtest1", objAdd.toString());
+        Log.d("testtest1", objAdd.toString());
         Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
                 new Response.Listener<JSONObject>() {
@@ -192,7 +183,7 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                             if (response.getString("status").equals("OK")) {
                                 //CartApotekActivity.initiateBelowAdapter();
                                 CartApotekActivity.show_cart(CartApotekActivity.urlbawahs,memberID);
-
+                                Toast.makeText(context, "iopiop", Toast.LENGTH_SHORT).show();
                               //  String temp = ss.getProductName();
                                 //Log.d("hahahhas", "onResponse: "+temp);
 //                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();
@@ -205,15 +196,11 @@ public class obat_adapter_as extends RecyclerView.Adapter<obat_adapter_as.obatVi
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                   Toast.makeText(context,"ERROR"+ error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
-//    public void updateList(ArrayList<obat> list){
-//        obatlist = new ArrayList<>();
-//        obatlist.addAll(list);
-//        notifyDataSetChanged();
-//    }
+
 }

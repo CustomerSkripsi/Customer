@@ -12,16 +12,41 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
 
+import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.Model.apotek;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapter.SearchApotekViewHolder> {
     List<apotek> apoteks;
     Context context;
+    static DecimalFormat df;
+    public static String add_url = "http://pharmanet.apodoc.id/customer/addCartCustomer.php";
+
+    //login
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
+
     double userLong;
     double userlat;
 
@@ -61,6 +86,19 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
 //            }
 //        });
 
+        session = new SessionManagement(context);
+        login = session.getMemberDetails();
+        userName= login.get(SessionManagement.USERNAME);
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
+
+
+        df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setCurrencySymbol("Rp. ");
+        dfs.setMonetaryDecimalSeparator('.');
+        dfs.setGroupingSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+        df.setMaximumFractionDigits(0);
 
         Location loc1 = new Location("");
         loc1.setLatitude(userlat);
@@ -108,4 +146,52 @@ public class SearchApotekAdapter extends RecyclerView.Adapter<SearchApotekAdapte
             rbApotek = itemView.findViewById(R.id.rbApotek);
         }
     }
+    public void add(String product_id, int product_price, int qty, String memberID) {
+        Log.d("dsa", memberID);
+        JSONObject objAdd = new JSONObject();
+        try {
+            JSONArray arrData = new JSONArray();
+            JSONObject objDetail = new JSONObject();
+            objDetail.put("ProductID", product_id);
+//            objDetail.put("ProductName", product_name);
+            objDetail.put("outletProductPrice", product_price);
+            objDetail.put("Qty", qty);
+            objDetail.put("CustomerID", memberID);
+            objDetail.put("UpdatedBy",memberID);
+            arrData.put(objDetail);
+            objAdd.put("data", arrData);
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+//        Log.d("testtest1", objAdd.toString());
+        Toast.makeText(context, "poipoi", Toast.LENGTH_SHORT).show();
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, add_url, objAdd,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+//                        Toast.makeText(context, "asdqwe", Toast.LENGTH_SHORT).show();
+                        try {
+                            if (response.getString("status").equals("OK")) {
+                                //CartApotekActivity.initiateBelowAdapter();
+                                SearchResultApotek.show_cart(SearchResultApotek.urlbawahs,memberID);
+
+                                //  String temp = ss.getProductName();
+                                //Log.d("hahahhas", "onResponse: "+temp);
+//                                Toast.makeText(context, "obatadapterberhasil", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
 }

@@ -1,6 +1,7 @@
 package mobi.garden.bottomnavigationtest.Fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,18 +23,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import mobi.garden.bottomnavigationtest.Adapter.LacakPesananAdapter;
 import mobi.garden.bottomnavigationtest.LoginRegister.User;
 import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.Lacak;
 import mobi.garden.bottomnavigationtest.R;
+import mobi.garden.bottomnavigationtest.Session.SessionManagement;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HistoryBerhasil extends Fragment {
 
+    public static Context context;
     public static ArrayList<Lacak> lacakItem;
     private static RecyclerView recyclerView;
     private static LacakPesananAdapter lacakPesananAdapter;
@@ -41,6 +47,12 @@ public class HistoryBerhasil extends Fragment {
     static User currUser;
     public static RequestQueue mQueue;
     static String link;
+
+    //login
+    SessionManagement session;
+    HashMap<String, String> login;
+    public static String CustomerID,memberID, userName;
+
     public HistoryBerhasil() {
         // Required empty public constructor
     }
@@ -61,14 +73,21 @@ public class HistoryBerhasil extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        userLocal = new UserLocalStore(getContext());
-        currUser = userLocal.getLoggedInUser();
+//        userLocal = new UserLocalStore(getContext());
+//        currUser = userLocal.getLoggedInUser();
 
+        session = new SessionManagement(getContext());
+        login = session.getMemberDetails();
+        userName= login.get(SessionManagement.USERNAME);
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
+
+//        Toast.makeText(context, memberID, Toast.LENGTH_SHORT).show();
+//
 
 
         lacakItem = new ArrayList<>();
 
-        link = "http://pharmanet.apodoc.id/select_lacak_berhasil_customer.php?CustomerID="+currUser.getUserID();
+        link = "http://pharmanet.apodoc.id/select_lacak_berhasil_customer.php?CustomerID=";
         mQueue = Volley.newRequestQueue(getContext());
         JSON();
 
@@ -76,11 +95,10 @@ public class HistoryBerhasil extends Fragment {
         return view;
     }
 
-
     public static void JSON()
     {
         Log.d("lnk", "JSON: "+link);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, link , null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, link+memberID , null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -117,4 +135,13 @@ public class HistoryBerhasil extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(session.getUserLoggedIn()){
+//            not_empty.setVisibility(not_empty.VISIBLE);
+            //show_cart(urlbawah, memberID);
+//            show_cart(urlbawah,Integer.parseInt(CustomerID), Outlet_ID);
+        }
+    }
 }

@@ -12,7 +12,6 @@ public class obat implements Parcelable {
     public String productName;
 
 
-
     public String productPhoto;
     public String productDescription;
     public String categoryID;

@@ -1,45 +1,46 @@
 package mobi.garden.bottomnavigationtest.Adapter;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.content.Context;
+        import android.os.AsyncTask;
+        import android.support.v7.app.AlertDialog;
+        import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
+        import android.view.KeyEvent;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.view.inputmethod.EditorInfo;
+        import android.view.inputmethod.InputMethodManager;
+        import android.widget.EditText;
+        import android.widget.ImageButton;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+        import com.android.volley.Request;
+        import com.android.volley.RequestQueue;
+        import com.android.volley.Response;
+        import com.android.volley.VolleyError;
+        import com.android.volley.toolbox.JsonObjectRequest;
+        import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.HashMap;
-import java.util.List;
+        import java.text.DecimalFormat;
+        import java.text.DecimalFormatSymbols;
+        import java.util.HashMap;
+        import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartActivity;
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
-import mobi.garden.bottomnavigationtest.Model.obat;
-import mobi.garden.bottomnavigationtest.R;
-import mobi.garden.bottomnavigationtest.Session.SessionManagement;
+        import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
+        import mobi.garden.bottomnavigationtest.Activity.FavoritSelengkapnyaActivity;
+        import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
+        import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
+        import mobi.garden.bottomnavigationtest.Model.obat;
+        import mobi.garden.bottomnavigationtest.R;
+        import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
-public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHolder>{
+public class CartFavoritSelengkapnyaAdapter  extends RecyclerView.Adapter<CartFavoritSelengkapnyaAdapter .cartViewHolder>{
 
     Context context;
     public static List<obat> cartList;
@@ -61,14 +62,14 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
     public static String CustomerID,memberID, userName;
     String ProductName;
 
-    public cart_adapter(Context context, List<obat> cartList, String productName) {
+    public CartFavoritSelengkapnyaAdapter (Context context, List<obat> cartList, String productName) {
         this.context = context;
         this.cartList = cartList;
         this.memberID = CustomerID;
         ProductName = productName;
         session = new SessionManagement(context);
     }
-    public cart_adapter(Context context, List<obat> cartList) {
+    public CartFavoritSelengkapnyaAdapter (Context context, List<obat> cartList) {
         this.context = context;
         this.cartList = cartList;
         this.memberID = CustomerID;
@@ -116,7 +117,6 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
 //        User currUser = userLocalStore.getLoggedInUser();
 //        CustomerID = currUser.getUserID();
 //
-
 
 
         holder.edtQty.setOnEditorActionListener(new DoneOnEditorActionListener() {
@@ -170,36 +170,14 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             @Override
             public void onClick(View v) {
                 Log.d("qtynya",product.cartProductQty+"");
-//                if (product.cartProductQty==1) {/
-//                    builder = new AlertDialog.Builder(context);
-////                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                    builder.setTitle("Konfirmasi Hapus Product "+product.getProductName()+" dari keranjang");
-//                    builder.setMessage("Apakah anda yakin?");
-//                    builder.setCancelable(false);
-//
-//                    builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.cancel();
-//                        }
-//                    });
-//
-//                    builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-////                            Log.d("prdId",product.productId+"");
-//                            delete(cartList.get(position).productID, cartList.get(position),memberID);
-//                        }
-//                    });
-//                    dialog = builder.show();
                 if (product.cartProductQty==0) {
                     Log.d("prdId",cartList.get(position).productID+"");
                     delete(cartList.get(position).productID, cartList.get(position),memberID);
-                   if(ProductName != product.getProductName()){
-                       Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
-                   }
-                    if(CartApotekActivity.temp == product.getProductName()){
-                        Log.d("gak tauuu", "onBindViewHolder:"+CartApotekActivity.temp);
+                    if(ProductName != product.getProductName()){
+                        Toast.makeText(context, "tidak ada", Toast.LENGTH_SHORT).show();
+                    }
+                    if(FavoritSelengkapnyaActivity.temp == product.getProductName()){
+                        Log.d("gak tauuu", "onBindViewHolder:"+FavoritSelengkapnyaActivity.temp);
                     }
 
                 }else {
@@ -310,7 +288,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getString("status").equals("OK")) {
-                                CartApotekActivity.refresh_total_cart(cartList);
+                                FavoritSelengkapnyaActivity.refresh_total_cart(cartList);
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -328,6 +306,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
         requestQueue.add(stringRequest);
     }
 
+
     public void delete (final String product_id, final obat removedProduct, final String memberID){
 
         JSONObject objAdd = new JSONObject();
@@ -340,9 +319,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
             arrData.put(objDetail);
             objAdd.put("data", arrData);
             Log.d("testapus", arrData.toString());
+
         } catch (JSONException e1) {
             e1.printStackTrace();
         }
+
+
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/customer/deleteCartCustomer.php", objAdd,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -354,14 +336,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.cartViewHold
                                 cartList.remove(removedProduct);
                                 notifyDataSetChanged();
 
-                                //Toast.makeText(context, cartList.size()+"", Toast.LENGTH_SHORT).show();
-//                                CartApotekActivity.initiateTopAdapter();
-//                                CartApotekActivity.refresh_cart(cartList,removedProduct);
+                                FavoritSelengkapnyaActivity.refresh_cart(cartList);
+//                                PromoSelengkapnyaActivity.showViewPromo(PromoSelengkapnyaActivity.rvSelengkapnya,PromoSelengkapnyaActivity.geturl);
+                                FavoritSelengkapnyaActivity.showViewFav(FavoritSelengkapnyaActivity.rvSelengkapnya,FavoritSelengkapnyaActivity.geturl);
 
 
-                                CartApotekActivity.refresh_cart(cartList);
-                                CartApotekActivity.showprodukterkait();
-                                Toast.makeText(context, "terhapus1", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "terhapusfavorit", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e1) {

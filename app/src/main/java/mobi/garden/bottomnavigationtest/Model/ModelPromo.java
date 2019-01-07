@@ -5,6 +5,12 @@ public class ModelPromo {
 
     public String ProductID,NameProduct, ProductNameUrl,AlamatApotek, CustomerID;
     public int PriceProduct, outletID ,ProductPriceAfterDC, ProductQty, StockProductQty;
+    public int outletProductPrice;
+    public int outletProductStockQty;
+    public int outletProductPriceafterDsc;
+    public int cartProductPrice;
+    public int cartProductQty;
+    public String memberID;
 
 
     public ModelPromo(String productID, String nameProduct, String productNameUrl, int outletID ,int priceProduct,int productPriceAfterDC) {
@@ -14,9 +20,17 @@ public class ModelPromo {
         PriceProduct = priceProduct;
         this.outletID = outletID;
         ProductPriceAfterDC = productPriceAfterDC;
+
     }
 
-
+    public ModelPromo(String productName, String productID,int cartproductQty,int outletProductStockQty, int cartProductPrice,  int outletProductPriceafterDsc){
+        this.NameProduct = productName;
+        this.ProductID = productID;
+        cartProductQty = cartproductQty;
+        this.outletProductStockQty = outletProductStockQty;
+        this.cartProductPrice = cartProductPrice;
+        this.outletProductPriceafterDsc = outletProductPriceafterDsc;
+    }
     public ModelPromo(String productID, int priceProduct, String nameProduct, int productQty, int stockProductQty) {
         ProductID = productID;
         PriceProduct = priceProduct;
