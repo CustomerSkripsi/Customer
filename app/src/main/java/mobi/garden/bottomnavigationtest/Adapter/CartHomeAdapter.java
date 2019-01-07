@@ -89,8 +89,8 @@ public class CartHomeAdapter extends  RecyclerView.Adapter<CartHomeAdapter.cartV
                         ubah(CartModel.get(position).getProductID(), carts.ProductQty, memberID);
                    }
                     else {
-                        carts.cartProductQty = Integer.parseInt(holder.edtQty.getText().toString());
-                        ubah(CartModel.get(position).getProductID(), carts.cartProductQty, memberID);
+                        carts.ProductQty = Integer.parseInt(holder.edtQty.getText().toString());
+                        ubah(CartModel.get(position).getProductID(), carts.ProductQty, memberID);
                     }
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
