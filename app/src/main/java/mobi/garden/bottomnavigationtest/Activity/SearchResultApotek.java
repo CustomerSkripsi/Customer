@@ -126,7 +126,7 @@ public class SearchResultApotek extends AppCompatActivity {
         rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));
 
         rvAllProduct = findViewById(R.id.rvAllProduk);
-        rvAllProduct.setHasFixedSize(true);
+        rvAllProduct.setHasFixedSize(false);
         rvAllProduct.setLayoutManager(new LinearLayoutManager(this));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
         rvAllProduct.setLayoutManager(gridLayoutManager);
@@ -171,7 +171,7 @@ public class SearchResultApotek extends AppCompatActivity {
             }
         });
         if(apotekk.contains(" ")){
-            apotekk = apotekk.replace(" ","%20");
+            apotekk = apotekk.replace(" "," ");
         }
 
         rvObatFavorite = findViewById(R.id.rvProdukFavaorit);
@@ -397,6 +397,7 @@ public class SearchResultApotek extends AppCompatActivity {
                     }
                 }
                 searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(AllProduct,context);
+                rvAllProduct.setNestedScrollingEnabled(false);
                 rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
             }
         }, new Response.ErrorListener() {
