@@ -2,8 +2,10 @@ package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,12 +50,16 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     Context context;
     session_obat session;
 
+    AlertDialog dialog;
+    AlertDialog.Builder builder;
+
     String CustomerID,productName;
 //    UserLocalStore userLocalStore;
-//SessionManagement session;
+SessionManagement sessions;
     HashMap<String, String> login;
     public static String memberID, userName;
     DecimalFormat df;
+
 
     Activity activity;
 
@@ -64,6 +70,7 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         this.apoteklist = apoteklist;
         this.context = c;
         session = new session_obat(c);
+        sessions = new SessionManagement(context);
         userLong = longitude;
         userlat = latitude;
     }
@@ -91,6 +98,10 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
 //        User currUser = userLocalStore.getLoggedInUser();
 //        CustomerID = currUser.getUserID();
 
+        sessions = new SessionManagement(context);
+        login = sessions.getMemberDetails();
+        userName= login.get(SessionManagement.USERNAME);
+        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
 
         df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
@@ -108,6 +119,8 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         loc2.setLongitude(pr.longitude);
         double distanceInMeters = loc1.distanceTo(loc2)/1000;
 
+        builder = new AlertDialog.Builder(context);
+
         Log.d("Jarak", distanceInMeters+"");
         holder.tv_nama_apotek.setText(pr.getNama_apotek());
         holder.tv_harga_obat_apotek.setText(df.format(pr.getHarga())+"");
@@ -122,15 +135,34 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
         holder.containerApotek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productName = pr.getProductName();
-                if(productName.contains(" ")){
-                    productName = productName.replace(" ","%20");
-                }
-                addkeranjang(productName ,pr.getId_apotek());
-                Intent i = new Intent(context,CartApotekActivity.class);
-                i.putExtra("ApotekName", pr.getNama_apotek());
-                Log.d( "ssssssss",pr.getNama_apotek());
-                context.startActivity(i);
+                builder.setMessage("Tambah ke keranjang?");
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        productName = pr.getProductName();
+                        if(productName.contains(" ")){
+                            productName = productName.replace(" ","%20");
+                        }
+                        addkeranjang(productName ,pr.getId_apotek(),memberID);//,
+                        Toast.makeText(context, "Berhasil menambah keranjang", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(context,CartApotekActivity.class);
+                        i.putExtra("ApotekName", pr.getNama_apotek());
+                        Log.d( "ssssssss",pr.getNama_apotek());
+                        context.startActivity(i);
+                    }
+                });
+                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Tidak menambah keranjang", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(context,CartApotekActivity.class);
+                        i.putExtra("ApotekName", pr.getNama_apotek());
+                        Log.d( "ssssssss",pr.getNama_apotek());
+                        context.startActivity(i);
+                    }
+                });
+                dialog = builder.show();
+
             }
         });
 
@@ -161,8 +193,8 @@ public class apotek_adapter extends RecyclerView.Adapter<apotek_adapter.apotekVi
     }
 
 
-    public void addkeranjang(String productname, String outletID){
-       String url = "http://pharmanet.apodoc.id/customer/AddProductToCart.php?ProductName="+productname+"&OutletID="+outletID;
+    public void addkeranjang(String productname, String outletID, String memberID){
+       String url = "http://pharmanet.apodoc.id/customer/AddProductToCart.php?ProductName="+productname+"&OutletID="+outletID+"&CustomerID="+memberID;
         Log.d("addkeranjangasd: ",url);
 
         JsonObjectRequest req = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {

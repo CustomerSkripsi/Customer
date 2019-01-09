@@ -216,7 +216,10 @@ public class SearchResultApotek extends AppCompatActivity {
         btnCancelSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search.setText("");
+                if (!search.getText().toString().isEmpty()){
+                    search.getText().clear();
+
+                }
             }
         });
 

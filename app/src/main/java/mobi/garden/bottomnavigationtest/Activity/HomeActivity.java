@@ -268,7 +268,10 @@ public class HomeActivity extends BaseActivity {
         btnCancelSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etSearch.setText("");
+                if (!etSearch.getText().toString().isEmpty()){
+                    etSearch.getText().clear();
+
+                }
             }
         });
         etSearch = findViewById(R.id.tvSearch);
