@@ -44,10 +44,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.firebase.client.Firebase;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.json.JSONArray;
@@ -79,8 +83,11 @@ import mobi.garden.bottomnavigationtest.Slider.ViewPagerAdapter;
 public class HomeActivity extends BaseActivity {
     //Slider Image
     private SliderPagerAdapter mAdapter;
-    private SliderIndicator mIndicator;private SliderView sliderView;private LinearLayout mLinearLayout;
+    private SliderIndicator mIndicator;
+    private SliderView sliderView;
+    private LinearLayout mLinearLayout;
     private int context_pilihan;
+    private static String token;
 
     RecyclerView rvSearchGlobal;
     List<String> listRekomen = new ArrayList<>();
@@ -132,6 +139,7 @@ public class HomeActivity extends BaseActivity {
     List<Rating> ratingList = new ArrayList<>();
     public String review;
     private ImageView textToSpeech;
+    public static int cidToken;
 
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
@@ -160,6 +168,10 @@ public class HomeActivity extends BaseActivity {
         btnCancelSearch = findViewById(R.id.btnCancelSearch);
 
         textToSpeech = findViewById(R.id.Mic);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("all_customer");
+        checkToken();
+
         textToSpeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -746,6 +758,73 @@ public class HomeActivity extends BaseActivity {
         queue.add(req);
     }
 
+    public void checkToken() {
+        String token;
+        SharedPrefTokenFireBase tokenStore = SharedPrefTokenFireBase.getInstance(getApplicationContext());
+        token = tokenStore.getDeviceToken();
+        if (token == null) {
+            Toast.makeText(HomeActivity.this, "Token Not Generated", Toast.LENGTH_SHORT).show();
+        } else {
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    String newToken = instanceIdResult.getToken();
+                    Log.d("NEW_TOKEN",newToken);
+                    SharedPrefTokenFireBase tokenStore = SharedPrefTokenFireBase.getInstance(getApplicationContext());
+                    tokenStore.saveDeviceToken(newToken);
+                    JSONObject objadd = new JSONObject();
+                    try {
+                        JSONArray arrdata = new JSONArray();
+                        JSONObject objdetail = new JSONObject();
+                        objdetail.put("Token", newToken);
+                        objdetail.put("UserID", memberID);
+                        arrdata.put(objdetail);
+                        objadd.put("data", arrdata);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("objadd", objadd.toString());
+
+                    JsonObjectRequest stringRequest = new
+                            JsonObjectRequest(Request.Method.POST, "http://pharmanet.apodoc.id/RegisterTokenCustomer.php", objadd
+                            , new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Toast.makeText(LainLainActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d("error_response_register", error.getMessage());
+                                }
+                            }
+                    );
+
+                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                    requestQueue.add(stringRequest);
+
+                    tokenStore.saveAdd();
+                    if (tokenStore.getAddedStatus()) {
+                        newToken = tokenStore.getDeviceToken();
+                    }
+                    if (newToken != null) {
+                        Log.d("token ada", newToken + "");
+                    } else {
+                        Log.d("no token", "Token not generated ");
+                    }
+                }
+            });
+
+
+        }
+    }
+
+
     public void Dots(int dotscount){
 //        dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
@@ -813,6 +892,11 @@ public class HomeActivity extends BaseActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                SharedPrefTokenFireBase tokenStore = SharedPrefTokenFireBase.getInstance(getApplicationContext());
+                tokenStore.clearToken();
+                SharedPrefTokenFireBase.deleteInstance();
+                Intent deleteToken = new Intent(HomeActivity.this,DeleteTokenService.class);
+                startService(deleteToken);
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 startActivity(intent);
@@ -831,6 +915,11 @@ public class HomeActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        checkToken();
+        super.onStart();
+    }
 
     public  int getContentViewId () {
         return R.layout.activity_home;
