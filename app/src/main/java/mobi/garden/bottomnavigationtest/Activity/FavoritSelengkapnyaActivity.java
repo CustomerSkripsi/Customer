@@ -258,7 +258,7 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
 
-        show_cart(urlbawahs,"8181200006");
+        show_cart(urlbawahs,memberID);
     }
 
     public static void show_cart(String urlbawahs, String memberID) {

@@ -42,6 +42,8 @@ import mobi.garden.bottomnavigationtest.Session.SessionManagement;
 
 public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResultApotekAdapter.SearchResultApotekAdapterViewHolder> {
     List<ModelPromo> modelPromo;
+    List<ModelPromo> allproductlist;//ini 20
+    List<ModelPromo> allproduct; // ini semua
     Context context;
     String tempurl;
     static DecimalFormat df;
@@ -52,9 +54,21 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
 
+    public SearchResultApotekAdapter(Context context) {
+        this.context = context;
+    }
+
     public SearchResultApotekAdapter(List<ModelPromo> modelPromo, Context context) {
         this.modelPromo = modelPromo;
         this.context = context;
+    }
+
+    public void setProductList(List<ModelPromo> AllProductList) {
+        this.allproductlist = AllProductList;
+        notifyDataSetChanged();
+    }
+    public void setProductListFull(List<ModelPromo> AllProduct) {
+        this.allproduct = AllProduct;
     }
 
     @NonNull
@@ -67,89 +81,89 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultApotekAdapterViewHolder holder, int position) {
-        final ModelPromo mp = modelPromo.get(position);
+        if(modelPromo != null) {
+            final ModelPromo mp = modelPromo.get(position);
 
 
-        session = new SessionManagement(context);
-        login = session.getMemberDetails();
-        userName= login.get(SessionManagement.USERNAME);
-        memberID = login.get(SessionManagement.KEY_KODEMEMBER);
+            session = new SessionManagement(context);
+            login = session.getMemberDetails();
+            userName = login.get(SessionManagement.USERNAME);
+            memberID = login.get(SessionManagement.KEY_KODEMEMBER);
 
 
-        df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-        dfs.setCurrencySymbol("Rp. ");
-        dfs.setMonetaryDecimalSeparator('.');
-        dfs.setGroupingSeparator('.');
-        df.setDecimalFormatSymbols(dfs);
-        df.setMaximumFractionDigits(0);
+            df = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+            DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+            dfs.setCurrencySymbol("Rp. ");
+            dfs.setMonetaryDecimalSeparator('.');
+            dfs.setGroupingSeparator('.');
+            df.setDecimalFormatSymbols(dfs);
+            df.setMaximumFractionDigits(0);
 
 
-
-        holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
-        holder.tvHargaCoret.setText(String.valueOf(df.format(mp.getPriceProduct())));
+            holder.tvNamaProdukPromo.setText(mp.getPromoNameProduct());
+            holder.tvHargaCoret.setText(String.valueOf(df.format(mp.getPriceProduct())));
 //        holder.tvharga.setText("Rp. " + String.valueOf(mp.getProductPriceAfterDC()));
-        holder.tvharga.setText(String.valueOf(df.format(mp.getProductPriceAfterDC())));
+            holder.tvharga.setText(String.valueOf(df.format(mp.getProductPriceAfterDC())));
 
-        if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
-            holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-        if(mp.getProductPriceAfterDC() == 0){
-            holder.tvHargaCoret.setText(" ");
-            holder.tvharga.setText(String.valueOf(df.format(mp.getPriceProduct())));
-        }
-
-        tempurl = mp.getProductNameUrl();
-        Log.d("onBindViewHolder: ", tempurl);
-        if (tempurl.contains(" ")) {
-            tempurl = tempurl.replace(" ", "%20");
-        }
-        Picasso.with(context).load(tempurl).into(holder.imgProduct, new Callback() {
-            @Override
-            public void onSuccess() {
-                Picasso.with(context).load(tempurl).into(holder.imgProduct);
+            if (mp.getPriceProduct() != mp.getProductPriceAfterDC()) {
+                holder.tvHargaCoret.setPaintFlags(holder.tvHargaCoret.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            if (mp.getProductPriceAfterDC() == 0) {
+                holder.tvHargaCoret.setText(" ");
+                holder.tvharga.setText(String.valueOf(df.format(mp.getPriceProduct())));
             }
 
-            @Override
-            public void onError() {
-                holder.imgProduct.setImageResource(R.drawable.nopicture);
-                //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+            tempurl = mp.getProductNameUrl();
+            Log.d("onBindViewHolder: ", tempurl);
+            if (tempurl.contains(" ")) {
+                tempurl = tempurl.replace(" ", "%20");
             }
-        });
-
-        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mp.getProductPriceAfterDC() == 0){
-                    add(mp.ProductID, mp.getPriceProduct(), 1, memberID);
-                }else {
-                    add(mp.ProductID, mp.getProductPriceAfterDC(), 1, memberID);
+            Picasso.with(context).load(tempurl).into(holder.imgProduct, new Callback() {
+                @Override
+                public void onSuccess() {
+                    Picasso.with(context).load(tempurl).into(holder.imgProduct);
                 }
-                holder.btnAdd.setEnabled(false);
-                holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
+
+                @Override
+                public void onError() {
+                    holder.imgProduct.setImageResource(R.drawable.nopicture);
+                    //Picasso.with(context).load("http://www.pharmanet.co.id/images/logo.png").into(holder.imgProduct);
+                }
+            });
+
+            holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mp.getProductPriceAfterDC() == 0) {
+                        add(mp.ProductID, mp.getPriceProduct(), 1, memberID);
+                    } else {
+                        add(mp.ProductID, mp.getProductPriceAfterDC(), 1, memberID);
+                    }
+                    holder.btnAdd.setEnabled(false);
+                    holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
 //                Toast.makeText(context, ""+mp.ProductID, Toast.LENGTH_SHORT).show();
 
-                Intent data = new Intent();
-                String text = "test123123";
-                data.putExtra(CONFIG.PREV_PAGE,text);
-            }
-        });
+                    Intent data = new Intent();
+                    String text = "test123123";
+                    data.putExtra(CONFIG.PREV_PAGE, text);
+                }
+            });
 
-        holder.ll_obat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context,DetailObatHome.class);
-                i.putExtra("ProductName",mp.getPromoNameProduct());
-                context.startActivity(i);
+            holder.ll_obat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, DetailObatHome.class);
+                    i.putExtra("ProductName", mp.getPromoNameProduct());
+                    context.startActivity(i);
+                }
+            });
+            for (int j = 0; j < SearchResultApotek.cartList.size(); j++) {
+                if (mp.ProductID.equals(SearchResultApotek.cartList.get(j).productID)) {
+                    holder.btnAdd.setEnabled(false);
+                    holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
+                    break;
+                }
             }
-        });
-        for(int j=0;j<SearchResultApotek.cartList.size();j++){
-            if(mp.ProductID.equals(SearchResultApotek.cartList.get(j).productID)){
-                holder.btnAdd.setEnabled(false);
-                holder.btnAdd.setBackgroundResource(R.drawable.add_button_set_enabled);
-                break;
-            }
-        }
 //        for(int j = 0; j<PromoSelengkapnyaActivity.cartList.size(); j++){
 //            if(mp.ProductID.equals(PromoSelengkapnyaActivity.cartList.get(j).productID)){
 //                holder.btnAdd.setEnabled(false);
@@ -158,11 +172,16 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
 //                break;
 //            }
 //        }
+        }
     }
 
     @Override
     public int getItemCount() {
-        return modelPromo.size();
+//        if(modelPromo.isEmpty()) {
+            return modelPromo.size();
+//        }else{
+//            return allproductlist.size();
+//        }
     }
 
     public class SearchResultApotekAdapterViewHolder extends RecyclerView.ViewHolder {
