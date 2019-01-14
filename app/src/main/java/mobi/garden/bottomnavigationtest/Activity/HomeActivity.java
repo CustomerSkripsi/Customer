@@ -138,7 +138,7 @@ public class HomeActivity extends BaseActivity {
     RatingAdapter buttonRatingAdapteradapter;
     List<Rating> ratingList = new ArrayList<>();
     public String review;
-    private ImageView textToSpeech;
+    private ImageView textToSpeech, notif;
     public static int cidToken;
 
     private final int REQ_CODE_SPEECH_INPUT = 100;
@@ -166,8 +166,9 @@ public class HomeActivity extends BaseActivity {
         cardListBrand2= (RecyclerView) findViewById(R.id.rv_cv_obat_rekomendasi);
         cardListBrand3= (RecyclerView) findViewById(R.id.rv_cv_obat_terlaris);
         btnCancelSearch = findViewById(R.id.btnCancelSearch);
-
+        context = getApplicationContext();
         textToSpeech = findViewById(R.id.Mic);
+        notif = findViewById(R.id.notif);
 
         FirebaseMessaging.getInstance().subscribeToTopic("all_customer");
         checkToken();
@@ -274,6 +275,15 @@ public class HomeActivity extends BaseActivity {
                 mBadge.setVisibility(View.VISIBLE);
                 rvSearchGlobal.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, InboxActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
 

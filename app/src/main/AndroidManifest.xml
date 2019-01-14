@@ -93,8 +93,9 @@
         <activity android:name=".Activity.EditEMember" />
         <activity android:name=".Activity.Rating" />
         <activity android:name=".Activity.PromoSelengkapnyaActivity" />
-        <activity android:name=".Activity.WishList"></activity>
-        <activity android:name=".Activity.FavoritSelengkapnyaActivity"></activity>
+        <activity android:name=".Activity.WishList" />
+        <activity android:name=".Activity.FavoritSelengkapnyaActivity" />
+        <activity android:name=".Activity.InboxActivity"></activity>
     </application>
 
 </manifest>
