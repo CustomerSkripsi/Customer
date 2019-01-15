@@ -63,12 +63,12 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
         this.context = context;
     }
 
-    public void setProductList(List<ModelPromo> AllProductList) {
-        this.allproductlist = AllProductList;
+    public void setProductList(List<ModelPromo> allProductList) {
+        this.allproductlist = allProductList;
         notifyDataSetChanged();
     }
-    public void setProductListFull(List<ModelPromo> AllProduct) {
-        this.allproduct = AllProduct;
+    public void setProductListFull(List<ModelPromo> allProduct) {
+        this.allproduct = allProduct;
     }
 
     @NonNull

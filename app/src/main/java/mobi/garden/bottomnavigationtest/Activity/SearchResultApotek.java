@@ -83,8 +83,8 @@ public class SearchResultApotek extends AppCompatActivity {
     static List<apotek> ApotekList = new ArrayList<>();
     public static List<ModelPromo> PromoList = new ArrayList<>();
     public static List<ModelPromo> FavList = new ArrayList<>();
-    public static List<ModelPromo> AllProduct = new ArrayList<>();
-    public static List<ModelPromo> AllProductList = new ArrayList<>();
+    public static List<ModelPromo> allProduct = new ArrayList<>();
+    public static List<ModelPromo> allProductList = new ArrayList<>();
 
     public static Context context;
     public static DecimalFormat df;
@@ -275,7 +275,10 @@ public class SearchResultApotek extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
                     isScrolling = true;
-                    Toast.makeText(SearchResultApotek.this, "asdsasadasdasd", Toast.LENGTH_SHORT).show();
+
+//                    addProductLain();
+//                    finish();
+//                    Toast.makeText(SearchResultApotek.this, "asdsasadasdasd", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -283,15 +286,22 @@ public class SearchResultApotek extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 currentItems = gridLayoutManager.getChildCount();
-                totalItems = gridLayoutManager.getItemCount();
+                totalItems = gridLayoutManager.getSpanCount();
                 scrollOutItems = gridLayoutManager.findFirstVisibleItemPosition();
-                Toast.makeText(SearchResultApotek.this, "currentitem = "+currentItems, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SearchResultApotek.this, "currentitem = "+currentItems, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(SearchResultApotek.this, "totalItem = "+totalItems, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(SearchResultApotek.this, "scrollOut = "+scrollOutItems, Toast.LENGTH_SHORT).show();
-                if(isScrolling && (currentItems + scrollOutItems == totalItems)&& countAddList!= Obat.length()){
+
+                //benerin ifnya biar ketahuan kalau sudah mentok
+//                if(isScrolling && ((currentItems + scrollOutItems) < totalItems)&& countAddList!= Obat.length()){
+//                    isScrolling=false;
+//                    addProductLain();
+//                    Toast.makeText(SearchResultApotek.this, "2222222222222222222", Toast.LENGTH_SHORT).show();
+
+                if(isScrolling && ((currentItems + scrollOutItems) < totalItems)&& countAddList!= Obat.length()){
                     isScrolling=false;
                     addProductLain();
-                    Toast.makeText(SearchResultApotek.this, "2222222222222222222", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SearchResultApotek.this, "2222222222222222222", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -454,33 +464,34 @@ public class SearchResultApotek extends AppCompatActivity {
                 sizeproduct=0;
                 try {
                     Obat = response.getJSONArray("result");
-                    AllProductList.clear();
+                    allProductList.clear();
                     Log.d("tyu", Obat.length()+"");
 
-                for (int i = sizeproduct; i < sizeproduct+20; i++) {
-                    try {
-                        rvAllProduct.setVisibility(View.VISIBLE);
-                        JSONObject obj = Obat.getJSONObject(i);
-                        AllProductList.add(new ModelPromo(
-                                obj.getString("ProductID"),
-                                obj.getString("ProductName"),
-                                obj.getString("ProductImage"),
-                                obj.getInt("OutletID"),
-                                obj.getInt("OutletProductPrice"),
-                                diskon));
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
+                    for (int i = sizeproduct; i < sizeproduct+20; i++) {
+                        try {
+                            rvAllProduct.setVisibility(View.VISIBLE);
+                            JSONObject obj = Obat.getJSONObject(i);
+                            allProductList.add(new ModelPromo(
+                                    obj.getString("ProductID"),
+                                    obj.getString("ProductName"),
+                                    obj.getString("ProductImage"),
+                                    obj.getInt("OutletID"),
+                                    obj.getInt("OutletProductPrice"),
+                                    diskon));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
                     }
 
-                }
+                    for (int i = sizeproduct; i < Obat.length(); i++) {
+                        try {
+                            rvAllProduct.setVisibility(View.VISIBLE);
 
-                for (int i = sizeproduct; i < Obat.length(); i++) {
-                    try {
-                        rvAllProduct.setVisibility(View.VISIBLE);
-                        JSONObject obj = Obat.getJSONObject(i);
-                        if(obj.getString("ProductPriceAfterDiscount").equals("null")){
-                            diskon =  0; }else{ diskon =  obj.getInt("ProductPriceAfterDiscount"); }
-                            AllProduct.add(new ModelPromo(
+                            JSONObject obj = Obat.getJSONObject(i);
+                            if(obj.getString("ProductPriceAfterDiscount").equals("null")){
+                                diskon =  0; }else{ diskon =  obj.getInt("ProductPriceAfterDiscount"); }
+                            allProduct.add(new ModelPromo(
                                     obj.getString("ProductID"),
                                     obj.getString("ProductName"),
                                     obj.getString("ProductImage"),
@@ -488,19 +499,22 @@ public class SearchResultApotek extends AppCompatActivity {
                                     obj.getInt("OutletProductPrice"),
                                     diskon
                             ));
-                        Log.d("asdtest", obj.toString());
-                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
+                            Log.d("asdtest", obj.toString());
+                            Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
                     }
-                }
 
-                searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(AllProductList,context);
-                searchresultApotekAdapterAllProduct.setProductList(AllProductList);
-                searchresultApotekAdapterAllProduct.setProductListFull(AllProduct);
-                rvAllProduct.setNestedScrollingEnabled(false); //biar tidak double scrollnya
-                rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
-                sizeproduct+=20;
+                    searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(allProductList,context);
+                    searchresultApotekAdapterAllProduct.setProductList(allProductList);
+                    searchresultApotekAdapterAllProduct.setProductListFull(allProduct);
+                    //biar tidak double scrollnya // tapi tidak ketahuan kalau lagi discroll saat nambah barang per 20
+//                    rvAllProduct.setNestedScrollingEnabled(false);
+                    rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
+                    sizeproduct+=20;
+                    Log.d("zxcad", String.valueOf(allProduct.size()));
+                    Log.d("zxcad1", String.valueOf(Obat.length()));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -531,7 +545,7 @@ public class SearchResultApotek extends AppCompatActivity {
                 for (int i = sizeproduct; i < sizeproduct+20; i++) {
                     try {
                         JSONObject obj = Obat.getJSONObject(i);
-                        AllProductList.add(new ModelPromo(
+                        allProductList.add(new ModelPromo(
                                 obj.getString("ProductID"),
                                 obj.getString("ProductName"),
                                 obj.getString("ProductImage"),
