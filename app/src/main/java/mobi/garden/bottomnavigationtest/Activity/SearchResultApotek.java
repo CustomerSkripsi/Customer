@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,9 +20,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +70,7 @@ public class SearchResultApotek extends AppCompatActivity {
     public static String urlFavorite="http://pharmanet.apodoc.id/customer/select_obat_favorite_outlet.php?OutletName=";
     public static String urlAllProduct="http://pharmanet.apodoc.id/customer/select_all_product_outlet.php?OutletName=";
 
+    private static JSONArray Obat = new JSONArray();
 
     public static SearchResultApotekAdapter searchresultApotekAdapter;
     public static SearchResultApotekAdapter searchresultApotekAdapterfavorit;
@@ -78,7 +83,8 @@ public class SearchResultApotek extends AppCompatActivity {
     static List<apotek> ApotekList = new ArrayList<>();
     public static List<ModelPromo> PromoList = new ArrayList<>();
     public static List<ModelPromo> FavList = new ArrayList<>();
-    public static List<ModelPromo> AllProduct = new ArrayList<>();
+    public static List<ModelPromo> allProduct = new ArrayList<>();
+    public static List<ModelPromo> allProductList = new ArrayList<>();
 
     public static Context context;
     public static DecimalFormat df;
@@ -93,11 +99,18 @@ public class SearchResultApotek extends AppCompatActivity {
     private static NotificationBadge mBadge;
     private static int totalPrice = 0;
     private static int count = 0;
+    private static int sizeproduct,currentItems,totalItems,scrollOutItems;
+    private static int countAddList;
+    private static ProgressBar pgBot;
+    private boolean isScrolling = false;
+//    private static SwipeRefreshLayout swipeRefreshLayout;
+
 
     //login
     SessionManagement session;
     HashMap<String, String> login;
     public static String CustomerID,memberID, userName;
+
 
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -127,11 +140,27 @@ public class SearchResultApotek extends AppCompatActivity {
         rvObatFavorite.setHasFixedSize(true);
         rvObatFavorite.setLayoutManager(new LinearLayoutManager(this));
 
-        rvAllProduct = findViewById(R.id.rvAllProduk);
-        rvAllProduct.setHasFixedSize(true);
-        rvAllProduct.setLayoutManager(new LinearLayoutManager(this));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
-        rvAllProduct.setLayoutManager(gridLayoutManager);
+
+
+//        rvAllProduct.setLayoutManager(new GridLayoutManager(this));
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
+//        rvAllProduct.setLayoutManager(gridLayoutManager);
+
+        pgBot = findViewById(R.id.pgBot);
+
+        countAddList = 20;
+//        swipeRefreshLayout = findViewById(R.id.swipe);
+//        swipeRefreshLayout.setRefreshing(true);
+
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                countAddList = 20;
+//                initiateTopAdapter();
+//                initiateBelowAdapter();
+//            }
+//        });
+
 
         session = new SessionManagement(getApplicationContext());
         login = session.getMemberDetails();
@@ -216,7 +245,10 @@ public class SearchResultApotek extends AppCompatActivity {
         btnCancelSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search.setText("");
+                if (!search.getText().toString().isEmpty()){
+                    search.getText().clear();
+
+                }
             }
         });
 
@@ -226,15 +258,66 @@ public class SearchResultApotek extends AppCompatActivity {
                 startActivity(new Intent(SearchResultApotek.this, CartActivity.class));
             }
         });
+
+        initiateTopAdapter();
     }
+
+    private void initiateTopAdapter(){
+        rvAllProduct = findViewById(R.id.rvAllProduk);
+        rvAllProduct.setHasFixedSize(false); //biar tidak double scrollnya (false)
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        rvAllProduct.setLayoutManager(gridLayoutManager);
+        showViewAll();
+
+        rvAllProduct.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                    isScrolling = true;
+
+//                    addProductLain();
+//                    finish();
+//                    Toast.makeText(SearchResultApotek.this, "asdsasadasdasd", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItems = gridLayoutManager.getChildCount();
+                totalItems = gridLayoutManager.getSpanCount();
+                scrollOutItems = gridLayoutManager.findFirstVisibleItemPosition();
+//                Toast.makeText(SearchResultApotek.this, "currentitem = "+currentItems, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SearchResultApotek.this, "totalItem = "+totalItems, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SearchResultApotek.this, "scrollOut = "+scrollOutItems, Toast.LENGTH_SHORT).show();
+
+                //benerin ifnya biar ketahuan kalau sudah mentok
+//                if(isScrolling && ((currentItems + scrollOutItems) < totalItems)&& countAddList!= Obat.length()){
+//                    isScrolling=false;
+//                    addProductLain();
+//                    Toast.makeText(SearchResultApotek.this, "2222222222222222222", Toast.LENGTH_SHORT).show();
+
+                if(isScrolling && ((currentItems + scrollOutItems) < totalItems)&& countAddList!= Obat.length()){
+                    isScrolling=false;
+                    addProductLain();
+//                    Toast.makeText(SearchResultApotek.this, "2222222222222222222", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+    }
+
     private void initiateBelowAdapter(){
         rvCart = findViewById(R.id.rvCartList);
         rvCart.setHasFixedSize(true);
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
 
-        show_cart(urlbawahs,"8181200006");
+        show_cart(urlbawahs,memberID);
     }
+
     public static void showApotek() {
         String url ="http://pharmanet.apodoc.id/customer/select_apotek_detail.php?OutletName="+apotekk;
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
@@ -378,34 +461,70 @@ public class SearchResultApotek extends AppCompatActivity {
         JsonObjectRequest rec= new JsonObjectRequest(urlAllProduct+apotekk, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                JSONArray Obat = null;
+                sizeproduct=0;
                 try {
                     Obat = response.getJSONArray("result");
-                    AllProduct.clear();
+                    allProductList.clear();
                     Log.d("tyu", Obat.length()+"");
+
+                    for (int i = sizeproduct; i < sizeproduct+20; i++) {
+                        try {
+                            rvAllProduct.setVisibility(View.VISIBLE);
+                            JSONObject obj = Obat.getJSONObject(i);
+                            allProductList.add(new ModelPromo(
+                                    obj.getString("ProductID"),
+                                    obj.getString("ProductName"),
+                                    obj.getString("ProductImage"),
+                                    obj.getInt("OutletID"),
+                                    obj.getInt("OutletProductPrice"),
+                                    diskon));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+
+                    for (int i = sizeproduct; i < Obat.length(); i++) {
+                        try {
+                            rvAllProduct.setVisibility(View.VISIBLE);
+
+                            JSONObject obj = Obat.getJSONObject(i);
+                            if(obj.getString("ProductPriceAfterDiscount").equals("null")){
+                                diskon =  0; }else{ diskon =  obj.getInt("ProductPriceAfterDiscount"); }
+                            allProduct.add(new ModelPromo(
+                                    obj.getString("ProductID"),
+                                    obj.getString("ProductName"),
+                                    obj.getString("ProductImage"),
+                                    obj.getInt("OutletID"),
+                                    obj.getInt("OutletProductPrice"),
+                                    diskon
+                            ));
+                            Log.d("asdtest", obj.toString());
+                            Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+
+                    searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(allProductList,context);
+                    searchresultApotekAdapterAllProduct.setProductList(allProductList);
+                    searchresultApotekAdapterAllProduct.setProductListFull(allProduct);
+                    //biar tidak double scrollnya // tapi tidak ketahuan kalau lagi discroll saat nambah barang per 20
+//                    rvAllProduct.setNestedScrollingEnabled(false);
+                    rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
+                    sizeproduct+=20;
+                    Log.d("zxcad", String.valueOf(allProduct.size()));
+                    Log.d("zxcad1", String.valueOf(Obat.length()));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                for (int j = 0; j < Obat.length(); j++) {
-                    try {
-                        //rvObatFavorite.setVisibility(View.VISIBLE);
-                        JSONObject obj = Obat.getJSONObject(j);
-                        if(obj.getString("ProductPriceAfterDiscount").equals("null")){
-                            diskon =  0; }else{ diskon =  obj.getInt("ProductPriceAfterDiscount"); }
-                        AllProduct.add(new ModelPromo(obj.getString("ProductID")
-                                ,obj.getString("ProductName")
-                                ,obj.getString("ProductImage")
-                                ,obj.getInt("OutletID"),
-                                obj.getInt("OutletProductPrice"),
-                                diskon));
-                        Log.d("asdtest", obj.toString());
-                        Toast.makeText(context, ""+obj.getString("productName"), Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-                searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(AllProduct,context);
-                rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
+
+
+//                searchresultApotekAdapterAllProduct = new SearchResultApotekAdapter(AllProduct,context);
+//                rvAllProduct.setNestedScrollingEnabled(false); //biar tidak double scrollnya
+//                rvAllProduct.setAdapter(searchresultApotekAdapterAllProduct);
+//                sizeproduct+=3;
+//                swipeRefreshLayout.setRefreshing(false);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -415,6 +534,36 @@ public class SearchResultApotek extends AppCompatActivity {
         });
         RequestQueue req = Volley.newRequestQueue(context);
         req.add(rec);
+    }
+
+    public static void addProductLain(){
+        Toast.makeText(context, "ADDPRODUCT20", Toast.LENGTH_SHORT).show();
+        pgBot.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = sizeproduct; i < sizeproduct+20; i++) {
+                    try {
+                        JSONObject obj = Obat.getJSONObject(i);
+                        allProductList.add(new ModelPromo(
+                                obj.getString("ProductID"),
+                                obj.getString("ProductName"),
+                                obj.getString("ProductImage"),
+                                obj.getInt("OutletID"),
+                                obj.getInt("OutletProductPrice"),
+                                diskon));
+                        countAddList+=1;
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+                sizeproduct+=20;
+                searchresultApotekAdapterAllProduct.notifyDataSetChanged();
+                pgBot.setVisibility(View.VISIBLE);
+//                swipeRefreshLayout.setRefreshing(false);
+            }
+        },2000);
     }
 
 
@@ -443,7 +592,6 @@ public class SearchResultApotek extends AppCompatActivity {
                 count=0;
                 totalPrice=0;
                 for (int i = 0; i < products.length(); i++) {
-//                    Toast.makeText(CartApotekActivity.context, "masuk sini", Toast.LENGTH_SHORT).show();
                     try {
                         recyclerViewCartList.setVisibility(View.VISIBLE);
                         JSONObject obj = products.getJSONObject(i);
@@ -462,7 +610,7 @@ public class SearchResultApotek extends AppCompatActivity {
                         Log.d("yyyyyy", obj.toString());
                     } catch (JSONException e1) {
                         e1.printStackTrace();
-                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
@@ -561,7 +709,6 @@ public class SearchResultApotek extends AppCompatActivity {
         showViewAll();
         show_cart(SearchResultApotek.urlbawahs,memberID);
         initBottomSheet();
-//        Toast.makeText(context, "onrestart", Toast.LENGTH_SHORT).show();
         super.onRestart();
 
     }
@@ -570,6 +717,3 @@ public class SearchResultApotek extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
-
-
-//searchresultapotek

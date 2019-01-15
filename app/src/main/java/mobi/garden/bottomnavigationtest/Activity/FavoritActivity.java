@@ -17,8 +17,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Searching;
@@ -28,7 +30,7 @@ public class FavoritActivity extends AppCompatActivity {
     Searching searching;
     Context context;
     public static String geturl;
-    TextView etSearchFavorite;
+    EditText etSearchFavorite;
     ImageView btnCancelSearch;
 
     @Override
@@ -91,7 +93,10 @@ public class FavoritActivity extends AppCompatActivity {
         btnCancelSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etSearchFavorite.setText("");
+                if (!etSearchFavorite.getText().toString().isEmpty()){
+                    etSearchFavorite.getText().clear();
+
+                }
             }
         });
 

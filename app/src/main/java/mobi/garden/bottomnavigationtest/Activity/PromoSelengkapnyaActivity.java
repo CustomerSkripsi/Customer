@@ -259,7 +259,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
 
-        show_cart(urlbawahs,"8181200006");
+        show_cart(urlbawahs,memberID);
     }
 
     public static void show_cart(String urlbawahs, String memberID) {
@@ -294,7 +294,7 @@ public class PromoSelengkapnyaActivity extends AppCompatActivity {
                         Log.d("asdqwe", obj.toString());
                     } catch (JSONException e1) {
                         e1.printStackTrace();
-                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");

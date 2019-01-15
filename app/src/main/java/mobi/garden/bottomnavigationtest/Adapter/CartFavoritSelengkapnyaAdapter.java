@@ -299,7 +299,7 @@ public class CartFavoritSelengkapnyaAdapter  extends RecyclerView.Adapter<CartFa
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(context);

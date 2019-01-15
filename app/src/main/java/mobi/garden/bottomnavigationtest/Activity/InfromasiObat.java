@@ -52,6 +52,7 @@ public class InfromasiObat extends BaseActivity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Toast.makeText(context, "cccccccccccc", Toast.LENGTH_SHORT).show();
         setContentView(R.layout.informasi_obat);
 
         session_obat = new session_obat(getApplicationContext());

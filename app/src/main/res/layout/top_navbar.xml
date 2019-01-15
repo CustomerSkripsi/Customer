@@ -31,7 +31,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:paddingRight="4dp"
-            app:srcCompat="@drawable/cancel"   
+            app:srcCompat="@drawable/cancel"
             android:layout_alignParentRight="true"
             />
 
@@ -66,7 +66,7 @@
             tools:ignore="VectorDrawableCompat" />
 
         <ImageView
-            android:id="@+id/ImageView"
+            android:id="@+id/notif"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"

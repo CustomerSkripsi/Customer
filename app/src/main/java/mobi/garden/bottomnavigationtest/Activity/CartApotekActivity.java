@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -106,6 +107,8 @@ public class CartApotekActivity extends AppCompatActivity {
 
    // static String CustomerID;
     ImageButton buyBtn;
+    ImageView btnCancelSearch;
+    EditText searchID;
     UserLocalStore userLocalStore;
 
     //login
@@ -146,7 +149,8 @@ public class CartApotekActivity extends AppCompatActivity {
         Outlet_Name = i.getStringExtra(OUTLET_NAME);
         setStatusBarGradiant(this);
         buyBtn = (ImageButton) findViewById(R.id.buyBtn);
-
+        btnCancelSearch = findViewById(R.id.btnCancelSearch);
+        searchID = findViewById(R.id.searchID);
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar_as);
         setSupportActionBar(toolbar);
@@ -193,6 +197,15 @@ public class CartApotekActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CartApotekActivity.this, CartActivity.class));
+            }
+        });
+        btnCancelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!searchID.getText().toString().isEmpty()){
+                    searchID.getText().clear();
+                }
             }
         });
 
@@ -351,7 +364,7 @@ public class CartApotekActivity extends AppCompatActivity {
         LinearLayoutManager setLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(setLayout);
 
-        show_cart(urlbawahs,"8181200006");
+        show_cart(urlbawahs,memberID);
     }
 
     public static void show_cart(String urlbawahs, String memberID) {
@@ -388,7 +401,7 @@ public class CartApotekActivity extends AppCompatActivity {
                         Log.d("rwarqwe", obj.toString());
                     } catch (JSONException e1) {
                         e1.printStackTrace();
-                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, e1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 tvTotalPrice.setText(df.format(totalPrice)+"");
@@ -471,6 +484,7 @@ public class CartApotekActivity extends AppCompatActivity {
                 }
 
                 obatAdapter = new obat_adapter_as(pr,context);
+                rvProdukAll.setNestedScrollingEnabled(false);
                 rvProdukAll.setAdapter(obatAdapter);
 
             }

@@ -17,9 +17,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 
@@ -45,7 +47,7 @@ public class PromoActivity extends AppCompatActivity {
     Context context;
     public static  List<ModelPromo> PromoList = new ArrayList<>();
     public static PromoAdapter promoAdapter;
-    TextView etSearchPromo;
+    EditText etSearchPromo;
     public static String geturl;
     //iconlainlain
     @Override
@@ -77,7 +79,10 @@ public class PromoActivity extends AppCompatActivity {
         btnCancelSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etSearchPromo.setText("");
+                if (!etSearchPromo.getText().toString().isEmpty()){
+                    etSearchPromo.getText().clear();
+
+                }
             }
         });
 

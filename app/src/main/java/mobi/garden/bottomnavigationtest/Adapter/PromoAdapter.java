@@ -81,7 +81,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoViewHol
             Picasso.with(context).load(tempurl).into(holder.imgProduct, new Callback() {
             @Override
             public void onSuccess() {
-                Picasso.with(context).load(tempurl).into(holder.imgProduct);
+//                Picasso.with(context).load(tempurl).into(holder.imgProduct);
             }
             @Override
             public void onError() {
