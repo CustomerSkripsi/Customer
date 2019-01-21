@@ -95,7 +95,8 @@
         <activity android:name=".Activity.PromoSelengkapnyaActivity" />
         <activity android:name=".Activity.WishList" />
         <activity android:name=".Activity.FavoritSelengkapnyaActivity" />
-        <activity android:name=".Activity.InboxActivity"></activity>
+        <activity android:name=".Activity.InboxActivity" />
+        <activity android:name=".Activity.LainLainSelengkapnya"></activity>
     </application>
 
 </manifest>

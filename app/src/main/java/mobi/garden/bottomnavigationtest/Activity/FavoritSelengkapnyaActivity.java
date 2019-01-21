@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -99,11 +100,13 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
 
         search = findViewById(R.id.search);
         btnCancelSearch = findViewById(R.id.btnCancelSearch);
+
         rvSelengkapnya = findViewById(R.id.rvActivitySelengkapnya);
         rvSelengkapnya.setHasFixedSize(true);
-        LinearLayoutManager llFavorite = new LinearLayoutManager(this);
-        llFavorite.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager llFavorite = new GridLayoutManager(getApplicationContext(),3);
         rvSelengkapnya.setLayoutManager(llFavorite);
+
+
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
         mBadge = findViewById(R.id.badge);
         buyBtn = (ImageButton) findViewById(R.id.buyBtn);
@@ -158,48 +161,6 @@ public class FavoritSelengkapnyaActivity extends AppCompatActivity {
             }
         });
     }
-
-
-//    public static void showViewPromo(final RecyclerView cardlist, String url) {
-//        JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("pertama", response.toString());
-//                JSONArray Obats = null;
-//                try {
-//                    Obats = response.getJSONArray("result");
-//                    PromoList.clear();
-//                    Toast.makeText(context, "sss"+Obats.length(), Toast.LENGTH_SHORT).show();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                for (int j = 0; j < Obats.length(); j++) {
-//                    try {
-//                        cardlist.setVisibility(View.VISIBLE);
-//                        JSONObject obj = Obats.getJSONObject(j);
-//                        PromoList.add(new ModelPromo(obj.getString("ProductID")
-//                                ,obj.getString("ProductName")
-//                                ,obj.getString("ProductImage")
-//                                ,obj.getInt("OutletID"),
-//                                obj.getInt("OutletProductPrice"),
-//                                obj.getInt("ProductPriceAfterDiscount")));
-//                        Log.d("masuk", obj.toString());
-//                    } catch (JSONException e1) {
-//                        e1.printStackTrace();
-//                    }
-//                }
-//                promoAdapter = new PromoSelengkapnyaAdapter(PromoList,context);
-//                cardlist.setAdapter(promoAdapter);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(context, "error loading obatttt", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        RequestQueue req = Volley.newRequestQueue(context);
-//        req.add(rec1);
-//    }
 
     public static void showViewFav(final RecyclerView cardlist, String url) {
         JsonObjectRequest rec1= new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {

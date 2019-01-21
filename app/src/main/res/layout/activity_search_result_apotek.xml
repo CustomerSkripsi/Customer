@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="hideKeyboard"
     tools:context=".Activity.SearchResultApotek">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,12 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:onClick="hideKeyboard"
-        tools:context=".Activity.SearchResultApotek">
+
 
 
         <LinearLayout
@@ -36,25 +35,14 @@
                 android:background="@drawable/toolbar"
                 android:onClick="hideKeyboard"
                 android:focusableInTouchMode="true">
-
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_back"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:foregroundGravity="left"-->
-                    <!--android:onClick="BackBack"-->
-                    <!--app:srcCompat="@drawable/ic_chevron_left_black_24dp" />-->
             </android.support.v7.widget.Toolbar>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:orientation="vertical">
-
-
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:orientation="vertical">-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -111,7 +99,7 @@
                     android:progressTint="@color/oren"
                     android:layout_marginTop="5dp"/>
 
-            </LinearLayout>
+
 
 
 
@@ -121,12 +109,7 @@
                 android:layout_height="1dp"
                 android:background="#e4e4e4"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:orientation="vertical">
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -189,6 +172,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"/>
 
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -200,14 +184,14 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="5dp"/>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:orientation="horizontal">
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:orientation="horizontal">-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -231,13 +215,10 @@
                         android:background="#ffffff"
                         android:text="SELENGKAPNYA >"
                         android:textColor="#7c7c7c"
-                        android:textSize="8dp" />
+                        android:textSize="10dp" />
 
 
                 </RelativeLayout>
-
-            </LinearLayout>
-
 
             <View
                 android:layout_marginTop="10dp"
@@ -280,7 +261,7 @@
                     android:background="#ffffff"
                     android:text="SELENGKAPNYA >"
                     android:textColor="#7c7c7c"
-                    android:textSize="8dp" />
+                    android:textSize="10dp" />
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -297,6 +278,10 @@
                 android:layout_height="6dp"
                 android:background="#e4e4e4"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -306,137 +291,148 @@
                     android:text="Produk Lain-lain"
                     android:textStyle="bold" />
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:paddingBottom="80dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/rvAllProduk">
-            </android.support.v7.widget.RecyclerView>
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/pgBot"
-                />
-
-        </LinearLayout>
-
-    </android.support.constraint.ConstraintLayout>
-
-</ScrollView>
-<android.support.design.widget.CoordinatorLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_alignParentStart="true"
-android:layout_alignParentTop="true"
-android:layout_marginStart="0dp"
-android:layout_marginTop="0dp">
-
-<android.support.v4.widget.NestedScrollView
-    android:id="@+id/bottom_sheet"
-    android:layout_width="match_parent"
-    android:layout_height="350dp"
-    android:background="@android:color/white"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="75dp"
-    app:layout_behavior="@string/bottom_sheet_behavior">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/substract" />
-
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="10dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/ic_menupsd" />
-
-        <LinearLayout
-            android:id="@+id/layoutEstimated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal">
-
-            <include
-                layout="@layout/cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="0.1"></include>
-
-
-            <LinearLayout
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvEstimatedPrice"
-                    android:layout_width="match_parent"
+                    android:id="@+id/btnSelengkapnyaLain2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Estimated Price"
-                    android:textSize="18sp" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#ffffff"
+                    android:text="SELENGKAPNYA >"
+                    android:textColor="#7c7c7c"
+                    android:textSize="10dp" />
 
-                <TextView
-                    android:id="@+id/tvTotalPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="ini harga" />
-            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/buyBtn"
-                android:layout_width="3dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_next" />
-
-        </LinearLayout>
-
-        <ScrollView
-            android:id="@+id/svCartList"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent">
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvCartList"
+                    android:id="@+id/rvAllProduk"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginRight="10dp"
-                    tools:listitem="@layout/cart_list_row">
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="80dp"
+                  >
 
                 </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
-</android.support.design.widget.CoordinatorLayout>
+                <ProgressBar
+                    android:id="@+id/pgBot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            </LinearLayout>
+        <!--</LinearLayout>-->
+    </ScrollView>
+</RelativeLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@android:color/white"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="75dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/substract" />
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_menupsd" />
+
+                <LinearLayout
+                    android:id="@+id/layoutEstimated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <include
+                        layout="@layout/cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"></include>
+
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvEstimatedPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="Estimated Price"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvTotalPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="ini harga" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/buyBtn"
+                        android:layout_width="3dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_next" />
+
+                </LinearLayout>
+
+                <ScrollView
+                    android:id="@+id/svCartList"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rvCartList"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="18dp"
+                            android:layout_marginRight="10dp"
+                            tools:listitem="@layout/cart_list_row">
+
+
+                        </android.support.v7.widget.RecyclerView>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
