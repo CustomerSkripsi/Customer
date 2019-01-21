@@ -82,7 +82,7 @@ public class SearchApotek extends AppCompatActivity {
         context = SearchApotek.this;
 
         etSearch = findViewById(R.id.tvSearch);
-        btnCancelSearch = findViewById(R.id.btnCancelSearch);
+        //btnCancelSearch = findViewById(R.id.btnCancelSearch);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SearchApotek.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

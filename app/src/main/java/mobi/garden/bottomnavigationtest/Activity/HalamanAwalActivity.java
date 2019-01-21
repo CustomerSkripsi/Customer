@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -85,6 +85,7 @@ public class HalamanAwalActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                validate(etUsername.getText().toString(), etPassword.getText().toString());
                 LogIn(etUsername.getText().toString(), etPassword.getText().toString());
             }
         });
@@ -141,31 +142,32 @@ public class HalamanAwalActivity extends AppCompatActivity {
         return generatedPassword;
     }
 
-
+public void validate(String s, String s1){
+    if (s.equals(""))
+    {
+        etUsername.setError("Harap diisi");
+        builder.setMessage("Username tidak boleh kosong");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        dialog = builder.show();
+    }
+    else if(s1.equals("")){
+        etPassword.setError("Harap diisi");
+        builder.setMessage("Password tidak boleh kosong");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        dialog = builder.show();
+    }
+}
     private void LogIn(String s, String s1) {
-        if (s.equals(""))
-        {
-            etUsername.setError("Harap diisi");
-            builder.setMessage("Username tidak boleh kosong");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            dialog = builder.show();
-        }
-        else if(s1.equals("")){
-            etPassword.setError("Harap diisi");
-            builder.setMessage("Password tidak boleh kosong");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            dialog = builder.show();
-        }
-        else
-        {
+
+
             JSONObject objadd = new JSONObject();
 //            try {
 //                Thread.sleep(2000);
@@ -248,7 +250,7 @@ public class HalamanAwalActivity extends AppCompatActivity {
 
         }
 
-    }
+
 
     //ERROR MESSAGE
     private void showErrorMessage(){

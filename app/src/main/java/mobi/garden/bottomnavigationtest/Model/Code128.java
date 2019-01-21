@@ -27,7 +27,7 @@ public class Code128 {
     private String data;
     private Context context;
 
-    public Code128(Context context) {
+        public Code128(Context context) {
         this.context = context;
     }
 

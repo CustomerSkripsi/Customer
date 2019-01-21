@@ -19,21 +19,23 @@
         />
 
     <LinearLayout
+        android:id="@+id/container1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/container1"
-        android:layout_marginTop="40dp">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama : "/>
+                android:text="Nama : " />
 
             <TextView
                 android:id="@+id/dialog_nama"
@@ -41,52 +43,53 @@
                 android:layout_height="wrap_content"
                 android:hint="nama user"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Telp : "/>
-
-        <TextView
-            android:id="@+id/dialog_no_telepon"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="no telp"
-            android:text=""
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-            android:textStyle="bold"
-            android:textSize="15dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alamat : "/>
-        <TextView
-            android:id="@+id/dialog_alamat"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Telp : " />
+
+            <TextView
+                android:id="@+id/dialog_no_telepon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="no telp"
+                android:text=""
+
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dialog_no_telepon"
-            android:hint=" alamat user"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-            android:layout_marginBottom="20dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat : " />
+
+            <TextView
+                android:id="@+id/dialog_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_no_telepon"
+                android:layout_marginBottom="20dp"
+
+                android:hint=" alamat user"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -88,7 +88,11 @@ public class LacakPesananDetail extends AppCompatActivity {
         Intent intent = getIntent();
         lacakdetail = intent.getStringExtra("LacakDetail");
         Log.d("te", "asddd"+lacakdetail);
+        showviewDetail();
 
+    }
+
+    public  void showviewDetail(){
         url = "http://pharmanet.apodoc.id/customer/lacakdetail.php?CustomerID="+lacakdetail;
         Log.d("url", url);
         JsonObjectRequest quest = new JsonObjectRequest (url, null, new Response.Listener<JSONObject>() {
@@ -138,7 +142,6 @@ public class LacakPesananDetail extends AppCompatActivity {
         });
         RequestQueue queue= Volley.newRequestQueue(context);
         queue.add(quest);
-
     }
     public void BackBack4(View view){
         super.onBackPressed();

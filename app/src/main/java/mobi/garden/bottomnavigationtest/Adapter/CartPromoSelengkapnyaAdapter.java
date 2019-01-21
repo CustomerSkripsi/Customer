@@ -2,7 +2,6 @@ package mobi.garden.bottomnavigationtest.Adapter;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -32,9 +31,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.CartApotekActivity;
 import mobi.garden.bottomnavigationtest.Activity.PromoSelengkapnyaActivity;
-import mobi.garden.bottomnavigationtest.LoginRegister.UserLocalStore;
 import mobi.garden.bottomnavigationtest.Model.obat;
 import mobi.garden.bottomnavigationtest.R;
 import mobi.garden.bottomnavigationtest.Session.SessionManagement;
@@ -44,16 +41,11 @@ public class CartPromoSelengkapnyaAdapter  extends RecyclerView.Adapter<CartProm
     Context context;
     public static List<obat> cartList;
 
-    AlertDialog dialog;
-    AlertDialog.Builder builder;
-
     //int userID;
     //String CustomerID;
     boolean isStoppedClicked = true;
     DecimalFormat df;
     //session_obat session;
-    UserLocalStore userLocalStore;
-
 
     //login
     SessionManagement session;

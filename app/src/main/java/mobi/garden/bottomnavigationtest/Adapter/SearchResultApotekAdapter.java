@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,7 +32,6 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 
-import mobi.garden.bottomnavigationtest.Activity.DetailObatHome;
 import mobi.garden.bottomnavigationtest.Activity.SearchResultApotek;
 import mobi.garden.bottomnavigationtest.CONFIG;
 import mobi.garden.bottomnavigationtest.Model.ModelPromo;
@@ -152,9 +150,9 @@ public class SearchResultApotekAdapter extends RecyclerView.Adapter<SearchResult
             holder.ll_obat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(context, DetailObatHome.class);
-                    i.putExtra("ProductName", mp.getPromoNameProduct());
-                    context.startActivity(i);
+                   // Intent i = new Intent(context, DetailObatHome.class);
+                 //   i.putExtra("ProductName", mp.getPromoNameProduct());
+                 //   context.startActivity(i);
                 }
             });
             for (int j = 0; j < SearchResultApotek.cartList.size(); j++) {
